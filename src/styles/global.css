@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Darumadrop+One&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-haven-green: #b8c220;
+  --color-haven-orange-deep: #ed5615;
+  --color-haven-orange-bright: #fa681b;
+  --color-haven-orange-mid: #fc8616;
+  --color-haven-yellow: #ffd059;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-haven-green);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: none;
+}
