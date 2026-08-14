@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { eq } from "drizzle-orm";
 import { db } from "../../../lib/db";
 import { usersTable } from "../../../lib/db/schema";
+import { EXTERNAL_URL } from "../../../lib/consts";
 
 const ADULT_AGE = 19;
 
@@ -16,7 +17,7 @@ export const POST: APIRoute = async ({ request }) => {
   if (!token) {
     return Response.json({
       success: false,
-      message: "The token in the form URL is invalid. Please ",
+      message: `The token in the form URL is invalid. Please click the POC sign up button on ${EXTERNAL_URL} to try again!`,
     });
   }
 
@@ -39,7 +40,11 @@ export const POST: APIRoute = async ({ request }) => {
     .from(usersTable)
     .where(eq(usersTable.token, token));
 
-  if (!user) return Response.json({ success: false, message: "Invalid token" });
+  if (!user)
+    return Response.json({
+      success: false,
+      message: `The token in the URL is invalid. Please click the POC sign up button on ${EXTERNAL_URL} to try again!`,
+    });
 
   const cutoffDate = new Date(import.meta.env.AGE_CUTOFF_DATE);
   const defaultShippingFirstName = user.legalFirstName || user.firstName;
@@ -52,7 +57,7 @@ export const POST: APIRoute = async ({ request }) => {
       : null;
   const overrideShippingName =
     user.address?.first_name !== defaultShippingFirstName ||
-    user.address.last_name !== defaultShippingLastName;
+    user.address?.last_name !== defaultShippingLastName;
 
   return Response.json({
     success: true,

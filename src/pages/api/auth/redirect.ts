@@ -13,5 +13,6 @@ export const GET: APIRoute = ({ request }) => {
   );
   authUrl.searchParams.set("client_id", import.meta.env.HCA_CLIENT_ID);
   authUrl.searchParams.set("redirect_uri", `${EXTERNAL_URL}/api/auth/callback`);
+  authUrl.searchParams.set("login_hint", email);
   return Response.redirect(authUrl);
 };

@@ -27,6 +27,10 @@ export const GET: APIRoute = async ({ request }) => {
 
   const tokenData = await tokenResp.json();
 
+  if (!tokenData.access_token) {
+    return new Response("Failed to read token", { status: 500 });
+  }
+
   const identity = await getHCAProfile(tokenData.access_token);
 
   const primaryAddress =
