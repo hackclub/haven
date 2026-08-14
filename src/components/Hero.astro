@@ -8,7 +8,7 @@ const navLinks = [
 
 <section
   id="hero"
-  class="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-haven-orange-deep"
+  class="relative isolate overflow-hidden bg-haven-orange-deep"
 >
   <img
     src="/images/haven-hero-bg.png"
@@ -16,73 +16,76 @@ const navLinks = [
     class="absolute inset-0 -z-10 h-full w-full object-cover object-top"
   />
 
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-2 z-10 rounded-[22px] border-2 border-haven-yellow/90 sm:inset-4 sm:rounded-[32px] sm:border-[3px] md:inset-6"
-  >
-  </div>
+  <div class="relative flex h-[100svh] flex-col">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-[clamp(0.5rem,1.4vw,1.5rem)] z-10 rounded-[clamp(14px,2vw,32px)] border-2 border-haven-yellow/90 sm:border-[3px]"
+    >
+    </div>
 
-  <header class="relative z-20 h-14 px-4 pt-5 sm:h-20 sm:px-8 sm:pt-7 md:h-24 md:px-12 md:pt-9">
-    <img
-      src="/images/haven-logo-final.png"
-      alt="Hack Club Haven"
-      class="absolute left-1/2 top-3 h-14 w-auto -translate-x-1/2 sm:top-5 sm:h-20 md:top-7 md:h-24"
-    />
-    <nav class="absolute right-4 top-5 flex max-w-[38%] flex-wrap justify-end gap-x-2 gap-y-1 font-darumadrop text-xs text-haven-yellow sm:right-8 sm:top-7 sm:max-w-none sm:gap-x-6 sm:text-xl md:right-12 md:top-9 md:text-2xl">
-      {
-        navLinks.map((link) => (
-          <a href={link.href} class="whitespace-nowrap transition-opacity hover:opacity-75">
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
-  </header>
-
-  <div class="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col items-center px-4 pt-10 text-center sm:pt-14 md:pt-20">
-    <h1 class="w-full text-4xl font-darumadrop leading-[0.85] tracking-tight text-white [text-shadow:0_0_10px_var(--color-haven-orange-deep)] sm:text-6xl md:text-7xl lg:text-8xl">
-      Lead a game jam<br /> in your city!
-    </h1>
-    <p class="mt-3 w-full max-w-[19rem] text-sm font-jua text-white [text-shadow:0_0_6px_var(--color-haven-orange-deep)] sm:mt-5 sm:max-w-none sm:text-xl md:text-2xl lg:text-3xl">
-      Nov 14&ndash;15 &#9825; For teenagers around the world
-    </p>
-
-    <form class="relative mt-6 w-full max-w-xl sm:mt-10 sm:max-w-2xl">
-      <input
-        type="email"
-        required
-        placeholder="enter email to sign up"
-        class="w-full rounded-full bg-white/70 py-3.5 pl-5 pr-14 font-jua text-base text-haven-orange-deep shadow-[0_0_10px_3px_rgba(250,104,27,0.55)] outline-none placeholder:text-haven-orange-deep sm:py-5 sm:pl-8 sm:pr-20 sm:text-2xl md:text-3xl"
+    <header class="relative z-20 h-[clamp(4.5rem,9vw,10rem)]">
+      <img
+        src="/images/haven-logo-final.png"
+        alt="Hack Club Haven"
+        class="absolute left-1/2 top-[clamp(1.5rem,3.2vw,3.75rem)] h-[clamp(4.25rem,9vw,10.5rem)] w-auto -translate-x-1/2"
       />
-      <button
-        type="submit"
-        aria-label="Sign up"
-        class="absolute right-1.5 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-haven-orange-bright sm:right-2 sm:size-14 md:size-16"
-      >
-        <img src="/images/haven-sign-up-arrow.png" alt="" class="h-[45%] w-auto" />
-      </button>
-    </form>
-  </div>
+      <nav class="absolute right-[clamp(1rem,3vw,3rem)] top-[clamp(1.75rem,3.6vw,4.25rem)] flex max-w-[42%] flex-wrap justify-end gap-x-[clamp(0.5rem,1.5vw,1.75rem)] gap-y-1 font-darumadrop text-[clamp(0.65rem,1.7vw,1.75rem)] text-haven-yellow">
+        {
+          navLinks.map((link) => (
+            <a href={link.href} class="whitespace-nowrap transition-opacity hover:opacity-75">
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
 
-  <div class="relative z-10 mt-auto flex items-end justify-between gap-3 px-3 pb-6 sm:px-8 sm:pb-10 md:px-12 md:pb-14">
-    <img
-      src="/images/pud-hero-1.png"
-      alt=""
-      class="-ml-3 w-20 shrink-0 sm:-ml-0 sm:w-36 md:w-48"
-    />
+    <div class="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col items-center px-[clamp(1rem,4vw,3rem)] pt-[clamp(1rem,3vw,2.5rem)] text-center">
+      <h1 class="w-full text-[clamp(2.25rem,8.3vw,10rem)] font-darumadrop leading-[0.85] tracking-tight text-white [text-shadow:0_0_10px_var(--color-haven-orange-deep)]">
+        Lead a game jam<br /> in your city!
+      </h1>
+      <p class="mt-[clamp(0.5rem,1.4vw,1.5rem)] w-full text-[clamp(0.95rem,2.8vw,2.75rem)] font-jua text-white [text-shadow:0_0_6px_var(--color-haven-orange-deep)]">
+        Nov 14&ndash;15 &#9825; For teenagers around the world
+      </p>
 
-    <a href="#more-info" class="flex flex-1 flex-col items-center gap-1 text-white/50">
-      <span class="font-jua text-sm sm:text-2xl md:text-3xl">more info</span>
-      <img src="/images/triangle-down.svg" alt="" class="h-3 w-6 -scale-y-100 sm:h-4 sm:w-8" />
+      <form class="relative mt-[clamp(1.25rem,3vw,3rem)] w-[min(92%,50rem)]">
+        <input
+          type="email"
+          required
+          placeholder="enter email to sign up"
+          class="w-full rounded-full bg-white/70 py-[clamp(0.7rem,2vw,1.75rem)] pl-[clamp(1rem,2.2vw,2.25rem)] pr-[clamp(2.75rem,7vw,6rem)] font-jua text-[clamp(1rem,3.2vw,2.75rem)] text-haven-orange-deep shadow-[0_0_10px_3px_rgba(250,104,27,0.55)] outline-none placeholder:text-haven-orange-deep"
+        />
+        <button
+          type="submit"
+          aria-label="Sign up"
+          class="absolute right-[clamp(0.3rem,0.8vw,0.75rem)] top-1/2 flex size-[clamp(2.25rem,5.2vw,4.5rem)] -translate-y-1/2 items-center justify-center rounded-full bg-haven-orange-bright"
+        >
+          <img src="/images/haven-sign-up-arrow.png" alt="" class="h-[45%] w-auto" />
+        </button>
+      </form>
+    </div>
+
+    <a
+      href="#more-info"
+      class="absolute bottom-[clamp(1.5rem,4vw,4rem)] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1 text-white/50"
+    >
+      <span class="font-jua text-[clamp(0.85rem,2.4vw,2.25rem)]">more info</span>
+      <img src="/images/triangle-down.svg" alt="" class="mt-1 h-[clamp(1.4rem,3.6vw,3.25rem)] w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100" />
     </a>
 
-    <div class="w-24 shrink-0 rounded-2xl bg-white p-1.5 shadow-lg sm:w-40 sm:p-2.5 md:w-56 md:p-3">
+    <div class="absolute bottom-[clamp(1.5rem,4vw,4rem)] right-[clamp(0.75rem,3vw,3.5rem)] z-10 w-[clamp(5.5rem,15vw,16rem)] rounded-2xl bg-white p-[clamp(0.35rem,1vw,1rem)] shadow-lg">
       <div class="flex items-center justify-between px-1 pb-1">
-        <span class="font-jua text-[0.5rem] text-haven-orange-mid sm:text-xs md:text-base">close video</span>
-        <img src="/images/small-arrow.png" alt="" class="h-2 w-auto sm:h-2.5 md:h-3" />
+        <span class="font-jua text-[clamp(0.45rem,1.15vw,1.25rem)] text-haven-orange-mid">close video</span>
+        <img src="/images/small-arrow.png" alt="" class="h-[clamp(0.4rem,1vw,1.1rem)] w-auto" />
       </div>
       <div class="aspect-video w-full rounded-lg border-2 border-sky-400 bg-haven-orange-mid sm:rounded-xl"></div>
     </div>
+
+    <img
+      src="/images/pud-hero-1.png"
+      alt=""
+      class="pointer-events-none absolute bottom-0 left-0 z-10 -ml-3 w-[clamp(8rem,22vw,27rem)] sm:-ml-4"
+    />
   </div>
 
   <img src="/images/hero-bottom.png" alt="" class="relative z-10 w-full" />
