@@ -1,5 +1,4 @@
 ---
-const imgHavenBgTillInfo2 = "/images/haven-bg-till-info.png";
 const imgFood3 = "/images/food-3.png";
 const imgFood2 = "/images/food-2.png";
 const imgFood1 = "/images/food-1.png";
@@ -15,6 +14,8 @@ const imgDaydreamPic = "/images/daydream-pic.png";
 const imgScrapyardPic1 = "/images/scrapyard-pic-2.png";
 const imgSpeechTriangle3 = "/images/speech-triangle.png";
 const imgHackathonsAreAwesomeTriangles1 = "/images/hackathons-awesome-triangles.png";
+const imgHavenBgMiddle = "/images/haven-bg-middle.png";
+const imgHavenPicnicBg = "/images/haven-picnic-bg.png";
 const imgHavenBottomBg1 = "/images/haven-bottom-bg.png";
 const imgHavenHeroBg = "/images/haven-hero-bg.png";
 const imgStickyTop = "/images/sticky-top.png";
@@ -26,159 +27,223 @@ const imgPlayTriangle = "/images/play-triangle-1.svg";
 const imgPlayTriangle1 = "/images/play-triangle-2.svg";
 const imgPlayTriangle2 = "/images/play-triangle-3.svg";
 const imgTriangleDown = "/images/triangle-down.svg";
+const imgHavenSignUpArrow1 = "/images/haven-sign-up-arrow.png";
+const imgHavenSmallArrow = "/images/haven-small-arrow.png";
+const imgStepImage1 = "/images/step-image-1.jpg";
+const imgStepImage2 = "/images/step-image-2.jpg";
+const imgStepImage3 = "/images/step-image-3.jpg";
+const imgStepImage4 = "/images/step-image-4.jpg";
+const imgSpeechBox1 = "/images/speech-box-1.svg";
+const imgHavenLogoFinal2 = "/images/haven-logo-final-2.png";
+
+const faqs = [
+  { x: 81.31, y: 4950.54, q: "Am I eligible?" },
+  { x: 858.07, y: 4950.54, q: "Can I organize a Haven?" },
+  { x: 81.31, y: 5033.81, q: "Is this free?" },
+  { x: 858.07, y: 5033.81, q: "Why should I organize a Haven?" },
+  { x: 81.31, y: 5117.07, q: "But I’ve never coded before!" },
+  { x: 858.07, y: 5117.07, q: "What can I make at Haven?" },
+  { x: 81.31, y: 5200.34, q: "What if my parents are concerned?" },
+  { x: 858.07, y: 5200.34, q: "What do I need to bring?" },
+  { x: 81.31, y: 5283.6, q: "I still have questions!" },
+  { x: 858.07, y: 5283.6, q: "I still have questions!" },
+];
 ---
 
 <div class="bg-[#b8c220] relative size-full" data-name="Desktop">
-  <div class="absolute contents left-0 top-[-8px]" data-name="info">
-    <div class="absolute h-[4171px] left-0 top-[-8px] w-[1440px]" data-name="haven-bg-till-info 2">
-      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHavenBgTillInfo2} />
+  <div class="absolute contents left-0 top-[1046px]" data-name="info">
+    <div class="absolute h-[1969px] left-[-1px] top-[1046px] w-[1440px]" data-name="haven-bg-middle">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHavenBgMiddle} />
     </div>
-    <div class="absolute contents left-[127px] top-[1931px]" data-name="food">
-      <div class="absolute bg-white h-[240px] left-[139px] opacity-80 rounded-[30px] top-[1942px] w-[587px]" data-name="food-box" />
-      <div class="absolute contents left-[127px] top-[1931px]" data-name="food-frame">
-        <div class="absolute bg-[#ffd059] h-[240.497px] left-[127px] rounded-[10px] top-[1942.8px] w-[3.772px]" data-name="frame-left" />
-        <div class="absolute bg-[#ffd059] h-[240.497px] left-[734.23px] rounded-[10px] top-[1942.8px] w-[3.772px]" data-name="frame-right" />
-        <div class="absolute flex h-[2.723px] items-center justify-center left-[143.34px] top-[1931px] w-[578.313px]">
+    <div class="absolute contents left-[152px] top-[1884px]" data-name="food">
+      <div class="absolute bg-white h-[251px] left-[164px] opacity-80 rounded-[30px] top-[1895px] w-[587px]" data-name="food-box" />
+      <div class="absolute contents left-[152px] top-[1884px]" data-name="food-frame">
+        <div class="absolute bg-[#ffd059] h-[240.497px] left-[152px] rounded-[10px] top-[1895.8px] w-[3.772px]" data-name="frame-left" />
+        <div class="absolute bg-[#ffd059] h-[240.497px] left-[759.23px] rounded-[10px] top-[1895.8px] w-[3.772px]" data-name="frame-right" />
+        <div class="absolute flex h-[2.723px] items-center justify-center left-[168.34px] top-[1884px] w-[578.313px]">
           <div class="-rotate-90 flex-none">
             <div class="bg-[#ffd059] h-[578.313px] relative rounded-[10px] w-[2.723px]" data-name="frame-top" />
           </div>
         </div>
-        <div class="absolute flex h-[2.723px] items-center justify-center left-[143.34px] top-[2193.28px] w-[578.313px]">
+        <div class="absolute flex h-[2.723px] items-center justify-center left-[169px] top-[2155px] w-[578.313px]">
           <div class="-scale-y-100 flex-none rotate-90">
             <div class="bg-[#ffd059] h-[578.313px] relative rounded-[10px] w-[2.723px]" data-name="frame-top" />
           </div>
         </div>
       </div>
-      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] font-normal h-[43px] leading-none left-[432.5px] text-[#fc8616] text-[20px] text-center top-[2009px] tracking-[-0.6px] w-[429px]" style={`font-variation-settings: "CTGR" 0, "wdth" 100;`}>
+      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] font-normal h-[25px] leading-none left-[443.5px] text-[#fc8616] text-[20px] text-center top-[2101px] tracking-[-0.6px] w-[429px]" style={`font-variation-settings: "CTGR" 0, "wdth" 100;`}>
         can&rsquo;t say no to free snacks :)
       </p>
-      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[432.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1963px] tracking-[-2.2px] w-[475px]">
-        Enjoy free food and prizes
+      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[57px] leading-[0.8] left-[457.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1916px] tracking-[-2.2px] w-[475px]">
+        Free Food and Prizes
       </p>
-      <div class="absolute h-[116px] left-[518px] rounded-[20px] top-[2040px] w-[183px]" data-name="food-3">
+      <div class="absolute h-[116px] left-[543px] rounded-[20px] top-[1973px] w-[183px]" data-name="food-3">
         <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
           <img alt="" class="absolute h-[149.13%] left-[-22.32%] max-w-none top-[-28.08%] w-[141.78%]" src={imgFood3} />
         </div>
       </div>
-      <div class="absolute h-[116px] left-[351px] rounded-[20px] top-[2040px] w-[155px]" data-name="food-2">
+      <div class="absolute h-[116px] left-[376px] rounded-[20px] top-[1973px] w-[155px]" data-name="food-2">
         <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgFood2} />
       </div>
-      <div class="absolute h-[116px] left-[162px] rounded-[20px] top-[2040px] w-[176px]" data-name="food-1">
+      <div class="absolute h-[116px] left-[187px] rounded-[20px] top-[1973px] w-[176px]" data-name="food-1">
         <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
           <img alt="" class="absolute h-[141.4%] left-[-18.75%] max-w-none top-[-19.55%] w-[139.77%]" src={imgFood1} />
         </div>
       </div>
     </div>
-    <div class="absolute contents left-[560px] top-[1627px]" data-name="friends">
-      <div class="absolute bg-white h-[251px] left-[574px] opacity-80 rounded-[30px] top-[1638px] w-[658px]" data-name="friends-box" />
-      <div class="absolute contents left-[560px] top-[1627px]" data-name="friends-frame">
-        <div class="absolute bg-[#ffd059] h-[250.479px] left-[560px] rounded-[10px] top-[1639.29px] w-[4.235px]" data-name="frame-left" />
-        <div class="absolute bg-[#ffd059] h-[250.479px] left-[1241.77px] rounded-[10px] top-[1639.29px] w-[4.235px]" data-name="frame-right" />
-        <div class="absolute flex h-[2.836px] items-center justify-center left-[578.35px] top-[1627px] w-[649.3px]">
+    <div class="absolute contents left-[585px] top-[1580px]" data-name="friends">
+      <div class="absolute bg-white h-[251px] left-[599px] opacity-80 rounded-[30px] top-[1591px] w-[658px]" data-name="friends-box" />
+      <div class="absolute contents left-[585px] top-[1580px]" data-name="friends-frame">
+        <div class="absolute bg-[#ffd059] h-[250.479px] left-[585px] rounded-[10px] top-[1592.29px] w-[4.235px]" data-name="frame-left" />
+        <div class="absolute bg-[#ffd059] h-[250.479px] left-[1266.77px] rounded-[10px] top-[1592.29px] w-[4.235px]" data-name="frame-right" />
+        <div class="absolute flex h-[2.836px] items-center justify-center left-[603.35px] top-[1580px] w-[649.3px]">
           <div class="-rotate-90 flex-none">
             <div class="bg-[#ffd059] h-[649.3px] relative rounded-[10px] w-[2.836px]" data-name="frame-top" />
           </div>
         </div>
-        <div class="absolute flex h-[2.836px] items-center justify-center left-[578.35px] top-[1900.16px] w-[649.3px]">
+        <div class="absolute flex h-[2.836px] items-center justify-center left-[603.35px] top-[1853.16px] w-[649.3px]">
           <div class="-scale-y-100 flex-none rotate-90">
             <div class="bg-[#ffd059] h-[649.3px] relative rounded-[10px] w-[2.836px]" data-name="frame-top" />
           </div>
         </div>
       </div>
-      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[25px] leading-none left-[903px] not-italic text-[#fc8616] text-[20px] text-center top-[1714px] tracking-[-0.6px] w-[492px]">
-        meet new people, who may become your friends for life!
+      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[25px] leading-none left-[927.5px] not-italic text-[#fc8616] text-[20px] text-center top-[1798px] tracking-[-0.6px] w-[539px]">
+        meet new people and form relationships that will last a lifetime
       </p>
-      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[902.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1659px] tracking-[-2.2px] w-[411px]">
-        Make friends
+      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[927.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1608px] tracking-[-2.2px] w-[411px]">
+        Make Friends
       </p>
-      <div class="absolute h-[120px] left-[1000px] rounded-[20px] top-[1747px] w-[206px]" data-name="friends-3">
+      <div class="absolute h-[120px] left-[1025px] rounded-[20px] top-[1663px] w-[206px]" data-name="friends-3">
         <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
           <img alt="" class="absolute h-[167.5%] left-[-18.45%] max-w-none top-[-38.13%] w-[130.1%]" src={imgFriends3} />
         </div>
       </div>
-      <div class="absolute h-[120px] left-[812px] rounded-[20px] top-[1747px] w-[174px]" data-name="friends-2">
+      <div class="absolute h-[120px] left-[837px] rounded-[20px] top-[1663px] w-[174px]" data-name="friends-2">
         <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgFriends2} />
       </div>
-      <div class="absolute h-[120px] left-[599px] rounded-[20px] top-[1747px] w-[198px]" data-name="friends-1">
+      <div class="absolute h-[120px] left-[624px] rounded-[20px] top-[1663px] w-[198px]" data-name="friends-1">
         <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgFriends1} />
       </div>
     </div>
-    <div class="absolute contents left-[44px] top-[1429px]" data-name="projects">
-      <div class="absolute bg-white h-[271px] left-[54px] opacity-80 rounded-[30px] top-[1439px] w-[466px]" data-name="projects-box" />
-      <div class="absolute contents left-[44px] top-[1429px]" data-name="projects-frame">
-        <div class="absolute bg-[#ffd059] h-[265px] left-[44px] rounded-[10px] top-[1442px] w-[3px]" data-name="frame-left" />
-        <div class="absolute bg-[#ffd059] h-[265px] left-[527px] rounded-[10px] top-[1442px] w-[3px]" data-name="frame-right" />
-        <div class="absolute flex h-[3px] items-center justify-center left-[57px] top-[1429px] w-[460px]">
+    <div class="absolute contents left-[69px] top-[1382px]" data-name="projects">
+      <div class="absolute bg-white h-[270px] left-[79px] opacity-80 rounded-[30px] top-[1393px] w-[466px]" data-name="projects-box" />
+      <div class="absolute contents left-[69px] top-[1382px]" data-name="projects-frame">
+        <div class="absolute bg-[#ffd059] h-[266.815px] left-[69px] rounded-[10px] top-[1395.09px] w-[3px]" data-name="frame-left" />
+        <div class="absolute bg-[#ffd059] h-[266.815px] left-[552px] rounded-[10px] top-[1395.09px] w-[3px]" data-name="frame-right" />
+        <div class="absolute flex h-[3.021px] items-center justify-center left-[82px] top-[1382px] w-[460px]">
           <div class="-rotate-90 flex-none">
-            <div class="bg-[#ffd059] h-[460px] relative rounded-[10px] w-[3px]" data-name="frame-top" />
+            <div class="bg-[#ffd059] h-[460px] relative rounded-[10px] w-[3.021px]" data-name="frame-top" />
           </div>
         </div>
-        <div class="absolute flex h-[3px] items-center justify-center left-[57px] top-[1718px] w-[460px]">
+        <div class="absolute flex h-[3.021px] items-center justify-center left-[82px] top-[1672.98px] w-[460px]">
           <div class="-scale-y-100 flex-none rotate-90">
-            <div class="bg-[#ffd059] h-[460px] relative rounded-[10px] w-[3px]" data-name="frame-top" />
+            <div class="bg-[#ffd059] h-[460px] relative rounded-[10px] w-[3.021px]" data-name="frame-top" />
           </div>
         </div>
       </div>
-      <div class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[106px] leading-[0] left-[286.5px] not-italic text-[#fc8616] text-[20px] text-center top-[1509px] tracking-[-0.6px] w-[429px]">
+      <div class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[49px] leading-[0] left-[286.5px] not-italic text-[#fc8616] text-[20px] text-center top-[1600px] tracking-[-0.6px] w-[429px]">
         <p class="leading-none mb-0">follow workshops or create at your own pace</p>
         <p class="leading-none">here are some cool projects at past hackathons!</p>
       </div>
-      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[286.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1460px] tracking-[-2.2px] w-[411px]">
-        Learn and build projects
+      <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[60px] leading-[0.8] left-[286.5px] not-italic text-[#fc8616] text-[44px] text-center top-[1415.86px] tracking-[-2.2px] w-[411px]">
+        Learn and Build
       </p>
-      <div class="absolute h-[118px] left-[368px] rounded-[20px] top-[1568px] w-[129px]" data-name="projects-3">
+      <a class="absolute block cursor-pointer h-[83px] left-[395px] rounded-[20px] top-[1472px] w-[131px]" href="https://theavgeekbee.itch.io/office-click-clack" target="_blank" data-name="projects-3">
+        <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgProjects3} />
+      </a>
+      <a class="absolute block cursor-pointer h-[88px] left-[246px] rounded-[20px] top-[1472px] w-[132px]" href="https://qrosp-games-oy.itch.io/deathleap" target="_blank" data-name="projects-2">
         <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
-          <img alt="" class="absolute h-[122.88%] left-[-0.08%] max-w-none top-0 w-[100.17%]" src={imgProjects3} />
+          <img alt="" class="absolute h-[115.91%] left-[-9.28%] max-w-none top-0 w-[137.43%]" src={imgProjects2} />
         </div>
+      </a>
+      <a class="absolute block cursor-pointer h-[88px] left-[99px] rounded-[20px] top-[1472px] w-[131px]" href="https://i1rs7.itch.io/return-to-the-sender" target="_blank" data-name="project-1">
+        <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgProject1} />
+      </a>
+      <div class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[30px] leading-[0] left-[163.5px] not-italic text-[#fba71f] text-[12px] text-center top-[1568px] tracking-[-0.6px] w-[133px]">
+        <p class="leading-none mb-0">return to the sender</p>
+        <p class="leading-none">by i1rs7</p>
       </div>
-      <div class="absolute h-[118px] left-[222px] rounded-[20px] top-[1568px] w-[130px]" data-name="projects-2">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
-          <img alt="" class="absolute h-[117.8%] left-[-0.03%] max-w-none top-0 w-[100.07%]" src={imgProjects2} />
-        </div>
+      <div class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[30px] leading-[0] left-[312.5px] not-italic text-[#fba71f] text-center top-[1568px] tracking-[-0.6px] w-[133px]">
+        <p class="leading-[0.8] mb-0 text-[12px]">deathleap</p>
+        <p class="leading-[1.2] text-[8px]">by qrosp, juusaktmii, &amp; 1100010101</p>
       </div>
-      <div class="absolute h-[118px] left-[76px] rounded-[20px] top-[1568px] w-[129px]" data-name="project-1">
-        <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
-          <img alt="" class="absolute h-[129.85%] left-[-0.14%] max-w-none top-0 w-[100.27%]" src={imgProject1} />
-        </div>
+      <div class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[30px] leading-[0] left-[461.5px] not-italic text-[#fba71f] text-[12px] text-center top-[1568px] tracking-[-0.6px] w-[133px] whitespace-pre-wrap">
+        <p class="leading-none mb-0">return to the sender</p>
+        <p class="leading-none">by bunxnyguy</p>
       </div>
     </div>
-    <p class="[word-break:break-word] absolute font-['Jua'] h-[106px] leading-none left-[239px] not-italic text-[25px] text-white top-[1238px] tracking-[-0.75px] w-[342px]">
-      A social coding event where you lock in on a project (ex: a game or app) with friends + food!
+    <p class="[word-break:break-word] absolute font-['Jua'] h-[106px] leading-none left-[239px] not-italic text-[25px] text-white top-[1211px] tracking-[-0.75px] w-[342px]">
+      It&rsquo;s a social coding event where you make a video game with friends + free food!
     </p>
-    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[233px] not-italic text-[44px] text-white top-[1183px] tracking-[-2.2px] w-[401px]">
-      What is a hackathon?
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[55px] leading-[0.8] left-[232px] not-italic text-[44px] text-white top-[1156px] tracking-[-2.2px] w-[401px]">
+      What is a game jam?
     </p>
-    <div class="absolute left-[946px] size-[108px] top-[1184px]" data-name="daven-gif">
+    <div class="absolute left-[948px] size-[108px] top-[1157px]" data-name="daven-gif">
       <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDavenGif} />
     </div>
   </div>
 
-  <div class="absolute contents left-[98.85px] top-[2240px]" data-name="picnic" id="about">
-    <div class="absolute contents h-[569.763px] left-[98.85px] top-[2930.69px] w-[1265.716px]" data-name="vids">
-      <div class="absolute contents h-[398.025px] left-[107.33px] top-[3102.43px] w-[402.571px]" data-name="scrapyard">
-        <div class="absolute flex h-[398.025px] items-center justify-center left-[107.33px] top-[3102.43px] w-[402.571px]">
+  <div class="absolute contents left-[75px] top-[3113px]" data-name="steps">
+    <div class="absolute bg-[#ffe382] h-[349px] left-[75px] rounded-[30px] top-[3181px] w-[315px]" data-name="step-box-1" />
+    <div class="absolute bg-[#ffe382] h-[349px] left-[408px] rounded-[30px] top-[3181px] w-[315px]" data-name="step-box-2" />
+    <div class="absolute bg-[#ffe382] h-[349px] left-[740px] rounded-[30px] top-[3181px] w-[315px]" data-name="step-box-3" />
+    <div class="absolute bg-[#ffe382] h-[349px] left-[1073px] rounded-[30px] top-[3181px] w-[315px]" data-name="step-box-4" />
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[89px] leading-[0.8] left-[731.5px] not-italic text-[50px] text-center text-white top-[3113px] tracking-[-2.5px] w-[1313px]">
+      Here is how you can organize a game jam this November!
+    </p>
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[89px] leading-[0.8] left-[141px] not-italic text-[#fa681b] text-[90px] text-center top-[3202px] tracking-[-4.5px] w-[68px]">1</p>
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[67px] leading-[0.8] left-[178px] not-italic text-[#fa681b] text-[30px] top-[3225px] tracking-[-1.5px] w-[171px]">find a team of coorganizers</p>
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[67px] leading-[0.8] left-[512px] not-italic text-[#fa681b] text-[30px] top-[3216px] tracking-[-1.5px] w-[171px]">find a venue to host your hackathon</p>
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[67px] leading-[0.8] left-[841px] not-italic text-[#fa681b] text-[30px] top-[3216px] tracking-[-1.5px] w-[171px]">find sponsors to buy merch and prizes</p>
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[67px] leading-[0.8] left-[1170px] not-italic text-[#fa681b] text-[30px] top-[3216px] tracking-[-1.5px] w-[171px]">buy supplies and prepare workshops</p>
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[89px] leading-[0.8] left-[468px] not-italic text-[#fa681b] text-[90px] text-center top-[3202px] tracking-[-4.5px] w-[68px]">2</p>
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[89px] leading-[0.8] left-[807px] not-italic text-[#fa681b] text-[90px] text-center top-[3202px] tracking-[-4.5px] w-[68px]">3</p>
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[89px] leading-[0.8] left-[1136px] not-italic text-[#fa681b] text-[90px] text-center top-[3202px] tracking-[-4.5px] w-[68px]">4</p>
+    <div class="absolute h-[172px] left-[113px] rounded-[20px] top-[3318px] w-[239px]" data-name="step-image-1">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgStepImage1} />
+    </div>
+    <div class="absolute h-[172px] left-[444px] rounded-[20px] top-[3318px] w-[239px]" data-name="step-image-2">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgStepImage2} />
+    </div>
+    <div class="absolute h-[172px] left-[778px] rounded-[20px] top-[3318px] w-[239px]" data-name="step-image-3">
+      <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
+        <img alt="" class="absolute h-full left-[-3.97%] max-w-none top-0 w-[107.94%]" src={imgStepImage3} />
+      </div>
+    </div>
+    <div class="absolute h-[172px] left-[1110px] rounded-[20px] top-[3318px] w-[239px]" data-name="step-image-4">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgStepImage4} />
+    </div>
+  </div>
+
+  <div class="absolute contents left-0 top-[2240px]" data-name="picnic" id="about">
+    <div class="absolute h-[1463px] left-0 top-[3470px] w-[1440px]" data-name="haven-picnic-bg">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHavenPicnicBg} />
+    </div>
+    <div class="absolute contents h-[569.763px] left-[110px] top-[3838px] w-[1265.716px]" data-name="vids">
+      <div class="absolute contents h-[398.025px] left-[118.48px] top-[4009.74px] w-[402.571px]" data-name="scrapyard">
+        <div class="absolute flex h-[398.025px] items-center justify-center left-[118.48px] top-[4009.74px] w-[402.571px]">
           <div class="-rotate-5 flex-none">
             <div class="bg-[#ed5615] border-3 border-[#ffd059] border-solid h-[367px] opacity-50 relative rounded-[30px] shadow-[0px_0px_4px_0px_#ffd059] w-[372px]" data-name="vid-box-1" />
           </div>
         </div>
-        <div class="absolute flex h-[216.852px] items-center justify-center left-[156.98px] top-[3172.55px] w-[304.314px]">
+        <div class="absolute flex h-[216.852px] items-center justify-center left-[168.14px] top-[4079.86px] w-[304.314px]">
           <div class="-rotate-5 flex-none">
-            <div class="border-2 border-solid border-white h-[192.427px] relative rounded-[20px] w-[288.641px]" data-name="scrapyard-pic">
+            <a class="block border-2 border-solid border-white cursor-pointer h-[192.427px] relative rounded-[20px] w-[288.641px]" href="https://www.youtube.com/watch?v=8iM1W8kXrQA" target="_blank" data-name="scrapyard-pic">
               <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgScrapyardPic} />
-            </div>
+            </a>
           </div>
         </div>
-        <div class="absolute flex h-[116.682px] items-center justify-center left-[164.98px] top-[3373.32px] w-[306.542px]">
+        <div class="absolute flex h-[116.682px] items-center justify-center left-[176.14px] top-[4280.63px] w-[306.542px]">
           <div class="-rotate-5 flex-none">
-            <p class="[word-break:break-word] font-['Jua'] h-[90.902px] leading-none not-italic relative text-[25px] text-white tracking-[-0.75px] w-[299.76px]">Build stupid stuff, get stupid prizes! In-person hackathon in 70+ cities.</p>
+            <p class="[word-break:break-word] font-['Jua'] h-[90.902px] leading-none not-italic relative text-[25px] text-white tracking-[-0.75px] w-[299.76px]">Build wacky stuff, get wacky prizes! In-person hackathon in 70+ cities.</p>
           </div>
         </div>
-        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[293.82px] top-[3117.55px] w-[323.674px]">
+        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[304.97px] top-[4024.86px] w-[323.674px]">
           <div class="-rotate-5 flex-none">
             <p class="[word-break:break-word] font-['Darumadrop_One'] h-[55px] leading-none not-italic relative text-[40px] text-center text-white tracking-[-1.2px] w-[320.098px]">Scrapyard</p>
           </div>
         </div>
-        <div class="absolute flex items-center justify-center left-[241px] size-[140.883px] top-[3211px]">
+        <div class="absolute flex items-center justify-center left-[252.15px] size-[140.883px] top-[4118.31px]">
           <div class="-rotate-40 flex-none">
             <div class="relative size-[100px]" data-name="play-triangle">
               <div class="absolute bottom-1/4 left-[14%] right-[14%] top-[10%]">
@@ -188,32 +253,32 @@ const imgTriangleDown = "/images/triangle-down.svg";
           </div>
         </div>
       </div>
-      <div class="absolute contents h-[398.025px] left-[537.98px] top-[3064.55px] w-[402.571px]" data-name="daydream">
-        <div class="absolute flex h-[398.025px] items-center justify-center left-[537.98px] top-[3064.55px] w-[402.571px]">
+      <div class="absolute contents h-[398.025px] left-[549.14px] top-[3971.86px] w-[402.571px]" data-name="daydream">
+        <div class="absolute flex h-[398.025px] items-center justify-center left-[549.14px] top-[3971.86px] w-[402.571px]">
           <div class="-rotate-5 flex-none">
             <div class="bg-[#ed5615] border-3 border-[#ffd059] border-solid h-[367px] opacity-50 relative rounded-[30px] shadow-[0px_0px_4px_0px_#ffd059] w-[372px]" data-name="vid-box-2" />
           </div>
         </div>
-        <div class="absolute flex h-[216.852px] items-center justify-center left-[587.64px] top-[3134.67px] w-[304.314px]">
+        <div class="absolute flex h-[213.268px] items-center justify-center left-[598.79px] top-[4041.98px] w-[304px]">
           <div class="-rotate-5 flex-none">
-            <div class="border-2 border-solid border-white h-[192.427px] relative rounded-[20px] w-[288.641px]" data-name="daydream-pic">
+            <a class="block border-2 border-solid border-white cursor-pointer h-[188.83px] relative rounded-[20px] w-[288.641px]" href="https://www.youtube.com/watch?v=vvdoW2gh9YU" target="_blank" data-name="daydream-pic">
               <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[20px] size-full" src={imgDaydreamPic} />
-            </div>
+            </a>
           </div>
         </div>
-        <div class="absolute flex h-[116.682px] items-center justify-center left-[595.64px] top-[3335.44px] w-[306.542px]">
+        <div class="absolute flex h-[116.682px] items-center justify-center left-[621px] top-[4242px] w-[306.542px]">
           <div class="-rotate-5 flex-none">
             <div class="[word-break:break-word] font-['Jua'] h-[90.902px] leading-[0] not-italic relative text-[25px] text-white tracking-[-0.75px] w-[299.76px]">
               <p class="leading-none mb-0">Students led game jams in 100 cities worldwide, from London to NYC to Penang!</p>
             </div>
           </div>
         </div>
-        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[724.47px] top-[3079.67px] w-[323.674px]">
+        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[735.63px] top-[3986.98px] w-[323.674px]">
           <div class="-rotate-5 flex-none">
             <p class="[word-break:break-word] font-['Darumadrop_One'] h-[55px] leading-none not-italic relative text-[40px] text-center text-white tracking-[-1.2px] w-[320.098px]">Daydream</p>
           </div>
         </div>
-        <div class="absolute flex items-center justify-center left-[672px] size-[140.883px] top-[3174px]">
+        <div class="absolute flex items-center justify-center left-[683.15px] size-[140.883px] top-[4081.31px]">
           <div class="-rotate-40 flex-none">
             <div class="relative size-[100px]" data-name="play-triangle">
               <div class="absolute bottom-1/4 left-[14%] right-[14%] top-[10%]">
@@ -223,30 +288,32 @@ const imgTriangleDown = "/images/triangle-down.svg";
           </div>
         </div>
       </div>
-      <div class="absolute contents h-[398.025px] left-[961.98px] top-[3027.55px] w-[402.571px]" data-name="campfire">
-        <div class="absolute flex h-[398.025px] items-center justify-center left-[961.98px] top-[3027.55px] w-[402.571px]">
+      <div class="absolute contents h-[398.025px] left-[973.14px] top-[3934.86px] w-[402.571px]" data-name="campfire">
+        <div class="absolute flex h-[398.025px] items-center justify-center left-[973.14px] top-[3934.86px] w-[402.571px]">
           <div class="-rotate-5 flex-none">
             <div class="bg-[#ed5615] border-3 border-[#ffd059] border-solid h-[367px] opacity-50 relative rounded-[30px] shadow-[0px_0px_4px_0px_#ffd059] w-[372px]" data-name="vid-box-1" />
           </div>
         </div>
-        <div class="absolute flex h-[224.388px] items-center justify-center left-[1011px] top-[3096px] w-[304.972px]">
+        <div class="absolute flex h-[217.186px] items-center justify-center left-[1022.15px] top-[4003.31px] w-[304.342px]">
           <div class="-rotate-5 flex-none">
-            <div class="border-2 border-solid border-white h-[199.992px] relative rounded-[20px] w-[288.64px]" data-name="scrapyard-pic">
-              <img alt="" class="absolute inset-0 max-w-none object-bottom pointer-events-none rounded-[20px] size-full" src={imgScrapyardPic1} />
-            </div>
+            <a class="block border-2 border-solid border-white cursor-pointer h-[192.763px] relative rounded-[20px] w-[288.64px]" href="https://www.youtube.com/watch?v=0aMAHuLxg3s" target="_blank" data-name="scrapyard-pic">
+              <div class="absolute inset-0 overflow-hidden pointer-events-none rounded-[20px]">
+                <img alt="" class="absolute h-[130.26%] left-[-32.46%] max-w-none top-[-25.29%] w-[130.47%]" src={imgScrapyardPic1} />
+              </div>
+            </a>
           </div>
         </div>
-        <div class="absolute flex h-[101.123px] items-center justify-center left-[1020.28px] top-[3305.75px] w-[305.181px]">
+        <div class="absolute flex h-[101.123px] items-center justify-center left-[1044px] top-[4207px] w-[305.181px]">
           <div class="-rotate-5 flex-none">
-            <p class="[word-break:break-word] font-['Jua'] h-[75.284px] leading-none not-italic relative text-[25px] text-white tracking-[-0.75px] w-[299.76px]">Our largest game jam yet! Over 10k teens gathered to make games one weekend.</p>
+            <p class="[word-break:break-word] font-['Jua'] h-[75.284px] leading-none not-italic relative text-[25px] text-white tracking-[-0.75px] w-[299.76px]">Our largest game jam yet: 10k teens, 1 weekend, making games at the same time!</p>
           </div>
         </div>
-        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[1148.47px] top-[3042.67px] w-[323.674px]">
+        <div class="-translate-x-1/2 absolute flex h-[82.689px] items-center justify-center left-[1159.63px] top-[3949.98px] w-[323.674px]">
           <div class="-rotate-5 flex-none">
             <p class="[word-break:break-word] font-['Darumadrop_One'] h-[55px] leading-none not-italic relative text-[40px] text-center text-white tracking-[-1.2px] w-[320.098px]">Campfire</p>
           </div>
         </div>
-        <div class="absolute flex h-[113.12px] items-center justify-center left-[1101.13px] top-[3140.35px] w-[114.55px]">
+        <div class="absolute flex h-[113.12px] items-center justify-center left-[1112.28px] top-[4047.66px] w-[114.55px]">
           <div class="-rotate-40 flex-none">
             <div class="h-[75px] relative w-[86.603px]" data-name="play-triangle">
               <div class="absolute inset-[13.33%_8.44%_0_8.44%]">
@@ -256,7 +323,7 @@ const imgTriangleDown = "/images/triangle-down.svg";
           </div>
         </div>
       </div>
-      <div class="-translate-x-1/2 absolute flex h-[128.902px] items-center justify-center left-[720.08px] top-[2957px] w-[1024.159px]">
+      <div class="-translate-x-1/2 absolute flex h-[128.902px] items-center justify-center left-[731.23px] top-[3864.31px] w-[1024.159px]">
         <div class="-rotate-4 flex-none">
           <div class="[word-break:break-word] font-['Darumadrop_One'] h-[57.708px] leading-[0] not-italic relative text-[35px] text-center text-white tracking-[-1.75px] w-[1022.625px] whitespace-pre-wrap">
             <p class="leading-[0.8] mb-0">We&rsquo;ve helped teens organize hundreds of hackathons around the world!</p>
@@ -265,10 +332,10 @@ const imgTriangleDown = "/images/triangle-down.svg";
         </div>
       </div>
     </div>
-    <div class="absolute contents left-[167px] top-[2470px]" data-name="speech">
-      <div class="absolute contents left-[279px] top-[2727px]" data-name="speech-3">
-        <div class="absolute flex h-[69.098px] items-center justify-center left-[825px] top-[2727px] w-[94.244px]">
-          <div class="-rotate-10 -scale-y-100 flex-none">
+    <div class="absolute contents left-[191px] top-[2463px]" data-name="speech">
+      <div class="absolute contents left-[233px] top-[2787px]" data-name="speech-3">
+        <div class="absolute flex h-[91.437px] items-center justify-center left-[769px] top-[2787px] w-[102.043px]">
+          <div class="-rotate-31 -scale-y-100 flex-none">
             <div class="h-[55px] relative w-[86px]" data-name="speech-triangle-3">
               <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <img alt="" class="absolute h-[3250.79%] left-[-351.02%] max-w-none top-[-2024.6%] w-[721.43%]" src={imgSpeechTriangle3} />
@@ -276,13 +343,15 @@ const imgTriangleDown = "/images/triangle-down.svg";
             </div>
           </div>
         </div>
-        <div class="absolute bg-white h-[106px] left-[279px] rounded-[30px] top-[2736px] w-[587px]" data-name="speech-3" />
-        <div class="absolute bg-[#ffd059] h-[24px] left-[318px] rounded-[10px] top-[2779px] w-[217px]" data-name="something-truly" />
-        <div class="absolute bg-[#ffd059] h-[24px] left-[732px] rounded-[10px] top-[2757px] w-[55px]" data-name="start" />
-        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[112px] leading-[1.09] left-[563px] not-italic text-[#ed5615] text-[20px] text-center top-[2757px] tracking-[-0.6px] w-[518px]">It may be challenging but this is your chance to start something truly impactful, learning real leadership skills and making life-changing friendships along the way.</p>
+        <div class="absolute bg-white h-[158px] left-[233px] rounded-[30px] top-[2831px] w-[587px]" data-name="speech-3" />
+        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[107px] leading-[0] left-[527px] not-italic text-[#ed5615] text-[24px] text-center top-[2857px] tracking-[-0.72px] w-[518px]">
+          <span class="leading-[1.09]">It may be challenging but this is your chance to </span>
+          <span class="underline">start something truly impactful</span>
+          <span class="leading-[1.09]">, learn real leadership skills, and make life-changing friendships along the way.</span>
+        </p>
       </div>
-      <div class="absolute contents left-[167px] top-[2597px]" data-name="speech-2">
-        <div class="absolute flex h-[83.634px] items-center justify-center left-[167px] top-[2640px] w-[102.502px]">
+      <div class="absolute contents left-[191px] top-[2637px]" data-name="speech-2">
+        <div class="absolute flex h-[83.634px] items-center justify-center left-[191px] top-[2680px] w-[102.502px]">
           <div class="-scale-y-100 flex-none rotate-160">
             <div class="h-[56.827px] relative w-[88.397px]" data-name="speech-triangle-2">
               <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -291,25 +360,21 @@ const imgTriangleDown = "/images/triangle-down.svg";
             </div>
           </div>
         </div>
-        <div class="absolute bg-white h-[120px] left-[218px] rounded-[30px] top-[2597px] w-[587px]" data-name="speech-2" />
-        <div class="absolute bg-[#ffd059] h-[24px] left-[365px] rounded-[10px] top-[2664px] w-[377px]" data-name="highlight-guides-funding" />
-        <div class="absolute bg-[#ffd059] h-[25px] left-[317px] rounded-[10px] top-[2619px] w-[188px]" data-name="highlight-join-hundreds" />
-        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] font-normal h-[78px] leading-[1.09] left-[520px] text-[#ed5615] text-[20px] text-center top-[2621px] tracking-[-0.6px] w-[518px]" style={`font-variation-settings: "CTGR" 0, "wdth" 100;`}>You&rsquo;ll join hundreds of teens running hackathons in their own cities around the globe. Hack Club (a global nonprofit) will provide guides, funding, merch, and 1-on-1 mentorship!</p>
+        <div class="absolute bg-white h-[150px] left-[191px] rounded-[30px] top-[2637px] w-[587px]" data-name="speech-2" />
+        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[114px] leading-[0] left-[488px] not-italic text-[#ed5615] text-[24px] text-center top-[2661px] tracking-[-0.72px] w-[518px]">
+          <span class="leading-[1.09]">You&rsquo;ll </span>
+          <span class="underline">join hundreds of teens</span>
+          <span class="leading-[1.09]"> from around the world, all running hackathons in their own cities. Hack Club (a global nonprofit) will provide guides, funding, merch, and 1-on-1 mentorship!</span>
+        </p>
       </div>
-      <div class="absolute contents left-[588px] top-[2470px]" data-name="speech-1">
-        <div class="absolute flex h-[116.172px] items-center justify-center left-[857px] top-[2522px] w-[94.787px]">
-          <div class="flex-none rotate-70">
-            <div class="h-[64.405px] relative w-[100.186px]" data-name="hedgehog-speech-triangle 2">
-              <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                <img alt="" class="absolute h-[3250.79%] left-[-351.02%] max-w-none top-[-2024.6%] w-[721.43%]" src={imgSpeechTriangle3} />
-              </div>
-            </div>
-          </div>
+      <div class="absolute contents left-[484px] top-[2463px]" data-name="speech-1">
+        <div class="absolute h-[136.5px] left-[484px] top-[2463px] w-[587px]" data-name="speech-box-1">
+          <img alt="" class="absolute block inset-0 max-w-none size-full" src={imgSpeechBox1} />
         </div>
-        <div class="absolute bg-white h-[110px] left-[588px] rounded-[30px] top-[2470px] w-[587px]" data-name="speech-box-1" />
-        <div class="absolute bg-[#ffd059] h-[27px] left-[749px] rounded-[10px] top-[2493px] w-[290px]" data-name="highlight-we-want" />
-        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] font-normal h-[72px] leading-[1.09] left-[881px] text-[#ed5615] text-[20px] text-center top-[2497px] tracking-[-0.6px] w-[518px]" style={`font-variation-settings: "CTGR" 0, "wdth" 100;`}>
-          This November, we want YOU to run a hackathon! Yes, you, no matter if you&rsquo;ve had years of experience running hackathons or just learned what they are today.
+        <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[72px] leading-[0] left-[777px] not-italic text-[#ed5615] text-[24px] text-center top-[2491px] tracking-[-0.72px] w-[518px]">
+          <span class="leading-[1.09]">This November, </span>
+          <span class="underline">we want YOU</span>
+          <span class="leading-[1.09]"> to run a game jam. Yes, you! It doesn&rsquo;t matter if you have years of experience, or just learned what they are today.</span>
         </p>
       </div>
     </div>
@@ -318,45 +383,46 @@ const imgTriangleDown = "/images/triangle-down.svg";
         <img alt="" class="absolute h-[1651.61%] left-[-25.63%] max-w-none top-[-892.34%] w-[148.53%]" src={imgHackathonsAreAwesomeTriangles1} />
       </div>
     </div>
-    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[164px] leading-[0.8] left-[738.5px] not-italic text-[60px] text-center [text-shadow:0px_0px_10px_#ffd059] text-white top-[2306px] tracking-[-3px] w-[665px]">
-      Don&rsquo;t hackathons sound awesome?
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[119px] leading-[0.8] left-[738.5px] not-italic text-[60px] text-center [text-shadow:0px_0px_10px_#ffd059] text-white top-[2306px] tracking-[-3px] w-[665px]">
+      Don&rsquo;t game jams sound awesome?
     </p>
   </div>
 
-  <div class="absolute contents left-0 top-[3671px]" data-name="faq" id="faq">
-    <div class="absolute h-[1863px] left-0 top-[3671px] w-[1440px]" data-name="haven-bottom-bg 1">
+  <div class="absolute contents left-0 top-[4595px]" data-name="faq" id="faq">
+    <div class="absolute h-[1863px] left-0 top-[4595px] w-[1440px]" data-name="haven-bottom-bg 1">
       <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <img alt="" class="absolute h-[228.94%] left-0 max-w-none top-[-128.8%] w-full" src={imgHavenBottomBg1} />
       </div>
     </div>
-    {[
-      { x: 81.31, y: 4026.54 },
-      { x: 858.07, y: 4026.54 },
-      { x: 81.31, y: 4109.81 },
-      { x: 858.07, y: 4109.81 },
-      { x: 81.31, y: 4193.07 },
-      { x: 858.07, y: 4193.07 },
-      { x: 81.31, y: 4276.34 },
-      { x: 858.07, y: 4276.34 },
-      { x: 81.31, y: 4359.6 },
-      { x: 858.07, y: 4359.6 },
-    ].map((pos) => (
-      <div class="absolute contents" style={`left: ${pos.x}px; top: ${pos.y}px;`}>
+    {faqs.map((f) => (
+      <div class="absolute contents" style={`left: ${f.x}px; top: ${f.y}px;`}>
         <div
-          class="absolute bg-white h-[68.571px] rounded-[20px] w-[501.502px]"
-          style={`left: ${pos.x}px; top: ${pos.y}px;`}
+          class="absolute bg-white h-[68.571px] opacity-85 rounded-[20px] w-[501.502px]"
+          style={`left: ${f.x}px; top: ${f.y}px;`}
         />
         <div
-          class="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Darumadrop_One'] h-[32.345px] justify-center leading-[0] not-italic text-[#ed5615] text-[30px] tracking-[-1.5px] w-[235.8px]"
-          style={`left: ${pos.x + 29.9}px; top: ${pos.y + 34.29}px;`}
+          class="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Darumadrop_One'] h-[32.345px] justify-center leading-[0] not-italic text-[#ed5615] text-[30px] tracking-[-1.5px] w-[396px]"
+          style={`left: ${f.x + 29.9}px; top: ${f.y + 30.96}px;`}
         >
-          <p class="leading-[0.8]">Am I eligible?</p>
+          <p class="leading-[0.8]">{f.q}</p>
+        </div>
+        <div class="absolute h-[18px] w-[30px]" style={`left: ${f.x + 445.7}px; top: ${f.y + 23.46}px;`} data-name="haven-small-arrow">
+          <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHavenSmallArrow} />
         </div>
       </div>
     ))}
-    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[121.469px] leading-[0.8] left-[719.51px] not-italic text-[#ed5615] text-[100px] text-center top-[3822.79px] tracking-[-5px] w-[306.612px]">
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[121.469px] leading-[0.8] left-[719.51px] not-italic text-[#ed5615] text-[100px] text-center top-[4746.79px] tracking-[-5px] w-[306.612px]">
       FAQ
     </p>
+    <a
+      href="mailto:haven@hackclub.com"
+      class="absolute bg-[#fc8616] border border-solid border-white cursor-pointer h-[172px] left-[451px] rounded-[30px] shadow-[0px_0px_5px_2px_rgba(255,255,255,0.65)] top-[5768px] w-[538px]"
+      data-name="final-sign-up-call"
+    >
+      <p class="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute font-['Jua'] leading-none left-1/2 not-italic text-[80px] text-center text-white top-1/2 tracking-[-2.4px] w-[538px]">
+        Sign up!
+      </p>
+    </a>
   </div>
 
   <div class="absolute contents left-0 top-0" data-name="hero" id="top">
@@ -380,7 +446,7 @@ const imgTriangleDown = "/images/triangle-down.svg";
       </div>
     </div>
     <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Jua'] h-[77px] leading-none left-[720.5px] not-italic text-[40px] text-center [text-shadow:0px_0px_4px_#ed5615] text-white top-[529px] tracking-[-1.2px] w-[1303px] whitespace-pre-wrap">Nov 14&ndash;15 &middot; For teenagers around the world</p>
-    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[332px] leading-[0.8] left-[720.5px] not-italic text-[150px] text-center [text-shadow:0px_0px_4px_#ed5615] text-white top-[241px] tracking-[-7.5px] w-[1201px] whitespace-pre-wrap">Lead&nbsp; a&nbsp; hackathon in&nbsp; your&nbsp; city!</p>
+    <p class="-translate-x-1/2 [word-break:break-word] absolute font-['Darumadrop_One'] h-[269px] leading-[0.8] left-[720.5px] not-italic text-[120px] text-center [text-shadow:0px_0px_4px_#ed5615] text-white top-[304px] tracking-[-6px] w-[1201px] whitespace-pre-wrap">Lead&nbsp; a&nbsp; game jam in&nbsp; your&nbsp; city!</p>
     <div class="absolute contents left-[524px] top-0" data-name="sticky">
       <div class="absolute h-[265px] left-[782px] top-0 w-[658px]" data-name="sticky-top">
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -406,16 +472,22 @@ const imgTriangleDown = "/images/triangle-down.svg";
       </div>
     </div>
     <div class="absolute contents left-[308px] top-[595px]" data-name="email" id="signup">
-      <div class="absolute bg-white h-[84px] left-[308px] opacity-50 rounded-[30px] shadow-[0px_0px_8px_2px_rgba(250,104,27,0.65)] top-[597px] w-[825px]" data-name="email-field" />
-      <div class="absolute bg-[#fa681b] h-[63px] left-[838px] rounded-[20px] top-[607px] w-[283.209px]" data-name="im-interested" />
-      <a class="-translate-x-full -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Jua'] h-[84px] justify-center text-left leading-[0] left-[821px] not-italic text-[#ed5615] text-[50px] text-right top-[639px] tracking-[-1.5px] w-[479px]" href="mailto:you@gmail.com" target="_blank">
-        <p class="cursor-pointer leading-none">you@email.com</p>
+      <div class="absolute bg-white h-[84px] left-[308px] opacity-70 rounded-[30px] shadow-[0px_0px_8px_2px_rgba(250,104,27,0.65)] top-[597px] w-[825px]" data-name="email-field" />
+      <div class="absolute bg-[#fa681b] h-[63px] left-[996px] rounded-[20px] top-[607px] w-[125px]" data-name="im-interested" />
+      <a class="-translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Jua'] h-[84px] justify-center leading-[0] left-[342px] not-italic text-[#ed5615] text-[50px] top-[639px] tracking-[-1.5px] w-[466px]" href="mailto:haven@hackclub.com" target="_blank">
+        <p class="cursor-pointer leading-none">enter email to sign up</p>
       </a>
-      <div class="-translate-x-1/2 -translate-y-1/2 [word-break:break-word] absolute flex flex-col font-['Darumadrop_One'] h-[76px] justify-center leading-[0] left-[981.91px] not-italic text-[40px] text-center text-white top-[633px] tracking-[-1.2px] w-[240.112px]">
-        <p class="leading-none">I&rsquo;m interested!</p>
-      </div>
     </div>
-    <div class="absolute bg-white h-[214px] left-[1063px] rounded-[30px] top-[758px] w-[333px]" data-name="vid-preview" />
+    <div class="absolute contents left-[1011px] top-[615px]" data-name="vid-preview">
+      <div class="absolute bg-white h-[248px] left-[1064px] rounded-[30px] top-[724px] w-[333px]" data-name="vid-preview-box" />
+      <div class="absolute bg-[#fc8616] h-[180px] left-[1092px] rounded-[20px] top-[772px] w-[281px]" data-name="launch-video" />
+      <div class="absolute h-[48px] left-[1011px] top-[615px] w-[95px]" data-name="haven-sign-up-arrow">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <img alt="" class="absolute h-full left-[20.41%] max-w-none top-0 w-[59.19%]" src={imgHavenSignUpArrow1} />
+        </div>
+      </div>
+      <p class="[word-break:break-word] absolute font-['Jua'] h-[37px] leading-none left-[1092px] not-italic text-[#fc8616] text-[30px] top-[735px] tracking-[-0.9px] w-[144px]">close video</p>
+    </div>
     <a href="#about" class="absolute flex h-[94px] items-center justify-center left-[614px] top-[878px] w-[309px]">
       <div class="-scale-y-100 flex-none">
         <div class="h-[94px] relative w-[309px]" data-name="triangle-down">
@@ -440,27 +512,27 @@ const imgTriangleDown = "/images/triangle-down.svg";
     </div>
   </div>
 
-  <div class="absolute contents left-[153px] top-[4843px]" data-name="footer">
-    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[187px] not-italic text-[50px] text-white top-[4957px] tracking-[-2.5px] w-[395px]">
+  <div class="absolute contents left-[146px] top-[6018px]" data-name="footer">
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[194px] not-italic text-[50px] text-white top-[6237px] tracking-[-2.5px] w-[395px]">
       Hack Club
     </p>
-    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[183px] not-italic text-[50px] text-white top-[5015px] tracking-[-2.5px] w-[395px]">
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[190px] not-italic text-[50px] text-white top-[6295px] tracking-[-2.5px] w-[395px]">
       Slack
     </p>
-    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[183px] not-italic text-[50px] text-white top-[5073px] tracking-[-2.5px] w-[395px]">
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[190px] not-italic text-[50px] text-white top-[6353px] tracking-[-2.5px] w-[395px]">
       Clubs
     </p>
-    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[183px] not-italic text-[50px] text-white top-[5131px] tracking-[-2.5px] w-[395px]">
+    <p class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[58px] leading-[0.8] left-[190px] not-italic text-[50px] text-white top-[6411px] tracking-[-2.5px] w-[395px]">
       Hackathons
     </p>
-    <div class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[285px] leading-[0] left-[644px] not-italic text-[0px] text-white top-[4876px] w-[643px] whitespace-pre-wrap">
+    <div class="[word-break:break-word] absolute font-['Darumadrop_One'] h-[285px] leading-[0] left-[651px] not-italic text-[0px] text-white top-[6156px] w-[643px] whitespace-pre-wrap">
       <p class="font-['Jua'] mb-0 text-[24px]">
         <span class="leading-none">Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers. We believe you learn best by building, so we&rsquo;re creating community and providing grants so you can make awesome projects. In the past few years, we&rsquo;ve </span>
         <a class="[text-decoration-skip-ink:none] [text-underline-position:from-font] cursor-pointer decoration-from-font decoration-solid leading-none underline" href="https://www.youtube.com/watch?v=ufMUJ9D1fi8" target="_blank">sent 30 teen hackers hiking the Pacific Crest Trail</a>
         <span class="leading-none">, </span>
         <a class="[text-decoration-skip-ink:none] [text-underline-position:from-font] cursor-pointer decoration-from-font decoration-solid leading-none underline" href="https://www.youtube.com/watch?v=8iM1W8kXrQA" target="_blank">hosted a hackathon for the worst ideas</a>
         <span class="leading-none">, and </span>
-        <a class="[text-decoration-skip-ink:none] [text-underline-position:from-font] cursor-pointer decoration-from-font decoration-solid leading-none underline" href="https://www.youtube.com/watch?v=kaEFv7e49mo" target="_blank">ran the largest hardware hackathon at GitHub HQ</a>
+        <a class="[text-decoration-skip-ink:none] [text-underline-position:from-font] cursor-pointer decoration-from-font decoration-solid leading-none underline" href="https://www.youtube.com/watch?v=kaEFv7e49mo" target="_blank">ran the largest teen hardware hackathon at GitHub HQ</a>
         <span class="leading-none">.</span>
       </p>
       <p class="leading-none mb-0 text-[24px]">&nbsp;</p>
@@ -478,13 +550,8 @@ const imgTriangleDown = "/images/triangle-down.svg";
       <p class="leading-none mb-0 text-[24px]">&nbsp;</p>
       <p class="font-['Jua'] leading-none text-[24px]">Made with &hearts; by teenagers, for teenagers at Hack Club</p>
     </div>
-    <div class="absolute h-[73px] left-[390px] top-[4856px] w-[207px]" data-name="flag-standalone-wtransparent 1">
-      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFlagStandaloneWtransparent1} />
-    </div>
-    <div class="absolute h-[87px] left-[153px] top-[4843px] w-[232px]" data-name="haven-logo">
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <img alt="" class="absolute h-[455.22%] left-[-64.29%] max-w-none top-[-190.43%] w-[233.77%]" src={imgHavenLogo} />
-      </div>
+    <div class="absolute h-[205px] left-[146px] top-[6018px] w-[359px]" data-name="haven-logo-final 2">
+      <img alt="" class="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHavenLogoFinal2} />
     </div>
   </div>
 </div>
