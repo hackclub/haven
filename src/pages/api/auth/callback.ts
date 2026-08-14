@@ -1,4 +1,7 @@
 import type { APIRoute } from "astro";
+import { db } from "../../../lib/db";
+import { usersTable } from "../../../lib/db/schema";
+import { getHCAProfile } from "../../../lib/services/hca";
 
 export const GET: APIRoute = async ({ request }) => {
   const code = new URL(request.url).searchParams.get("code");
@@ -24,15 +27,37 @@ export const GET: APIRoute = async ({ request }) => {
 
   const tokenData = await tokenResp.json();
 
-  const profileResp = await fetch("https://auth.hackclub.com/api/v1/me", {
-    headers: { Authorization: `Bearer ${tokenData.access_token}` },
-  });
+  const identity = await getHCAProfile(tokenData.access_token);
 
-  if (!profileResp.ok) {
-    return new Response("Failed to fetch profile", { status: 502 });
-  }
+  const primaryAddress =
+    identity.addresses?.find((address) => address.primary) ??
+    identity.addresses?.[0] ??
+    null;
 
-  const profile = await profileResp.json();
+  const values = {
+    hcaToken: tokenData.access_token,
+    hcaId: identity.id,
+    firstName: identity.first_name,
+    lastName: identity.last_name,
+    legalFirstName: identity.legal_first_name,
+    legalLastName: identity.legal_last_name,
+    primaryEmail: identity.primary_email,
+    birthday: identity.birthday,
+    phoneNumber: identity.phone_number,
+    yswsEligible: identity.ysws_eligible ?? false,
+    verificationStatus: identity.verification_status,
+    address: primaryAddress,
+    slackId: identity.slack_id,
+  };
 
-  return Response.json(profile);
+  const [user] = await db
+    .insert(usersTable)
+    .values(values)
+    .onConflictDoUpdate({ target: usersTable.hcaId, set: values })
+    .returning({ token: usersTable.token });
+
+  const signupUrl = new URL(import.meta.env.POC_SIGNUP_URL);
+  signupUrl.searchParams.set("token", user!.token);
+
+  return Response.redirect(signupUrl);
 };

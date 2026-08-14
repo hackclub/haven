@@ -9,12 +9,31 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.1",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.0",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^1.0.0-rc.4",
+    "pg": "^8.23.0",
     "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@types/pg": "^8.21.0",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "tsx": "^4.23.12",
+    "typescript": "^6.0.3"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true,
+    "esbuild@0.28.2": true,
+    "fsevents@2.3.3": true
   }
 }
