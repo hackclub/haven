@@ -4,6 +4,7 @@ import {
   randomBytes,
   type CipherGCMTypes,
 } from "crypto";
+import { env } from "./env";
 
 // Encrypted values are stored as `v1.<iv>.<authTag>.<ciphertext>`, all base64.
 // The version prefix lets us rotate the scheme later without guessing at
@@ -18,7 +19,7 @@ let cachedKey: Buffer | null = null;
 function getKey(): Buffer {
   if (cachedKey) return cachedKey;
 
-  const raw = import.meta.env.ENCRYPTION_KEY;
+  const raw = env.ENCRYPTION_KEY;
   if (!raw) {
     throw new Error("ENCRYPTION_KEY is not set");
   }

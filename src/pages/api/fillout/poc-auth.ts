@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "../../../lib/db";
 import { usersTable } from "../../../lib/db/schema";
 import { EXTERNAL_URL } from "../../../lib/consts";
+import { env } from "../../../lib/env";
 
 const ADULT_AGE = 19;
 
@@ -46,7 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
       message: `The token in the URL is invalid. Please click the POC sign up button on ${EXTERNAL_URL} to try again!`,
     });
 
-  const cutoffDate = new Date(import.meta.env.AGE_CUTOFF_DATE);
+  const cutoffDate = new Date(env.AGE_CUTOFF_DATE);
   const defaultShippingFirstName = user.legalFirstName || user.firstName;
   const defaultShippingLastName = user.legalLastName || user.lastName;
 

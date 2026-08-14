@@ -1,0 +1,39 @@
+function required(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} is not set`);
+  }
+  return value;
+}
+
+function optional(name: string): string | undefined {
+  return process.env[name] || undefined;
+}
+
+export const env = {
+  get DATABASE_URL() {
+    return required("DATABASE_URL");
+  },
+  get ENCRYPTION_KEY() {
+    return required("ENCRYPTION_KEY");
+  },
+  get AGE_CUTOFF_DATE() {
+    return required("AGE_CUTOFF_DATE");
+  },
+  get POC_SIGNUP_URL() {
+    return required("POC_SIGNUP_URL");
+  },
+  get HCA_CLIENT_ID() {
+    return required("HCA_CLIENT_ID");
+  },
+  get HCA_CLIENT_SECRET() {
+    return required("HCA_CLIENT_SECRET");
+  },
+  get EXTERNAL_URL() {
+    return (
+      optional("EXTERNAL_URL") ||
+      optional("SITE") ||
+      "https://haven.hackclub.com"
+    );
+  },
+};

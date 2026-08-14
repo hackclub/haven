@@ -1,4 +1,3 @@
-export const EXTERNAL_URL =
-  import.meta.env.EXTERNAL_URL ||
-  import.meta.env.SITE ||
-  "https://haven.hackclub.com";
+import { env } from "./env";
+
+export const EXTERNAL_URL = env.EXTERNAL_URL;
