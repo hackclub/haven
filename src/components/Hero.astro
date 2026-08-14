@@ -1,0 +1,126 @@
+---
+import { event } from "../data/content";
+import SignupForm from "./SignupForm.astro";
+---
+
+{/*
+  `z-10` lets the foreground band hang past the bottom edge and overlap the
+  section below, the way the illustration is drawn.
+
+  Full viewport height so the yellow frame always frames the first screen —
+  capping it at 52rem meant the frame stopped short of the fold on tall
+  displays.
+
+  On mobile the hedgehog sits at the bottom across the full width, so the
+  bottom padding reserves its height (44vw wide x 308/422 = 32.1vw tall).
+  From sm it is off to the left of the row and needs no extra room.
+*/}
+<section
+  id="top"
+  class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
+>
+  {/* The headline block centres in whatever space is left above the bottom
+      row, so the row stays down by the hedgehog however tall the screen is. */}
+  <div class="relative z-10 flex flex-1 items-center justify-center">
+    <div class="shell flex flex-col items-center text-center">
+      {/* The leading space keeps the accessible name from reading "game jamin"
+          — block spans concatenate without one. It collapses visually. */}
+      <h1 class="glow-orange font-display text-hero text-white [word-spacing:0.18em]">
+        {
+          event.tagline.map((line, i) => (
+            <span class="block">
+              {i > 0 ? " " : ""}
+              {line}
+            </span>
+          ))
+        }
+      </h1>
+
+      <p class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white">
+        <span class="whitespace-nowrap">{event.dates}</span>
+        <span aria-hidden="true" class="mx-2 hidden sm:inline">&hearts;</span>
+        <span class="block sm:inline">{event.audience}</span>
+      </p>
+
+      <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-full max-w-[52rem]" />
+    </div>
+  </div>
+
+  {/* Jump-link and video slot share a row on desktop and stack on narrow
+      screens. In the export these were absolutely-placed boxes. */}
+  <div
+    class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] grid grid-cols-1 items-end gap-8 sm:grid-cols-[1fr_auto_1fr]"
+  >
+    {/* Desktop-only: on mobile the next section is already the obvious scroll
+        target, and the arrow just crowds the hedgehog. */}
+    <a
+      href="#about"
+      class="order-2 hidden flex-col items-center gap-1 justify-self-center sm:order-none sm:col-start-2 sm:flex"
+    >
+      <span class="font-body text-subheading text-white/60">more info</span>
+      {/* The asset points up; the design flips it to point down the page. */}
+      <img
+        src="/images/triangle-down.svg"
+        alt=""
+        aria-hidden="true"
+        width="207"
+        height="69"
+        class="w-[clamp(6rem,18vw,19rem)] -scale-y-100"
+      />
+    </a>
+
+    {/* Collapsible video panel. Uses <details> so the "close video" control
+        works without JavaScript; the panel starts open, as drawn. */}
+    <details
+      open
+      class="group order-1 w-full max-w-[22.5rem] justify-self-center rounded-[1.875rem] bg-white p-[clamp(0.75rem,1.3vw,1.2rem)] sm:order-none sm:col-start-3 sm:max-w-[min(22.5rem,24svh)] sm:justify-self-end"
+    >
+      {/* Hidden on mobile: the panel stays open (the `open` attribute keeps the
+          content rendered) so there is nothing to toggle and no control to
+          crowd the layout. The bottom padding only separates the label from the
+          video, so it applies when open — collapsed it left the label high. */}
+      <summary
+        class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1.05rem,1.4vw,1.875rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
+      >
+        <span class="group-open:hidden">watch video</span>
+        <span class="hidden group-open:inline">close video</span>
+        <img
+          src="/images/faq-chevron.webp"
+          alt=""
+          aria-hidden="true"
+          width="416"
+          height="256"
+          class="w-[clamp(1.5rem,1.8vw,2.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+        />
+      </summary>
+      <div class="aspect-[320/180] w-full rounded-[1.25rem] bg-haven-orange-mid">
+        <span class="sr-only">Intro video coming soon</span>
+      </div>
+    </details>
+  </div>
+
+  {/* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
+      the hero's bottom-left (Figma x138/1440 = 9.6%, w422/1440 = 29.3%) rather
+      than sitting in the flow row, where it ended up floating above the grass.
+      On mobile it keeps the same slight-left placement, still on the ground. */}
+  <img
+    src="/images/hedgehog.webp"
+    alt=""
+    aria-hidden="true"
+    width="422"
+    height="308"
+    class="absolute bottom-0 left-[6%] z-10 w-[clamp(9rem,44vw,16rem)] select-none sm:left-[9.6%] sm:w-[29.3%] sm:max-w-[26rem]"
+  />
+
+  {/* Foreground foliage band that bridges the hero into the section below. The
+      55% offset puts the band's horizontal bar just below the frame's bottom
+      rule and lets the bushes hang into the section below, as in the design. */}
+  <img
+    src="/images/hero-foreground.webp"
+    alt=""
+    aria-hidden="true"
+    width="1414"
+    height="501"
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full max-w-none translate-y-[55%] select-none"
+  />
+</section>

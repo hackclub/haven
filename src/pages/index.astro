@@ -1,22 +1,37 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ScaledCanvas from "../components/ScaledCanvas.astro";
-import DesktopScene from "../components/DesktopScene.astro";
-import MobileScene from "../components/MobileScene.astro";
-import MobileExtra from "../components/MobileExtra.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Pitch from "../components/Pitch.astro";
+import Steps from "../components/Steps.astro";
+import PastEvents from "../components/PastEvents.astro";
+import Faq from "../components/Faq.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 ---
 
 <Layout>
-  <div class="hidden md:block">
-    <ScaledCanvas width={1440} height={5340}>
-      <DesktopScene />
-    </ScaledCanvas>
-  </div>
+  <SiteHeader />
 
-  <div class="md:hidden">
-    <ScaledCanvas width={402} height={2862}>
-      <MobileScene />
-    </ScaledCanvas>
-    <MobileExtra />
-  </div>
+  <main id="main">
+    <Hero />
+
+    {/* One backdrop per run of sections, matching how the Figma file splits the
+        artwork. From `lg` up each is an aspect-locked stage its children are
+        positioned on; below that they collapse to ordinary stacked flow. */}
+    <div class="stage stage-middle">
+      <About />
+      <Pitch />
+    </div>
+
+    <Steps />
+
+    <div class="stage stage-picnic">
+      <PastEvents />
+    </div>
+
+    <Faq />
+  </main>
+
+  <SiteFooter />
 </Layout>

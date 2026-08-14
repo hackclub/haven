@@ -1,0 +1,67 @@
+---
+import { pitchHeading, pitches } from "../data/content";
+
+const toStyle = (vars: Record<string, string>) =>
+  Object.entries(vars)
+    .map(([key, value]) => `${key}:${value}`)
+    .join(";");
+
+/** Stage coordinates as percentages of the 1439x1969 `bg-middle` artwork. */
+const stage: Record<string, string> = {
+  triangles: "lg:absolute lg:left-[24.9%] lg:top-[60.6%] lg:w-[53.3%]",
+  heading: "lg:absolute lg:left-[28.2%] lg:top-[64%] lg:w-[46.2%]",
+  invite: "lg:absolute lg:left-[33.6%] lg:top-[72%] lg:w-[40.8%]",
+  support: "lg:absolute lg:left-[13.3%] lg:top-[80.8%] lg:w-[40.8%]",
+  impact: "lg:absolute lg:left-[16.2%] lg:top-[90.6%] lg:w-[40.8%]",
+};
+
+const alignment = {
+  start: "sm:self-start",
+  center: "sm:self-center",
+  end: "sm:self-end",
+} as const;
+---
+
+<section
+  class="relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] px-5 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] lg:contents"
+>
+  {/* Decorative sparkles that flank the headline. */}
+  <img
+    src="/images/banner-triangles.webp"
+    alt=""
+    aria-hidden="true"
+    width="952"
+    height="248"
+    class={`pointer-events-none hidden select-none lg:block ${stage.triangles}`}
+  />
+
+  <h2
+    class:list={[
+      "glow-yellow mx-auto max-w-[14ch] text-center font-display text-display text-white lg:max-w-none lg:text-[4.17cqw] lg:leading-[0.8]",
+      stage.heading,
+    ]}
+  >
+    {pitchHeading}
+  </h2>
+
+  {/* The design underlines the emphasised runs; we keep the highlighter
+      treatment instead — same emphasis, more of the brand. */}
+  {
+    pitches.map((pitch) => (
+      <div
+        class:list={[
+          "speech w-full max-w-[38rem] lg:max-w-none",
+          alignment[pitch.align],
+          stage[pitch.id],
+        ]}
+        style={pitch.tail ? toStyle(pitch.tail) : undefined}
+      >
+        <p class="px-[clamp(1.25rem,3vw,2.5rem)] py-[clamp(1.1rem,2.2vw,1.75rem)] text-center font-body text-copy leading-[1.7] text-haven-orange-deep lg:px-[6%] lg:py-[5%] lg:text-[1.67cqw] lg:leading-[1.35]">
+          {pitch.body.map((segment) =>
+            segment.mark ? <span class="marker">{segment.text}</span> : segment.text,
+          )}
+        </p>
+      </div>
+    ))
+  }
+</section>

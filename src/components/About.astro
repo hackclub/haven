@@ -1,0 +1,106 @@
+---
+import { about, perks } from "../data/content";
+
+/**
+ * Stage coordinates, taken straight from the Figma frame and expressed as
+ * percentages of the 1439x1969 `bg-middle` artwork so they hold at any width.
+ * They only apply from `lg` up, where `.stage` locks the aspect ratio.
+ */
+const stage: Record<string, string> = {
+  intro: "lg:absolute lg:left-[16.1%] lg:top-[5.6%] lg:w-[30%]",
+  daven: "lg:absolute lg:left-[65.8%] lg:top-[5.6%] lg:w-[7.5%]",
+  build: "lg:absolute lg:left-[4.8%] lg:top-[17.1%] lg:w-[33.8%]",
+  friends: "lg:absolute lg:left-[40.6%] lg:top-[27.1%] lg:w-[47.6%]",
+  food: "lg:absolute lg:left-[10.6%] lg:top-[42.6%] lg:w-[42.4%]",
+};
+---
+
+{/*
+  Below `lg` this is an ordinary stacked section. The hero's foliage band hangs
+  into it — the bushes reach 0.388 * bandHeight below the hero, and bandHeight
+  is 100vw * 501/1414, so they end 13.75vw down. The mobile top padding clears
+  that; on the stage the Figma coordinates already sit clear of them.
+*/}
+<section
+  id="about"
+  class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-5 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] lg:contents"
+>
+  <div class={`max-w-[42rem] ${stage.intro}`}>
+    <h2 class="font-display text-heading text-white lg:text-[3.06cqw] lg:leading-[0.8]">
+      {about.title}
+    </h2>
+    {/* Gap matches the body's own line gap so the block reads as one unit. */}
+    <p
+      class="mt-[0.35em] max-w-[30ch] font-body text-lead leading-[1.15] text-white lg:max-w-none lg:text-[1.74cqw]"
+    >
+      {about.body}
+    </p>
+  </div>
+
+  <img
+    src="/images/daven.webp"
+    alt=""
+    aria-hidden="true"
+    width="108"
+    height="108"
+    class={`hidden select-none lg:block ${stage.daven}`}
+  />
+
+  {
+    perks.map((perk) => (
+      <div
+        class:list={[
+          "rule-frame w-full max-w-[40rem] p-[clamp(0.75rem,1.4vw,1.25rem)] [--frame-gap:clamp(0.75rem,1.4vw,1.25rem)] [--frame-offset:0px] lg:max-w-none lg:p-[2.1%] lg:[--frame-gap:2.5%]",
+          perk.side === "end" ? "self-end" : "self-start",
+          stage[perk.id],
+        ]}
+      >
+        <div class="panel px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center lg:px-[6%] lg:py-[4%]">
+          <h3 class="font-display text-heading text-haven-orange-mid lg:text-[3.06cqw] lg:leading-[0.8]">
+            {perk.title}
+          </h3>
+
+          {/* Images first, then the blurb — the current design order. */}
+          <ul class="mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-3 gap-[clamp(0.5rem,1.2vw,1rem)] lg:mt-[4%] lg:gap-[3%]">
+            {perk.photos.map((photo) => {
+              const Cell = photo.href ? "a" : "div";
+              return (
+                <li>
+                  <Cell
+                    {...(photo.href ? { href: photo.href, target: "_blank", rel: "noopener" } : {})}
+                    class:list={["block", photo.href && "group"]}
+                  >
+                    <img
+                      src={photo.src}
+                      alt={photo.alt}
+                      loading="lazy"
+                      decoding="async"
+                      class:list={[
+                        "w-full rounded-[clamp(0.625rem,1.4vw,1.25rem)] object-cover transition-transform lg:rounded-[1.4cqw]",
+                        photo.href && "group-hover:scale-[1.03]",
+                        perk.aspect,
+                        photo.position,
+                      ]}
+                    />
+                    {photo.caption && (
+                      <span class="mt-1.5 block font-body text-[clamp(0.5rem,0.85vw,0.75rem)] leading-tight tracking-[-0.03em] text-haven-gold lg:mt-[3%] lg:text-[0.84cqw]">
+                        <span class="block">{photo.caption.title}</span>
+                        <span class="block text-[0.85em]">{photo.caption.author}</span>
+                      </span>
+                    )}
+                  </Cell>
+                </li>
+              );
+            })}
+          </ul>
+
+          {perk.blurb.map((line) => (
+            <p class="mt-1 font-body text-copy text-haven-orange-mid first-of-type:mt-[clamp(0.75rem,1.4vw,1.1rem)] lg:text-[1.39cqw] lg:leading-[1.15] lg:first-of-type:mt-[4%]">
+              {line}
+            </p>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</section>

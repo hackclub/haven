@@ -1,0 +1,74 @@
+---
+import { faqs } from "../data/content";
+
+/* The design reads down two columns: odd entries left, even entries right.
+   A two-column grid fills across, so split the list first to preserve order. */
+const columns = [faqs.filter((_, i) => i % 2 === 0), faqs.filter((_, i) => i % 2 === 1)];
+---
+
+{/*
+  Real <details>/<summary> disclosures. Top padding is tuned so the heading
+  lands inside the painted signpost.
+*/}
+<section
+  id="faq"
+  class="scene-harvest relative pb-[clamp(3rem,7vw,6rem)] pt-[clamp(3.5rem,9vw,7.875rem)]"
+>
+  <div class="shell">
+    <h2 class="text-center font-display text-[clamp(3.5rem,8vw,6.25rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-deep">
+      FAQ
+    </h2>
+
+    <div
+      class="mx-auto mt-[clamp(2rem,5vw,4rem)] grid max-w-[68rem] grid-cols-1 items-start gap-x-[clamp(1rem,2vw,1.75rem)] gap-y-[clamp(0.75rem,1.5vw,1.25rem)] md:grid-cols-2"
+    >
+      {
+        columns.map((column) => (
+          <ul class="flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)]">
+            {column.map((item) => (
+              <li>
+                <details class="group rounded-[1.25rem] bg-white/85 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)]">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <img
+                      src="/images/faq-chevron.webp"
+                      alt=""
+                      aria-hidden="true"
+                      width="416"
+                      height="256"
+                      class="w-[clamp(1.125rem,1.6vw,1.875rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+                    />
+                  </summary>
+                  <p class="mt-2.5 font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-haven-orange-deep">
+                    {item.a.map((seg) =>
+                      seg.href ? (
+                        <a
+                          href={seg.href}
+                          class="underline decoration-from-font underline-offset-2 hover:text-haven-orange-mid"
+                          {...(seg.href.startsWith("http")
+                            ? { target: "_blank", rel: "noopener" }
+                            : {})}
+                        >
+                          {seg.text}
+                        </a>
+                      ) : (
+                        seg.text
+                      ),
+                    )}
+                  </p>
+                </details>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+
+    <a
+      href="#signup"
+      class="mx-auto mt-[clamp(2.5rem,6vw,5rem)] block w-full max-w-[34rem] rounded-[1.875rem] bg-haven-orange-mid px-6 py-[clamp(1.25rem,2.5vw,2.25rem)] text-center font-display text-[clamp(2rem,4vw,3.75rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100"
+    >
+      Sign up!
+    </a>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+---
+import { steps, stepsHeading } from "../data/content";
+---
+
+{/*
+  "How you organize" — an ordered list, because the four steps really are a
+  sequence, which is what earns the numbered markers.
+*/}
+<section class="relative py-[clamp(2.5rem,6vw,5rem)]">
+  <div class="shell">
+    <h2
+      class="mx-auto max-w-[24ch] text-center font-display text-display text-white sm:max-w-none"
+    >
+      {stepsHeading}
+    </h2>
+
+    <ol
+      class="mt-[clamp(1.5rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        steps.map((step, i) => (
+          <li class="flex flex-col gap-[clamp(1rem,1.6vw,1.5rem)] rounded-[1.875rem] bg-haven-butter p-[clamp(1.25rem,1.8vw,1.75rem)]">
+            <div class="flex items-start gap-[clamp(0.5rem,1vw,0.875rem)]">
+              <span
+                aria-hidden="true"
+                class="font-display text-[clamp(3rem,5.5vw,5.625rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-bright"
+              >
+                {i + 1}
+              </span>
+              <span class="font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-bright">
+                {step.title}
+              </span>
+            </div>
+            <img
+              src={step.image}
+              alt={step.alt}
+              loading="lazy"
+              decoding="async"
+              width="239"
+              height="172"
+              class="mt-auto aspect-[239/172] w-full rounded-[1.25rem] object-cover"
+            />
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

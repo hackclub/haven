@@ -1,22 +1,291 @@
-@import url("https://fonts.googleapis.com/css2?family=Jua&family=Darumadrop+One&display=swap");
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Sizes are fluid: the min end matches the 402px mobile Figma frame, the max
+   end the 1440px desktop frame. Between and beyond those, type scales with the
+   viewport but never runs away — the old build scaled the whole page by
+   100vw/1440, which made body copy 8px on a small laptop.
+--------------------------------------------------------------------------- */
 @theme {
+  --font-display: "Darumadrop One", "Jua", ui-rounded, system-ui, sans-serif;
+  --font-body: "Jua", ui-rounded, system-ui, sans-serif;
+
   --color-haven-green: #b8c220;
+  --color-haven-green-deep: #97a01a;
   --color-haven-orange-deep: #ed5615;
   --color-haven-orange-bright: #fa681b;
   --color-haven-orange-mid: #fc8616;
   --color-haven-yellow: #ffd059;
+  --color-haven-butter: #ffe382;
+  --color-haven-gold: #fba71f;
+
+  /* The svh cap keeps the headline from eating the whole screen on wide-but-
+     short viewports (a maximised window on a 1080p display), where the hero
+     would otherwise grow past the fold and drag the frame with it. */
+  --text-hero: clamp(2.75rem, 9.4vw, min(9.375rem, 12svh));
+  --text-hero--line-height: 0.82;
+  --text-hero--letter-spacing: -0.05em;
+
+  --text-display: clamp(2rem, 4.6vw, 3.75rem);
+  --text-display--line-height: 0.85;
+  --text-display--letter-spacing: -0.05em;
+
+  --text-heading: clamp(1.5rem, 3vw, 2.75rem);
+  --text-heading--line-height: 0.88;
+  --text-heading--letter-spacing: -0.05em;
+
+  --text-subheading: clamp(1.375rem, 2.3vw, 2.5rem);
+  --text-subheading--line-height: 1;
+  --text-subheading--letter-spacing: -0.03em;
+
+  --text-lead: clamp(1.0625rem, 1.5vw, 1.5625rem);
+  --text-lead--line-height: 1.25;
+  --text-lead--letter-spacing: -0.03em;
+
+  --text-copy: clamp(0.9375rem, 1.15vw, 1.25rem);
+  --text-copy--line-height: 1.4;
+  --text-copy--letter-spacing: -0.03em;
+
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: var(--color-haven-green);
-  overflow-x: hidden;
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  /* The lockup's box, shared by the header (which draws it) and the hero
+     (whose top padding has to clear it). Deriving the padding from these means
+     the logo can sit lower without a breakpoint jump or an overlap. */
+  :root {
+    --logo-w: clamp(9rem, 45vw, 14rem);
+    /* Floor clears the nav row, which sits directly above it on narrow screens
+       where the centred lockup and the right-aligned links share a band. */
+    --logo-top: clamp(2.875rem, 4.5vw, 3.75rem);
+    --logo-h: calc(var(--logo-w) * 445 / 778);
+    --logo-gap: clamp(1rem, 2.5vw, 2.5rem);
+  }
+
+  @media (width >= 40rem) {
+    :root {
+      --logo-w: clamp(9rem, 19vw, 16.5rem);
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Sticky header height + breathing room, so anchors don't land under it. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-haven-green);
+    font-family: var(--font-body);
+    color: var(--color-haven-orange-deep);
+    /* `clip` (not `hidden`) contains the tilted cards and mascots that hang
+       past the edge without breaking `position: sticky` on the header. */
+    overflow-x: clip;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-haven-yellow);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
-img {
-  max-width: none;
+/* ---------------------------------------------------------------------------
+   Components — the recurring motifs of the Haven illustration set
+--------------------------------------------------------------------------- */
+@layer components {
+  /* Page gutter + max measure. */
+  .shell {
+    width: min(100% - 2.5rem, 75rem);
+    margin-inline: auto;
+  }
+
+  /* The design ships one backdrop per run of sections instead of a single
+     page-tall painting, so each attaches to the block it belongs to and is
+     top-anchored. That keeps the artwork locked to the content above it — a
+     bottom-anchored backdrop's offset depends on how tall the content happens
+     to be, which made it slide around under the hero.
+
+     From `lg` up each backdrop becomes a *stage*: `aspect-ratio` matches the
+     artwork exactly, so a child at `top: 42.56%` lands on the same spot of the
+     painting at every width. Children size their type in `cqw` (1% of the
+     stage, not the viewport), so the whole composition scales together and
+     stops growing once `max-width` caps the stage. Below `lg` the stage
+     dissolves back into ordinary stacked flow and the art goes ambient —
+     matching the separate mobile frame in the design file. */
+  .stage {
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    background-color: var(--color-haven-green);
+  }
+
+  @media (width >= 64rem) {
+    .stage {
+      container-type: inline-size;
+      position: relative;
+      max-width: 120rem;
+      margin-inline: auto;
+      aspect-ratio: var(--stage-ratio);
+    }
+  }
+
+  .stage-middle {
+    --stage-ratio: 1439 / 1969;
+    background-image: url("/images/bg-middle.webp");
+  }
+
+  .stage-picnic {
+    --stage-ratio: 1440 / 1463;
+    background-image: url("/images/bg-picnic.webp");
+  }
+
+  /* The carrot field is drawn at full page width, so its rendered height is
+     width * 1170/1149. Tying the section's min-height to that same ratio means
+     the field always lands whole instead of being sliced mid-row when the
+     content happens to be shorter than the painting. The signpost sits at the
+     top of the crop, which is what the FAQ heading lands on. */
+  .scene-harvest {
+    min-height: calc(100vw * 1170 / 1149);
+    background:
+      url("/images/faq-bg.webp") top center / 100% auto no-repeat,
+      var(--color-haven-green);
+  }
+
+  /* The yellow rule frame: four bars, inset from the edges, stopping short of
+     the corners. Two pseudo-elements draw all four (each carries a pair of
+     gradient bars), replacing the eight rotated divs the export used.
+       --frame-offset: distance from the element's edges
+       --frame-gap:    how far each bar stops short of the corner */
+  .rule-frame {
+    position: relative;
+    --frame-color: var(--color-haven-yellow);
+    --frame-weight: 3px;
+    --frame-offset: 1rem;
+    --frame-gap: 1rem;
+  }
+
+  .rule-frame::before,
+  .rule-frame::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-image:
+      linear-gradient(var(--frame-color), var(--frame-color)),
+      linear-gradient(var(--frame-color), var(--frame-color));
+  }
+
+  /* top + bottom bars */
+  .rule-frame::before {
+    inset: var(--frame-offset) calc(var(--frame-offset) + var(--frame-gap));
+    background-size: 100% var(--frame-weight);
+    background-position:
+      left top,
+      left bottom;
+  }
+
+  /* left + right bars */
+  .rule-frame::after {
+    inset: calc(var(--frame-offset) + var(--frame-gap)) var(--frame-offset);
+    background-size: var(--frame-weight) 100%;
+    background-position:
+      left top,
+      right top;
+  }
+
+  /* Translucent white panel used by the perk cards. */
+  .panel {
+    background: rgb(255 255 255 / 0.8);
+    border-radius: 1.875rem;
+  }
+
+  /* Highlighter swipe. Replaces the absolutely-positioned yellow rectangles,
+     so it now tracks the text when it reflows. */
+  .marker {
+    background-color: var(--color-haven-yellow);
+    border-radius: 0.45em;
+    padding: 0.1em 0.3em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Speech bubble; each instance positions its own tail. */
+  .speech {
+    position: relative;
+    background: #fff;
+    border-radius: 1.875rem;
+  }
+
+  /* Tail is opt-in: bubbles set --tail-size to grow one. */
+  .speech::after {
+    content: "";
+    position: absolute;
+    width: var(--tail-size, 0);
+    aspect-ratio: 196 / 125;
+    background: url("/images/speech-tail.webp") center / contain no-repeat;
+    rotate: var(--tail-rotate, 0deg);
+    inset-block-start: var(--tail-top, auto);
+    inset-block-end: var(--tail-bottom, auto);
+    inset-inline-start: var(--tail-left, auto);
+    inset-inline-end: var(--tail-right, auto);
+  }
+
+  /* The --tail-* offsets are stage coordinates that point outward, so on narrow
+     screens they hung past the viewport edge. Below the stage there is no
+     composition for a tail to point into, so drop them entirely. */
+  @media (width < 64rem) {
+    .speech::after {
+      display: none;
+    }
+  }
+
+  /* Tilted event card. */
+  .polaroid {
+    background: rgb(237 86 21 / 0.5);
+    border: 3px solid var(--color-haven-yellow);
+    border-radius: 1.875rem;
+    box-shadow: 0 0 4px var(--color-haven-yellow);
+    rotate: var(--tilt, -5deg);
+    transition:
+      rotate 250ms var(--ease-bounce),
+      translate 250ms var(--ease-bounce);
+  }
+
+  .polaroid:hover,
+  .polaroid:focus-within {
+    rotate: 0deg;
+    translate: 0 -0.375rem;
+  }
+
+  .glow-orange {
+    text-shadow: 0 0 4px var(--color-haven-orange-deep);
+  }
+
+  .glow-yellow {
+    text-shadow: 0 0 10px var(--color-haven-yellow);
+  }
 }
