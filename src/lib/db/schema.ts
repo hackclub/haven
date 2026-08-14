@@ -8,11 +8,12 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 import type { HCAAddress } from "../services/hca";
+import { encryptedText } from "./columns";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   token: uuid().unique().notNull().defaultRandom(),
-  hcaToken: text().notNull(),
+  hcaToken: encryptedText().notNull(),
   hcaId: text().unique().notNull(),
   firstName: text().notNull(),
   lastName: text().notNull(),
