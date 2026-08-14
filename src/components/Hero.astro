@@ -8,15 +8,14 @@ const navLinks = [
 
 <section
   id="hero"
-  class="relative isolate overflow-hidden bg-haven-orange-deep"
+  class="relative isolate overflow-hidden bg-haven-green"
 >
-  <img
-    src="/images/haven-hero-bg.png"
-    alt=""
-    class="absolute inset-0 -z-10 h-full w-full object-cover object-top"
-  />
-
-  <div class="relative flex h-[100svh] flex-col">
+  <div class="relative flex h-[100svh] flex-col overflow-hidden bg-haven-green">
+    <img
+      src="/images/haven-hero-bg.png"
+      alt=""
+      class="absolute left-0 top-0 h-auto w-full"
+    />
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-[clamp(0.5rem,1.4vw,1.5rem)] z-10 rounded-[clamp(14px,2vw,32px)] border-2 border-haven-yellow/90 sm:border-[3px]"
@@ -27,7 +26,7 @@ const navLinks = [
       <img
         src="/images/haven-logo-final.png"
         alt="Hack Club Haven"
-        class="absolute left-1/2 top-[clamp(1.5rem,3.2vw,3.75rem)] h-[clamp(4.25rem,9vw,10.5rem)] w-auto -translate-x-1/2"
+        class="absolute left-1/2 top-[clamp(1.5rem,3.2vw,3.75rem)] h-[clamp(3.5rem,7.2vw,8.5rem)] w-auto -translate-x-1/2"
       />
       <nav class="absolute right-[clamp(1rem,3vw,3rem)] top-[clamp(1.75rem,3.6vw,4.25rem)] flex max-w-[42%] flex-wrap justify-end gap-x-[clamp(0.5rem,1.5vw,1.75rem)] gap-y-1 font-darumadrop text-[clamp(0.65rem,1.7vw,1.75rem)] text-haven-yellow">
         {
