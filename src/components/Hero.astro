@@ -50,8 +50,9 @@ const navLinks = [
         Nov 14&ndash;15 &#9825; For teenagers around the world
       </p>
 
-      <form class="relative mt-[clamp(1.25rem,3vw,3rem)] w-[min(92%,50rem)]">
+      <form id="signup" class="relative mt-[clamp(0.75rem,2.2vw,2.25rem)] w-[min(92%,50rem)] scroll-mt-8">
         <input
+          id="signup-email"
           type="email"
           required
           placeholder="enter email to sign up"
@@ -68,7 +69,7 @@ const navLinks = [
     </div>
 
     <a
-      href="#more-info"
+      href="#about"
       class="absolute bottom-[clamp(1.5rem,4vw,4rem)] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1 text-white/50"
     >
       <span class="font-jua text-[clamp(0.85rem,2.4vw,2.25rem)]">more info</span>
@@ -89,25 +90,28 @@ const navLinks = [
         <img id="video-fold-chevron" src="/images/small-arrow.png" alt="" class="h-[clamp(0.45rem,1.1vw,1.2rem)] w-auto transition-transform" />
       </button>
       <div id="video-body">
-        <div
+        <button
+          type="button"
           id="video-trigger"
-          role="button"
-          tabindex="0"
           aria-haspopup="dialog"
           aria-label="Expand Haven intro video"
-          class="cursor-pointer"
+          class="w-full cursor-pointer"
         >
-          <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
-            <iframe
-              id="video-preview-iframe"
-              class="h-full w-full border-0"
-              src="https://www.youtube.com/embed/AnG56HUDzdI?autoplay=1&mute=1&loop=1&playlist=AnG56HUDzdI&modestbranding=1&playsinline=1&rel=0"
-              title="Haven intro video preview"
-              allow="autoplay; encrypted-media"
-            ></iframe>
-          </div>
-          <p class="mt-1 text-center font-jua text-[clamp(0.4rem,1vw,0.85rem)] text-gray-400">(click to expand)</p>
-        </div>
+          <span class="relative block aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
+            <img
+              class="h-full w-full object-cover"
+              src="https://img.youtube.com/vi/AnG56HUDzdI/hqdefault.jpg"
+              alt=""
+              loading="lazy"
+            />
+            <span class="absolute inset-0 flex items-center justify-center bg-black/15" aria-hidden="true">
+              <span class="flex size-[clamp(2.25rem,5.5vw,5rem)] items-center justify-center rounded-full bg-white/90 shadow-lg">
+                <img src="/images/play-triangle.svg" alt="" class="ml-[8%] h-[42%] w-[42%] rotate-90" />
+              </span>
+            </span>
+          </span>
+          <span class="mt-1 block text-center font-jua text-[clamp(0.4rem,1vw,0.85rem)] text-gray-400">(click to expand)</span>
+        </button>
       </div>
     </div>
 
@@ -147,7 +151,7 @@ const navLinks = [
         class="h-full w-full border-0"
         src="about:blank"
         title="Haven intro video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
     </div>
@@ -167,8 +171,6 @@ const navLinks = [
   const videoBody = document.getElementById("video-body");
   const foldLabel = document.getElementById("video-fold-label");
   const foldChevron = document.getElementById("video-fold-chevron");
-  const previewIframe = document.getElementById("video-preview-iframe");
-  const PREVIEW_SRC = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&modestbranding=1&playsinline=1&rel=0`;
 
   let folded = false;
 
@@ -178,15 +180,12 @@ const navLinks = [
     if (foldLabel) foldLabel.textContent = folded ? "open video" : "close video";
     foldChevron?.classList.toggle("-scale-y-100", folded);
     foldToggle?.setAttribute("aria-expanded", String(!folded));
-    // Hiding the iframe alone doesn't stop it — it keeps decoding/playing offscreen.
-    // Drop the src to actually stop it, and restore it (restarting the loop) on unfold.
-    if (previewIframe) previewIframe.src = folded ? "about:blank" : PREVIEW_SRC;
   }
 
   foldToggle?.addEventListener("click", () => setFolded(!folded));
 
   function openVideo() {
-    if (iframe) iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1`;
+    if (iframe) iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?modestbranding=1&playsinline=1&rel=0`;
     modal?.classList.remove("hidden");
     modal?.classList.add("flex");
     document.body.style.overflow = "hidden";
@@ -200,12 +199,6 @@ const navLinks = [
   }
 
   trigger?.addEventListener("click", openVideo);
-  trigger?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openVideo();
-    }
-  });
   closeBtn?.addEventListener("click", closeVideo);
   modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeVideo();
@@ -213,4 +206,23 @@ const navLinks = [
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") closeVideo();
   });
+
+  function focusSignup() {
+    const signup = document.getElementById("signup");
+    const email = document.getElementById("signup-email");
+    signup?.scrollIntoView({ behavior: "smooth", block: "center" });
+    window.setTimeout(() => email?.focus({ preventScroll: true }), 450);
+  }
+
+  document.querySelectorAll('a[href="#signup"]').forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      history.pushState(null, "", "#signup");
+      focusSignup();
+    });
+  });
+
+  if (window.location.hash === "#signup") {
+    window.setTimeout(focusSignup, 100);
+  }
 </script>

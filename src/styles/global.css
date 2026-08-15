@@ -18,3 +18,7 @@ body {
   padding: 0;
   background: var(--color-haven-green);
 }
+
+html {
+  scroll-behavior: smooth;
+}

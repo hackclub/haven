@@ -1,0 +1,84 @@
+---
+const events = [
+  {
+    title: "Scrapyard",
+    description: "Build wacky stuff, get wacky prizes! In-person hackathon in 70+ cities.",
+    href: "https://www.youtube.com/watch?v=8iM1W8kXrQA",
+    image: "/images/scrapyard-pic.png",
+    stagger: "sm:translate-y-[5.2vw]",
+  },
+  {
+    title: "Daydream",
+    description: "Students led game jams in 100 cities worldwide, from London to NYC to Penang!",
+    href: "https://www.youtube.com/watch?v=vvdoW2gh9YU",
+    image: "/images/daydream-pic.png",
+    stagger: "sm:translate-y-[2.6vw]",
+  },
+  {
+    title: "Campfire",
+    description: "Our largest game jam yet: 10k teens, 1 weekend, making games at the same time!",
+    href: "https://www.youtube.com/watch?v=0aMAHuLxg3s",
+    image: "/images/campfire-pic.png",
+    stagger: "",
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-haven-green">
+  <img
+    src="/images/haven-picnic-bg.png"
+    alt=""
+    class="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+  />
+
+  <div
+    class="relative z-10 px-[clamp(0.75rem,4vw,3.5rem)] pt-[clamp(4rem,27vw,24rem)] pb-[clamp(4rem,24vw,22rem)]"
+  >
+    <h2
+      class="-rotate-[4deg] mb-[clamp(2rem,4.5vw,3.75rem)] text-center font-darumadrop text-[clamp(1rem,2.5vw,2.2rem)] leading-[0.85] tracking-tight text-white"
+    >
+      We&rsquo;ve helped teens organize hundreds of events around the world!<br />
+      Check out some of our past events&nbsp;~
+    </h2>
+
+    <div
+      class="flex flex-col items-center gap-[clamp(1.5rem,3vw,2.5rem)] sm:flex-row sm:items-end sm:justify-center"
+    >
+      {
+        events.map((event) => (
+          <div
+            class={`relative w-full max-w-[420px] -rotate-[5deg] sm:flex-1 sm:max-w-[clamp(240px,29vw,420px)] ${event.stagger}`}
+          >
+            <div class="absolute inset-0 rounded-[clamp(0.875rem,2.1vw,1.875rem)] border-2 border-[#ffd059] bg-[#ed5615] opacity-50 shadow-[0_0_4px_#ffd059]" />
+            <div class="relative flex flex-col gap-[clamp(0.5rem,1vw,0.9rem)] p-[clamp(0.75rem,1.5vw,1.25rem)]">
+              <h3 class="text-center font-darumadrop text-[clamp(1.3rem,3.2vw,2.75rem)] leading-none tracking-tight text-white">
+                {event.title}
+              </h3>
+              <a
+                href={event.href}
+                target="_blank"
+                rel="noreferrer"
+                class="relative block overflow-hidden rounded-[clamp(0.5rem,1vw,0.875rem)] border-2 border-white"
+                style="aspect-ratio: 288/192"
+              >
+                <img src={event.image} alt={event.title} class="h-full w-full object-cover" />
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="-rotate-[40deg]">
+                    <img
+                      src="/images/play-triangle.svg"
+                      alt="Play"
+                      class="w-[clamp(2.5rem,5.5vw,5rem)]"
+                    />
+                  </div>
+                </div>
+              </a>
+              <p class="font-jua text-[clamp(0.8rem,1.6vw,1.25rem)] leading-snug tracking-tight text-white">
+                {event.description}
+              </p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
