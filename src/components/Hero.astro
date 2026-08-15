@@ -96,6 +96,7 @@ const navLinks = [
         >
           <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
             <iframe
+              id="video-preview-iframe"
               class="h-full w-full"
               src="https://www.youtube.com/embed/AnG56HUDzdI?autoplay=1&mute=1&loop=1&playlist=AnG56HUDzdI&modestbranding=1&playsinline=1&rel=0"
               title="Haven intro video preview"
@@ -160,6 +161,8 @@ const navLinks = [
   const videoBody = document.getElementById("video-body");
   const foldLabel = document.getElementById("video-fold-label");
   const foldChevron = document.getElementById("video-fold-chevron");
+  const previewIframe = document.getElementById("video-preview-iframe");
+  const PREVIEW_SRC = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&loop=1&playlist=${YOUTUBE_ID}&modestbranding=1&playsinline=1&rel=0`;
 
   let folded = false;
 
@@ -169,6 +172,9 @@ const navLinks = [
     if (foldLabel) foldLabel.textContent = folded ? "open video" : "close video";
     foldChevron?.classList.toggle("-scale-y-100", folded);
     foldToggle?.setAttribute("aria-expanded", String(!folded));
+    // Hiding the iframe alone doesn't stop it — it keeps decoding/playing offscreen.
+    // Drop the src to actually stop it, and restore it (restarting the loop) on unfold.
+    if (previewIframe) previewIframe.src = folded ? "about:blank" : PREVIEW_SRC;
   }
 
   foldToggle?.addEventListener("click", () => setFolded(!folded));
