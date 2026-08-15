@@ -14,7 +14,7 @@ const navLinks = [
     <img
       src="/images/haven-hero-bg.png"
       alt=""
-      class="absolute left-0 top-0 h-auto w-full"
+      class="absolute inset-0 h-full w-full object-cover object-top"
     />
     <div
       aria-hidden="true"
@@ -39,7 +39,7 @@ const navLinks = [
       </nav>
     </header>
 
-    <div class="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col items-center px-[clamp(1rem,4vw,3rem)] pt-[clamp(1rem,3vw,2.5rem)] text-center">
+    <div class="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col items-center justify-center px-[clamp(1rem,4vw,3rem)] text-center">
       <h1 class="w-full text-[clamp(2.25rem,8.3vw,10rem)] font-darumadrop leading-[0.85] tracking-tight text-white [text-shadow:0_0_10px_var(--color-haven-orange-deep)]">
         Lead a game jam<br /> in your city!
       </h1>
@@ -72,13 +72,18 @@ const navLinks = [
       <img src="/images/triangle-down.svg" alt="" class="mt-1 h-[clamp(1.4rem,3.6vw,3.25rem)] w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100" />
     </a>
 
-    <div class="absolute bottom-[clamp(1.5rem,4vw,4rem)] right-[clamp(0.75rem,3vw,3.5rem)] z-10 w-[clamp(5.5rem,15vw,16rem)] rounded-2xl bg-white p-[clamp(0.35rem,1vw,1rem)] shadow-lg">
+    <button
+      type="button"
+      id="video-trigger"
+      aria-haspopup="dialog"
+      class="absolute bottom-[clamp(1.5rem,4vw,4rem)] right-[clamp(0.75rem,3vw,3.5rem)] z-10 w-[clamp(7rem,19vw,21rem)] cursor-pointer rounded-2xl bg-white p-[clamp(0.4rem,1.2vw,1.2rem)] text-left shadow-lg transition-transform hover:scale-[1.03]"
+    >
       <div class="flex items-center justify-between px-1 pb-1">
-        <span class="font-jua text-[clamp(0.45rem,1.15vw,1.25rem)] text-haven-orange-mid">close video</span>
-        <img src="/images/small-arrow.png" alt="" class="h-[clamp(0.4rem,1vw,1.1rem)] w-auto" />
+        <span class="font-jua text-[clamp(0.5rem,1.3vw,1.4rem)] text-haven-orange-mid">close video</span>
+        <img src="/images/small-arrow.png" alt="" class="h-[clamp(0.45rem,1.1vw,1.2rem)] w-auto" />
       </div>
-      <div class="aspect-video w-full rounded-lg border-2 border-sky-400 bg-haven-orange-mid sm:rounded-xl"></div>
-    </div>
+      <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-haven-orange-mid sm:rounded-xl"></div>
+    </button>
 
     <img
       src="/images/pud-hero-1.png"
@@ -88,4 +93,66 @@ const navLinks = [
   </div>
 
   <img src="/images/hero-bottom.png" alt="" class="relative z-10 w-full" />
+
+  <div
+    id="video-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Haven intro video"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 sm:p-8"
+  >
+    <div class="relative w-full max-w-4xl">
+      <button
+        type="button"
+        id="video-close"
+        aria-label="Close video"
+        class="absolute -top-10 right-0 flex size-8 items-center justify-center rounded-full bg-white text-lg font-bold text-haven-orange-deep sm:-top-12 sm:size-10"
+      >
+        &#10005;
+      </button>
+      <div class="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl">
+        <iframe
+          id="video-iframe"
+          class="h-full w-full"
+          src="about:blank"
+          title="Haven intro video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
 </section>
+
+<script>
+  const YOUTUBE_ID = "AnG56HUDzdI";
+
+  const trigger = document.getElementById("video-trigger");
+  const modal = document.getElementById("video-modal");
+  const closeBtn = document.getElementById("video-close");
+  const iframe = document.getElementById("video-iframe");
+
+  function openVideo() {
+    if (iframe) iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1`;
+    modal?.classList.remove("hidden");
+    modal?.classList.add("flex");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeVideo() {
+    modal?.classList.add("hidden");
+    modal?.classList.remove("flex");
+    if (iframe) iframe.src = "about:blank";
+    document.body.style.overflow = "";
+  }
+
+  trigger?.addEventListener("click", openVideo);
+  closeBtn?.addEventListener("click", closeVideo);
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeVideo();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeVideo();
+  });
+</script>
