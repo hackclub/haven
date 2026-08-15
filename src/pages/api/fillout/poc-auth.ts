@@ -14,8 +14,11 @@ function isAdultByCutoff(birthday: string, cutoffDate: Date) {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-  const token = request.headers.get("x-auth-token");
-  if (!token) {
+  const UUID_RE =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  const token = request.headers.get("x-auth-token")?.trim();
+  if (!token || !UUID_RE.test(token)) {
     return Response.json({
       success: false,
       message: `The token in the form URL is invalid. Please click the POC sign up button on ${EXTERNAL_URL} to try again!`,
