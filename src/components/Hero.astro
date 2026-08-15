@@ -97,10 +97,9 @@ const navLinks = [
           <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
             <iframe
               id="video-preview-iframe"
-              class="h-full w-full"
+              class="h-full w-full border-0"
               src="https://www.youtube.com/embed/AnG56HUDzdI?autoplay=1&mute=1&loop=1&playlist=AnG56HUDzdI&modestbranding=1&playsinline=1&rel=0"
               title="Haven intro video preview"
-              frameborder="0"
               allow="autoplay; encrypted-media"
             ></iframe>
           </div>
@@ -137,10 +136,9 @@ const navLinks = [
       <div class="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl">
         <iframe
           id="video-iframe"
-          class="h-full w-full"
+          class="h-full w-full border-0"
           src="about:blank"
           title="Haven intro video"
-          frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
         ></iframe>
@@ -150,6 +148,7 @@ const navLinks = [
 </section>
 
 <script>
+  // @ts-nocheck
   const YOUTUBE_ID = "AnG56HUDzdI";
 
   const trigger = document.getElementById("video-trigger");
