@@ -10,7 +10,7 @@ const navLinks = [
   id="hero"
   class="relative isolate overflow-hidden bg-haven-green"
 >
-  <div class="relative flex h-[100svh] flex-col overflow-hidden bg-haven-green">
+  <div class="relative flex h-[min(100svh,58rem)] flex-col overflow-hidden bg-haven-green">
     <img
       src="/images/haven-hero-bg.png"
       alt=""
@@ -28,10 +28,13 @@ const navLinks = [
         alt="Hack Club Haven"
         class="absolute left-1/2 top-[clamp(1.5rem,3.2vw,3.75rem)] h-[clamp(3.5rem,7.2vw,8.5rem)] w-auto -translate-x-1/2"
       />
-      <nav class="absolute right-[clamp(1rem,3vw,3rem)] top-[clamp(1.75rem,3.6vw,4.25rem)] flex max-w-[42%] flex-wrap justify-end gap-x-[clamp(0.5rem,1.5vw,1.75rem)] gap-y-1 font-darumadrop text-[clamp(0.65rem,1.7vw,1.75rem)] text-haven-yellow">
+      <nav class="absolute right-[clamp(2.5rem,6vw,6.5rem)] top-[clamp(1.75rem,3.6vw,4.25rem)] flex max-w-[48%] flex-wrap justify-end gap-x-[clamp(0.75rem,2.2vw,2.5rem)] gap-y-1 font-darumadrop text-[clamp(0.8rem,2.2vw,2.25rem)] text-haven-yellow">
         {
           navLinks.map((link) => (
-            <a href={link.href} class="whitespace-nowrap transition-opacity hover:opacity-75">
+            <a
+              href={link.href}
+              class="inline-block whitespace-nowrap transition-transform duration-200 ease-out hover:-translate-y-1 hover:scale-110 hover:text-white"
+            >
               {link.label}
             </a>
           ))
@@ -114,38 +117,42 @@ const navLinks = [
       class="pointer-events-none absolute bottom-0 left-0 z-10 -ml-3 w-[clamp(8rem,22vw,27rem)] sm:-ml-4"
     />
   </div>
+</section>
 
-  <img src="/images/hero-bottom.png" alt="" class="relative z-10 w-full" />
+<img
+  src="/images/hero-bottom.png"
+  alt=""
+  class="pointer-events-none relative z-10 mt-[-14.5%] w-full"
+/>
 
-  <div
-    id="video-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Haven intro video"
-    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 sm:p-8"
-  >
-    <div class="relative w-full max-w-4xl">
-      <button
-        type="button"
-        id="video-close"
-        aria-label="Close video"
-        class="absolute -top-10 right-0 flex size-8 items-center justify-center rounded-full bg-white text-lg font-bold text-haven-orange-deep sm:-top-12 sm:size-10"
-      >
-        &#10005;
-      </button>
-      <div class="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl">
-        <iframe
-          id="video-iframe"
-          class="h-full w-full border-0"
-          src="about:blank"
-          title="Haven intro video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+<div
+  id="video-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Haven intro video"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 sm:p-8"
+>
+  <div class="relative w-full max-w-4xl">
+    <button
+      type="button"
+      id="video-close"
+      aria-label="Close video"
+      class="absolute -top-10 right-0 flex size-8 items-center justify-center rounded-full bg-white text-lg font-bold text-haven-orange-deep sm:-top-12 sm:size-10"
+    >
+      &#10005;
+    </button>
+    <div class="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl">
+      <iframe
+        id="video-iframe"
+        class="h-full w-full border-0"
+        src="about:blank"
+        title="Haven intro video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
     </div>
   </div>
-</section>
+</div>
 
 <script>
   // @ts-nocheck
