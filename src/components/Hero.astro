@@ -72,18 +72,30 @@ const navLinks = [
       <img src="/images/triangle-down.svg" alt="" class="mt-1 h-[clamp(1.4rem,3.6vw,3.25rem)] w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100" />
     </a>
 
-    <button
-      type="button"
+    <div
       id="video-trigger"
+      role="button"
+      tabindex="0"
       aria-haspopup="dialog"
+      aria-label="Expand Haven intro video"
       class="absolute bottom-[clamp(1.5rem,4vw,4rem)] right-[clamp(0.75rem,3vw,3.5rem)] z-10 w-[clamp(7rem,19vw,21rem)] cursor-pointer rounded-2xl bg-white p-[clamp(0.4rem,1.2vw,1.2rem)] text-left shadow-lg transition-transform hover:scale-[1.03]"
     >
       <div class="flex items-center justify-between px-1 pb-1">
         <span class="font-jua text-[clamp(0.5rem,1.3vw,1.4rem)] text-haven-orange-mid">close video</span>
         <img src="/images/small-arrow.png" alt="" class="h-[clamp(0.45rem,1.1vw,1.2rem)] w-auto" />
       </div>
-      <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-haven-orange-mid sm:rounded-xl"></div>
-    </button>
+      <div class="aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
+        <iframe
+          class="h-full w-full pointer-events-none"
+          src="https://www.youtube.com/embed/AnG56HUDzdI?autoplay=1&mute=1&loop=1&playlist=AnG56HUDzdI&controls=0&modestbranding=1&playsinline=1&rel=0"
+          title="Haven intro video preview"
+          tabindex="-1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+        ></iframe>
+      </div>
+      <p class="mt-1 text-center font-jua text-[clamp(0.4rem,1vw,0.85rem)] text-gray-400">(click to expand)</p>
+    </div>
 
     <img
       src="/images/pud-hero-1.png"
@@ -148,6 +160,12 @@ const navLinks = [
   }
 
   trigger?.addEventListener("click", openVideo);
+  trigger?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openVideo();
+    }
+  });
   closeBtn?.addEventListener("click", closeVideo);
   modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeVideo();
