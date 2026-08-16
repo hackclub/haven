@@ -6,122 +6,229 @@ const navLinks = [
 ];
 ---
 
+{
+  /*
+  Laid out in flow rather than as a stack of absolutely-placed boxes: the
+  headline block takes whatever space is left above the bottom row, so the row
+  stays down by the hedgehog however tall the screen is, and nothing overlaps
+  when the viewport gets short.
+
+  `min-h-svh` (not a fixed height) lets the hero grow if the content needs it
+  instead of overflowing. The top padding is derived from the shared --logo-*
+  box so the headline always clears the lockup at every size.
+
+  On mobile the hedgehog sits at the bottom, so the bottom padding reserves its
+  height (40vw wide x 366/403 = 36.3vw tall). From sm it is small and off to the
+  left of the row, and needs no extra room.
+*/
+}
 <section
   id="hero"
-  class="relative isolate overflow-hidden bg-haven-green"
+  class="relative isolate flex min-h-svh flex-col overflow-hidden bg-haven-green bg-[url('/images/haven-hero-bg.png')] bg-cover bg-top bg-no-repeat pb-[38vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))]"
 >
-  <div class="relative flex h-[100svh] flex-col overflow-hidden bg-haven-green">
-    <img
-      src="/images/haven-hero-bg.png"
-      alt=""
-      class="absolute inset-0 h-full w-full object-cover object-top"
-    />
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-[clamp(0.5rem,1.4vw,1.5rem)] z-10 rounded-[clamp(14px,2vw,32px)] border-2 border-haven-yellow/90 sm:border-[3px]"
+  >
+  </div>
+
+  {
+    /* Logo is centred and the nav sits top-right. Taken out of the flow so the
+      body below only has to reserve its height, not share a column with it. */
+  }
+  <header class="absolute inset-x-0 top-0 z-20">
     <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-[clamp(0.5rem,1.4vw,1.5rem)] z-10 rounded-[clamp(14px,2vw,32px)] border-2 border-haven-yellow/90 sm:border-[3px]"
+      class="shell relative flex items-start justify-end pt-[clamp(0.75rem,2vw,2rem)]"
     >
-    </div>
+      <a
+        href="#hero"
+        class="absolute left-1/2 top-[var(--logo-top)] -translate-x-1/2"
+        aria-label="Hack Club Haven — home"
+      >
+        <img
+          src="/images/haven-logo-final.png"
+          alt="Hack Club Haven"
+          width="731"
+          height="415"
+          class="w-[var(--logo-w)] max-w-none"
+        />
+      </a>
 
-    <header class="relative z-20 h-[clamp(4.5rem,9vw,10rem)]">
-      <img
-        src="/images/haven-logo-final.png"
-        alt="Hack Club Haven"
-        class="absolute left-1/2 top-[clamp(1.5rem,3.2vw,3.75rem)] h-[clamp(3.5rem,7.2vw,8.5rem)] w-auto -translate-x-1/2"
-      />
-      <nav class="absolute right-[clamp(2.5rem,6vw,6.5rem)] top-[clamp(1.75rem,3.6vw,4.25rem)] flex max-w-[48%] flex-wrap justify-end gap-x-[clamp(0.75rem,2.2vw,2.5rem)] gap-y-1 font-darumadrop text-[clamp(0.8rem,2.2vw,2.25rem)] text-haven-yellow">
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="inline-block whitespace-nowrap transition-transform duration-200 ease-out hover:-translate-y-1 hover:scale-110 hover:text-white"
-            >
-              {link.label}
-            </a>
-          ))
-        }
+      <nav aria-label="Primary">
+        <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="inline-block whitespace-nowrap py-1 font-darumadrop text-[clamp(1.375rem,2.7vw,2.5rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-transform duration-200 ease-out hover:-translate-y-1 hover:scale-110 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <div class="relative z-10 mx-auto flex w-full max-w-[100rem] flex-1 flex-col items-center justify-center px-[clamp(1rem,4vw,3rem)] text-center">
-      <h1 class="w-full text-[clamp(2.25rem,8.3vw,10rem)] font-darumadrop leading-[0.85] tracking-tight text-white [text-shadow:0_0_10px_var(--color-haven-orange-deep)]">
+  {
+    /* The headline block centres in whatever space is left above the bottom row. */
+  }
+  <div class="relative z-10 flex flex-1 items-center justify-center">
+    <div class="shell flex flex-col items-center text-center">
+      <h1 class="glow-orange font-darumadrop text-hero text-white">
         Lead a game jam<br /> in your city!
       </h1>
-      <p class="mt-[clamp(0.5rem,1.4vw,1.5rem)] w-full text-[clamp(0.95rem,2.8vw,2.75rem)] font-jua text-white [text-shadow:0_0_6px_var(--color-haven-orange-deep)]">
-        Nov 14&ndash;15 &#9825; For teenagers around the world
+
+      <p
+        class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-jua text-subheading text-white"
+      >
+        <span class="whitespace-nowrap">Nov 14&ndash;15</span>
+        <span aria-hidden="true" class="mx-2 hidden sm:inline">&#9825;</span>
+        <span class="block sm:inline">For teenagers around the world</span>
       </p>
 
-      <form id="signup" action="/api/auth/redirect" method="GET" class="relative mt-[clamp(0.75rem,2.2vw,2.25rem)] w-[min(92%,50rem)] scroll-mt-8">
+      <form
+        id="signup"
+        action="/api/auth/redirect"
+        method="GET"
+        class="mt-[clamp(1.5rem,3vw,2.25rem)] flex w-full max-w-[50rem] scroll-mt-8 items-center gap-2 rounded-full bg-white/70 p-[clamp(0.3rem,0.7vw,0.625rem)] shadow-[0_0_10px_3px_rgba(250,104,27,0.55)]"
+      >
+        <label for="signup-email" class="sr-only">Your email address</label>
         <input
           id="signup-email"
           name="email"
           type="email"
           required
-          placeholder="enter email to sign up"
-          class="w-full rounded-full bg-white/70 py-[clamp(0.7rem,2vw,1.75rem)] pl-[clamp(1rem,2.2vw,2.25rem)] pr-[clamp(2.75rem,7vw,6rem)] font-jua text-[clamp(1rem,3.2vw,2.75rem)] text-haven-orange-deep shadow-[0_0_10px_3px_rgba(250,104,27,0.55)] outline-none placeholder:text-haven-orange-deep"
+          autocomplete="email"
+          placeholder="enter email to organize"
+          class="min-w-0 flex-1 bg-transparent px-[clamp(0.75rem,1.6vw,1.5rem)] py-[clamp(0.4rem,1vw,0.9rem)] font-jua text-[clamp(1rem,2.6vw,2.75rem)] leading-tight tracking-[-0.03em] text-haven-orange-deep placeholder:text-haven-orange-deep focus:outline-none"
         />
         <button
           type="submit"
           aria-label="Sign up"
-          class="absolute right-[clamp(0.3rem,0.8vw,0.75rem)] top-1/2 flex size-[clamp(2.25rem,5.2vw,4.5rem)] -translate-y-1/2 items-center justify-center rounded-full bg-haven-orange-bright"
+          class="flex size-[clamp(2.25rem,5.2vw,4.5rem)] shrink-0 items-center justify-center rounded-full bg-haven-orange-bright"
         >
-          <img src="/images/haven-sign-up-arrow.png" alt="" class="h-[45%] w-auto" />
+          <img
+            src="/images/haven-sign-up-arrow.png"
+            alt=""
+            class="h-[45%] w-auto"
+          />
         </button>
       </form>
     </div>
+  </div>
 
+  {
+    /* Jump-link and video panel share a row on desktop and stack on narrow
+      screens, instead of being absolutely pinned to the bottom corners. */
+  }
+  <div
+    class="shell relative z-10 mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] grid grid-cols-1 items-end gap-8 sm:grid-cols-[1fr_auto_1fr]"
+  >
+    {
+      /* Desktop-only: on mobile the next section is already the obvious scroll
+        target, and the arrow just crowds the hedgehog. */
+    }
     <a
       href="#about"
-      class="absolute bottom-[clamp(1.5rem,4vw,4rem)] left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1 text-white/50"
+      class="order-2 hidden flex-col items-center gap-1 justify-self-center text-white/50 sm:order-none sm:col-start-2 sm:flex"
     >
-      <span class="font-jua text-[clamp(0.85rem,2.4vw,2.25rem)]">more info</span>
-      <img src="/images/triangle-down.svg" alt="" class="mt-1 h-[clamp(1.4rem,3.6vw,3.25rem)] w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100" />
+      <span class="font-jua text-subheading">more info</span>
+      {/* The asset points up; the design flips it to point down the page. */}
+      <img
+        src="/images/triangle-down.svg"
+        alt=""
+        aria-hidden="true"
+        width="207"
+        height="69"
+        class="mt-1 w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100"
+      />
     </a>
 
-    <div
+    {
+      /* Collapsible video panel. Uses <details> so the "close video" control
+        works without JavaScript; the panel starts open, as drawn. */
+    }
+    <details
+      open
       id="video-widget"
-      class="absolute bottom-[clamp(1.5rem,4vw,4rem)] right-[clamp(0.75rem,3vw,3.5rem)] z-10 w-[clamp(7rem,22vw,28rem)] rounded-2xl bg-white p-[clamp(0.4rem,1.2vw,1.2rem)] shadow-lg"
+      class="group order-1 w-full max-w-[22.5rem] justify-self-center rounded-2xl bg-white p-[clamp(0.5rem,1.2vw,1.2rem)] shadow-lg sm:order-none sm:col-start-3 sm:max-w-[min(22.5rem,24svh)] sm:justify-self-end"
     >
+      {
+        /* Hidden on mobile: the panel stays open (the `open` attribute keeps the
+          content rendered) so there is nothing to toggle and no control to
+          crowd the layout. */
+      }
+      <summary
+        class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-jua text-[clamp(0.85rem,1.3vw,1.4rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
+      >
+        <span class="group-open:hidden">open video</span>
+        <span class="hidden group-open:inline">close video</span>
+        <img
+          src="/images/small-arrow.png"
+          alt=""
+          aria-hidden="true"
+          width="380"
+          height="214"
+          class="w-[clamp(0.7rem,1.1vw,1.2rem)] shrink-0 -scale-y-100 transition-transform duration-200 group-open:scale-y-100"
+        />
+      </summary>
+
       <button
         type="button"
-        id="video-fold-toggle"
-        aria-expanded="true"
-        class="flex w-full cursor-pointer items-center justify-between px-1 pb-1"
+        id="video-trigger"
+        aria-haspopup="dialog"
+        aria-label="Expand Haven intro video"
+        class="w-full cursor-pointer"
       >
-        <span id="video-fold-label" class="font-jua text-[clamp(0.5rem,1.3vw,1.4rem)] text-haven-orange-mid">close video</span>
-        <img id="video-fold-chevron" src="/images/small-arrow.png" alt="" class="h-[clamp(0.45rem,1.1vw,1.2rem)] w-auto transition-transform" />
-      </button>
-      <div id="video-body">
-        <button
-          type="button"
-          id="video-trigger"
-          aria-haspopup="dialog"
-          aria-label="Expand Haven intro video"
-          class="w-full cursor-pointer"
+        <span
+          class="relative block aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl"
         >
-          <span class="relative block aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl">
-            <img
-              class="h-full w-full object-cover"
-              src="https://img.youtube.com/vi/AnG56HUDzdI/hqdefault.jpg"
-              alt=""
-              loading="lazy"
-            />
-            <span class="absolute inset-0 flex items-center justify-center bg-black/15" aria-hidden="true">
-              <span class="flex size-[clamp(2.25rem,5.5vw,5rem)] items-center justify-center rounded-full bg-white/90 shadow-lg">
-                <img src="/images/play-triangle.svg" alt="" class="ml-[8%] h-[42%] w-[42%] rotate-90" />
-              </span>
+          <img
+            class="h-full w-full object-cover"
+            src="https://img.youtube.com/vi/AnG56HUDzdI/hqdefault.jpg"
+            alt=""
+            loading="lazy"
+          />
+          <span
+            class="absolute inset-0 flex items-center justify-center bg-black/15"
+            aria-hidden="true"
+          >
+            <span
+              class="flex size-[clamp(2.25rem,5.5vw,5rem)] items-center justify-center rounded-full bg-white/90 shadow-lg"
+            >
+              <img
+                src="/images/play-triangle.svg"
+                alt=""
+                class="ml-[8%] h-[42%] w-[42%] rotate-90"
+              />
             </span>
           </span>
-          <span class="mt-1 block text-center font-jua text-[clamp(0.4rem,1vw,0.85rem)] text-gray-400">(click to expand)</span>
-        </button>
-      </div>
-    </div>
-
-    <img
-      src="/images/pud-hero-1.png"
-      alt=""
-      class="pointer-events-none absolute bottom-0 left-0 z-10 -ml-3 w-[clamp(8rem,22vw,27rem)] sm:-ml-4"
-    />
+        </span>
+        <span
+          class="mt-1 block text-center font-jua text-[clamp(0.65rem,1vw,0.85rem)] text-gray-400"
+          >(click to expand)</span
+        >
+      </button>
+    </details>
   </div>
+
+  {
+    /* Hedgehog is scenery, not content. It stands on the ground at the hero's
+      bottom-left at every size; on mobile it takes a much larger share of the
+      width, which is the space the bottom padding above reserves for it. */
+  }
+  <img
+    src="/images/pud-hero-1.png"
+    alt=""
+    aria-hidden="true"
+    width="403"
+    height="366"
+    class="pointer-events-none absolute bottom-0 left-0 z-10 -ml-3 w-[clamp(9rem,40vw,16rem)] select-none sm:-ml-4 sm:w-[clamp(8rem,22vw,27rem)]"
+  />
 </section>
 
 <img
@@ -153,8 +260,7 @@ const navLinks = [
         src="about:blank"
         title="Haven intro video"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
+        allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -168,25 +274,9 @@ const navLinks = [
   const closeBtn = document.getElementById("video-close");
   const iframe = document.getElementById("video-iframe");
 
-  const foldToggle = document.getElementById("video-fold-toggle");
-  const videoBody = document.getElementById("video-body");
-  const foldLabel = document.getElementById("video-fold-label");
-  const foldChevron = document.getElementById("video-fold-chevron");
-
-  let folded = false;
-
-  function setFolded(next) {
-    folded = next;
-    if (videoBody) videoBody.style.display = folded ? "none" : "";
-    if (foldLabel) foldLabel.textContent = folded ? "open video" : "close video";
-    foldChevron?.classList.toggle("-scale-y-100", folded);
-    foldToggle?.setAttribute("aria-expanded", String(!folded));
-  }
-
-  foldToggle?.addEventListener("click", () => setFolded(!folded));
-
   function openVideo() {
-    if (iframe) iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?modestbranding=1&playsinline=1&rel=0`;
+    if (iframe)
+      iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?modestbranding=1&playsinline=1&rel=0`;
     modal?.classList.remove("hidden");
     modal?.classList.add("flex");
     document.body.style.overflow = "hidden";

@@ -10,6 +10,40 @@
 
   --font-jua: "Jua", sans-serif;
   --font-darumadrop: "Darumadrop One", cursive;
+
+  /* Fluid type: the min end matches the 402px mobile frame, the max end the
+     1440px desktop frame. The svh cap keeps the headline from eating the whole
+     screen on wide-but-short viewports (a maximised window on a 1080p
+     display), where the hero would otherwise grow past the fold. */
+  --text-hero: clamp(2.75rem, 9.4vw, min(9.375rem, 12svh));
+  --text-hero--line-height: 0.82;
+  --text-hero--letter-spacing: -0.05em;
+
+  --text-subheading: clamp(1.375rem, 2.3vw, 2.5rem);
+  --text-subheading--line-height: 1;
+  --text-subheading--letter-spacing: -0.03em;
+}
+
+/* The lockup's box, shared by the hero header (which draws it) and the hero
+   body (whose top padding has to clear it). Deriving the padding from these
+   means the logo scales in place instead of stepping up at the breakpoint, and
+   can never overlap the headline. */
+:root {
+  --logo-w: clamp(9rem, 45vw, 14rem);
+  /* Floor clears the nav row, which sits directly above it on narrow screens
+     where the centred lockup and the right-aligned links share a band. */
+  --logo-top: clamp(2.875rem, 4.5vw, min(3.75rem, 7svh));
+  --logo-h: calc(var(--logo-w) * 415 / 731);
+  --logo-gap: clamp(1rem, 2.5vw, min(2.5rem, 4.5svh));
+}
+
+@media (width >= 40rem) {
+  :root {
+    /* Same svh cap as --text-hero: on a wide-but-short viewport the lockup
+       would otherwise reserve a third of the screen before the headline
+       starts. The caps only bite below ~900px of viewport height. */
+    --logo-w: clamp(9rem, 19vw, min(16.5rem, 30svh));
+  }
 }
 
 html,
@@ -21,4 +55,16 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer components {
+  /* Page gutter + max measure. */
+  .shell {
+    width: min(100% - 2.5rem, 75rem);
+    margin-inline: auto;
+  }
+
+  .glow-orange {
+    text-shadow: 0 0 10px var(--color-haven-orange-deep);
+  }
 }
