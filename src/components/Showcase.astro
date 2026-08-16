@@ -47,34 +47,37 @@ const events = [
       {
         events.map((event) => (
           <div
-            class={`relative w-full max-w-[420px] -rotate-[5deg] sm:flex-1 sm:max-w-[clamp(240px,29vw,420px)] ${event.stagger}`}
+            class={`group/card relative w-full max-w-[480px] sm:flex-1 sm:max-w-[clamp(280px,36vw,560px)] ${event.stagger}`}
           >
-            <div class="absolute inset-0 rounded-[clamp(0.875rem,2.1vw,1.875rem)] border-2 border-[#ffd059] bg-[#ed5615] opacity-50 shadow-[0_0_4px_#ffd059]" />
-            <div class="relative flex flex-col gap-[clamp(0.5rem,1vw,0.9rem)] p-[clamp(0.75rem,1.5vw,1.25rem)]">
-              <h3 class="text-center font-darumadrop text-[clamp(1.3rem,3.2vw,2.75rem)] leading-none tracking-tight text-white">
-                {event.title}
-              </h3>
-              <a
-                href={event.href}
-                target="_blank"
-                rel="noreferrer"
-                class="relative block overflow-hidden rounded-[clamp(0.5rem,1vw,0.875rem)] border-2 border-white"
-                style="aspect-ratio: 288/192"
-              >
-                <img src={event.image} alt={event.title} class="h-full w-full object-cover" />
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="-rotate-[40deg]">
-                    <img
-                      src="/images/play-triangle.svg"
-                      alt="Play"
-                      class="w-[clamp(2.5rem,5.5vw,5rem)]"
-                    />
+            {/* Inner card: rotate + lift on hover */}
+            <div class="relative -rotate-[5deg] transition-all duration-300 ease-out group-hover/card:-translate-y-4 group-hover/card:scale-[1.06]">
+              <div class="absolute inset-0 rounded-[clamp(0.875rem,2.1vw,1.875rem)] border-2 border-[#ffd059] bg-[#ed5615] opacity-50 shadow-[0_0_4px_#ffd059] transition-shadow duration-300 group-hover/card:shadow-[0_0_24px_#ffd059]" />
+              <div class="relative flex flex-col gap-[clamp(0.5rem,1vw,0.9rem)] p-[clamp(0.875rem,1.8vw,1.5rem)]">
+                <h3 class="text-center font-darumadrop text-[clamp(1.5rem,3.8vw,3.25rem)] leading-none tracking-tight text-white">
+                  {event.title}
+                </h3>
+                <a
+                  href={event.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="relative block overflow-hidden rounded-[clamp(0.5rem,1vw,0.875rem)] border-2 border-white"
+                  style="aspect-ratio: 288/192"
+                >
+                  <img src={event.image} alt={event.title} class="h-full w-full object-cover transition-transform duration-300 group-hover/card:scale-[1.04]" />
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="-rotate-[40deg] transition-transform duration-300 group-hover/card:scale-[1.35]">
+                      <img
+                        src="/images/play-triangle.svg"
+                        alt="Play"
+                        class="w-[clamp(2.75rem,6vw,5.5rem)]"
+                      />
+                    </div>
                   </div>
-                </div>
-              </a>
-              <p class="font-jua text-[clamp(0.8rem,1.6vw,1.25rem)] leading-snug tracking-tight text-white">
-                {event.description}
-              </p>
+                </a>
+                <p class="font-jua text-[clamp(0.875rem,1.8vw,1.4rem)] leading-snug tracking-tight text-white">
+                  {event.description}
+                </p>
+              </div>
             </div>
           </div>
         ))

@@ -50,9 +50,10 @@ const navLinks = [
         Nov 14&ndash;15 &#9825; For teenagers around the world
       </p>
 
-      <form id="signup" class="relative mt-[clamp(0.75rem,2.2vw,2.25rem)] w-[min(92%,50rem)] scroll-mt-8">
+      <form id="signup" action="/api/auth/redirect" method="GET" class="relative mt-[clamp(0.75rem,2.2vw,2.25rem)] w-[min(92%,50rem)] scroll-mt-8">
         <input
           id="signup-email"
+          name="email"
           type="email"
           required
           placeholder="enter email to sign up"
