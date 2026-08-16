@@ -7,6 +7,9 @@
   --color-haven-orange-bright: #fa681b;
   --color-haven-orange-mid: #fc8616;
   --color-haven-yellow: #ffd059;
+
+  --font-jua: "Jua", sans-serif;
+  --font-darumadrop: "Darumadrop One", cursive;
 }
 
 html,
@@ -14,9 +17,8 @@ body {
   margin: 0;
   padding: 0;
   background: var(--color-haven-green);
-  overflow-x: hidden;
 }
 
-img {
-  max-width: none;
+html {
+  scroll-behavior: smooth;
 }

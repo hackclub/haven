@@ -1,0 +1,169 @@
+---
+interface Project {
+  title: string;
+  author: string;
+  href: string;
+  image: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "return to the sender",
+    author: "by i1rs7",
+    href: "https://i1rs7.itch.io/return-to-the-sender",
+    image: "/images/project-1.jpg",
+  },
+  {
+    title: "deathleap",
+    author: "by qrosp, juusaktmii, & 1100010101",
+    href: "https://qrosp-games-oy.itch.io/deathleap",
+    image: "/images/projects-2.jpg",
+  },
+  {
+    title: "office click clack",
+    author: "by bunnyguy",
+    href: "https://theavgeekbee.itch.io/office-click-clack",
+    image: "/images/projects-3.jpg",
+  },
+];
+
+const friendsPhotos = ["/images/friends-1.jpg", "/images/friends-2.jpg", "/images/friends-3.jpg"];
+const foodPhotos = ["/images/food-1.jpg", "/images/food-2.jpg", "/images/food-3.jpg"];
+---
+
+<section id="about" class="relative isolate scroll-mt-0 overflow-hidden bg-haven-green">
+  <div class="relative w-full aspect-[1440/1969]">
+    <img
+      src="/images/haven-bg-middle.png"
+      alt=""
+      class="absolute inset-0 -z-10 h-full w-full object-cover object-top"
+    />
+
+    <div class="absolute left-[16.2%] top-[5.6%] w-[44%] sm:w-[36%]">
+      <h2 class="font-darumadrop text-[clamp(0.8rem,3.6vw,3.4rem)] leading-[0.85] tracking-tight text-white [text-shadow:0_0_8px_var(--color-haven-orange-deep)]">
+        What is a game jam?
+      </h2>
+      <p class="mt-[0.4em] font-jua text-[clamp(0.4rem,1.5vw,1.35rem)] leading-snug text-white [text-shadow:0_0_6px_var(--color-haven-orange-deep)]">
+        It&rsquo;s a social coding event where you make a video game with friends + free food!
+      </p>
+    </div>
+    <img
+      src="/images/daven-gif.png"
+      alt=""
+      class="absolute left-[65.9%] top-[4.4%] w-[7.5%]"
+    />
+
+    <div class="absolute left-[4.86%] top-[17.06%] w-[33.75%]">
+      <div class="h-full rounded-[clamp(0.8rem,2vw,2rem)] border-2 border-haven-yellow p-[clamp(0.25rem,0.7vw,0.6rem)]">
+        <div class="rounded-[clamp(0.6rem,1.6vw,1.6rem)] bg-white/80 px-[clamp(0.6rem,1.8vw,1.5rem)] py-[clamp(0.6rem,2vw,1.75rem)]">
+          <h3 class="text-center font-darumadrop text-[clamp(0.8rem,2vw,1.9rem)] leading-[0.8] tracking-tight text-haven-orange-mid">
+            Learn and Build
+          </h3>
+          <div class="mt-[0.5em] grid grid-cols-3 gap-[clamp(0.25rem,0.7vw,0.6rem)]">
+            {
+              projects.map((project) => (
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="block overflow-hidden rounded-[0.6rem] transition-transform hover:scale-[1.04]"
+                >
+                  <img src={project.image} alt={project.title} class="aspect-[4/3] w-full object-cover" />
+                  <p class="mt-1 text-center font-jua text-[clamp(0.35rem,0.8vw,0.65rem)] leading-tight text-haven-orange-bright">
+                    {project.title}
+                    <br />
+                    {project.author}
+                  </p>
+                </a>
+              ))
+            }
+          </div>
+          <p class="mt-[0.6em] text-center font-jua text-[clamp(0.4rem,1vw,0.9rem)] text-haven-orange-mid">
+            follow workshops or create at your own pace &mdash; here are some cool projects at past hackathons!
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute left-[40.7%] top-[27.1%] w-[47.6%]">
+      <div class="h-full rounded-[clamp(0.8rem,2vw,2rem)] border-2 border-haven-yellow p-[clamp(0.25rem,0.7vw,0.6rem)]">
+        <div class="rounded-[clamp(0.6rem,1.6vw,1.6rem)] bg-white/80 px-[clamp(0.6rem,1.8vw,1.5rem)] py-[clamp(0.6rem,2vw,1.75rem)]">
+          <h3 class="text-center font-darumadrop text-[clamp(0.8rem,2vw,1.9rem)] leading-[0.8] tracking-tight text-haven-orange-mid">
+            Make Friends
+          </h3>
+          <div class="mt-[0.5em] grid grid-cols-3 gap-[clamp(0.25rem,0.7vw,0.6rem)]">
+            {
+              friendsPhotos.map((src) => (
+                <img src={src} alt="" class="aspect-[4/3] w-full rounded-[0.6rem] object-cover" />
+              ))
+            }
+          </div>
+          <p class="mt-[0.6em] text-center font-jua text-[clamp(0.4rem,1vw,0.9rem)] text-haven-orange-mid">
+            meet new people and form relationships that will last a lifetime
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute left-[10.6%] top-[42.6%] w-[42.4%]">
+      <div class="h-full rounded-[clamp(0.8rem,2vw,2rem)] border-2 border-haven-yellow p-[clamp(0.25rem,0.7vw,0.6rem)]">
+        <div class="rounded-[clamp(0.6rem,1.6vw,1.6rem)] bg-white/80 px-[clamp(0.6rem,1.8vw,1.5rem)] py-[clamp(0.6rem,2vw,1.75rem)]">
+          <h3 class="text-center font-darumadrop text-[clamp(0.8rem,2vw,1.9rem)] leading-[0.8] tracking-tight text-haven-orange-mid">
+            Free Food and Prizes
+          </h3>
+          <div class="mt-[0.5em] grid grid-cols-3 gap-[clamp(0.25rem,0.7vw,0.6rem)]">
+            {
+              foodPhotos.map((src) => (
+                <img src={src} alt="" class="aspect-[4/3] w-full rounded-[0.6rem] object-cover" />
+              ))
+            }
+          </div>
+          <p class="mt-[0.6em] text-center font-jua text-[clamp(0.4rem,1vw,0.9rem)] text-haven-orange-mid">
+            can&rsquo;t say no to free snacks :)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative z-10 mx-auto -mt-[56%] flex w-full max-w-[75rem] flex-col px-[clamp(1.25rem,4vw,3rem)] pb-[clamp(3rem,7vw,6rem)]">
+    <div class="flex items-center justify-center gap-[clamp(0.5rem,2vw,1.5rem)]">
+      <img
+        src="/images/awesome-paws-left.png"
+        alt=""
+        class="pointer-events-none hidden w-[clamp(2rem,5vw,4rem)] shrink-0 sm:block"
+      />
+      <h3 class="text-center font-darumadrop text-[clamp(1.75rem,4.5vw,3.25rem)] leading-[0.85] tracking-tight text-white [text-shadow:0_0_10px_var(--color-haven-yellow)]">
+        Don&rsquo;t game jams sound awesome?
+      </h3>
+      <img
+        src="/images/awesome-paws-right.png"
+        alt=""
+        class="pointer-events-none hidden w-[clamp(2rem,5vw,4rem)] shrink-0 sm:block"
+      />
+    </div>
+
+    <div class="relative mx-auto mt-[clamp(2rem,5vw,3rem)] flex w-full max-w-2xl flex-col gap-[clamp(1rem,2.5vw,1.5rem)]">
+      <p class="self-end rounded-[1.75rem] bg-white px-[clamp(1.25rem,3vw,2rem)] py-[clamp(1rem,2.5vw,1.5rem)] text-center font-jua text-[clamp(0.85rem,1.7vw,1.15rem)] leading-relaxed text-haven-orange-deep sm:w-[85%]">
+        This November, <span class="underline">we want YOU</span> to run a game jam. Yes, you! It doesn&rsquo;t matter
+        if you have years of experience, or just learned what they are today.
+      </p>
+      <p class="self-start rounded-[1.75rem] bg-white px-[clamp(1.25rem,3vw,2rem)] py-[clamp(1rem,2.5vw,1.5rem)] text-center font-jua text-[clamp(0.85rem,1.7vw,1.15rem)] leading-relaxed text-haven-orange-deep sm:w-[85%]">
+        You&rsquo;ll <span class="underline">join hundreds of teens</span> from around the world, all running hackathons
+        in their own cities. Hack Club (a global nonprofit) will provide guides, funding, merch, and 1-on-1 mentorship!
+      </p>
+      <div class="relative self-end sm:w-[85%]">
+        <p class="rounded-[1.75rem] bg-white px-[clamp(1.25rem,3vw,2rem)] py-[clamp(1rem,2.5vw,1.5rem)] text-center font-jua text-[clamp(0.85rem,1.7vw,1.15rem)] leading-relaxed text-haven-orange-deep">
+          It may be challenging but this is your chance to
+          <span class="underline">start something truly impactful</span>, learn real leadership skills, and make
+          life-changing friendships along the way.
+        </p>
+        <img
+          src="/images/speech-triangle.png"
+          alt=""
+          class="pointer-events-none absolute -right-6 top-1/2 hidden w-10 -translate-y-1/2 -rotate-[31deg] sm:block"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,142 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+const faqLeft: FAQItem[] = [
+  {
+    q: "Am I eligible?",
+    a: "If you're age 13–18, you're eligible! No prior experience required.",
+  },
+  {
+    q: "Is this free?",
+    a: "Yes! Hack Club is a nonprofit helping teens build technical projects at no cost.",
+  },
+  {
+    q: "But I've never coded before!",
+    a: "Perfect! Game jams are designed for beginners. You'll have workshops, mentors, and teammates to help you every step of the way.",
+  },
+  {
+    q: "What if my parents are concerned?",
+    a: "We're here to help! You can see our <a href='#' class='underline'>parent guide</a> here, or they can reach out to us at <a href='mailto:haven@hackclub.com' class='underline'>haven@hackclub.com</a> for questions.",
+  },
+  {
+    q: "I still have questions!",
+    a: "Join <a href='https://hackclub.com/slack/' target='_blank' rel='noreferrer' class='underline'>#haven-help on Slack</a> or reach out to us at <a href='mailto:haven@hackclub.com' class='underline'>haven@hackclub.com</a>!",
+  },
+];
+
+const faqRight: FAQItem[] = [
+  {
+    q: "Can I organize a Haven?",
+    a: "Absolutely! We're always looking for passionate organizers. If you're ready to bring the magic of game development to your community, we'd love to help.",
+  },
+  {
+    q: "Why should I organize a Haven?",
+    a: "You'll make an impact on your community, whether inspiring someone to make their first game or helping someone find friends in tech. Leading an event is usually very difficult, but we are providing support to help you along the way!",
+  },
+  {
+    q: "What are the steps to organizing?",
+    a: "First, apply through our organizer form. Then we'll guide you through venue booking, team building, workshop planning, and day-of coordination.",
+  },
+  {
+    q: "Do we get volunteer hours?",
+    a: "Many schools accept organizing hours as community service. If your school requires documentation, we can provide it!",
+  },
+  {
+    q: "Can I join an organizing team?",
+    a: "Of course! Many cities have organizing teams. Reach out to organizers in your area or apply to join an existing team.",
+  },
+];
+---
+
+<section id="faq" class="relative scroll-mt-0 overflow-hidden bg-haven-green">
+  <img
+    src="/images/haven-bottom-bg.png"
+    alt=""
+    class="pointer-events-none absolute left-0 w-full"
+    style="top: -210vw; height: 356.5vw;"
+  />
+
+  <div
+    class="relative z-10 px-[clamp(1rem,3vw,2.5rem)] pt-[clamp(1rem,3.2vw,3rem)] pb-[clamp(4rem,16vw,15rem)]"
+  >
+    <h2
+      class="mb-[clamp(1rem,5.8vw,5.25rem)] text-center font-darumadrop text-[clamp(3rem,8vw,7rem)] leading-none tracking-tight text-haven-orange-deep"
+    >
+      FAQ
+    </h2>
+
+    <!-- Two columns pushed to far edges with large center gap (sign post lives in the gap) -->
+    <div class="flex flex-col gap-[clamp(0.5rem,0.9vw,0.75rem)] sm:flex-row sm:gap-[clamp(6rem,20vw,18rem)]">
+      <!-- Left column -->
+      <div class="flex flex-col gap-[clamp(0.5rem,0.9vw,0.75rem)] sm:flex-1">
+        {
+          faqLeft.map((item) => (
+            <details class="group rounded-[clamp(0.75rem,1.4vw,1.25rem)] bg-white/85 px-[clamp(0.75rem,2vw,1.5rem)] py-[clamp(0.65rem,1.3vw,1rem)]">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+                <span class="font-darumadrop text-[clamp(0.85rem,1.7vw,1.4rem)] leading-[0.85] tracking-tight text-haven-orange-deep">
+                  {item.q}
+                </span>
+                <img
+                  src="/images/haven-small-arrow.png"
+                  alt=""
+                  class="w-[clamp(1.1rem,1.8vw,1.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+                />
+              </summary>
+              <p
+                class="mt-[clamp(0.4rem,0.8vw,0.6rem)] font-jua text-[clamp(0.75rem,1.3vw,1.05rem)] leading-snug text-haven-orange-deep"
+                set:html={item.a}
+              />
+            </details>
+          ))
+        }
+      </div>
+
+      <!-- Right column -->
+      <div class="flex flex-col gap-[clamp(0.5rem,0.9vw,0.75rem)] sm:flex-1">
+        {
+          faqRight.map((item) => (
+            <details class="group rounded-[clamp(0.75rem,1.4vw,1.25rem)] bg-white/85 px-[clamp(0.75rem,2vw,1.5rem)] py-[clamp(0.65rem,1.3vw,1rem)]">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4">
+                <span class="font-darumadrop text-[clamp(0.85rem,1.7vw,1.4rem)] leading-[0.85] tracking-tight text-haven-orange-deep">
+                  {item.q}
+                </span>
+                <img
+                  src="/images/haven-small-arrow.png"
+                  alt=""
+                  class="w-[clamp(1.1rem,1.8vw,1.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+                />
+              </summary>
+              <p
+                class="mt-[clamp(0.4rem,0.8vw,0.6rem)] font-jua text-[clamp(0.75rem,1.3vw,1.05rem)] leading-snug text-haven-orange-deep"
+                set:html={item.a}
+              />
+            </details>
+          ))
+        }
+      </div>
+    </div>
+
+    <form
+      action="/api/auth/redirect"
+      method="GET"
+      class="mt-[clamp(2.5rem,15vw,13.5rem)] flex flex-col items-center gap-[clamp(0.75rem,1.5vw,1.25rem)]"
+    >
+      <input
+        type="email"
+        name="email"
+        required
+        placeholder="your@email.com"
+        class="w-full max-w-[clamp(18rem,32vw,30rem)] rounded-[clamp(0.75rem,1.4vw,1.25rem)] border-2 border-white bg-white/90 px-[clamp(1rem,2.5vw,2rem)] py-[clamp(0.6rem,1.3vw,1rem)] font-jua text-[clamp(1rem,1.8vw,1.5rem)] text-haven-orange-deep outline-none placeholder:text-haven-orange-deep/40 focus:ring-2 focus:ring-white/60"
+      />
+      <button
+        type="submit"
+        class="rounded-[clamp(1rem,2.1vw,1.875rem)] border border-white bg-haven-orange-mid px-[clamp(2.5rem,6vw,5.5rem)] py-[clamp(0.75rem,2.5vw,2.25rem)] font-jua text-[clamp(2rem,5.5vw,5rem)] leading-none text-white shadow-[0_0_5px_2px_rgba(255,255,255,0.65)] transition-transform hover:scale-105"
+      >
+        Sign up!
+      </button>
+    </form>
+  </div>
+</section>
