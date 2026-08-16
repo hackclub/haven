@@ -1,0 +1,70 @@
+---
+import { pastEvents, pastEventsHeading } from "../data/content";
+
+/**
+ * Stage coordinates as percentages of the 1440x1463 `bg-picnic` artwork,
+ * measured from each card's own box (372x367) rather than its rotated frame.
+ * Figma gives every card the same rotated bounding box (402.6x398.0), which
+ * only holds if all three share one angle — so the tilt lives in `.polaroid`
+ * (--tilt: -5deg) rather than being set per card.
+ */
+const stage = [
+  "lg:absolute lg:left-[9.2%] lg:top-[40.2%] lg:w-[25.8%]",
+  "lg:absolute lg:left-[39.2%] lg:top-[37.6%] lg:w-[25.8%]",
+  "lg:absolute lg:left-[68.6%] lg:top-[35.1%] lg:w-[25.8%]",
+];
+---
+
+{/* On the stage the cards land on the picnic blanket, as drawn. */}
+<section
+  class="relative flex flex-col gap-[clamp(2rem,4vw,3rem)] px-5 pb-[clamp(3rem,8vw,6rem)] pt-[clamp(2rem,5vw,4rem)] lg:contents"
+>
+  <h2
+    class="mx-auto max-w-[42ch] -rotate-3 text-center font-display text-subheading text-white lg:absolute lg:left-[15.2%] lg:top-[26.9%] lg:w-[71.1%] lg:max-w-none lg:-rotate-4 lg:text-[2.43cqw] lg:leading-[0.9]"
+  >
+    {pastEventsHeading.map((line) => <span class="block">{line}</span>)}
+  </h2>
+
+  {
+    pastEvents.map((item, i) => (
+      <article
+        class:list={[
+          "polaroid mx-auto flex w-full max-w-[23rem] flex-col items-center gap-4 px-[clamp(1.25rem,2vw,2rem)] py-[clamp(1.5rem,2.5vw,2.25rem)] text-center lg:mx-0 lg:max-w-none",
+          stage[i],
+        ]}
+      >
+        <h3 class="font-display text-subheading text-white lg:text-[2.78cqw] lg:leading-none">
+          {item.title}
+        </h3>
+
+        <a
+          href={item.href}
+          target="_blank"
+          rel="noopener"
+          class="relative block w-full overflow-hidden rounded-[1.25rem] border-2 border-white lg:rounded-[1.4cqw]"
+        >
+          <span class="sr-only">Watch the {item.title} video</span>
+          <img
+            src={item.image}
+            alt={item.alt}
+            loading="lazy"
+            decoding="async"
+            class:list={["aspect-[3/2] w-full object-cover", item.position]}
+          />
+          <img
+            src={item.play}
+            alt=""
+            aria-hidden="true"
+            width="72"
+            height="65"
+            class="pointer-events-none absolute top-1/2 left-1/2 w-[19%] -translate-x-1/2 -translate-y-1/2 -rotate-[40deg] select-none drop-shadow-[0_2px_6px_rgb(0_0_0/0.35)]"
+          />
+        </a>
+
+        <p class="font-body text-copy text-white lg:text-[1.55cqw] lg:leading-[1.05]">
+          {item.caption}
+        </p>
+      </article>
+    ))
+  }
+</section>

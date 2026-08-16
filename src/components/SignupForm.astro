@@ -1,0 +1,45 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+{/*
+  `/api/auth/redirect` is a GET route that takes an `email` query param and
+  bounces the visitor to Hack Club auth, so a plain GET form hits it correctly
+  with no JavaScript. The export rendered this as a white rectangle, an orange
+  rectangle and an <a href="mailto:you@gmail.com"> — it collected nothing.
+*/}
+<form
+  id="signup"
+  method="get"
+  action="/api/auth/redirect"
+  class={`flex items-center gap-2 rounded-[1.875rem] bg-white/70 p-[clamp(0.4rem,0.7vw,0.625rem)] shadow-[0_0_8px_2px_rgb(250_104_27/0.65)] ${className}`}
+>
+  <label for="signup-email" class="sr-only">Your email address</label>
+  <input
+    id="signup-email"
+    name="email"
+    type="email"
+    required
+    autocomplete="email"
+    placeholder="enter email to sign up"
+    class="min-w-0 flex-1 bg-transparent px-[clamp(0.75rem,1.6vw,1.5rem)] py-1 font-body text-[clamp(1rem,2.6vw,3.125rem)] leading-tight tracking-[-0.03em] text-haven-orange-deep placeholder:text-haven-orange-deep focus:outline-none"
+  />
+  <button
+    type="submit"
+    class="shrink-0 rounded-[1.25rem] bg-haven-orange-bright px-[clamp(0.9rem,1.9vw,2rem)] py-[clamp(0.5rem,1vw,1rem)] transition-transform hover:scale-[1.04] active:scale-100"
+  >
+    <span class="sr-only">Sign up</span>
+    <img
+      src="/images/signup-arrow.webp"
+      alt=""
+      aria-hidden="true"
+      width="293"
+      height="252"
+      class="w-[clamp(1.75rem,3.4vw,3.5rem)]"
+    />
+  </button>
+</form>

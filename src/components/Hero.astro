@@ -1,142 +1,63 @@
 ---
-const navLinks = [
-  { label: "Sign up", href: "#signup" },
-  { label: "About", href: "#about" },
-  { label: "FAQ", href: "#faq" },
-];
+import { event } from "../data/content";
+import SignupForm from "./SignupForm.astro";
 ---
 
-{
-  /*
-  Laid out in flow rather than as a stack of absolutely-placed boxes: the
-  headline block takes whatever space is left above the bottom row, so the row
-  stays down by the hedgehog however tall the screen is, and nothing overlaps
-  when the viewport gets short.
+{/*
+  `z-10` lets the foreground band hang past the bottom edge and overlap the
+  section below, the way the illustration is drawn.
 
-  `min-h-svh` (not a fixed height) lets the hero grow if the content needs it
-  instead of overflowing. The top padding is derived from the shared --logo-*
-  box so the headline always clears the lockup at every size.
+  Full viewport height so the yellow frame always frames the first screen —
+  capping it at 52rem meant the frame stopped short of the fold on tall
+  displays.
 
-  On mobile the hedgehog sits at the bottom, so the bottom padding reserves its
-  height (40vw wide x 366/403 = 36.3vw tall). From sm it is small and off to the
-  left of the row, and needs no extra room.
-*/
-}
+  On mobile the hedgehog sits at the bottom across the full width, so the
+  bottom padding reserves its height (44vw wide x 308/422 = 32.1vw tall).
+  From sm it is off to the left of the row and needs no extra room.
+*/}
 <section
-  id="hero"
-  class="relative isolate flex min-h-svh flex-col overflow-hidden bg-haven-green bg-[url('/images/haven-hero-bg.webp')] bg-cover bg-top bg-no-repeat pb-[38vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))]"
+  id="top"
+  class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute inset-[clamp(0.5rem,1.4vw,1.5rem)] z-10 rounded-[clamp(14px,2vw,32px)] border-2 border-haven-yellow/90 sm:border-[3px]"
-  >
-  </div>
-
-  {
-    /* Logo is centred and the nav sits top-right. Taken out of the flow so the
-      body below only has to reserve its height, not share a column with it. */
-  }
-  <header class="absolute inset-x-0 top-0 z-20">
-    <div
-      class="shell relative flex items-start justify-end pt-[clamp(0.75rem,2vw,2rem)]"
-    >
-      <a
-        href="#hero"
-        class="absolute left-1/2 top-[var(--logo-top)] -translate-x-1/2"
-        aria-label="Hack Club Haven — home"
-      >
-        <img
-          src="/images/haven-logo-final.webp"
-          alt="Hack Club Haven"
-          width="731"
-          height="415"
-          class="w-[var(--logo-w)] max-w-none"
-        />
-      </a>
-
-      <nav aria-label="Primary">
-        <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
-          {
-            navLinks.map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="inline-block whitespace-nowrap py-1 font-darumadrop text-[clamp(1.375rem,2.7vw,2.5rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-transform duration-200 ease-out hover:-translate-y-1 hover:scale-110 hover:text-white"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  {
-    /* The headline block centres in whatever space is left above the bottom row. */
-  }
+  {/* The headline block centres in whatever space is left above the bottom
+      row, so the row stays down by the hedgehog however tall the screen is. */}
   <div class="relative z-10 flex flex-1 items-center justify-center">
     <div class="shell flex flex-col items-center text-center">
-      <h1 class="glow-orange font-darumadrop text-hero text-white">
-        Lead a game jam<br /> in your city!
+      {/* The leading space keeps the accessible name from reading "game jamin"
+          — block spans concatenate without one. It collapses visually. */}
+      <h1 class="glow-orange font-display text-hero text-white [word-spacing:0.18em]">
+        {
+          event.tagline.map((line, i) => (
+            <span class="block">
+              {i > 0 ? " " : ""}
+              {line}
+            </span>
+          ))
+        }
       </h1>
 
-      <p
-        class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-jua text-subheading text-white"
-      >
-        <span class="whitespace-nowrap">Nov 14&ndash;15</span>
-        <span aria-hidden="true" class="mx-2 hidden sm:inline">&#9825;</span>
-        <span class="block sm:inline">For teenagers around the world</span>
+      <p class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white">
+        <span class="whitespace-nowrap">{event.dates}</span>
+        <span aria-hidden="true" class="mx-2 hidden sm:inline">&hearts;</span>
+        <span class="block sm:inline">{event.audience}</span>
       </p>
 
-      <form
-        id="signup"
-        action="/api/auth/redirect"
-        method="GET"
-        class="mt-[clamp(1.5rem,3vw,2.25rem)] flex w-full max-w-[50rem] scroll-mt-8 items-center gap-2 rounded-full bg-white/70 p-[clamp(0.3rem,0.7vw,0.625rem)] shadow-[0_0_10px_3px_rgba(250,104,27,0.55)]"
-      >
-        <label for="signup-email" class="sr-only">Your email address</label>
-        <input
-          id="signup-email"
-          name="email"
-          type="email"
-          required
-          autocomplete="email"
-          placeholder="enter email to organize"
-          class="min-w-0 flex-1 bg-transparent px-[clamp(0.75rem,1.6vw,1.5rem)] py-[clamp(0.4rem,1vw,0.9rem)] font-jua text-[clamp(1rem,2.6vw,2.75rem)] leading-tight tracking-[-0.03em] text-haven-orange-deep placeholder:text-haven-orange-deep focus:outline-none"
-        />
-        <button
-          type="submit"
-          aria-label="Sign up"
-          class="flex size-[clamp(2.25rem,5.2vw,4.5rem)] shrink-0 items-center justify-center rounded-full bg-haven-orange-bright"
-        >
-          <img
-            src="/images/haven-sign-up-arrow.webp"
-            alt=""
-            class="h-[45%] w-auto"
-          />
-        </button>
-      </form>
+      <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-full max-w-[52rem]" />
     </div>
   </div>
 
-  {
-    /* Jump-link and video panel share a row on desktop and stack on narrow
-      screens, instead of being absolutely pinned to the bottom corners. */
-  }
+  {/* Jump-link and video slot share a row on desktop and stack on narrow
+      screens. In the export these were absolutely-placed boxes. */}
   <div
-    class="shell relative z-10 mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] grid grid-cols-1 items-end gap-8 sm:grid-cols-[1fr_auto_1fr]"
+    class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] grid grid-cols-1 items-end gap-8 sm:grid-cols-[1fr_auto_1fr]"
   >
-    {
-      /* Desktop-only: on mobile the next section is already the obvious scroll
-        target, and the arrow just crowds the hedgehog. */
-    }
+    {/* Desktop-only: on mobile the next section is already the obvious scroll
+        target, and the arrow just crowds the hedgehog. */}
     <a
       href="#about"
-      class="order-2 hidden flex-col items-center gap-1 justify-self-center text-white/50 sm:order-none sm:col-start-2 sm:flex"
+      class="order-2 hidden flex-col items-center gap-1 justify-self-center sm:order-none sm:col-start-2 sm:flex"
     >
-      <span class="font-jua text-subheading">more info</span>
+      <span class="font-body text-subheading text-white/60">more info</span>
       {/* The asset points up; the design flips it to point down the page. */}
       <img
         src="/images/triangle-down.svg"
@@ -144,176 +65,62 @@ const navLinks = [
         aria-hidden="true"
         width="207"
         height="69"
-        class="mt-1 w-[clamp(4rem,10.5vw,9.5rem)] -scale-y-100"
+        class="w-[clamp(6rem,18vw,19rem)] -scale-y-100"
       />
     </a>
 
-    {
-      /* Collapsible video panel. Uses <details> so the "close video" control
-        works without JavaScript; the panel starts open, as drawn. */
-    }
+    {/* Collapsible video panel. Uses <details> so the "close video" control
+        works without JavaScript; the panel starts open, as drawn. */}
     <details
       open
-      id="video-widget"
-      class="group order-1 w-full max-w-[22.5rem] justify-self-center rounded-2xl bg-white p-[clamp(0.5rem,1.2vw,1.2rem)] shadow-lg sm:order-none sm:col-start-3 sm:max-w-[min(22.5rem,24svh)] sm:justify-self-end"
+      class="group order-1 w-full max-w-[22.5rem] justify-self-center rounded-[1.875rem] bg-white p-[clamp(0.75rem,1.3vw,1.2rem)] sm:order-none sm:col-start-3 sm:max-w-[min(22.5rem,24svh)] sm:justify-self-end"
     >
-      {
-        /* Hidden on mobile: the panel stays open (the `open` attribute keeps the
+      {/* Hidden on mobile: the panel stays open (the `open` attribute keeps the
           content rendered) so there is nothing to toggle and no control to
-          crowd the layout. */
-      }
+          crowd the layout. The bottom padding only separates the label from the
+          video, so it applies when open — collapsed it left the label high. */}
       <summary
-        class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-jua text-[clamp(0.85rem,1.3vw,1.4rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
+        class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1.05rem,1.4vw,1.875rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
       >
-        <span class="group-open:hidden">open video</span>
+        <span class="group-open:hidden">watch video</span>
         <span class="hidden group-open:inline">close video</span>
         <img
-          src="/images/small-arrow.webp"
+          src="/images/faq-chevron.webp"
           alt=""
           aria-hidden="true"
-          width="380"
-          height="214"
-          class="w-[clamp(0.7rem,1.1vw,1.2rem)] shrink-0 -scale-y-100 transition-transform duration-200 group-open:scale-y-100"
+          width="416"
+          height="256"
+          class="w-[clamp(1.5rem,1.8vw,2.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
         />
       </summary>
-
-      <button
-        type="button"
-        id="video-trigger"
-        aria-haspopup="dialog"
-        aria-label="Expand Haven intro video"
-        class="w-full cursor-pointer"
-      >
-        <span
-          class="relative block aspect-video w-full overflow-hidden rounded-lg border-2 border-sky-400 bg-black sm:rounded-xl"
-        >
-          <img
-            class="h-full w-full object-cover"
-            src="https://img.youtube.com/vi/AnG56HUDzdI/hqdefault.jpg"
-            alt=""
-            loading="lazy"
-          />
-          <span
-            class="absolute inset-0 flex items-center justify-center bg-black/15"
-            aria-hidden="true"
-          >
-            <span
-              class="flex size-[clamp(2.25rem,5.5vw,5rem)] items-center justify-center rounded-full bg-white/90 shadow-lg"
-            >
-              <img
-                src="/images/play-triangle.svg"
-                alt=""
-                class="ml-[8%] h-[42%] w-[42%] rotate-90"
-              />
-            </span>
-          </span>
-        </span>
-        <span
-          class="mt-1 block text-center font-jua text-[clamp(0.65rem,1vw,0.85rem)] text-gray-400"
-          >(click to expand)</span
-        >
-      </button>
+      <div class="aspect-[320/180] w-full rounded-[1.25rem] bg-haven-orange-mid">
+        <span class="sr-only">Intro video coming soon</span>
+      </div>
     </details>
   </div>
 
-  {
-    /* Hedgehog is scenery, not content. It stands on the ground at the hero's
-      bottom-left at every size; on mobile it takes a much larger share of the
-      width, which is the space the bottom padding above reserves for it. */
-  }
+  {/* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
+      the hero's bottom-left (Figma x138/1440 = 9.6%, w422/1440 = 29.3%) rather
+      than sitting in the flow row, where it ended up floating above the grass.
+      On mobile it keeps the same slight-left placement, still on the ground. */}
   <img
-    src="/images/pud-hero-1.webp"
+    src="/images/hedgehog.webp"
     alt=""
     aria-hidden="true"
-    width="403"
-    height="366"
-    class="pointer-events-none absolute bottom-0 left-0 z-10 -ml-3 w-[clamp(9rem,40vw,16rem)] select-none sm:-ml-4 sm:w-[clamp(8rem,22vw,27rem)]"
+    width="422"
+    height="308"
+    class="absolute bottom-0 left-[6%] z-10 w-[clamp(9rem,44vw,16rem)] select-none sm:left-[9.6%] sm:w-[29.3%] sm:max-w-[26rem]"
+  />
+
+  {/* Foreground foliage band that bridges the hero into the section below. The
+      55% offset puts the band's horizontal bar just below the frame's bottom
+      rule and lets the bushes hang into the section below, as in the design. */}
+  <img
+    src="/images/hero-foreground.webp"
+    alt=""
+    aria-hidden="true"
+    width="1414"
+    height="501"
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full max-w-none translate-y-[55%] select-none"
   />
 </section>
-
-<img
-  src="/images/hero-bottom.webp"
-  alt=""
-  class="pointer-events-none relative z-10 mt-[-14.5%] w-full [mask-image:linear-gradient(to_bottom,black_0%,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_80%,transparent_100%)]"
-/>
-
-<div
-  id="video-modal"
-  role="dialog"
-  aria-modal="true"
-  aria-label="Haven intro video"
-  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 sm:p-8"
->
-  <div class="relative w-full max-w-4xl">
-    <button
-      type="button"
-      id="video-close"
-      aria-label="Close video"
-      class="absolute -top-10 right-0 flex size-8 items-center justify-center rounded-full bg-white text-lg font-bold text-haven-orange-deep sm:-top-12 sm:size-10"
-    >
-      &#10005;
-    </button>
-    <div class="aspect-video w-full overflow-hidden rounded-2xl shadow-2xl">
-      <iframe
-        id="video-iframe"
-        class="h-full w-full border-0"
-        src="about:blank"
-        title="Haven intro video"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
-    </div>
-  </div>
-</div>
-
-<script>
-  // @ts-nocheck
-  const YOUTUBE_ID = "AnG56HUDzdI";
-
-  const trigger = document.getElementById("video-trigger");
-  const modal = document.getElementById("video-modal");
-  const closeBtn = document.getElementById("video-close");
-  const iframe = document.getElementById("video-iframe");
-
-  function openVideo() {
-    if (iframe)
-      iframe.src = `https://www.youtube.com/embed/${YOUTUBE_ID}?modestbranding=1&playsinline=1&rel=0`;
-    modal?.classList.remove("hidden");
-    modal?.classList.add("flex");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeVideo() {
-    modal?.classList.add("hidden");
-    modal?.classList.remove("flex");
-    if (iframe) iframe.src = "about:blank";
-    document.body.style.overflow = "";
-  }
-
-  trigger?.addEventListener("click", openVideo);
-  closeBtn?.addEventListener("click", closeVideo);
-  modal?.addEventListener("click", (e) => {
-    if (e.target === modal) closeVideo();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeVideo();
-  });
-
-  function focusSignup() {
-    const signup = document.getElementById("signup");
-    const email = document.getElementById("signup-email");
-    signup?.scrollIntoView({ behavior: "smooth", block: "center" });
-    window.setTimeout(() => email?.focus({ preventScroll: true }), 450);
-  }
-
-  document.querySelectorAll('a[href="#signup"]').forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      history.pushState(null, "", "#signup");
-      focusSignup();
-    });
-  });
-
-  if (window.location.hash === "#signup") {
-    window.setTimeout(focusSignup, 100);
-  }
-</script>

@@ -1,18 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import Hero from "../components/Hero.astro";
-import Info from "../components/Info.astro";
+import About from "../components/About.astro";
+import Pitch from "../components/Pitch.astro";
 import Steps from "../components/Steps.astro";
-import Showcase from "../components/Showcase.astro";
-import FAQ from "../components/FAQ.astro";
-import Footer from "../components/Footer.astro";
+import PastEvents from "../components/PastEvents.astro";
+import Faq from "../components/Faq.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 ---
 
 <Layout>
-  <Hero />
-  <Info />
-  <Steps />
-  <Showcase />
-  <FAQ />
-  <Footer />
+  <SiteHeader />
+
+  <main id="main">
+    <Hero />
+
+    {/* One backdrop per run of sections, matching how the Figma file splits the
+        artwork. From `lg` up each is an aspect-locked stage its children are
+        positioned on; below that they collapse to ordinary stacked flow. */}
+    {/* `#about` lives here rather than on About's own <section>: from `lg` up
+        that section is `display: contents`, which generates no box, so the
+        anchor had nothing to scroll to and jumped to the top of the page. */}
+    <div id="about" class="stage stage-middle">
+      <About />
+      <Pitch />
+    </div>
+
+    <Steps />
+
+    <div class="stage stage-picnic">
+      <PastEvents />
+    </div>
+
+    <Faq />
+  </main>
+
+  <SiteFooter />
 </Layout>

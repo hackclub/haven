@@ -3,24 +3,38 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = "Haven — Lead a game jam in your city!" } = Astro.props;
+const {
+  title = "Haven — Lead a game jam in your city!",
+  description = "Haven is a Hack Club event for teenagers to lead their own game jam. Nov 14–15, for teenagers around the world.",
+} = Astro.props;
 ---
 
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="Haven is a Hack Club event for teenagers to learn how to lead their own game jam. Nov 14-15, for teenagers around the world."
-    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    {/* Fonts via <link> rather than an @import inside the stylesheet, so the
+        font request starts alongside the CSS instead of after it parses. */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Jua&display=swap"
+    />
 
     <!-- Privacy-friendly analytics by Plausible -->
     <script async src="https://plausible.io/js/pa-NOfzi3QD0QvG1dD-VNMuv.js"
@@ -40,7 +54,14 @@ const { title = "Haven — Lead a game jam in your city!" } = Astro.props;
       plausible.init();
     </script>
   </head>
+
   <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-2xl focus:bg-white focus:px-4 focus:py-2 focus:font-display focus:text-xl focus:text-haven-orange-deep"
+    >
+      Skip to content
+    </a>
     <slot />
   </body>
 </html>
