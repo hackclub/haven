@@ -21,6 +21,24 @@ const { title = "Haven — Lead a game jam in your city!" } = Astro.props;
       content="Haven is a Hack Club event for teenagers to learn how to lead their own game jam. Nov 14-15, for teenagers around the world."
     />
     <title>{title}</title>
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script async src="https://plausible.io/js/pa-NOfzi3QD0QvG1dD-VNMuv.js"
+    ></script>
+    <script>
+      // @ts-nocheck
+      ((window.plausible =
+        window.plausible ||
+        function () {
+          (plausible.q = plausible.q || []).push(arguments);
+        }),
+        (plausible.init =
+          plausible.init ||
+          function (i) {
+            plausible.o = i || {};
+          }));
+      plausible.init();
+    </script>
   </head>
   <body>
     <slot />
