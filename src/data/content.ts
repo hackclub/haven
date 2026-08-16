@@ -68,7 +68,10 @@ export const perks: Perk[] = [
         src: "/images/projects-2.webp",
         alt: "Deathleap, a game made at a past event",
         href: "https://qrosp-games-oy.itch.io/deathleap",
-        caption: { title: "deathleap", author: "by qrosp, juusaktmii, & 1100010101" },
+        caption: {
+          title: "deathleap",
+          author: "by qrosp, juusaktmii, & 1100010101",
+        },
       },
       {
         src: "/images/projects-3.webp",
@@ -86,8 +89,14 @@ export const perks: Perk[] = [
     blurb: ["meet new people and form relationships that will last a lifetime"],
     photos: [
       { src: "/images/friends-1.webp", alt: "Attendees hanging out together" },
-      { src: "/images/friends-2.webp", alt: "A group of teens working at a shared table" },
-      { src: "/images/friends-3.webp", alt: "Attendees celebrating at an event" },
+      {
+        src: "/images/friends-2.webp",
+        alt: "A group of teens working at a shared table",
+      },
+      {
+        src: "/images/friends-3.webp",
+        alt: "Attendees celebrating at an event",
+      },
     ],
   },
   {
@@ -98,7 +107,10 @@ export const perks: Perk[] = [
     blurb: ["can’t say no to free snacks :)"],
     photos: [
       { src: "/images/food-1.webp", alt: "A spread of snacks and merch" },
-      { src: "/images/food-2.webp", alt: "Boxes of snacks laid out on a table" },
+      {
+        src: "/images/food-2.webp",
+        alt: "Boxes of snacks laid out on a table",
+      },
       { src: "/images/food-3.webp", alt: "Attendees holding up their prizes" },
     ],
   },
@@ -141,7 +153,7 @@ export const pitches: Pitch[] = [
       { text: "You’ll " },
       { text: "join hundreds of teens", mark: true },
       {
-        text: " from around the world, all running hackathons in their own cities. Hack Club (a global nonprofit) will provide guides, funding, merch, and 1-on-1 mentorship!",
+        text: " from around the world, all running game jams in their own cities. Hack Club (a global nonprofit) will provide guides, funding, merch, and 1-on-1 mentorship!",
       },
     ],
   },
@@ -157,14 +169,17 @@ export const pitches: Pitch[] = [
     body: [
       { text: "It may be challenging but this is your chance to " },
       { text: "start something truly impactful", mark: true },
-      { text: ", learn real leadership skills, and make life-changing friendships along the way." },
+      {
+        text: ", learn real leadership skills, and make life-changing friendships along the way.",
+      },
     ],
   },
 ];
 
 /* ── How you organize ───────────────────────────────────────────────────── */
 
-export const stepsHeading = "Here is how you can organize a game jam this November!";
+export const stepsHeading =
+  "Here is how you can organize a game jam this November!";
 
 export const steps = [
   {
@@ -173,7 +188,7 @@ export const steps = [
     alt: "Organizers standing together at an event",
   },
   {
-    title: "find a venue to host your hackathon",
+    title: "find a venue to host your game jam",
     image: "/images/step-2.webp",
     alt: "An organizer giving a thumbs up in a booked venue",
   },
@@ -192,7 +207,7 @@ export const steps = [
 /* ── Past events ────────────────────────────────────────────────────────── */
 
 export const pastEventsHeading = [
-  "We’ve helped teens organize hundreds of hackathons around the world!",
+  "We’ve helped teens organize hundreds of events around the world!",
   "Check out some of our past events ~",
 ];
 
@@ -204,37 +219,36 @@ export type PastEvent = {
   play: string;
   href: string;
   position?: string;
-  tilt: string;
 };
 
 export const pastEvents: PastEvent[] = [
   {
     title: "Scrapyard",
-    caption: "Build wacky stuff, get wacky prizes! In-person hackathon in 70+ cities.",
+    caption:
+      "Build wacky stuff, get wacky prizes! In-person hackathon in 70+ cities.",
     image: "/images/scrapyard-pic.webp",
     alt: "Teens building at Scrapyard",
     play: "/images/play-triangle-1.svg",
     href: "https://www.youtube.com/watch?v=8iM1W8kXrQA",
-    tilt: "-5deg",
   },
   {
     title: "Daydream",
-    caption: "Students led game jams in 100 cities worldwide, from London to NYC to Penang!",
+    caption:
+      "Students led game jams in 100 cities worldwide, from London to NYC to Penang!",
     image: "/images/daydream-pic.webp",
     alt: "Attendees at a Daydream game jam",
     play: "/images/play-triangle-2.svg",
     href: "https://www.youtube.com/watch?v=vvdoW2gh9YU",
-    tilt: "-3deg",
   },
   {
     title: "Campfire",
-    caption: "Our largest game jam yet: 10k teens, 1 weekend, making games at the same time!",
+    caption:
+      "Our largest game jam yet: 10k teens, 1 weekend, making games at the same time!",
     image: "/images/scrapyard-pic-2.webp",
     alt: "A packed room of teens at Campfire",
     play: "/images/play-triangle-3.svg",
     href: "https://www.youtube.com/watch?v=0aMAHuLxg3s",
     position: "object-bottom",
-    tilt: "-6deg",
   },
 ];
 
@@ -249,7 +263,11 @@ const HAVEN_EMAIL = "mailto:haven@hackclub.com";
 export const faqs: { q: string; a: Linked }[] = [
   {
     q: "Am I eligible?",
-    a: [{ text: "If you’re age 13-18, you’re eligible! No prior experience required." }],
+    a: [
+      {
+        text: "If you’re age 13-18, you’re eligible! No prior experience required.",
+      },
+    ],
   },
   {
     q: "Can I organize a Haven?",
@@ -295,7 +313,9 @@ export const faqs: { q: string; a: Linked }[] = [
     q: "What if my parents are concerned?",
     a: [
       // TODO: the Figma still has "[parent guide]" bracketed — no URL yet.
-      { text: "We’re here to help! You can see our [parent guide] here, or they can reach out to us at " },
+      {
+        text: "We’re here to help! You can see our [parent guide] here, or they can reach out to us at ",
+      },
       { text: "haven@hackclub.com", href: HAVEN_EMAIL },
       { text: " for questions." },
     ],
@@ -338,7 +358,8 @@ export const footerLinks = [
 ];
 
 export const navLinks = [
-  { label: "Sign up", href: "#signup" },
+  // Back to the top of the page, where the hero's email field is.
+  { label: "Sign up", href: "#top" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },
 ];

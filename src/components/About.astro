@@ -21,8 +21,9 @@ const stage: Record<string, string> = {
   is 100vw * 501/1414, so they end 13.75vw down. The mobile top padding clears
   that; on the stage the Figma coordinates already sit clear of them.
 */}
+{/* The `#about` anchor sits on the stage wrapper in index.astro — this section
+    is `display: contents` from `lg` up and so has no box to scroll to. */}
 <section
-  id="about"
   class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-5 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] lg:contents"
 >
   <div class={`max-w-[42rem] ${stage.intro}`}>

@@ -10,9 +10,27 @@ const toStyle = (vars: Record<string, string>) =>
 const stage: Record<string, string> = {
   triangles: "lg:absolute lg:left-[24.9%] lg:top-[60.6%] lg:w-[53.3%]",
   heading: "lg:absolute lg:left-[28.2%] lg:top-[64%] lg:w-[46.2%]",
-  invite: "lg:absolute lg:left-[33.6%] lg:top-[72%] lg:w-[40.8%]",
-  support: "lg:absolute lg:left-[13.3%] lg:top-[80.8%] lg:w-[40.8%]",
-  impact: "lg:absolute lg:left-[16.2%] lg:top-[90.6%] lg:w-[40.8%]",
+};
+
+/**
+ * The three bubbles used to carry a `top` each, straight off the Figma frame.
+ * That only holds while every bubble is exactly as tall as its Figma
+ * counterpart — ours run a line longer, so the gaps closed up unevenly (the
+ * bottom pair ended up 3px apart against 13px for the top pair). They are a
+ * flex column now: one shared gap, and copy edits can no longer break the
+ * rhythm. Only the horizontal offsets are still per-bubble.
+ *
+ * Offsets are relative to the column box, which spans the union of the three
+ * Figma positions — 13.26%..74.37% of the artwork, so 61.11% wide.
+ */
+/* `lg:self-start` cancels the `sm:self-*` alignment used by the stacked
+   layout — on the stage the horizontal position comes from the margin below,
+   and `self-center` would otherwise re-centre the bubble in the column. */
+const BUBBLE_WIDTH = "lg:w-[66.7%] lg:self-start"; // 40.76% of the artwork
+const bubbleOffset: Record<string, string> = {
+  invite: "lg:ml-[33.3%]", // artwork x 33.61%
+  support: "lg:ml-0", // artwork x 13.26%
+  impact: "lg:ml-[4.78%]", // artwork x 16.18%
 };
 
 const alignment = {
@@ -45,23 +63,31 @@ const alignment = {
   </h2>
 
   {/* The design underlines the emphasised runs; we keep the highlighter
-      treatment instead — same emphasis, more of the brand. */}
-  {
-    pitches.map((pitch) => (
-      <div
-        class:list={[
-          "speech w-full max-w-[38rem] lg:max-w-none",
-          alignment[pitch.align],
-          stage[pitch.id],
-        ]}
-        style={pitch.tail ? toStyle(pitch.tail) : undefined}
-      >
-        <p class="px-[clamp(1.25rem,3vw,2.5rem)] py-[clamp(1.1rem,2.2vw,1.75rem)] text-center font-body text-copy leading-[1.7] text-haven-orange-deep lg:px-[6%] lg:py-[5%] lg:text-[1.67cqw] lg:leading-[1.35]">
-          {pitch.body.map((segment) =>
-            segment.mark ? <span class="marker">{segment.text}</span> : segment.text,
-          )}
-        </p>
-      </div>
-    ))
-  }
+      treatment instead — same emphasis, more of the brand.
+
+      `contents` below `lg` so the bubbles stay direct children of the section's
+      flex column; from `lg` up the wrapper becomes the positioned column. */}
+  <div
+    class="contents lg:absolute lg:left-[13.26%] lg:top-[72%] lg:flex lg:w-[61.11%] lg:flex-col lg:gap-[2.83cqw]"
+  >
+    {
+      pitches.map((pitch) => (
+        <div
+          class:list={[
+            "speech w-full max-w-[38rem] lg:max-w-none",
+            alignment[pitch.align],
+            BUBBLE_WIDTH,
+            bubbleOffset[pitch.id],
+          ]}
+          style={pitch.tail ? toStyle(pitch.tail) : undefined}
+        >
+          <p class="px-[clamp(1.25rem,3vw,2.5rem)] py-[clamp(1.1rem,2.2vw,1.75rem)] text-center font-body text-copy leading-[1.7] text-haven-orange-deep lg:px-[6%] lg:py-[3.3%] lg:text-[1.55cqw] lg:leading-[1.3]">
+            {pitch.body.map((segment) =>
+              segment.mark ? <span class="marker">{segment.text}</span> : segment.text,
+            )}
+          </p>
+        </div>
+      ))
+    }
+  </div>
 </section>

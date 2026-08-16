@@ -19,7 +19,10 @@ import SiteFooter from "../components/SiteFooter.astro";
     {/* One backdrop per run of sections, matching how the Figma file splits the
         artwork. From `lg` up each is an aspect-locked stage its children are
         positioned on; below that they collapse to ordinary stacked flow. */}
-    <div class="stage stage-middle">
+    {/* `#about` lives here rather than on About's own <section>: from `lg` up
+        that section is `display: contents`, which generates no box, so the
+        anchor had nothing to scroll to and jumped to the top of the page. */}
+    <div id="about" class="stage stage-middle">
       <About />
       <Pitch />
     </div>

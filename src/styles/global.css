@@ -163,6 +163,22 @@
     background-image: url("/images/bg-picnic.webp");
   }
 
+  /* The picnic artwork opens with a band of flat green above the rabbit — the
+     exact page background (#b8c21f) — so the stage can be pulled up under the
+     section before it with no visible seam. Figma stacks them the same way:
+     the backdrop starts 60px *above* the last step card rather than after it.
+     Percentage margins resolve against the parent's width, so this tracks the
+     artwork as it scales. */
+  @media (width >= 64rem) {
+    .stage-picnic {
+      /* The percentage tracks the parent's width, but the stage itself stops
+         growing at `max-width: 120rem` — so the pull-up caps at its value
+         there (5.3% of 120rem) instead of running past the artwork. `max()`
+         picks the less-negative of the two. */
+      margin-top: max(-5.3%, -6.36rem);
+    }
+  }
+
   /* The carrot field is drawn at full page width, so its rendered height is
      width * 1170/1149. Tying the section's min-height to that same ratio means
      the field always lands whole instead of being sliced mid-row when the
@@ -173,6 +189,24 @@
     background:
       url("/images/faq-bg.webp") top center / 100% auto no-repeat,
       var(--color-haven-green);
+  }
+
+  /* From `lg` up the FAQ lays itself out *on* the painting rather than in a
+     centred column, so its children measure against the section's own width.
+     1cqw is 1% of that width, which is also 1% of the artwork's width — so a
+     child at `top: 29.5cqw` lands on the same patch of soil at every size.
+     Measured off faq-bg.webp (1149x1170, drawn at 100% width, so 101.83cqw
+     tall):
+       signpost board   y  9.40cqw .. 21.49cqw
+       left carrot bed  x  0%      .. 44.30%
+       right carrot bed x 54.31%   .. 100%
+       beds             y 23.33cqw .. 83.55cqw
+     The column insets within each bed come from the Figma frame, which puts
+     the pills symmetric about the centre at 5.65%..40.47% and 59.53%..94.35%. */
+  @media (width >= 64rem) {
+    .scene-harvest {
+      container-type: inline-size;
+    }
   }
 
   /* The yellow rule frame: four bars, inset from the edges, stopping short of

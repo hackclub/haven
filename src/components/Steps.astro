@@ -6,8 +6,20 @@ import { steps, stepsHeading } from "../data/content";
   "How you organize" — an ordered list, because the four steps really are a
   sequence, which is what earns the numbered markers.
 */}
-<section class="relative py-[clamp(2.5rem,6vw,5rem)]">
-  <div class="shell">
+{/* Bottom padding is deliberately smaller than the top: the picnic scene that
+    follows opens with a band of flat green that already reads as breathing
+    room, and doubling up on it left a visible void.
+
+    `z-10` because that scene is pulled up under this section (see
+    `.stage-picnic`) and, coming later in the document, would otherwise paint
+    its backdrop over the bottom of the cards. */}
+<section class="relative z-10 pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(1.5rem,2vw,2rem)]">
+  {/* Figma runs this row edge-to-edge at 1313/1440 rather than inside the
+      75rem shell — four 315px cards with an 18px gutter. Squeezed into the
+      shell the cards came out 283px, which wrapped every title onto a third
+      line and left no room around the photo. `min()` freezes the proportions
+      once the artwork elsewhere stops growing at 120rem. */}
+  <div class="shell lg:w-[min(91.2%,109.44rem)] lg:max-w-none">
     <h2
       class="mx-auto max-w-[24ch] text-center font-display text-display text-white sm:max-w-none"
     >
@@ -15,19 +27,21 @@ import { steps, stepsHeading } from "../data/content";
     </h2>
 
     <ol
-      class="mt-[clamp(1.5rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4"
+      class="mt-[clamp(1.5rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4 lg:gap-[min(1.25vw,1.5rem)]"
     >
       {
         steps.map((step, i) => (
-          <li class="flex flex-col gap-[clamp(1rem,1.6vw,1.5rem)] rounded-[1.875rem] bg-haven-butter p-[clamp(1.25rem,1.8vw,1.75rem)]">
+          /* Padding and inner gap are ~12% and ~11% of the card's own width,
+             matching the Figma box; the photo then lands at its drawn size. */
+          <li class="flex flex-col gap-[clamp(1rem,1.6vw,1.5rem)] rounded-[1.875rem] bg-haven-butter p-[clamp(1.25rem,1.8vw,1.75rem)] lg:gap-[min(2.4vw,2.88rem)] lg:p-[min(2.63vw,3.15rem)]">
             <div class="flex items-start gap-[clamp(0.5rem,1vw,0.875rem)]">
               <span
                 aria-hidden="true"
-                class="font-display text-[clamp(3rem,5.5vw,5.625rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-bright"
+                class="font-display text-[clamp(3rem,5.5vw,5.625rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-bright lg:text-[min(4.4vw,5.28rem)]"
               >
                 {i + 1}
               </span>
-              <span class="font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-bright">
+              <span class="font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-bright lg:text-[min(1.53vw,1.84rem)]">
                 {step.title}
               </span>
             </div>
