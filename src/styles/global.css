@@ -36,7 +36,7 @@
   --text-heading--letter-spacing: -0.05em;
 
   --text-subheading: clamp(1.25rem, 2vw, 2rem);
-  --text-subheading--line-height: 1;
+  --text-subheading--line-height: 1.2;
   --text-subheading--letter-spacing: -0.03em;
 
   --text-lead: clamp(1.0625rem, 1.5vw, 1.5625rem);
