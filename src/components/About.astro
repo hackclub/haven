@@ -9,8 +9,14 @@ import { about, perks } from "../data/content";
 const stage: Record<string, string> = {
   intro: "lg:absolute lg:left-[16.1%] lg:top-[5.6%] lg:w-[30%]",
   daven: "lg:absolute lg:left-[65.8%] lg:top-[5.6%] lg:w-[7.5%]",
-  build: "lg:absolute lg:left-[4.8%] lg:top-[17.1%] lg:w-[33.8%]",
-  friends: "lg:absolute lg:left-[40.6%] lg:top-[27.1%] lg:w-[47.6%]",
+  /* Figma gave "build" the narrowest box of the three even though it carries
+     the most in it — three thumbnails *and* a two-line credit under each — so
+     the credits wrapped to three lines and the card ran tall and ragged.
+     Widening it to 39% and taking the slack out of "friends" (which had the
+     widest box and the least in it) evens the two out. "friends" keeps its
+     right edge at 88.2%, so the composition still ends where it did. */
+  build: "lg:absolute lg:left-[4.8%] lg:top-[17.1%] lg:w-[39%]",
+  friends: "lg:absolute lg:left-[46.5%] lg:top-[27.1%] lg:w-[41.7%]",
   food: "lg:absolute lg:left-[10.6%] lg:top-[42.6%] lg:w-[42.4%]",
 };
 ---
@@ -26,13 +32,20 @@ const stage: Record<string, string> = {
 <section
   class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-5 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] lg:contents"
 >
-  <div class={`max-w-[42rem] ${stage.intro}`}>
-    <h2 class="font-display text-heading text-white lg:text-[3.06cqw] lg:leading-[0.8]">
+  {/* Below `lg` the intro wears the same white card as the perks below it —
+      bare text against the artwork read as an unstyled orphan floating off to
+      the left. On the stage it stays plain type painted onto the scene. */}
+  <div
+    class={`panel w-full max-w-[40rem] self-start px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center lg:max-w-[42rem] lg:bg-transparent lg:p-0 lg:text-left ${stage.intro}`}
+  >
+    <h2
+      class="font-display text-heading text-haven-orange-mid lg:text-[3.06cqw] lg:leading-[0.8] lg:text-white"
+    >
       {about.title}
     </h2>
     {/* Gap matches the body's own line gap so the block reads as one unit. */}
     <p
-      class="mt-[0.35em] max-w-[30ch] font-body text-lead leading-[1.15] text-white lg:max-w-none lg:text-[1.74cqw]"
+      class="mt-[0.35em] font-body text-lead leading-[1.15] text-haven-orange-mid lg:text-[1.74cqw] lg:text-white"
     >
       {about.body}
     </p>
@@ -51,7 +64,7 @@ const stage: Record<string, string> = {
     perks.map((perk) => (
       <div
         class:list={[
-          "rule-frame w-full max-w-[40rem] p-[clamp(0.75rem,1.4vw,1.25rem)] [--frame-gap:clamp(0.75rem,1.4vw,1.25rem)] [--frame-offset:0px] lg:max-w-none lg:p-[2.1%] lg:[--frame-gap:2.5%]",
+          "w-full max-w-[40rem] lg:max-w-none lg:p-[2.1%]",
           perk.side === "end" ? "self-end" : "self-start",
           stage[perk.id],
         ]}
@@ -84,9 +97,9 @@ const stage: Record<string, string> = {
                       ]}
                     />
                     {photo.caption && (
-                      <span class="mt-1.5 block font-body text-[clamp(0.5rem,0.85vw,0.75rem)] leading-tight tracking-[-0.03em] text-haven-gold lg:mt-[3%] lg:text-[0.84cqw]">
+                      <span class="mt-1.5 block font-body text-[clamp(0.8125rem,1.1vw,1rem)] leading-tight tracking-[-0.03em] text-haven-gold lg:mt-[3%] lg:text-[1.11cqw]">
                         <span class="block">{photo.caption.title}</span>
-                        <span class="block text-[0.85em]">{photo.caption.author}</span>
+                        <span class="block text-[0.9em]">{photo.caption.author}</span>
                       </span>
                     )}
                   </Cell>

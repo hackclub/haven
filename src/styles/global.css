@@ -299,7 +299,7 @@
 
   /* Tilted event card. */
   .polaroid {
-    background: rgb(237 86 21 / 0.5);
+    background: rgb(237 86 21 / 0.85);
     border: 3px solid var(--color-haven-yellow);
     border-radius: 1.875rem;
     box-shadow: 0 0 4px var(--color-haven-yellow);

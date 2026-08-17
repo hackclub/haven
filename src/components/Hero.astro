@@ -1,6 +1,7 @@
 ---
 import { event } from "../data/content";
 import SignupForm from "./SignupForm.astro";
+import VideoPanel from "./VideoPanel.astro";
 ---
 
 {/*
@@ -22,7 +23,13 @@ import SignupForm from "./SignupForm.astro";
   {/* The headline block centres in whatever space is left above the bottom
       row, so the row stays down by the hedgehog however tall the screen is. */}
   <div class="relative z-10 flex flex-1 items-center justify-center">
-    <div class="shell flex flex-col items-center text-center">
+    {/* Wider measure than the 75rem `.shell`. The headline scales with the
+        viewport (up to 9.375rem) but the shell does not, so past roughly
+        1440px the line outgrew its container and "game jam" broke across two
+        lines. A tagline line runs about 8.9em, which is 83.4rem once the type
+        hits its cap — 88rem clears that with room for a copy edit. The section's
+        own `px-4` supplies the gutter the shell used to. */}
+    <div class="mx-auto flex w-full max-w-[88rem] flex-col items-center text-center">
       {/* The leading space keeps the accessible name from reading "game jamin"
           — block spans concatenate without one. It collapses visually. */}
       <h1 class="glow-orange font-display text-hero text-white [word-spacing:0.18em]">
@@ -46,17 +53,10 @@ import SignupForm from "./SignupForm.astro";
     </div>
   </div>
 
-  {/* Jump-link and video slot share a row on desktop and stack on narrow
-      screens. In the export these were absolutely-placed boxes. */}
-  <div
-    class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] grid grid-cols-1 items-end gap-8 sm:grid-cols-[1fr_auto_1fr]"
-  >
-    {/* Desktop-only: on mobile the next section is already the obvious scroll
-        target, and the arrow just crowds the hedgehog. */}
-    <a
-      href="#about"
-      class="order-2 hidden flex-col items-center gap-1 justify-self-center sm:order-none sm:col-start-2 sm:flex"
-    >
+  {/* Desktop-only jump link: on mobile the next section is already the obvious
+      scroll target, and the arrow just crowds the hedgehog. */}
+  <div class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] flex justify-center">
+    <a href="#about" class="hidden flex-col items-center gap-1 sm:flex">
       <span class="font-body text-subheading text-white/60">more info</span>
       {/* The asset points up; the design flips it to point down the page. */}
       <img
@@ -68,48 +68,40 @@ import SignupForm from "./SignupForm.astro";
         class="w-[clamp(6rem,18vw,19rem)] -scale-y-100"
       />
     </a>
-
-    {/* Collapsible video panel. Uses <details> so the "close video" control
-        works without JavaScript; the panel starts open, as drawn. */}
-    <details
-      open
-      class="group order-1 w-full max-w-[22.5rem] justify-self-center rounded-[1.875rem] bg-white p-[clamp(0.75rem,1.3vw,1.2rem)] sm:order-none sm:col-start-3 sm:max-w-[min(22.5rem,24svh)] sm:justify-self-end"
-    >
-      {/* Hidden on mobile: the panel stays open (the `open` attribute keeps the
-          content rendered) so there is nothing to toggle and no control to
-          crowd the layout. The bottom padding only separates the label from the
-          video, so it applies when open — collapsed it left the label high. */}
-      <summary
-        class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1.05rem,1.4vw,1.875rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
-      >
-        <span class="group-open:hidden">watch video</span>
-        <span class="hidden group-open:inline">close video</span>
-        <img
-          src="/images/faq-chevron.webp"
-          alt=""
-          aria-hidden="true"
-          width="416"
-          height="256"
-          class="w-[clamp(1.5rem,1.8vw,2.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
-        />
-      </summary>
-      <div class="aspect-[320/180] w-full rounded-[1.25rem] bg-haven-orange-mid">
-        <span class="sr-only">Intro video coming soon</span>
-      </div>
-    </details>
   </div>
 
+  {/* From `sm` up the panel is pinned to the hero's bottom-right corner rather
+      than sitting in a flow row: opening and closing it used to resize that row
+      and shove the arrow and the hero's own height around. Absolute means the
+      toggle costs the rest of the layout nothing.
+
+      The width is capped against `svh` as well as `vw` so that on a short,
+      wide window (1400x800, say) the panel still clears the email field above
+      it instead of growing up into it. Below `sm` there is no corner to sit in,
+      so it stays a centred block in the flow. */}
+  <VideoPanel
+    videoId="P3iS-QPHAZE"
+    class="relative z-20 mx-auto mt-8 w-full max-w-[22.5rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
+  />
+
   {/* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
-      the hero's bottom-left (Figma x138/1440 = 9.6%, w422/1440 = 29.3%) rather
-      than sitting in the flow row, where it ended up floating above the grass.
-      On mobile it keeps the same slight-left placement, still on the ground. */}
+      the hero's bottom-left rather than sitting in the flow row, where it ended
+      up floating above the grass. On mobile it keeps the same slight-left
+      placement, still on the ground.
+
+      It is drawn at 29.3% of the frame in Figma, but that frame is 1440x1024;
+      on a short, wide window the same 29.3% grew tall enough to swallow the
+      email field. `max-height` in `svh` keeps it in proportion to the space it
+      actually has (a constrained max-height shrinks a replaced element's width
+      to match, so the aspect ratio holds). `pointer-events-none` because it is
+      scenery — it used to eat clicks aimed at the field behind it. */}
   <img
     src="/images/hedgehog.webp"
     alt=""
     aria-hidden="true"
     width="422"
     height="308"
-    class="absolute bottom-0 left-[6%] z-10 w-[clamp(9rem,44vw,16rem)] select-none sm:left-[9.6%] sm:w-[29.3%] sm:max-w-[26rem]"
+    class="pointer-events-none absolute bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
   />
 
   {/* Foreground foliage band that bridges the hero into the section below. The

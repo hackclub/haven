@@ -43,8 +43,14 @@ const columns = [
           <ul class="flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] lg:gap-[1.1cqw]">
             {column.map((item) => (
               <li>
-                <details class="group rounded-[1.25rem] bg-white/85 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] lg:rounded-[1.4cqw] lg:px-[2cqw] lg:py-[1.9cqw]">
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep lg:text-[1.9cqw] [&::-webkit-details-marker]:hidden">
+                {/* The card's padding lives on the <summary>, not the <details>
+                    — that way the summary *is* the whole card while it is
+                    closed, so clicking anywhere on it opens the answer rather
+                    than only the question text being a target. Its bottom
+                    padding shrinks to the question/answer gap once open, which
+                    keeps the open card measuring exactly as it did before. */}
+                <details class="group rounded-[1.25rem] bg-white/85 lg:rounded-[1.4cqw]">
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep group-open:pb-2.5 lg:px-[2cqw] lg:py-[1.9cqw] lg:text-[1.9cqw] lg:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
                     {item.q}
                     <img
                       src="/images/faq-chevron.webp"
@@ -55,7 +61,7 @@ const columns = [
                       class="w-[clamp(1.125rem,1.6vw,1.875rem)] shrink-0 transition-transform duration-200 group-open:rotate-180 lg:w-[1.6cqw]"
                     />
                   </summary>
-                  <p class="mt-2.5 font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-haven-orange-deep lg:mt-[0.9cqw] lg:text-[1.15cqw]">
+                  <p class="px-[clamp(1rem,2vw,1.875rem)] pb-[clamp(0.75rem,1.2vw,1.1rem)] font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-haven-orange-deep lg:px-[2cqw] lg:pb-[1.9cqw] lg:text-[1.15cqw]">
                     {item.a.map((seg) =>
                       seg.href ? (
                         <a

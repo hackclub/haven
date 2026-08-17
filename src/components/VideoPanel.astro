@@ -1,0 +1,119 @@
+---
+/**
+ * Collapsible YouTube panel.
+ *
+ * The player is a *facade*: until someone clicks play we render nothing but a
+ * thumbnail, so the page never pays for YouTube's ~1MB embed on load. The click
+ * swaps in the real iframe with `autoplay=1`, which picks up where the poster
+ * left off.
+ *
+ * `<details>` gives the open/close control for free — no JavaScript needed for
+ * the toggle itself. The one thing it does *not* do is stop playback when it
+ * closes (hidden iframes keep their audio running), so the script below tears
+ * the iframe back down to the facade on close.
+ */
+interface Props {
+  /** YouTube video id, e.g. the `P3iS-QPHAZE` in youtu.be/P3iS-QPHAZE. */
+  videoId: string;
+  /** Accessible name for the play button and the embed. */
+  title?: string;
+  class?: string;
+}
+
+const { videoId, title = "Watch the Haven intro video", class: className } = Astro.props;
+
+/* 16:9 poster. hq720 exists for every public upload; maxres does not. */
+const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
+---
+
+<details
+  open
+  data-video-panel
+  class:list={[
+    "group rounded-[1.875rem] bg-white p-[clamp(0.6rem,0.9vw,1rem)]",
+    className,
+  ]}
+>
+  {/* Hidden on mobile: the panel stays open (the `open` attribute keeps the
+      content rendered) so there is nothing to toggle and no control to crowd
+      the layout. The bottom padding only separates the label from the video, so
+      it applies when open — collapsed it left the label high. */}
+  <summary
+    class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1.05rem,1.4vw,1.875rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
+  >
+    <span class="group-open:hidden">watch video</span>
+    <span class="hidden group-open:inline">close video</span>
+    <img
+      src="/images/faq-chevron.webp"
+      alt=""
+      aria-hidden="true"
+      width="416"
+      height="256"
+      class="w-[clamp(1.5rem,1.8vw,2.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+    />
+  </summary>
+
+  <div
+    data-video-slot
+    data-video-id={videoId}
+    data-video-title={title}
+    class="relative aspect-video w-full overflow-hidden rounded-[1.25rem] bg-haven-orange-mid"
+  >
+    <button
+      type="button"
+      data-video-play
+      class="absolute inset-0 grid h-full w-full cursor-pointer place-items-center border-0 bg-transparent p-0"
+    >
+      <span class="sr-only">{title}</span>
+      <img
+        src={poster}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      {/* Same hand-drawn triangle the past-event cards use, so the play
+          affordance reads as part of the illustration set. */}
+      <img
+        src="/images/play-triangle-1.svg"
+        alt=""
+        aria-hidden="true"
+        width="72"
+        height="65"
+        class="relative w-[22%] -rotate-[40deg] select-none drop-shadow-[0_2px_6px_rgb(0_0_0/0.45)] transition-transform duration-200 ease-bounce group-hover:scale-110"
+      />
+    </button>
+  </div>
+</details>
+
+<script>
+  const EMBED_ALLOW =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+
+  document.querySelectorAll<HTMLDetailsElement>("[data-video-panel]").forEach((panel) => {
+    const slot = panel.querySelector<HTMLElement>("[data-video-slot]");
+    if (!slot) return;
+
+    const { videoId, videoTitle } = slot.dataset;
+    const facade = slot.innerHTML;
+
+    slot.addEventListener("click", (event) => {
+      if (!(event.target as HTMLElement).closest("[data-video-play]")) return;
+
+      const frame = document.createElement("iframe");
+      frame.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+      frame.title = videoTitle ?? "Video";
+      frame.allow = EMBED_ALLOW;
+      frame.allowFullscreen = true;
+      frame.className = "absolute inset-0 h-full w-full border-0";
+      slot.replaceChildren(frame);
+    });
+
+    // A closed <details> still runs its iframe — swapping the facade back in is
+    // what actually stops the audio.
+    panel.addEventListener("toggle", () => {
+      if (!panel.open) slot.innerHTML = facade;
+    });
+  });
+</script>

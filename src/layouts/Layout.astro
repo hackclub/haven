@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Haven — Lead a game jam in your city!",
-  description = "Haven is a Hack Club event for teenagers to lead their own game jam. Nov 14–15, for teenagers around the world.",
+  title = "Haven — Organize a game jam in your city!",
+  description = "Haven is a Hack Club event for teenagers to organize their own game jam. Nov 14–15, for teenagers around the world.",
 } = Astro.props;
 ---
 
@@ -18,7 +18,8 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
 
     <title>{title}</title>
     <meta name="description" content={description} />

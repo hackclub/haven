@@ -9,8 +9,8 @@
 export const event = {
   name: "Haven",
   dates: "Nov 14–15",
-  audience: "For teenagers around the world",
-  tagline: ["Lead a game jam", "in your city!"],
+  audience: "For teenagers aged 13-18 around the world",
+  tagline: ["Organize a game jam", "in your city!"],
 } as const;
 
 /** A run of copy where some spans get the yellow highlighter treatment. */
@@ -160,11 +160,14 @@ export const pitches: Pitch[] = [
   {
     id: "impact",
     align: "center",
+    // The hedgehog sits directly to the right of this bubble, level with it —
+    // so the tail leaves the right edge at mid-height and points at it. It used
+    // to hang off the top corner pointing up and *away* from the hedgehog.
     tail: {
       "--tail-size": "4.5rem",
-      "--tail-rotate": "-149deg",
-      "--tail-right": "-2.75rem",
-      "--tail-top": "-1.5rem",
+      "--tail-rotate": "-28deg",
+      "--tail-right": "-2.25rem",
+      "--tail-top": "2.5rem",
     },
     body: [
       { text: "It may be challenging but this is your chance to " },
