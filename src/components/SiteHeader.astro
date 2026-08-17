@@ -3,13 +3,18 @@ import { navLinks } from "../data/content";
 ---
 
 <header class="absolute inset-x-0 top-0 z-30">
+  {/* The nav sits on this blob, so it can't shrink at the same rate as the
+      viewport: the paint only turns opaque ~6% in from the left edge and pulls
+      further right down the shape, so a straight 46% left the links hanging off
+      the foliage on every phone width. The extra rem term flattens the curve
+      below ~550px, where the nav's own type and gaps stop scaling too. */}
   <img
     src="/images/nav-banner.webp"
     alt=""
     aria-hidden="true"
     width="646"
     height="260"
-    class="pointer-events-none fixed right-0 top-0 -z-10 w-[min(46%,41rem)] max-w-none select-none md:right-[clamp(-3rem,-2vw,0rem)] md:top-[clamp(-3rem,-2vw,0rem)]"
+    class="pointer-events-none fixed right-0 top-0 -z-10 w-[min(41rem,max(46%,calc(13rem_+_8vw)))] max-w-none select-none md:right-[clamp(-3rem,-2vw,0rem)] md:top-[clamp(-3rem,-2vw,0rem)]"
   />
 
   <div
