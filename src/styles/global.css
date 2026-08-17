@@ -23,7 +23,7 @@
   /* The svh cap keeps the headline from eating the whole screen on wide-but-
      short viewports (a maximised window on a 1080p display), where the hero
      would otherwise grow past the fold and drag the frame with it. */
-  --text-hero: clamp(2.75rem, 9.4vw, min(9.375rem, 12svh));
+  --text-hero: clamp(2.75rem, 8vw, min(9rem, 10svh));
   --text-hero--line-height: 0.82;
   --text-hero--letter-spacing: -0.05em;
 
@@ -35,7 +35,7 @@
   --text-heading--line-height: 0.88;
   --text-heading--letter-spacing: -0.05em;
 
-  --text-subheading: clamp(1.375rem, 2.3vw, 2.5rem);
+  --text-subheading: clamp(1.25rem, 2vw, 2rem);
   --text-subheading--line-height: 1;
   --text-subheading--letter-spacing: -0.03em;
 
@@ -58,9 +58,7 @@
      (whose top padding has to clear it). Deriving the padding from these means
      the logo can sit lower without a breakpoint jump or an overlap. */
   :root {
-    --logo-w: clamp(9rem, 45vw, 14rem);
-    /* Floor clears the nav row, which sits directly above it on narrow screens
-       where the centred lockup and the right-aligned links share a band. */
+    --logo-w: clamp(9rem, 40vw, 14rem);
     --logo-top: clamp(2.875rem, 4.5vw, 3.75rem);
     --logo-h: calc(var(--logo-w) * 445 / 778);
     --logo-gap: clamp(1rem, 2.5vw, 2.5rem);
@@ -68,7 +66,7 @@
 
   @media (width >= 40rem) {
     :root {
-      --logo-w: clamp(9rem, 19vw, 16.5rem);
+      --logo-w: clamp(8rem, 15vw, 12rem);
     }
   }
 

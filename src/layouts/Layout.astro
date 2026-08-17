@@ -8,7 +8,7 @@ interface Props {
 
 const {
   title = "Haven — Organize a game jam in your city!",
-  description = "Haven is a Hack Club event for teenagers to organize their own game jam. Nov 14–15, for teenagers around the world.",
+  description = "Hack Club Haven is a global event for hundreds of teenagers to organize their own game jams",
 } = Astro.props;
 ---
 
@@ -28,8 +28,6 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
 
-    {/* Fonts via <link> rather than an @import inside the stylesheet, so the
-        font request starts alongside the CSS instead of after it parses. */}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

@@ -53,19 +53,16 @@ import VideoPanel from "./VideoPanel.astro";
     </div>
   </div>
 
-  {/* Desktop-only jump link: on mobile the next section is already the obvious
-      scroll target, and the arrow just crowds the hedgehog. */}
-  <div class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] flex justify-center">
+  <div class="relative z-10 shell mt-[clamp(1rem,5vw,min(3rem,2svh))] flex justify-center">
     <a href="#about" class="hidden flex-col items-center gap-1 sm:flex">
       <span class="font-body text-subheading text-white/60">more info</span>
-      {/* The asset points up; the design flips it to point down the page. */}
       <img
         src="/images/triangle-down.svg"
         alt=""
         aria-hidden="true"
         width="207"
         height="69"
-        class="w-[clamp(6rem,18vw,19rem)] -scale-y-100"
+        class="w-[clamp(6rem,18vw,10rem)] -scale-y-100"
       />
     </a>
   </div>
