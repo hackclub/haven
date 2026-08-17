@@ -4,31 +4,11 @@ import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
 ---
 
-{/*
-  `z-10` lets the foreground band hang past the bottom edge and overlap the
-  section below, the way the illustration is drawn.
-
-  Full viewport height so the yellow frame always frames the first screen —
-  capping it at 52rem meant the frame stopped short of the fold on tall
-  displays.
-
-  On mobile the hedgehog sits at the bottom across the full width, so the
-  bottom padding reserves its height (44vw wide x 308/422 = 32.1vw tall).
-  From sm it is off to the left of the row and needs no extra room.
-*/}
 <section
   id="top"
   class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
-  {/* The headline block centres in whatever space is left above the bottom
-      row, so the row stays down by the hedgehog however tall the screen is. */}
   <div class="relative z-10 flex flex-1 items-center justify-center">
-    {/* Wider measure than the 75rem `.shell`. The headline scales with the
-        viewport (up to 9.375rem) but the shell does not, so past roughly
-        1440px the line outgrew its container and "game jam" broke across two
-        lines. A tagline line runs about 8.9em, which is 83.4rem once the type
-        hits its cap — 88rem clears that with room for a copy edit. The section's
-        own `px-4` supplies the gutter the shell used to. */}
     <div class="mx-auto flex w-full max-w-[88rem] flex-col items-center text-center">
       {/* The leading space keeps the accessible name from reading "game jamin"
           — block spans concatenate without one. It collapses visually. */}
@@ -110,6 +90,6 @@ import VideoPanel from "./VideoPanel.astro";
     aria-hidden="true"
     width="1414"
     height="501"
-    class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full max-w-none translate-y-[55%] select-none"
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full max-w-none translate-y-[55%] select-none"
   />
 </section>

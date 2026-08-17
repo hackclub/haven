@@ -54,19 +54,16 @@
    Base
 --------------------------------------------------------------------------- */
 @layer base {
-  /* The lockup's box, shared by the header (which draws it) and the hero
-     (whose top padding has to clear it). Deriving the padding from these means
-     the logo can sit lower without a breakpoint jump or an overlap. */
   :root {
-    --logo-w: clamp(9rem, 40vw, 14rem);
-    --logo-top: clamp(2.875rem, 4.5vw, 3.75rem);
+    --logo-w: clamp(8rem, 15vw, 12rem);
+    --logo-top: clamp(2.5rem, 3vw, 3.75rem);
     --logo-h: calc(var(--logo-w) * 445 / 778);
-    --logo-gap: clamp(1rem, 2.5vw, 2.5rem);
+    --logo-gap: clamp(2rem, 2.5vw, 3rem);
   }
 
   @media (width >= 40rem) {
     :root {
-      --logo-w: clamp(8rem, 15vw, 12rem);
+      --logo-gap: 0rem;
     }
   }
 
