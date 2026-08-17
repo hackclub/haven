@@ -2,16 +2,19 @@
 import { navLinks } from "../data/content";
 ---
 
-{/* Logo is centred and the nav sits top-right, matching the Figma "sticky" frame. */}
 <header class="absolute inset-x-0 top-0 z-30">
-  {/* Decorative foliage blob the nav sits on. */}
+  {/* The nav sits on this blob, so it can't shrink at the same rate as the
+      viewport: the paint only turns opaque ~6% in from the left edge and pulls
+      further right down the shape, so a straight 46% left the links hanging off
+      the foliage on every phone width. The extra rem term flattens the curve
+      below ~550px, where the nav's own type and gaps stop scaling too. */}
   <img
     src="/images/nav-banner.webp"
     alt=""
     aria-hidden="true"
     width="646"
     height="260"
-    class="pointer-events-none absolute right-0 top-0 -z-10 w-[min(46%,41rem)] max-w-none select-none"
+    class="pointer-events-none fixed right-0 top-0 -z-10 w-[min(41rem,max(46%,calc(13rem_+_8vw)))] max-w-none select-none md:right-[clamp(-3rem,-2vw,0rem)] md:top-[clamp(-3rem,-2vw,0rem)]"
   />
 
   <div
@@ -40,14 +43,14 @@ import { navLinks } from "../data/content";
 
     {/* Figma sets these at 40px on a 1440 frame (2.78vw); they were running at
         1.9vw, which read as cramped from md up. */}
-    <nav aria-label="Primary">
+    <nav class="fixed" aria-label="Primary">
       <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
         {
           navLinks.map((link) => (
             <li>
               <a
                 href={link.href}
-                class="inline-block py-1 font-display text-[clamp(1.375rem,2.7vw,2.5rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white"
+                class="inline-block py-1 font-display text-[clamp(1rem,3vw,2rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white"
               >
                 {link.label}
               </a>

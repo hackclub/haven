@@ -30,16 +30,12 @@ const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
   open
   data-video-panel
   class:list={[
-    "group rounded-[1.875rem] bg-white p-[clamp(0.6rem,0.9vw,1rem)]",
+    "group rounded-[1rem] bg-white/80 p-[clamp(0.1rem,0.9vw,1rem)]  shadow-[0_0_4px_2px_rgb(255_255_255/0.5)] sm:shadow-none",
     className,
   ]}
 >
-  {/* Hidden on mobile: the panel stays open (the `open` attribute keeps the
-      content rendered) so there is nothing to toggle and no control to crowd
-      the layout. The bottom padding only separates the label from the video, so
-      it applies when open — collapsed it left the label high. */}
   <summary
-    class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1.05rem,1.4vw,1.875rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
+    class="hidden cursor-pointer list-none items-center justify-between gap-3 px-1 font-body text-[clamp(1rem,1vw,1.7rem)] leading-none text-haven-orange-mid group-open:pb-2 sm:flex [&::-webkit-details-marker]:hidden"
   >
     <span class="group-open:hidden">watch video</span>
     <span class="hidden group-open:inline">close video</span>
@@ -49,7 +45,7 @@ const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
       aria-hidden="true"
       width="416"
       height="256"
-      class="w-[clamp(1.5rem,1.8vw,2.5rem)] shrink-0 transition-transform duration-200 group-open:rotate-180"
+      class="w-[clamp(1.5rem,1.8vw,2.5rem)] rotate-180 shrink-0 transition-transform duration-200 group-open:rotate-0"
     />
   </summary>
 
@@ -57,7 +53,7 @@ const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
     data-video-slot
     data-video-id={videoId}
     data-video-title={title}
-    class="relative aspect-video w-full overflow-hidden rounded-[1.25rem] bg-haven-orange-mid"
+    class="relative aspect-video w-full overflow-hidden rounded-[0.75rem] bg-haven-orange-mid"
   >
     <button
       type="button"
@@ -73,15 +69,13 @@ const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
         decoding="async"
         class="absolute inset-0 h-full w-full object-cover"
       />
-      {/* Same hand-drawn triangle the past-event cards use, so the play
-          affordance reads as part of the illustration set. */}
       <img
         src="/images/play-triangle-1.svg"
         alt=""
         aria-hidden="true"
         width="72"
         height="65"
-        class="relative w-[22%] -rotate-[40deg] select-none drop-shadow-[0_2px_6px_rgb(0_0_0/0.45)] transition-transform duration-200 ease-bounce group-hover:scale-110"
+        class="relative w-[22%] -rotate-[33deg] select-none drop-shadow-[0_2px_6px_rgb(0_0_0/0.45)] transition-transform duration-200 ease-bounce group-hover:scale-110"
       />
     </button>
   </div>

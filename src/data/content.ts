@@ -9,7 +9,7 @@
 export const event = {
   name: "Haven",
   dates: "Nov 14–15",
-  audience: "For teenagers aged 13-18 around the world",
+  audience: "For teens 13-18 around the world",
   tagline: ["Organize a game jam", "in your city!"],
 } as const;
 
@@ -59,7 +59,7 @@ export const perks: Perk[] = [
     ],
     photos: [
       {
-        src: "/images/project-1.webp",
+        src: "/images/projects-1.webp",
         alt: "Return to the Sender, a game made at a past event",
         href: "https://i1rs7.itch.io/return-to-the-sender",
         caption: { title: "return to the sender", author: "by i1rs7" },

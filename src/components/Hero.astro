@@ -4,32 +4,12 @@ import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
 ---
 
-{/*
-  `z-10` lets the foreground band hang past the bottom edge and overlap the
-  section below, the way the illustration is drawn.
-
-  Full viewport height so the yellow frame always frames the first screen —
-  capping it at 52rem meant the frame stopped short of the fold on tall
-  displays.
-
-  On mobile the hedgehog sits at the bottom across the full width, so the
-  bottom padding reserves its height (44vw wide x 308/422 = 32.1vw tall).
-  From sm it is off to the left of the row and needs no extra room.
-*/}
 <section
   id="top"
   class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
-  {/* The headline block centres in whatever space is left above the bottom
-      row, so the row stays down by the hedgehog however tall the screen is. */}
   <div class="relative z-10 flex flex-1 items-center justify-center">
-    {/* Wider measure than the 75rem `.shell`. The headline scales with the
-        viewport (up to 9.375rem) but the shell does not, so past roughly
-        1440px the line outgrew its container and "game jam" broke across two
-        lines. A tagline line runs about 8.9em, which is 83.4rem once the type
-        hits its cap — 88rem clears that with room for a copy edit. The section's
-        own `px-4` supplies the gutter the shell used to. */}
-    <div class="mx-auto flex w-full max-w-[88rem] flex-col items-center text-center">
+    <div class="mx-auto flex w-full max-w-[90rem] flex-col items-center text-center">
       {/* The leading space keeps the accessible name from reading "game jamin"
           — block spans concatenate without one. It collapses visually. */}
       <h1 class="glow-orange font-display text-hero text-white [word-spacing:0.18em]">
@@ -49,23 +29,20 @@ import VideoPanel from "./VideoPanel.astro";
         <span class="block sm:inline">{event.audience}</span>
       </p>
 
-      <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-full max-w-[52rem]" />
+      <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]" />
     </div>
   </div>
 
-  {/* Desktop-only jump link: on mobile the next section is already the obvious
-      scroll target, and the arrow just crowds the hedgehog. */}
-  <div class="relative z-10 shell mt-[clamp(1.5rem,5vw,min(3.5rem,3svh))] flex justify-center">
-    <a href="#about" class="hidden flex-col items-center gap-1 sm:flex">
-      <span class="font-body text-subheading text-white/60">more info</span>
-      {/* The asset points up; the design flips it to point down the page. */}
+  <div class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center">
+    <a href="#about" class=" flex-col items-center gap-1 ">
+      <span class="font-body text-[1.5em] text-white/60">more info</span>
       <img
         src="/images/triangle-down.svg"
         alt=""
         aria-hidden="true"
         width="207"
         height="69"
-        class="w-[clamp(6rem,18vw,19rem)] -scale-y-100"
+        class="w-[clamp(2rem,12vw,6rem)] -scale-y-100"
       />
     </a>
   </div>
@@ -81,7 +58,7 @@ import VideoPanel from "./VideoPanel.astro";
       so it stays a centred block in the flow. */}
   <VideoPanel
     videoId="P3iS-QPHAZE"
-    class="relative z-20 mx-auto mt-8 w-full max-w-[22.5rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
+    class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
   />
 
   {/* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
@@ -101,7 +78,7 @@ import VideoPanel from "./VideoPanel.astro";
     aria-hidden="true"
     width="422"
     height="308"
-    class="pointer-events-none absolute bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
+    class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
   />
 
   {/* Foreground foliage band that bridges the hero into the section below. The
@@ -113,6 +90,6 @@ import VideoPanel from "./VideoPanel.astro";
     aria-hidden="true"
     width="1414"
     height="501"
-    class="pointer-events-none absolute inset-x-0 bottom-0 z-0 w-full max-w-none translate-y-[55%] select-none"
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full max-w-none translate-y-[55%] select-none"
   />
 </section>
