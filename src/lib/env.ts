@@ -36,4 +36,10 @@ export const env = {
       "https://haven.hackclub.com"
     );
   },
+  get SLACK_BOT_TOKEN() {
+    return optional("SLACK_BOT_TOKEN");
+  },
+  get SLACK_MAIN_CHANNEL() {
+    return optional("SLACK_MAIN_CHANNEL");
+  },
 };

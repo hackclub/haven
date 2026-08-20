@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@astrojs/node": "^11.1.1",
+    "@slack/web-api": "^8.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.0",
     "dotenv": "^17.4.2",
