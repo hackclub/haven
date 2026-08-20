@@ -207,6 +207,11 @@ export const steps = [
   },
 ];
 
+export const stepsCta = {
+  label: "Read the organizer guide for more info!",
+  href: "https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit",
+};
+
 /* ── Past events ────────────────────────────────────────────────────────── */
 
 export const pastEventsHeading = [

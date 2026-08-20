@@ -1,5 +1,5 @@
 ---
-import { steps, stepsHeading } from "../data/content";
+import { steps, stepsCta, stepsHeading } from "../data/content";
 ---
 
 {/*
@@ -58,5 +58,18 @@ import { steps, stepsHeading } from "../data/content";
         ))
       }
     </ol>
+
+    {/* Butter-on-orange picks up the cards above rather than the white heading,
+        so the guide link reads as the end of this section, not a stray CTA. */}
+    <div class="mt-[clamp(1.5rem,3vw,2.5rem)] flex justify-center">
+      <a
+        href={stepsCta.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="rounded-[1.25rem] bg-haven-butter px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(0.6rem,1.1vw,1rem)] font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-none tracking-[-0.05em] text-haven-orange-bright transition-transform hover:scale-[1.04] active:scale-100"
+      >
+        {stepsCta.label}
+      </a>
+    </div>
   </div>
 </section>
