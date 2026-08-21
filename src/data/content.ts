@@ -19,6 +19,14 @@ export type Marked = { text: string; mark?: boolean }[];
 /** A run of copy where some spans are links. */
 export type Linked = { text: string; href?: string }[];
 
+/**
+ * Secondary hero CTA for visitors who want to attend rather than organize.
+ * The form URL itself is environment config (`RSVP_URL`), not copy.
+ */
+export const rsvpCta = {
+  label: "Not looking to organize?",
+} as const;
+
 /* ── What is a game jam ─────────────────────────────────────────────────── */
 
 export const about = {

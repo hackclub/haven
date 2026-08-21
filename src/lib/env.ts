@@ -23,6 +23,14 @@ export const env = {
   get POC_SIGNUP_URL() {
     return required("POC_SIGNUP_URL");
   },
+  /**
+   * Attendee RSVP form. Optional: the hero only shows the "just want to
+   * attend" link when it is set, so a missing value hides that link rather
+   * than failing the page render.
+   */
+  get RSVP_URL() {
+    return optional("RSVP_URL");
+  },
   get HCA_CLIENT_ID() {
     return required("HCA_CLIENT_ID");
   },

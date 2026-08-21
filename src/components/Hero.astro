@@ -1,7 +1,12 @@
 ---
-import { event } from "../data/content";
+import { event, rsvpCta } from "../data/content";
+import { env } from "../lib/env";
 import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
+
+/* Optional config — without it there is no form to point at, so the link is
+   simply not rendered (see `env.RSVP_URL`). */
+const rsvpUrl = env.RSVP_URL;
 ---
 
 <section
@@ -30,6 +35,24 @@ import VideoPanel from "./VideoPanel.astro";
       </p>
 
       <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]" />
+
+      {/* Attendees, not organizers. The href is the bare form URL so it works
+          with no JavaScript; the script below keeps `?email=` in step with
+          whatever has been typed into the signup field above, so someone who
+          starts there and changes their mind does not retype it. */}
+      {
+        rsvpUrl && (
+          <a
+            data-rsvp-link
+            href={rsvpUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
+          >
+            {rsvpCta.label}
+          </a>
+        )
+      }
     </div>
   </div>
 
@@ -93,3 +116,21 @@ import VideoPanel from "./VideoPanel.astro";
     class="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full max-w-none translate-y-[55%] select-none"
   />
 </section>
+
+<script>
+  const link = document.querySelector<HTMLAnchorElement>("[data-rsvp-link]");
+  const email = document.querySelector<HTMLInputElement>("#signup-email");
+
+  if (link && email) {
+    const base = link.href;
+
+    email.addEventListener("input", () => {
+      const url = new URL(base);
+      // A half-typed address is worse than none: only prefill once it parses.
+      if (email.validity.valid && email.value) {
+        url.searchParams.set("email", email.value);
+      }
+      link.href = url.toString();
+    });
+  }
+</script>
