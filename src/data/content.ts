@@ -250,7 +250,7 @@ export const pastEvents: PastEvent[] = [
   {
     title: "Daydream",
     caption:
-      "Students led game jams in 100 cities worldwide, from London to NYC to Penang!",
+      "Students led game jams in 200 cities worldwide, from London to NYC to Penang!",
     image: "/images/daydream-pic.webp",
     alt: "Attendees at a Daydream game jam",
     play: "/images/play-triangle-2.svg",
