@@ -14,10 +14,16 @@ const rsvpUrl = env.RSVP_URL;
   class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
   <div class="relative z-10 flex flex-1 items-center justify-center">
-    <div class="mx-auto flex w-full max-w-[90rem] flex-col items-center text-center">
-      {/* The leading space keeps the accessible name from reading "game jamin"
-          — block spans concatenate without one. It collapses visually. */}
-      <h1 class="glow-orange font-display text-hero text-white [word-spacing:0.18em]">
+    <div
+      class="mx-auto flex w-full max-w-[90rem] flex-col items-center text-center"
+    >
+      {
+        /* The leading space keeps the accessible name from reading "game jamin"
+          — block spans concatenate without one. It collapses visually. */
+      }
+      <h1
+        class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+      >
         {
           event.tagline.map((line, i) => (
             <span class="block">
@@ -28,18 +34,24 @@ const rsvpUrl = env.RSVP_URL;
         }
       </h1>
 
-      <p class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white">
+      <p
+        class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
+      >
         <span class="whitespace-nowrap">{event.dates}</span>
         <span aria-hidden="true" class="mx-2 hidden sm:inline">&hearts;</span>
         <span class="block sm:inline">{event.audience}</span>
       </p>
 
-      <SignupForm class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]" />
+      <SignupForm
+        class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]"
+      />
 
-      {/* Attendees, not organizers. The href is the bare form URL so it works
+      {
+        /* Attendees, not organizers. The href is the bare form URL so it works
           with no JavaScript; the script below keeps `?email=` in step with
           whatever has been typed into the signup field above, so someone who
-          starts there and changes their mind does not retype it. */}
+          starts there and changes their mind does not retype it. */
+      }
       {
         rsvpUrl && (
           <a
@@ -56,8 +68,10 @@ const rsvpUrl = env.RSVP_URL;
     </div>
   </div>
 
-  <div class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center">
-    <a href="#about" class=" flex-col items-center gap-1 ">
+  <div
+    class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center"
+  >
+    <a href="#about" class="flex-col items-center gap-1">
       <span class="font-body text-[1.5em] text-white/60">more info</span>
       <img
         src="/images/triangle-down.svg"
@@ -70,7 +84,8 @@ const rsvpUrl = env.RSVP_URL;
     </a>
   </div>
 
-  {/* From `sm` up the panel is pinned to the hero's bottom-right corner rather
+  {
+    /* From `sm` up the panel is pinned to the hero's bottom-right corner rather
       than sitting in a flow row: opening and closing it used to resize that row
       and shove the arrow and the hero's own height around. Absolute means the
       toggle costs the rest of the layout nothing.
@@ -78,13 +93,15 @@ const rsvpUrl = env.RSVP_URL;
       The width is capped against `svh` as well as `vw` so that on a short,
       wide window (1400x800, say) the panel still clears the email field above
       it instead of growing up into it. Below `sm` there is no corner to sit in,
-      so it stays a centred block in the flow. */}
+      so it stays a centred block in the flow. */
+  }
   <VideoPanel
-    videoId="P3iS-QPHAZE"
+    videoId="8tNEPMI5wss"
     class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
   />
 
-  {/* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
+  {
+    /* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
       the hero's bottom-left rather than sitting in the flow row, where it ended
       up floating above the grass. On mobile it keeps the same slight-left
       placement, still on the ground.
@@ -94,7 +111,8 @@ const rsvpUrl = env.RSVP_URL;
       email field. `max-height` in `svh` keeps it in proportion to the space it
       actually has (a constrained max-height shrinks a replaced element's width
       to match, so the aspect ratio holds). `pointer-events-none` because it is
-      scenery — it used to eat clicks aimed at the field behind it. */}
+      scenery — it used to eat clicks aimed at the field behind it. */
+  }
   <img
     src="/images/hedgehog.webp"
     alt=""
@@ -104,9 +122,11 @@ const rsvpUrl = env.RSVP_URL;
     class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
   />
 
-  {/* Foreground foliage band that bridges the hero into the section below. The
+  {
+    /* Foreground foliage band that bridges the hero into the section below. The
       55% offset puts the band's horizontal bar just below the frame's bottom
-      rule and lets the bushes hang into the section below, as in the design. */}
+      rule and lets the bushes hang into the section below, as in the design. */
+  }
   <img
     src="/images/hero-foreground.webp"
     alt=""
