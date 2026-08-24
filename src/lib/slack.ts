@@ -42,6 +42,8 @@ if (env.SLACK_HELP_CHANNEL) {
           .from(ticketsTable)
           .where(eq(ticketsTable.helpMessageTs, event.thread_ts));
 
+        if (ticket?.resolved && event.user !== ticket.openedBy) return;
+
         await tx
           .update(ticketsTable)
           .set({ resolved: false, latestMessageAt: new Date() })
