@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro";
+import { SlackWebAPIPlatformError } from "slack.ts";
 import { EXTERNAL_URL } from "../../../lib/consts";
 import { env } from "../../../lib/env";
-import { slack } from "../../../lib/slack";
+import { app } from "../../../lib/slack";
 
 export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
@@ -12,16 +13,18 @@ export const GET: APIRoute = async ({ request }) => {
 
   if (env.SLACK_BOT_TOKEN && env.SLACK_MAIN_CHANNEL) {
     try {
-      const { user } = await slack.users.lookupByEmail({ email });
-      if (user) {
-        await slack.conversations.invite({
-          channel: env.SLACK_MAIN_CHANNEL,
-          users: user.id!,
-        });
+      // `users.lookupByEmail` has no typings in slack.ts yet, so this falls
+      // through to the untyped `request` overload.
+      const { user } = (await app.request("users.lookupByEmail", {
+        email,
+      })) as { user?: { id?: string } };
+      if (user?.id) {
+        await app.channel(env.SLACK_MAIN_CHANNEL).invite(user.id);
       }
     } catch (e) {
-      const message = e instanceof Error ? e.message : String(e);
-      if (!message.includes("already_in_channel")) {
+      const code = e instanceof SlackWebAPIPlatformError ? e.error : null;
+      if (code !== "already_in_channel") {
+        const message = e instanceof Error ? e.message : String(e);
         console.error("Failed to invite user to slack: " + message);
       }
     }

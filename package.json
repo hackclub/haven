@@ -13,23 +13,23 @@
     "check": "astro check",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "db:sync": "bun db:generate && bun db:migrate"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.1",
-    "@slack/web-api": "^8.0.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^1.0.0-rc.4",
     "pg": "^8.23.0",
+    "slack.ts": "0.0.22",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
     "@types/pg": "^8.21.0",
     "drizzle-kit": "^1.0.0-rc.4",
-    "slack.ts": "0.0.22",
     "tsx": "^4.23.12",
     "typescript": "^6.0.3"
   },

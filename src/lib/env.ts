@@ -47,7 +47,19 @@ export const env = {
   get SLACK_BOT_TOKEN() {
     return optional("SLACK_BOT_TOKEN");
   },
+  get SLACK_BOT_USER_ID() {
+    return optional("SLACK_BOT_USER_ID");
+  },
   get SLACK_MAIN_CHANNEL() {
     return optional("SLACK_MAIN_CHANNEL");
+  },
+  get SLACK_HELP_CHANNEL() {
+    return optional("SLACK_HELP_CHANNEL");
+  },
+  get SLACK_TICKETS_CHANNEL() {
+    return optional("SLACK_TICKETS_CHANNEL");
+  },
+  get SLACK_SIGNING_SECRET() {
+    return optional("SLACK_SIGNING_SECRET");
   },
 };

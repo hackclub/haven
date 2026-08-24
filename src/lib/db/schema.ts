@@ -1,10 +1,13 @@
 import {
   boolean,
   date,
+  index,
   integer,
   jsonb,
   pgTable,
   text,
+  timestamp,
+  uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
 import type { HCAAddress } from "../services/hca";
@@ -28,3 +31,35 @@ export const usersTable = pgTable("users", {
   slackId: text(),
   address: jsonb().$type<HCAAddress | null>().default(null),
 });
+
+export const ticketsTable = pgTable(
+  "tickets",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    helpMessageTs: text().notNull(),
+    helpReplyMessageTs: text().notNull(),
+    // ticketsMessageTs: text().notNull(),
+    resolved: boolean().notNull().default(false),
+    openedBy: text().notNull(),
+    text: text().notNull(),
+    latestMessageAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex().on(table.helpMessageTs),
+    uniqueIndex().on(table.helpReplyMessageTs),
+    // uniqueIndex().on(table.ticketsMessageTs),
+    index().on(table.openedBy),
+    index().on(table.latestMessageAt),
+    index().on(table.createdAt),
+  ],
+);
+
+export const ticketSummariesTable = pgTable(
+  "ticket_summaries",
+  {
+    ts: text().primaryKey(),
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [index().on(table.createdAt)],
+);
