@@ -29,6 +29,7 @@
     "@astrojs/check": "^0.9.10",
     "@types/pg": "^8.21.0",
     "drizzle-kit": "^1.0.0-rc.4",
+    "slack.ts": "0.0.22",
     "tsx": "^4.23.12",
     "typescript": "^6.0.3"
   },
