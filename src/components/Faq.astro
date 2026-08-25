@@ -1,11 +1,19 @@
 ---
 import { faqs } from "../data/content";
+import type { FaqItem } from "../data/site";
+
+interface Props {
+  /** City pages answer their own questions; the home page takes these. */
+  items?: FaqItem[];
+}
+
+const { items = faqs } = Astro.props;
 
 /* The design reads down two columns: odd entries left, even entries right.
    A two-column grid fills across, so split the list first to preserve order. */
 const columns = [
-  faqs.filter((_, i) => i % 2 === 0),
-  faqs.filter((_, i) => i % 2 === 1),
+  items.filter((_, i) => i % 2 === 0),
+  items.filter((_, i) => i % 2 === 1),
 ];
 ---
 

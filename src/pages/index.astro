@@ -6,8 +6,10 @@ import About from "../components/About.astro";
 import Pitch from "../components/Pitch.astro";
 import Steps from "../components/Steps.astro";
 import PastEvents from "../components/PastEvents.astro";
+import Sponsors from "../components/Sponsors.astro";
 import Faq from "../components/Faq.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import { supporters, supportersHeading } from "../data/content";
 ---
 
 <Layout>
@@ -16,12 +18,16 @@ import SiteFooter from "../components/SiteFooter.astro";
   <main id="main">
     <Hero />
 
-    {/* One backdrop per run of sections, matching how the Figma file splits the
+    {
+      /* One backdrop per run of sections, matching how the Figma file splits the
         artwork. From `lg` up each is an aspect-locked stage its children are
-        positioned on; below that they collapse to ordinary stacked flow. */}
-    {/* `#about` lives here rather than on About's own <section>: from `lg` up
+        positioned on; below that they collapse to ordinary stacked flow. */
+    }
+    {
+      /* `#about` lives here rather than on About's own <section>: from `lg` up
         that section is `display: contents`, which generates no box, so the
-        anchor had nothing to scroll to and jumped to the top of the page. */}
+        anchor had nothing to scroll to and jumped to the top of the page. */
+    }
     <div id="about" class="stage stage-middle">
       <About />
       <Pitch />
@@ -32,6 +38,8 @@ import SiteFooter from "../components/SiteFooter.astro";
     <div class="stage stage-picnic">
       <PastEvents />
     </div>
+
+    <Sponsors heading={supportersHeading} items={supporters} />
 
     <Faq />
   </main>

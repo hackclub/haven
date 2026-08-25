@@ -6,18 +6,19 @@
  * still say "hackathon" because the design does.
  */
 
+import type { Linked, Marked, Sponsor } from "./types";
+
 export const event = {
   name: "Haven",
-  dates: "Nov 14–15",
-  audience: "For teens 13-18 around the world",
-  tagline: ["Organize a game jam", "in your city!"],
+  /** Hero headline — one entry per line. Overridable per city page. */
+  title: ["Organize a game jam", "in your city!"],
+  /**
+   * The line under the headline. Entries are separate lines on mobile and are
+   * strung together with a ♥ from `sm` up, so a city page can run one part
+   * ("Nov 15, at the Barbican") or three.
+   */
+  tagline: ["Nov 14–15", "For teens 13-18 around the world"],
 } as const;
-
-/** A run of copy where some spans get the yellow highlighter treatment. */
-export type Marked = { text: string; mark?: boolean }[];
-
-/** A run of copy where some spans are links. */
-export type Linked = { text: string; href?: string }[];
 
 /**
  * Secondary hero CTA for visitors who want to attend rather than organize.
@@ -187,6 +188,20 @@ export const pitches: Pitch[] = [
   },
 ];
 
+/* ── Schedule ───────────────────────────────────────────────────────────── */
+
+export const scheduleHeading = "What happens on the day?";
+
+/**
+ * Shown in place of the timetable until a city has one. Cities announce before
+ * they have times pinned down, and inventing a plausible schedule for them is
+ * worse than admitting it isn't set — someone would turn up at 10am for it.
+ */
+export const scheduleTbd = {
+  title: "TBD!",
+  body: "We’re still working out the schedule. Sign up and we'll let you know as soon as we figure it out!",
+} as const;
+
 /* ── How you organize ───────────────────────────────────────────────────── */
 
 export const stepsHeading =
@@ -267,6 +282,15 @@ export const pastEvents: PastEvent[] = [
     position: "object-bottom",
   },
 ];
+
+/* ── Supporters / sponsors ──────────────────────────────────────────────── */
+
+export const supportersHeading = "Our supporters";
+
+export const supporters: Sponsor[] = [];
+
+/** City pages open with an empty wall until their organizers fill it in. */
+export const sponsorsHeading = "Our sponsors";
 
 /* ── FAQ ────────────────────────────────────────────────────────────────── */
 

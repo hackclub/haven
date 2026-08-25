@@ -10,6 +10,7 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
+import type { SiteDataInput } from "../../data/types";
 import type { HCAAddress } from "../services/hca";
 import { encryptedText } from "./columns";
 
@@ -30,6 +31,11 @@ export const usersTable = pgTable("users", {
   overrideIneligible: boolean().notNull().default(false),
   slackId: text(),
   address: jsonb().$type<HCAAddress | null>().default(null),
+});
+
+export const websitesTable = pgTable("websites", {
+  slug: text().primaryKey(),
+  data: jsonb().$type<SiteDataInput>().notNull(),
 });
 
 export const ticketsTable = pgTable(

@@ -1,0 +1,57 @@
+---
+import type { Sponsor } from "../data/content";
+
+/**
+ * The supporter/sponsor banners. One component, two callers: the home page
+ * credits Haven's global backers ("Our supporters"), a city page credits
+ * whoever is paying for the pizza in that room ("Our sponsors"). Only the
+ * heading differs.
+ */
+interface Props {
+  heading: string;
+  items: Sponsor[];
+}
+
+const { heading, items } = Astro.props;
+---
+
+{
+  /* A city with no sponsors yet renders no section at all — an empty wall
+     reads as a page that failed to load rather than one that is early. */
+}
+{
+  items.length > 0 && (
+    <section class="relative z-10 bg-haven-green py-[clamp(2.5rem,6vw,5rem)]">
+      <div class="shell">
+        <h2 class="text-center font-display text-display text-white">{heading}</h2>
+
+        {/* One panel around the banners — they stay unframed themselves, so the
+            box is what separates them from the green rather than a border on
+            each. The height cap plus `object-contain` means a squarer logo
+            dropped in among the banners is letterboxed instead of towering. */}
+        <div class="panel mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] max-w-[60rem] px-[clamp(1.25rem,3vw,3rem)] py-[clamp(1.5rem,3vw,2.5rem)]">
+          <ul class="flex flex-col items-center gap-[clamp(1rem,2vw,1.75rem)]">
+            {items.map((item) => (
+              <li class="w-full">
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="block transition-transform hover:scale-[1.02] active:scale-100"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                    class="mx-auto max-h-[clamp(5rem,10vw,9rem)] w-full object-contain"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -4,6 +4,15 @@ import { env } from "../lib/env";
 import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
 
+/* The headline and the line under it are the two things every city page
+   changes, so they come in as props; the home page takes the defaults. */
+interface Props {
+  title?: readonly string[];
+  tagline?: readonly string[];
+}
+
+const { title = event.title, tagline = event.tagline } = Astro.props;
+
 /* Optional config — without it there is no form to point at, so the link is
    simply not rendered (see `env.RSVP_URL`). */
 const rsvpUrl = env.RSVP_URL;
@@ -25,7 +34,7 @@ const rsvpUrl = env.RSVP_URL;
         class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
       >
         {
-          event.tagline.map((line, i) => (
+          title.map((line, i) => (
             <span class="block">
               {i > 0 ? " " : ""}
               {line}
@@ -34,12 +43,29 @@ const rsvpUrl = env.RSVP_URL;
         }
       </h1>
 
+      {
+        /* Parts stack as blocks on mobile — the hearts that separate them from
+          `sm` up have no room there, and the second part is usually a full
+          sentence. Only the first part is held on one line: it is the short
+          one (a date), and the rest would overflow a phone if kept intact. */
+      }
       <p
         class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
       >
-        <span class="whitespace-nowrap">{event.dates}</span>
-        <span aria-hidden="true" class="mx-2 hidden sm:inline">&hearts;</span>
-        <span class="block sm:inline">{event.audience}</span>
+        {
+          tagline.map((part, i) => (
+            <Fragment>
+              {i > 0 && (
+                <span aria-hidden="true" class="mx-2 hidden sm:inline">
+                  &hearts;
+                </span>
+              )}
+              <span class:list={[i === 0 ? "whitespace-nowrap" : "block sm:inline"]}>
+                {part}
+              </span>
+            </Fragment>
+          ))
+        }
       </p>
 
       <SignupForm
