@@ -11,11 +11,14 @@ import { checkCsrf } from "./lib/csrf";
  * - `/api/fillout/` — Fillout calls these server-to-server and proves itself
  *   with the per-user token from the form URL. No cookie or session is
  *   involved, so there is nothing for a cross-site form to ride on.
+ * - `/api/airtable/` — Airtable automations call these server-to-server with
+ *   the shared secret in `AIRTABLE_SECRET_KEY`; check it with
+ *   `checkAirtableAuth` from src/lib/airtable.ts.
  *
  * Anything added here MUST verify its caller itself. Everything else gets the
  * same-origin guard by default.
  */
-const UNGUARDED_PREFIXES = ["/api/slack/", "/api/fillout/"];
+const UNGUARDED_PREFIXES = ["/api/slack/", "/api/fillout/", "/api/airtable/"];
 
 export const onRequest = defineMiddleware((context, next) => {
   const { request, url } = context;

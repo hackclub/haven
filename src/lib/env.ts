@@ -17,6 +17,9 @@ export const env = {
   get ENCRYPTION_KEY() {
     return required("ENCRYPTION_KEY");
   },
+  get AIRTABLE_SECRET_KEY() {
+    return required("AIRTABLE_SECRET_KEY");
+  },
   get AGE_CUTOFF_DATE() {
     return required("AGE_CUTOFF_DATE");
   },
