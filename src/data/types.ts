@@ -66,16 +66,16 @@ export const siteDataInputSchema = z.object({
       items: sponsorSchema.array().optional(),
     })
     .optional(),
+  schedule: z
+    .object({
+      heading: z.string().optional(),
+      days: scheduleDaySchema.array().optional(),
+    })
+    .optional(),
 });
 
 /**
  * Stored slug data is untrusted JSON, so it is a deep partial: fill the gaps
  * from the defaults rather than trusting a row to carry every field.
  */
-export type SiteDataInput = {
-  title?: string[];
-  tagline?: string[];
-  faq?: FaqItem[];
-  sponsors?: { heading?: string; items?: Sponsor[] };
-  schedule?: { heading?: string; days?: ScheduleDay[] };
-};
+export type SiteDataInput = z.infer<typeof siteDataInputSchema>;

@@ -1,5 +1,5 @@
 ---
-import type { Sponsor } from "../data/content";
+import type { Sponsor } from "../data/types";
 
 /**
  * The supporter/sponsor banners. One component, two callers: the home page
@@ -23,7 +23,9 @@ const { heading, items } = Astro.props;
   items.length > 0 && (
     <section class="relative z-10 bg-haven-green py-[clamp(2.5rem,6vw,5rem)]">
       <div class="shell">
-        <h2 class="text-center font-display text-display text-white">{heading}</h2>
+        <h2 class="text-center font-display text-display text-white">
+          {heading}
+        </h2>
 
         {/* One panel around the banners — they stay unframed themselves, so the
             box is what separates them from the green rather than a border on
