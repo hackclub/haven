@@ -127,10 +127,17 @@
      From `lg` up each backdrop becomes a *stage*: `aspect-ratio` matches the
      artwork exactly, so a child at `top: 42.56%` lands on the same spot of the
      painting at every width. Children size their type in `cqw` (1% of the
-     stage, not the viewport), so the whole composition scales together and
-     stops growing once `max-width` caps the stage. Below `lg` the stage
+     stage, not the viewport), so the whole composition scales together with
+     the artwork rather than drifting across it. Below `lg` the stage
      dissolves back into ordinary stacked flow and the art goes ambient —
-     matching the separate mobile frame in the design file. */
+     matching the separate mobile frame in the design file.
+
+     The stage is deliberately *not* width-capped: the backdrop is the page's
+     background, so a cap left flat green gutters down both sides of the
+     painting on anything wider than the cap. Everything on the stage is placed
+     in % or cqw, so letting it run full-bleed keeps art and composition locked
+     together at any width — the whole scene scales like a poster instead of
+     the art stopping short of the edge. */
   .stage {
     background-repeat: no-repeat;
     background-position: top center;
@@ -142,8 +149,6 @@
     .stage {
       container-type: inline-size;
       position: relative;
-      max-width: 120rem;
-      margin-inline: auto;
       aspect-ratio: var(--stage-ratio);
     }
   }
@@ -166,11 +171,7 @@
      artwork as it scales. */
   @media (width >= 64rem) {
     .stage-picnic {
-      /* The percentage tracks the parent's width, but the stage itself stops
-         growing at `max-width: 120rem` — so the pull-up caps at its value
-         there (5.3% of 120rem) instead of running past the artwork. `max()`
-         picks the less-negative of the two. */
-      margin-top: max(-5.3%, -6.36rem);
+      margin-top: -5.3%;
     }
   }
 
