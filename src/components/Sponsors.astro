@@ -11,15 +11,47 @@ const { heading, items } = Astro.props;
 
 {
   items.length > 0 && (
-    <section class="relative z-10 bg-haven-green py-[clamp(2.5rem,6vw,5rem)]">
+    <section class="relative z-10 bg-haven-green">
+      <div class="flex justify-self-center items-center h-[clamp(1rem,5vw,5rem)]">
+        <img
+          src="/images/sponsors/white-border.png"
+          class="h-full w-full object-contain"
+        />
+        <img
+          src="/images/sponsors/white-decor.png"
+          class="h-full w-full object-contain"
+        />
+        <img
+          src="/images/sponsors/white-border.png"
+          class="h-full w-full object-contain"
+        />
+      </div>
+      <div class="grid grid-cols-[1fr_auto_1fr] items-center h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)] pt-2 relative z-10">
+        <img
+          src="/images/sponsors/houses-1-l.png"
+          class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-end"
+        />
+        <img
+          src="/images/sponsors/top-house.png"
+          class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-center"
+        />
+        <img
+          src="/images/sponsors/houses-1-r.png"
+          class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-start"
+        />
+      </div>
       <div class="shell">
-        <h2 class="text-center font-display text-display text-white">
+        <h2 class="text-center font-display text-display text-white -translate-y-[clamp(0.5rem,1vw,1rem)]">
           {heading}
         </h2>
-        <div class="panel mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] max-w-[60rem] px-[clamp(1.25rem,3vw,3rem)] py-[clamp(1.5rem,3vw,2.5rem)]">
-          <ul class="flex flex-col items-center gap-[clamp(1rem,2vw,1.75rem)]">
+        <div class="relative mx-auto mt-[clamp(0.5rem,5vw,6rem)] max-w-[80rem]">
+          <img
+            src="/images/sponsors/brown-box-tall.png"
+            class="pointer-events-none absolute left-1/2 top-0 -z-10 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2 -translate-y-1/2 object-contain"
+          />
+          <ul class="flex items-center gap-[clamp(1rem,2vw,1.75rem)] px-[clamp(1.25rem,3vw,3rem)]">
             {items.map((item) => (
-              <li class="w-full">
+              <li class="w-full flex flex-col items-center text-center -translate-y-[clamp(1rem,4vw,4rem)]">
                 <a
                   href={item.href}
                   target="_blank"
@@ -33,6 +65,9 @@ const { heading, items } = Astro.props;
                     decoding="async"
                     class="mx-auto max-h-[clamp(5rem,10vw,9rem)] w-full object-contain"
                   />
+                  <p class="text-white lg:text-[1.55cqw] lg:leading-[1.05] pt-4">
+                  {item.name}
+                  </p>
                 </a>
               </li>
             ))}

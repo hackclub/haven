@@ -244,9 +244,25 @@ export const pastEvents: PastEvent[] = [
   },
 ];
 
-export const supportersHeading = "Our supporters";
+export const supportersHeading = "Our Supporters";
 
-export const supporters: Sponsor[] = [];
+export const supporters: Sponsor[] = [
+  {
+    name: "HCB 1",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/hcb-logo.jpeg",
+  },
+  {
+    name: "HCB 2",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/hcb-logo.jpeg",
+  },
+  {
+    name: "HCB 3",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/hcb-logo.jpeg",
+  },
+];
 
 export const sponsorsHeading = "Our sponsors";
 
