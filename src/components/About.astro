@@ -5,8 +5,8 @@ const stage: Record<string, string> = {
   intro: "md:absolute md:left-[16.1%] md:top-[5.6%] md:w-[30%]",
   daven: "md:absolute md:left-[65.8%] md:top-[5.6%] md:w-[7.5%]",
   build: "md:absolute md:left-[4.8%] md:top-[17.1%] md:w-[39%]",
-  friends: "md:absolute md:left-[46.5%] md:top-[27.1%] md:w-[41.7%]",
-  food: "md:absolute md:left-[10.6%] md:top-[42.6%] md:w-[42.4%]",
+  friends: "md:absolute md:left-[45%] md:top-[23%] md:w-[41.7%]",
+  food: "md:absolute md:left-[10.6%] md:top-[42%] md:w-[42.4%]",
 };
 ---
 <section
@@ -50,7 +50,7 @@ const stage: Record<string, string> = {
             {perk.title}
           </h3>
 
-          <ul class="p-2 mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-3 gap-[clamp(0.5rem,1.2vw,1rem)] md:mt-[4%] md:gap-[3%]">
+          <ul class="p-2 mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-2 gap-[clamp(0.5rem,1.2vw,1rem)] md:mt-[4%] md:gap-[3%]">
             {perk.photos.map((photo) => {
               const Cell = photo.href ? "a" : "div";
               return (

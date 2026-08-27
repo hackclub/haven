@@ -50,15 +50,6 @@ export const perks: Perk[] = [
         caption: { title: "return to the sender", author: "by i1rs7" },
       },
       {
-        src: "/images/projects-2.webp",
-        alt: "Deathleap, a game made at a past event",
-        href: "https://qrosp-games-oy.itch.io/deathleap",
-        caption: {
-          title: "deathleap",
-          author: "by qrosp, juusaktmii, & 1100010101",
-        },
-      },
-      {
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
@@ -78,10 +69,6 @@ export const perks: Perk[] = [
         src: "/images/friends-2.webp",
         alt: "A group of teens working at a shared table",
       },
-      {
-        src: "/images/friends-3.webp",
-        alt: "Attendees celebrating at an event",
-      },
     ],
   },
   {
@@ -92,10 +79,6 @@ export const perks: Perk[] = [
     blurb: ["can’t say no to free snacks :)"],
     photos: [
       { src: "/images/food-1.webp", alt: "A spread of snacks and merch" },
-      {
-        src: "/images/food-2.webp",
-        alt: "Boxes of snacks laid out on a table",
-      },
       { src: "/images/food-3.webp", alt: "Attendees holding up their prizes" },
     ],
   },

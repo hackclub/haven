@@ -1,7 +1,6 @@
 ---
 import { navLinks } from "../data/content";
 ---
-
 <header class="absolute inset-x-0 top-0 z-30">
   <img
     src="/images/nav-banner.webp"
@@ -28,22 +27,26 @@ import { navLinks } from "../data/content";
         class="w-[var(--logo-w)]"
       />
     </a>
-
-    <nav class="fixed" aria-label="Primary">
-      <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
-        {
-          navLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="inline-block py-1 font-display text-[clamp(1rem,3vw,2rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
   </div>
 </header>
+
+<div
+  class="fixed inset-x-0 top-0 justify-end z-30 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none"
+>
+  <nav class="pointer-events-auto" aria-label="Primary">
+    <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class="inline-block py-1 font-display text-[clamp(1rem,3vw,2rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
