@@ -249,6 +249,7 @@ export const supporters: Sponsor[] = [
 
 export const sponsorsHeading = "Our sponsors";
 
+const HAVEN_GUIDE_LINK = "https://docs.google.com/document/d/1f_uFvFP4gD01YhXBmU9jBfEBU9QMvr1L5yJTKWBBhbA/edit?usp=sharing";
 const HAVEN_EMAIL = "mailto:haven@hackclub.com";
 
 export const faqs: { q: string; a: Linked }[] = [
@@ -304,8 +305,10 @@ export const faqs: { q: string; a: Linked }[] = [
     q: "What if my parents are concerned?",
     a: [
       {
-        text: "We’re here to help! You can see our [parent guide] here, or they can reach out to us at ",
+        text: "We’re here to help! You can see our ",
       },
+      { text: "parent guide", href: HAVEN_GUIDE_LINK },
+      { text: " here, or they can reach out to us at "},
       { text: "haven@hackclub.com", href: HAVEN_EMAIL },
       { text: " for questions." },
     ],

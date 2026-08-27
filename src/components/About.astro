@@ -9,6 +9,7 @@ const stage: Record<string, string> = {
   food: "md:absolute md:left-[10.6%] md:top-[42%] md:w-[42.4%]",
 };
 ---
+
 <section
   class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-18 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] sm:px-24 md:contents"
 >
@@ -56,7 +57,9 @@ const stage: Record<string, string> = {
               return (
                 <li>
                   <Cell
-                    {...(photo.href ? { href: photo.href, target: "_blank", rel: "noopener" } : {})}
+                    {...(photo.href
+                      ? { href: photo.href, target: "_blank", rel: "noopener" }
+                      : {})}
                     class:list={["block", photo.href && "group"]}
                   >
                     <img
@@ -74,7 +77,9 @@ const stage: Record<string, string> = {
                     {photo.caption && (
                       <span class="mt-1.5 block font-body text-[clamp(0.8125rem,1.1vw,1rem)] leading-[clamp(0.8rem,1.2vw,1.5rem)] tracking-[-0.03em] text-haven-gold md:mt-[3%] md:text-[1.11cqw]">
                         <span class="block">{photo.caption.title}</span>
-                        <span class="block text-[0.9em]">{photo.caption.author}</span>
+                        <span class="block text-[0.9em]">
+                          {photo.caption.author}
+                        </span>
                       </span>
                     )}
                   </Cell>
@@ -84,7 +89,7 @@ const stage: Record<string, string> = {
           </ul>
 
           {perk.blurb.map((line) => (
-            <p class="mt-1 font-body text-copy text-haven-orange-mid first-of-type:mt-[clamp(0.75rem,1.4vw,1.1rem)] md:text-[1.39cqw] md:leading-[1.15] md:first-of-type:mt-[4%]">
+            <p class="mt-1 font-body text-copy text-haven-orange-mid md:text-[1.4cqw] md:leading-[1.15]">
               {line}
             </p>
           ))}
