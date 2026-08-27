@@ -2,26 +2,26 @@
 import { about, perks } from "../data/content";
 
 const stage: Record<string, string> = {
-  intro: "lg:absolute lg:left-[16.1%] lg:top-[5.6%] lg:w-[30%]",
-  daven: "lg:absolute lg:left-[65.8%] lg:top-[5.6%] lg:w-[7.5%]",
-  build: "lg:absolute lg:left-[4.8%] lg:top-[17.1%] lg:w-[39%]",
-  friends: "lg:absolute lg:left-[46.5%] lg:top-[27.1%] lg:w-[41.7%]",
-  food: "lg:absolute lg:left-[10.6%] lg:top-[42.6%] lg:w-[42.4%]",
+  intro: "md:absolute md:left-[16.1%] md:top-[5.6%] md:w-[30%]",
+  daven: "md:absolute md:left-[65.8%] md:top-[5.6%] md:w-[7.5%]",
+  build: "md:absolute md:left-[4.8%] md:top-[17.1%] md:w-[39%]",
+  friends: "md:absolute md:left-[46.5%] md:top-[27.1%] md:w-[41.7%]",
+  food: "md:absolute md:left-[10.6%] md:top-[42.6%] md:w-[42.4%]",
 };
 ---
 <section
-  class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-5 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] lg:contents"
+  class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-18 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] sm:px-24 md:contents"
 >
   <div
-    class={`panel w-full max-w-[40rem] self-start px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center lg:max-w-[42rem] lg:bg-transparent lg:p-0 lg:text-left ${stage.intro}`}
+    class={`panel shadow-[0_0_5px_var(--color-haven-yellow)] w-full max-w-[40rem] self-center px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:shadow-none md:self-start md:max-w-[42rem] md:bg-transparent md:p-0 md:text-left ${stage.intro}`}
   >
     <h2
-      class="font-display text-heading text-haven-orange-mid lg:text-[3.06cqw] lg:leading-[0.8] lg:text-white"
+      class="font-display text-heading text-haven-orange-mid md:text-[3cqw] md:leading-[0.8] md:text-white"
     >
       {about.title}
     </h2>
     <p
-      class="mt-[0.35em] font-body text-lead leading-[1.15] text-haven-orange-mid lg:text-[1.74cqw] lg:text-white"
+      class="mt-[1em] font-body text-lead leading-[1.15] text-haven-orange-mid md:text-[1.5cqw] md:text-white"
     >
       {about.body}
     </p>
@@ -33,24 +33,24 @@ const stage: Record<string, string> = {
     aria-hidden="true"
     width="108"
     height="108"
-    class={`hidden select-none lg:block ${stage.daven}`}
+    class={`hidden select-none md:block ${stage.daven}`}
   />
 
   {
     perks.map((perk) => (
       <div
         class:list={[
-          "w-full max-w-[40rem] lg:max-w-none lg:p-[2.1%]",
+          "w-full max-w-[40rem] md:max-w-none md:p-[2.1%]",
           perk.side === "end" ? "self-end" : "self-start",
           stage[perk.id],
         ]}
       >
-        <div class="panel px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center lg:px-[6%] lg:py-[4%]">
-          <h3 class="font-display text-heading text-haven-orange-mid lg:text-[3.06cqw] lg:leading-[0.8]">
+        <div class="panel px-[clamp(2rem,5vw,5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[6%] md:py-[4%]">
+          <h3 class="font-display text-heading text-haven-orange-mid md:text-[3.06cqw] md:leading-[0.8]">
             {perk.title}
           </h3>
 
-          <ul class="mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-3 gap-[clamp(0.5rem,1.2vw,1rem)] lg:mt-[4%] lg:gap-[3%]">
+          <ul class="p-2 mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-3 gap-[clamp(0.5rem,1.2vw,1rem)] md:mt-[4%] md:gap-[3%]">
             {perk.photos.map((photo) => {
               const Cell = photo.href ? "a" : "div";
               return (
@@ -65,14 +65,14 @@ const stage: Record<string, string> = {
                       loading="lazy"
                       decoding="async"
                       class:list={[
-                        "w-full rounded-[clamp(0.625rem,1.4vw,1.25rem)] object-cover transition-transform lg:rounded-[1.4cqw]",
+                        "w-full rounded-[clamp(0.625rem,1vw,1rem)] object-cover transition-transform md:rounded-[1cqw]",
                         photo.href && "group-hover:scale-[1.03]",
                         perk.aspect,
                         photo.position,
                       ]}
                     />
                     {photo.caption && (
-                      <span class="mt-1.5 block font-body text-[clamp(0.8125rem,1.1vw,1rem)] leading-tight tracking-[-0.03em] text-haven-gold lg:mt-[3%] lg:text-[1.11cqw]">
+                      <span class="mt-1.5 block font-body text-[clamp(0.8125rem,1.1vw,1rem)] leading-[clamp(0.8rem,1.2vw,1.5rem)] tracking-[-0.03em] text-haven-gold md:mt-[3%] md:text-[1.11cqw]">
                         <span class="block">{photo.caption.title}</span>
                         <span class="block text-[0.9em]">{photo.caption.author}</span>
                       </span>
@@ -84,7 +84,7 @@ const stage: Record<string, string> = {
           </ul>
 
           {perk.blurb.map((line) => (
-            <p class="mt-1 font-body text-copy text-haven-orange-mid first-of-type:mt-[clamp(0.75rem,1.4vw,1.1rem)] lg:text-[1.39cqw] lg:leading-[1.15] lg:first-of-type:mt-[4%]">
+            <p class="mt-1 font-body text-copy text-haven-orange-mid first-of-type:mt-[clamp(0.75rem,1.4vw,1.1rem)] md:text-[1.39cqw] md:leading-[1.15] md:first-of-type:mt-[4%]">
               {line}
             </p>
           ))}

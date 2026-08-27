@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
-   Design tokens
-   Sizes are fluid: the min end matches the 402px mobile Figma frame, the max
-   end the 1440px desktop frame. Between and beyond those, type scales with the
-   viewport but never runs away — the old build scaled the whole page by
-   100vw/1440, which made body copy 8px on a small laptop.
---------------------------------------------------------------------------- */
 @theme {
   --font-display: "Darumadrop One", "Jua", ui-rounded, system-ui, sans-serif;
   --font-body: "Jua", ui-rounded, system-ui, sans-serif;
@@ -41,15 +34,12 @@
   --text-lead--letter-spacing: -0.03em;
 
   --text-copy: clamp(0.9375rem, 1.15vw, 1.25rem);
-  --text-copy--line-height: 1.4;
+  --text-copy--line-height: clamp(0.75rem, 2vw, 2rem);
   --text-copy--letter-spacing: -0.03em;
 
   --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ---------------------------------------------------------------------------
-   Base
---------------------------------------------------------------------------- */
 @layer base {
   :root {
     --logo-w: clamp(8rem, 15vw, 12rem);
@@ -115,7 +105,7 @@
     background-color: var(--color-haven-green);
   }
 
-  @media (width >= 64rem) {
+  @media (width >= 48rem) {
     .stage {
       container-type: inline-size;
       position: relative;
@@ -126,16 +116,23 @@
   }
 
   .stage-middle {
+    --stage-ratio: 1440 / 6582;
+    background-image: url("/images/middle/mid-phone-bg.png");
+  }
+
+  @media (width >= 48rem) {
+    .stage-middle {
     --stage-ratio: 1439 / 1969;
     background-image: url("/images/bg-middle.webp");
+    }
   }
 
   .stage-picnic {
     --stage-ratio: 1440 / 1463;
-    background-image: url("/images/bg-picnic.webp");
+    background-image: url("/images/middle/picnic-bg.png");
   }
 
-  @media (width >= 64rem) {
+  @media (width >= 48rem) {
     .stage-picnic {
       margin-top: max(-5.3%, -6.36rem);
     }
@@ -148,7 +145,7 @@
       var(--color-haven-green);
   }
 
-  @media (width >= 64rem) {
+  @media (width >= 48rem) {
     .scene-harvest {
       container-type: inline-size;
     }
@@ -191,7 +188,7 @@
 
   .panel {
     background: rgb(255 255 255 / 0.8);
-    border-radius: 1.875rem;
+    border-radius: 1.2rem;
   }
 
   .marker {
@@ -213,7 +210,6 @@
     position: absolute;
     width: var(--tail-size, 0);
     aspect-ratio: 196 / 125;
-    background: url("/images/speech-tail.webp") center / contain no-repeat;
     rotate: var(--tail-rotate, 0deg);
     inset-block-start: var(--tail-top, auto);
     inset-block-end: var(--tail-bottom, auto);
@@ -221,7 +217,7 @@
     inset-inline-end: var(--tail-right, auto);
   }
 
-  @media (width < 64rem) {
+  @media (width < 48rem) {
     .speech::after {
       display: none;
     }
