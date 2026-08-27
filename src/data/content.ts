@@ -86,7 +86,7 @@ export const perks: Perk[] = [
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
-        caption: { title: "office click clack", author: "by bunnyguy" },
+        caption: { title: "office click clack", author: "by Nathan and bunnyguy" },
       },
     ],
   },
