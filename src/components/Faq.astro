@@ -3,31 +3,17 @@ import { faqs } from "../data/content";
 import type { FaqItem } from "../data/types";
 
 interface Props {
-  /** City pages answer their own questions; the home page takes these. */
   items?: FaqItem[];
 }
 
 const { items = faqs } = Astro.props;
 
-/* The design reads down two columns: odd entries left, even entries right.
-   A two-column grid fills across, so split the list first to preserve order. */
 const columns = [
   items.filter((_, i) => i % 2 === 0),
   items.filter((_, i) => i % 2 === 1),
 ];
 ---
 
-{
-  /*
-  Real <details>/<summary> disclosures.
-
-  Below `lg` this is an ordinary centred column and the carrot field is just
-  ambient backdrop. From `lg` up the section becomes a stage (see
-  `.scene-harvest`) and each block is placed in `cqw`/% against the painting,
-  so the two columns sit *on* the carrot beds instead of straddling the grass
-  path between them, and the heading lands on the signpost.
-*/
-}
 <section
   id="faq"
   class="scene-harvest relative pb-[clamp(3rem,7vw,6rem)] pt-[clamp(3.5rem,11vw,7.875rem)] lg:py-0"
@@ -39,10 +25,6 @@ const columns = [
       FAQ
     </h2>
 
-    {
-      /* Left column 5.65%..40.47%, right 59.53%..94.35% — i.e. an 88.7%-wide
-        block whose 21.49% inner gutter clears the grass path down the middle. */
-    }
     <div
       class="mx-auto mt-[16vw] grid max-w-[68rem] grid-cols-1 items-start gap-x-[clamp(1rem,2vw,1.75rem)] gap-y-[clamp(0.75rem,1.5vw,1.25rem)] md:grid-cols-2 lg:absolute lg:left-[5.65%] lg:mt-0 lg:w-[88.7%] lg:max-w-none lg:top-[30.5cqw] lg:gap-x-[21.49%] lg:gap-y-[1.1cqw]"
     >
@@ -51,12 +33,7 @@ const columns = [
           <ul class="flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] lg:gap-[1.1cqw]">
             {column.map((item) => (
               <li>
-                {/* The card's padding lives on the <summary>, not the <details>
-                    — that way the summary *is* the whole card while it is
-                    closed, so clicking anywhere on it opens the answer rather
-                    than only the question text being a target. Its bottom
-                    padding shrinks to the question/answer gap once open, which
-                    keeps the open card measuring exactly as it did before. */}
+
                 <details class="group rounded-[1.25rem] bg-white/85 lg:rounded-[1.4cqw]">
                   <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep group-open:pb-2.5 lg:px-[2cqw] lg:py-[1.9cqw] lg:text-[1.9cqw] lg:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
                     {item.q}
@@ -94,10 +71,6 @@ const columns = [
       }
     </div>
 
-    {
-      /* Sits on the open grass below the beds (which end at 83.55cqw), matching
-        the design rather than floating in the middle of the carrot field. */
-    }
     <a
       href="#top"
       class="mx-auto mt-[clamp(2.5rem,6vw,5rem)] md:mt-[24vw] block w-full max-w-[34rem] rounded-[1.875rem] bg-haven-orange-mid px-6 py-[clamp(1.25rem,2.5vw,2.25rem)] text-center font-display text-[clamp(2rem,4vw,3.75rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 lg:absolute lg:left-1/2 lg:mt-0 lg:w-[37.4%] lg:max-w-none lg:-translate-x-1/2 lg:top-[86cqw] lg:rounded-[2.1cqw] lg:py-[2.2cqw] lg:text-[4.17cqw]"

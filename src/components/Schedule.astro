@@ -2,10 +2,6 @@
 import { scheduleTbd } from "../data/content";
 import type { ScheduleDay } from "../data/types";
 
-/**
- * City pages only — the home page has no one set of times to publish.
- * Plain colour and type for now; the artwork for this band isn't drawn yet.
- */
 interface Props {
   heading: string;
   days: ScheduleDay[];
@@ -13,10 +9,6 @@ interface Props {
 
 const { heading, days } = Astro.props;
 
-/* A day with nothing in it is an empty card, so drop it — and if that leaves
-   nothing at all, the section says so rather than vanishing. A city that has
-   announced but not planned still wants this band on the page: its absence
-   reads as "no schedule section", not as "times not set yet". */
 const filled = days.filter((day) => day.items.length > 0);
 ---
 
@@ -29,9 +21,6 @@ const filled = days.filter((day) => day.items.length > 0);
 
     {
       filled.length > 0 ? (
-        /* One column per day from `md` up. The rows are a <dl>-shaped pairing
-           of time and what happens then, but they carry a blurb too, so an
-           ordered list keeps the sequence without overloading dt/dd. */
         <div class="mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] grid max-w-[64rem] grid-cols-1 gap-[clamp(1rem,2vw,1.75rem)] md:grid-cols-2">
           {filled.map((day) => (
             <section class="panel px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.25rem,2.2vw,2rem)]">
@@ -42,8 +31,6 @@ const filled = days.filter((day) => day.items.length > 0);
               <ol class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.75rem,1.4vw,1.1rem)]">
                 {day.items.map((item) => (
                   <li class="flex flex-col gap-x-[clamp(0.75rem,1.4vw,1.25rem)] sm:flex-row sm:items-baseline">
-                    {/* Fixed column so the times line up down the card; below
-                        `sm` there isn't room for two columns, so it stacks. */}
                     <span class="font-display text-subheading whitespace-nowrap text-haven-gold sm:w-[7.25rem] sm:shrink-0">
                       {item.time}
                     </span>
@@ -64,8 +51,6 @@ const filled = days.filter((day) => day.items.length > 0);
           ))}
         </div>
       ) : (
-        /* Deliberately one card the width of a single day's column, centred —
-           a full-width empty state would loom larger than a real schedule. */
         <p class="panel mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] max-w-[31.5rem] px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.5rem,2.6vw,2.25rem)] text-center">
           <span class="block font-display text-heading text-haven-orange-bright">
             {scheduleTbd.title}

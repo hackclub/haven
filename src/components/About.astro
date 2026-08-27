@@ -1,40 +1,17 @@
 ---
 import { about, perks } from "../data/content";
 
-/**
- * Stage coordinates, taken straight from the Figma frame and expressed as
- * percentages of the 1439x1969 `bg-middle` artwork so they hold at any width.
- * They only apply from `lg` up, where `.stage` locks the aspect ratio.
- */
 const stage: Record<string, string> = {
   intro: "lg:absolute lg:left-[16.1%] lg:top-[5.6%] lg:w-[30%]",
   daven: "lg:absolute lg:left-[65.8%] lg:top-[5.6%] lg:w-[7.5%]",
-  /* Figma gave "build" the narrowest box of the three even though it carries
-     the most in it — three thumbnails *and* a two-line credit under each — so
-     the credits wrapped to three lines and the card ran tall and ragged.
-     Widening it to 39% and taking the slack out of "friends" (which had the
-     widest box and the least in it) evens the two out. "friends" keeps its
-     right edge at 88.2%, so the composition still ends where it did. */
   build: "lg:absolute lg:left-[4.8%] lg:top-[17.1%] lg:w-[39%]",
   friends: "lg:absolute lg:left-[46.5%] lg:top-[27.1%] lg:w-[41.7%]",
   food: "lg:absolute lg:left-[10.6%] lg:top-[42.6%] lg:w-[42.4%]",
 };
 ---
-
-{/*
-  Below `lg` this is an ordinary stacked section. The hero's foliage band hangs
-  into it — the bushes reach 0.388 * bandHeight below the hero, and bandHeight
-  is 100vw * 501/1414, so they end 13.75vw down. The mobile top padding clears
-  that; on the stage the Figma coordinates already sit clear of them.
-*/}
-{/* The `#about` anchor sits on the stage wrapper in index.astro — this section
-    is `display: contents` from `lg` up and so has no box to scroll to. */}
 <section
   class="relative flex flex-col gap-[clamp(1.5rem,4vw,3rem)] px-5 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] lg:contents"
 >
-  {/* Below `lg` the intro wears the same white card as the perks below it —
-      bare text against the artwork read as an unstyled orphan floating off to
-      the left. On the stage it stays plain type painted onto the scene. */}
   <div
     class={`panel w-full max-w-[40rem] self-start px-[clamp(1rem,2.5vw,2.5rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center lg:max-w-[42rem] lg:bg-transparent lg:p-0 lg:text-left ${stage.intro}`}
   >
@@ -43,7 +20,6 @@ const stage: Record<string, string> = {
     >
       {about.title}
     </h2>
-    {/* Gap matches the body's own line gap so the block reads as one unit. */}
     <p
       class="mt-[0.35em] font-body text-lead leading-[1.15] text-haven-orange-mid lg:text-[1.74cqw] lg:text-white"
     >
@@ -74,7 +50,6 @@ const stage: Record<string, string> = {
             {perk.title}
           </h3>
 
-          {/* Images first, then the blurb — the current design order. */}
           <ul class="mt-[clamp(0.75rem,1.6vw,1.25rem)] grid grid-cols-3 gap-[clamp(0.5rem,1.2vw,1rem)] lg:mt-[4%] lg:gap-[3%]">
             {perk.photos.map((photo) => {
               const Cell = photo.href ? "a" : "div";

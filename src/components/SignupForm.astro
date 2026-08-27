@@ -6,13 +6,6 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-{
-  /*
-  `/api/auth/redirect` is a GET route that takes an `email` query param and
-  bounces the visitor to Hack Club auth, so a plain GET form hits it correctly
-  with no JavaScript.
-*/
-}
 <form
   id="signup"
   method="get"

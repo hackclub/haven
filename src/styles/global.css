@@ -20,9 +20,6 @@
   --color-haven-butter: #ffe382;
   --color-haven-gold: #fba71f;
 
-  /* The svh cap keeps the headline from eating the whole screen on wide-but-
-     short viewports (a maximised window on a 1080p display), where the hero
-     would otherwise grow past the fold and drag the frame with it. */
   --text-hero: clamp(2.75rem, 8vw, min(9rem, 10svh));
   --text-hero--line-height: 0.82;
   --text-hero--letter-spacing: -0.05em;
@@ -69,7 +66,6 @@
 
   html {
     scroll-behavior: smooth;
-    /* Sticky header height + breathing room, so anchors don't land under it. */
     scroll-padding-top: 5.5rem;
   }
 
@@ -78,8 +74,6 @@
     background: var(--color-haven-green);
     font-family: var(--font-body);
     color: var(--color-haven-orange-deep);
-    /* `clip` (not `hidden`) contains the tilted cards and mascots that hang
-       past the edge without breaking `position: sticky` on the header. */
     overflow-x: clip;
   }
 
@@ -108,29 +102,12 @@
   }
 }
 
-/* ---------------------------------------------------------------------------
-   Components — the recurring motifs of the Haven illustration set
---------------------------------------------------------------------------- */
 @layer components {
-  /* Page gutter + max measure. */
   .shell {
     width: min(100% - 2.5rem, 75rem);
     margin-inline: auto;
   }
 
-  /* The design ships one backdrop per run of sections instead of a single
-     page-tall painting, so each attaches to the block it belongs to and is
-     top-anchored. That keeps the artwork locked to the content above it — a
-     bottom-anchored backdrop's offset depends on how tall the content happens
-     to be, which made it slide around under the hero.
-
-     From `lg` up each backdrop becomes a *stage*: `aspect-ratio` matches the
-     artwork exactly, so a child at `top: 42.56%` lands on the same spot of the
-     painting at every width. Children size their type in `cqw` (1% of the
-     stage, not the viewport), so the whole composition scales together and
-     stops growing once `max-width` caps the stage. Below `lg` the stage
-     dissolves back into ordinary stacked flow and the art goes ambient —
-     matching the separate mobile frame in the design file. */
   .stage {
     background-repeat: no-repeat;
     background-position: top center;
@@ -158,27 +135,12 @@
     background-image: url("/images/bg-picnic.webp");
   }
 
-  /* The picnic artwork opens with a band of flat green above the rabbit — the
-     exact page background (#b8c21f) — so the stage can be pulled up under the
-     section before it with no visible seam. Figma stacks them the same way:
-     the backdrop starts 60px *above* the last step card rather than after it.
-     Percentage margins resolve against the parent's width, so this tracks the
-     artwork as it scales. */
   @media (width >= 64rem) {
     .stage-picnic {
-      /* The percentage tracks the parent's width, but the stage itself stops
-         growing at `max-width: 120rem` — so the pull-up caps at its value
-         there (5.3% of 120rem) instead of running past the artwork. `max()`
-         picks the less-negative of the two. */
       margin-top: max(-5.3%, -6.36rem);
     }
   }
 
-  /* The carrot field is drawn at full page width, so its rendered height is
-     width * 1170/1149. Tying the section's min-height to that same ratio means
-     the field always lands whole instead of being sliced mid-row when the
-     content happens to be shorter than the painting. The signpost sits at the
-     top of the crop, which is what the FAQ heading lands on. */
   .scene-harvest {
     min-height: calc(100vw * 1170 / 1149);
     background:
@@ -186,29 +148,12 @@
       var(--color-haven-green);
   }
 
-  /* From `lg` up the FAQ lays itself out *on* the painting rather than in a
-     centred column, so its children measure against the section's own width.
-     1cqw is 1% of that width, which is also 1% of the artwork's width — so a
-     child at `top: 29.5cqw` lands on the same patch of soil at every size.
-     Measured off faq-bg.webp (1149x1170, drawn at 100% width, so 101.83cqw
-     tall):
-       signpost board   y  9.40cqw .. 21.49cqw
-       left carrot bed  x  0%      .. 44.30%
-       right carrot bed x 54.31%   .. 100%
-       beds             y 23.33cqw .. 83.55cqw
-     The column insets within each bed come from the Figma frame, which puts
-     the pills symmetric about the centre at 5.65%..40.47% and 59.53%..94.35%. */
   @media (width >= 64rem) {
     .scene-harvest {
       container-type: inline-size;
     }
   }
 
-  /* The yellow rule frame: four bars, inset from the edges, stopping short of
-     the corners. Two pseudo-elements draw all four (each carries a pair of
-     gradient bars), replacing the eight rotated divs the export used.
-       --frame-offset: distance from the element's edges
-       --frame-gap:    how far each bar stops short of the corner */
   .rule-frame {
     position: relative;
     --frame-color: var(--color-haven-yellow);
@@ -228,7 +173,6 @@
       linear-gradient(var(--frame-color), var(--frame-color));
   }
 
-  /* top + bottom bars */
   .rule-frame::before {
     inset: var(--frame-offset) calc(var(--frame-offset) + var(--frame-gap));
     background-size: 100% var(--frame-weight);
@@ -237,7 +181,6 @@
       left bottom;
   }
 
-  /* left + right bars */
   .rule-frame::after {
     inset: calc(var(--frame-offset) + var(--frame-gap)) var(--frame-offset);
     background-size: var(--frame-weight) 100%;
@@ -246,14 +189,11 @@
       right top;
   }
 
-  /* Translucent white panel used by the perk cards. */
   .panel {
     background: rgb(255 255 255 / 0.8);
     border-radius: 1.875rem;
   }
 
-  /* Highlighter swipe. Replaces the absolutely-positioned yellow rectangles,
-     so it now tracks the text when it reflows. */
   .marker {
     background-color: var(--color-haven-yellow);
     border-radius: 0.45em;
@@ -262,14 +202,12 @@
     -webkit-box-decoration-break: clone;
   }
 
-  /* Speech bubble; each instance positions its own tail. */
   .speech {
     position: relative;
     background: #fff;
     border-radius: 1.875rem;
   }
 
-  /* Tail is opt-in: bubbles set --tail-size to grow one. */
   .speech::after {
     content: "";
     position: absolute;
@@ -283,16 +221,12 @@
     inset-inline-end: var(--tail-right, auto);
   }
 
-  /* The --tail-* offsets are stage coordinates that point outward, so on narrow
-     screens they hung past the viewport edge. Below the stage there is no
-     composition for a tail to point into, so drop them entirely. */
   @media (width < 64rem) {
     .speech::after {
       display: none;
     }
   }
 
-  /* Tilted event card. */
   .polaroid {
     background: rgb(237 86 21 / 0.85);
     border: 3px solid var(--color-haven-yellow);

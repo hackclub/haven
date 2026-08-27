@@ -1,56 +1,32 @@
-/**
- * Single source of truth for page copy, mirroring the Figma file
- * "Haven (Copy)" — https://www.figma.com/design/acqqsRYXbvzKRJqIb9zw5l
- *
- * The event is framed as a *game jam* in the current design; a few strings
- * still say "hackathon" because the design does.
- */
-
 import type { Linked, Marked, Sponsor } from "./types";
 
 export const event = {
   name: "Haven",
-  /** Hero headline — one entry per line. Overridable per city page. */
   title: ["Organize a game jam", "in your city!"],
-  /**
-   * The line under the headline. Entries are separate lines on mobile and are
-   * strung together with a ♥ from `sm` up, so a city page can run one part
-   * ("Nov 15, at the Barbican") or three.
-   */
   tagline: ["Nov 14–15", "For teens 13-18 around the world"],
 } as const;
 
-/**
- * Secondary hero CTA for visitors who want to attend rather than organize.
- * The form URL itself is environment config (`RSVP_URL`), not copy.
- */
 export const rsvpCta = {
   label: "Not looking to organize?",
 } as const;
 
-/* ── What is a game jam ─────────────────────────────────────────────────── */
 
 export const about = {
   title: "What is a game jam?",
   body: "It’s a social coding event where you make a video game with friends + free food!",
 } as const;
 
-/* ── Perk cards ─────────────────────────────────────────────────────────── */
 
 export type Perk = {
   id: string;
   title: string;
-  /** Sits under the images, per the current design. */
   blurb: string[];
-  /** Which side the card hangs off, mirroring the staggered Figma layout. */
   side: "start" | "end";
-  /** Aspect ratio of this group's photo cells, taken from the Figma frame. */
   aspect: string;
   photos: {
     src: string;
     alt: string;
     position?: string;
-    /** Projects link out to itch.io and carry a title + author credit. */
     href?: string;
     caption?: { title: string; author: string };
   }[];
@@ -125,12 +101,10 @@ export const perks: Perk[] = [
   },
 ];
 
-/* ── Pitch bubbles ──────────────────────────────────────────────────────── */
 
 export type Pitch = {
   id: string;
   align: "start" | "center" | "end";
-  /** Custom properties for `.speech`; omit for a bubble with no tail. */
   tail?: Record<string, string>;
   body: Marked;
 };
@@ -169,9 +143,6 @@ export const pitches: Pitch[] = [
   {
     id: "impact",
     align: "center",
-    // The hedgehog sits directly to the right of this bubble, level with it —
-    // so the tail leaves the right edge at mid-height and points at it. It used
-    // to hang off the top corner pointing up and *away* from the hedgehog.
     tail: {
       "--tail-size": "4.5rem",
       "--tail-rotate": "-28deg",
@@ -188,21 +159,13 @@ export const pitches: Pitch[] = [
   },
 ];
 
-/* ── Schedule ───────────────────────────────────────────────────────────── */
 
 export const scheduleHeading = "What happens on the day?";
 
-/**
- * Shown in place of the timetable until a city has one. Cities announce before
- * they have times pinned down, and inventing a plausible schedule for them is
- * worse than admitting it isn't set — someone would turn up at 10am for it.
- */
 export const scheduleTbd = {
   title: "TBD!",
   body: "We’re still working out the schedule. Sign up and we'll let you know as soon as we figure it out!",
 } as const;
-
-/* ── How you organize ───────────────────────────────────────────────────── */
 
 export const stepsHeading =
   "Here is how you can organize a game jam this November!";
@@ -234,8 +197,6 @@ export const stepsCta = {
   label: "Read the organizer guide for more info!",
   href: "https://docs.google.com/document/d/e/2PACX-1vSDc2zLDalO4rYSbpJ_Y4dE3Utve-Gg80ao_1iEowCW2UY_IMBic-x2CjO1_bmZRasDiOH5u8C-G5UJ/pub",
 };
-
-/* ── Past events ────────────────────────────────────────────────────────── */
 
 export const pastEventsHeading = [
   "We’ve helped teens organize hundreds of events around the world!",
@@ -283,23 +244,14 @@ export const pastEvents: PastEvent[] = [
   },
 ];
 
-/* ── Supporters / sponsors ──────────────────────────────────────────────── */
-
 export const supportersHeading = "Our supporters";
 
 export const supporters: Sponsor[] = [];
 
-/** City pages open with an empty wall until their organizers fill it in. */
 export const sponsorsHeading = "Our sponsors";
-
-/* ── FAQ ────────────────────────────────────────────────────────────────── */
 
 const HAVEN_EMAIL = "mailto:haven@hackclub.com";
 
-/**
- * Order matches the Figma reading order: odd entries fill the left column,
- * even entries the right.
- */
 export const faqs: { q: string; a: Linked }[] = [
   {
     q: "Am I eligible?",
@@ -352,7 +304,6 @@ export const faqs: { q: string; a: Linked }[] = [
   {
     q: "What if my parents are concerned?",
     a: [
-      // TODO: the Figma still has "[parent guide]" bracketed — no URL yet.
       {
         text: "We’re here to help! You can see our [parent guide] here, or they can reach out to us at ",
       },
@@ -388,8 +339,6 @@ export const faqs: { q: string; a: Linked }[] = [
   },
 ];
 
-/* ── Chrome ─────────────────────────────────────────────────────────────── */
-
 export const footerLinks = [
   { label: "Hack Club", href: "https://hackclub.com" },
   { label: "Slack", href: "https://hackclub.com/slack/" },
@@ -398,7 +347,6 @@ export const footerLinks = [
 ];
 
 export const navLinks = [
-  // Back to the top of the page, where the hero's email field is.
   { label: "Sign up", href: "#top" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },

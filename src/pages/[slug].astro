@@ -18,16 +18,12 @@ const slug = Astro.params.slug!;
 
 const data = await getDataForSlug(slug);
 
-/* An unknown slug is a 404, not an empty copy of the home page — otherwise
-   every typo'd URL becomes a real page that looks official. */
 if (!data) {
   return new Response(null, { status: 404, statusText: "Not found" });
 }
 
 const site = resolveSiteData(data);
 
-/* The headline is the one line that identifies the page, so it doubles as the
-   document title rather than making every city set a second one. */
 const pageTitle = `${event.name} — ${site.title.join(" ")}`;
 ---
 
@@ -37,15 +33,11 @@ const pageTitle = `${event.name} — ${site.title.join(" ")}`;
   <main id="main">
     <Hero title={site.title} tagline={site.tagline} />
 
-    {/* Same backdrops, same order as the home page — a city page is the home
-        page with its copy swapped, not a different design. */}
     <div id="about" class="stage stage-middle">
       <About />
       <Pitch />
     </div>
 
-    {/* City pages only: once there is a venue and a date, "what actually
-        happens" is the next thing a reader wants after the pitch. */}
     <Schedule heading={site.schedule.heading} days={site.schedule.days} />
 
     <Steps />

@@ -1,28 +1,12 @@
 ---
-/**
- * Collapsible YouTube panel.
- *
- * The player is a *facade*: until someone clicks play we render nothing but a
- * thumbnail, so the page never pays for YouTube's ~1MB embed on load. The click
- * swaps in the real iframe with `autoplay=1`, which picks up where the poster
- * left off.
- *
- * `<details>` gives the open/close control for free — no JavaScript needed for
- * the toggle itself. The one thing it does *not* do is stop playback when it
- * closes (hidden iframes keep their audio running), so the script below tears
- * the iframe back down to the facade on close.
- */
 interface Props {
-  /** YouTube video id, e.g. the `P3iS-QPHAZE` in youtu.be/P3iS-QPHAZE. */
   videoId: string;
-  /** Accessible name for the play button and the embed. */
   title?: string;
   class?: string;
 }
 
 const { videoId, title = "Watch the Haven intro video", class: className } = Astro.props;
 
-/* 16:9 poster. hq720 exists for every public upload; maxres does not. */
 const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
 ---
 
@@ -104,8 +88,6 @@ const poster = `https://i.ytimg.com/vi/${videoId}/hq720.jpg`;
       slot.replaceChildren(frame);
     });
 
-    // A closed <details> still runs its iframe — swapping the facade back in is
-    // what actually stops the audio.
     panel.addEventListener("toggle", () => {
       if (!panel.open) slot.innerHTML = facade;
     });

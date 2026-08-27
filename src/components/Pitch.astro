@@ -6,31 +6,16 @@ const toStyle = (vars: Record<string, string>) =>
     .map(([key, value]) => `${key}:${value}`)
     .join(";");
 
-/** Stage coordinates as percentages of the 1439x1969 `bg-middle` artwork. */
 const stage: Record<string, string> = {
   triangles: "lg:absolute lg:left-[24.9%] lg:top-[60.6%] lg:w-[53.3%]",
   heading: "lg:absolute lg:left-[28.2%] lg:top-[64%] lg:w-[46.2%]",
 };
 
-/**
- * The three bubbles used to carry a `top` each, straight off the Figma frame.
- * That only holds while every bubble is exactly as tall as its Figma
- * counterpart — ours run a line longer, so the gaps closed up unevenly (the
- * bottom pair ended up 3px apart against 13px for the top pair). They are a
- * flex column now: one shared gap, and copy edits can no longer break the
- * rhythm. Only the horizontal offsets are still per-bubble.
- *
- * Offsets are relative to the column box, which spans the union of the three
- * Figma positions — 13.26%..74.37% of the artwork, so 61.11% wide.
- */
-/* `lg:self-start` cancels the `sm:self-*` alignment used by the stacked
-   layout — on the stage the horizontal position comes from the margin below,
-   and `self-center` would otherwise re-centre the bubble in the column. */
-const BUBBLE_WIDTH = "lg:w-[66.7%] lg:self-start"; // 40.76% of the artwork
+const BUBBLE_WIDTH = "lg:w-[66.7%] lg:self-start";
 const bubbleOffset: Record<string, string> = {
-  invite: "lg:ml-[33.3%]", // artwork x 33.61%
-  support: "lg:ml-0", // artwork x 13.26%
-  impact: "lg:ml-[4.78%]", // artwork x 16.18%
+  invite: "lg:ml-[33.3%]",
+  support: "lg:ml-0",
+  impact: "lg:ml-[4.78%]",
 };
 
 const alignment = {
@@ -43,7 +28,6 @@ const alignment = {
 <section
   class="relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] px-5 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] lg:contents"
 >
-  {/* Decorative sparkles that flank the headline. */}
   <img
     src="/images/banner-triangles.webp"
     alt=""
@@ -62,11 +46,6 @@ const alignment = {
     {pitchHeading}
   </h2>
 
-  {/* The design underlines the emphasised runs; we keep the highlighter
-      treatment instead — same emphasis, more of the brand.
-
-      `contents` below `lg` so the bubbles stay direct children of the section's
-      flex column; from `lg` up the wrapper becomes the positioned column. */}
   <div
     class="contents lg:absolute lg:left-[13.26%] lg:top-[72%] lg:flex lg:w-[61.11%] lg:flex-col lg:gap-[2.83cqw]"
   >
