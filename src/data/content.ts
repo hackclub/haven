@@ -22,7 +22,6 @@ export type Perk = {
   title: string;
   blurb: string[];
   side: "start" | "end";
-  aspect: string;
   photos: {
     src: string;
     alt: string;
@@ -35,9 +34,8 @@ export type Perk = {
 export const perks: Perk[] = [
   {
     id: "build",
-    title: "Learn and Build",
+    title: "Learn & Build",
     side: "start",
-    aspect: "aspect-[131/88]",
     blurb: [
       "follow workshops or create at your own pace",
       "here are some cool projects at past hackathons!",
@@ -53,7 +51,7 @@ export const perks: Perk[] = [
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
-        caption: { title: "office click clack", author: "by bunnyguy" },
+        caption: { title: "office click clack", author: "by bunnyguy and nathan" },
       },
     ],
   },
@@ -61,7 +59,6 @@ export const perks: Perk[] = [
     id: "friends",
     title: "Make Friends",
     side: "end",
-    aspect: "aspect-[198/120]",
     blurb: ["meet new people and form relationships that will last a lifetime"],
     photos: [
       { src: "/images/friends-1.webp", alt: "Attendees hanging out together" },
@@ -73,9 +70,8 @@ export const perks: Perk[] = [
   },
   {
     id: "food",
-    title: "Free Food and Prizes",
+    title: "Free Food & Prizes",
     side: "start",
-    aspect: "aspect-[176/116]",
     blurb: ["can’t say no to free snacks :)"],
     photos: [
       { src: "/images/food-1.webp", alt: "A spread of snacks and merch" },
@@ -233,17 +229,17 @@ export const supporters: Sponsor[] = [
   {
     name: "HCB 1",
     href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/hcb-logo.jpeg",
+    image: "/images/sponsors/logos/hcb-icon.png",
   },
   {
     name: "HCB 2",
     href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/hcb-logo.jpeg",
+    image: "/images/sponsors/logos/hcb-icon.png",
   },
   {
     name: "HCB 3",
     href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/hcb-logo.jpeg",
+    image: "/images/sponsors/logos/hcb-icon.png",
   },
 ];
 
