@@ -5,13 +5,13 @@ const stage: Record<string, string> = {
   intro: "md:absolute md:left-[16.1%] md:top-[5.6%] md:w-[30%]",
   daven: "md:absolute md:left-[65.8%] md:top-[5.6%] md:w-[7.5%]",
   build: "md:absolute md:left-[4.8%] md:top-[17.1%] md:w-[40%]",
-  friends: "md:absolute md:left-[45%] md:top-[20%] md:w-[40%]",
+  friends: "md:absolute md:left-[56%] md:top-[20%] md:w-[40%]",
   food: "md:absolute md:left-[13%] md:top-[40%] md:w-[40%]",
 };
 ---
 
 <section
-  class="relative flex flex-col gap-[clamp(2.5rem,6vw,4rem)] px-18 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] sm:px-36 md:contents"
+  class="relative flex flex-col gap-[clamp(2.5rem,6vw,4rem)] overflow-x-clip px-18 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] sm:px-36 md:contents"
 >
   <div
     class={`panel bg-haven-green-deep/60 shadow-[0_0_10px_var(--color-haven-green-deep)] w-full max-w-[40rem] self-center px-[clamp(2rem,4vw,4rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:shadow-none md:self-start md:max-w-[42rem] md:bg-transparent md:p-0 md:text-left ${stage.intro}`}
@@ -46,7 +46,7 @@ const stage: Record<string, string> = {
           stage[perk.id],
         ]}
       >
-        <div class="relative w-full aspect-[1899/1194]">
+        <div class="relative w-full aspect-1972/1413">
           <img
             src="/images/about/sign-side.png"
             alt=""
@@ -57,9 +57,8 @@ const stage: Record<string, string> = {
             ]}
           />
 
-          <div class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.png')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[9%] md:py-[4%]">
-            {" "}
-            <ul class="px-2 md:px-6 grid grid-cols-2 gap-[clamp(2rem,5vw,5rem)] md:mt-[4%] md:gap-[3%]">
+          <div class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.png')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]">
+            <ul class="px-2 pt-[clamp(2.5rem,8vw,9rem)] md:px-6 grid grid-cols-2 gap-[clamp(1rem,3vw,5rem)] md:pt-[15%] md:gap-[3%]">
               {perk.photos.map((photo) => {
                 const Cell = photo.href ? "a" : "div";
                 return (
@@ -82,14 +81,14 @@ const stage: Record<string, string> = {
                         class:list={[
                           "w-full rounded-[clamp(0.625rem,1vw,1rem)] object-cover transition-transform md:rounded-[1cqw]",
                           perk.id === "build"
-                            ? "h-[clamp(5rem,14vw,7.5rem)] md:h-[6.5cqw]"
-                            : "h-[clamp(6rem,18vw,10rem)] md:h-[9cqw]",
+                            ? "mt-4 h-[clamp(2.5rem,15vw,4.5rem)] md:h-[6.5cqw]"
+                            : "h-[clamp(3.5rem,18vw,5rem)] md:h-[9cqw]",
                           photo.href && "group-hover:scale-[1.03]",
                           photo.position,
                         ]}
                       />
                       {photo.caption && (
-                        <span class="mt-1.5 block font-body text-[clamp(0.5rem,1vw,0.8rem)] leading-[clamp(0.8rem,1.2vw,1.5rem)] tracking-[-0.03em] text-haven-brown-light md:mt-[3%] md:text-[1cqw]">
+                        <span class="mt-1.5 block font-body text-[clamp(0.5rem,1vw,0.8rem)] leading-[clamp(0.5rem,1vw,1.5rem)] tracking-[-0.03em] text-haven-brown-light md:mt-[3%] md:text-[1cqw]">
                           <span class="block">{photo.caption.title}</span>
                           <span class="block text-[0.8em]">
                             {photo.caption.author}
@@ -104,8 +103,10 @@ const stage: Record<string, string> = {
             {perk.blurb.map((line) => (
               <p
                 class:list={[
-                  "font-body text-copy text-haven-brown-dark md:text-[1.4cqw] md:leading-[1.15]",
-                  perk.id === "build" ? "mt-1" : "mt-4 md:mt-[3%]",
+                  "font-body text-[clamp(0.75rem,3vw,3rem)] leading-[clamp(0.75rem,3vw,1.5rem)] text-haven-brown-dark pb-4 md:text-[1.4cqw] md:leading-[1.15]",
+                  perk.id === "build"
+                    ? "mt-[clamp(0.3rem,2vw,3rem)] md:mt-[3%]"
+                    : "mt-[clamp(0.5rem,2vw,3rem)] md:mt-[3%]",
                 ]}
               >
                 {line}
@@ -113,13 +114,7 @@ const stage: Record<string, string> = {
             ))}
           </div>
 
-          <div class="absolute left-1/2 top-0 z-10 w-max -translate-x-1/2 -translate-y-1/2">
-            <img
-              src="/images/about/sign-title.png"
-              alt=""
-              aria-hidden="true"
-              class="pointer-events-none absolute inset-0 -z-10 h-full w-full scale-300 object-contain"
-            />
+          <div class="absolute left-1/2 top-0 z-10 w-max -translate-x-[52%] translate-y-[clamp(1rem,calc(-1.61rem_+_10.43vw),2.5rem)] sm:translate-y-[clamp(2.0rem,2.0rem-0.5vw,2.2rem)] md:translate-y-[100%]">
             <h3 class="relative font-display z-10 whitespace-nowrap text-heading text-white md:text-[3.06cqw] md:leading-[0.8]">
               {perk.title}
             </h3>

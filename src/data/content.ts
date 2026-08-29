@@ -38,7 +38,6 @@ export const perks: Perk[] = [
     side: "start",
     blurb: [
       "follow workshops or create at your own pace",
-      "here are some cool projects at past hackathons!",
     ],
     photos: [
       {
@@ -59,7 +58,7 @@ export const perks: Perk[] = [
     id: "friends",
     title: "Make Friends",
     side: "end",
-    blurb: ["meet new people and form relationships that will last a lifetime"],
+    blurb: ["meet new people and form lifelong relationships"],
     photos: [
       { src: "/images/friends-1.webp", alt: "Attendees hanging out together" },
       {
