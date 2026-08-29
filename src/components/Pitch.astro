@@ -10,7 +10,7 @@ const BUBBLE_WIDTH = "md:w-[66.7%] md:self-start";
 const bubbleOffset: Record<string, string> = {
   invite: "md:ml-[33.3%]",
   support: "md:ml-0",
-  impact: "md:ml-[4.78%]",
+  impact: "md:ml-[10%]",
 };
 
 const bubbleImage: Record<string, string> = {
@@ -20,14 +20,23 @@ const bubbleImage: Record<string, string> = {
 };
 
 const alignment = {
-  start: "sm:self-start",
-  center: "sm:self-center",
-  end: "sm:self-end",
+  start: "md:self-start",
+  center: "md:self-center",
+  end: "md:self-end",
 } as const;
+
+const bubblePadding: Record<string, string> = {
+  invite:
+    "md:px-[clamp(1.5rem,4vw,1rem)] md:pb-[clamp(2rem,6vw,5rem)] md:px-[8%] md:mb-[4%]",
+  support:
+    "md:mr-16 md:px-[clamp(0.5rem,2vw,1rem)] md:py-[clamp(1.1rem,2.2vw,1.75rem)] md:px-[2%] md:py-[6%]",
+  impact:
+    "md:mr-12 md:px-[clamp(0.5rem,2.5vw,1rem)] md:py-[clamp(1rem,2vw,1.5rem)] md:px-[2%] md:py-[4%]",
+};
 ---
 
 <section
-  class="relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] px-5 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] md:contents"
+  class=" relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] md:px-3 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] md:contents"
 >
   <img
     src="/images/banner-triangles.webp"
@@ -47,39 +56,59 @@ const alignment = {
     {pitchHeading}
   </h2>
 
-  <div
-    class="contents md:absolute md:left-[13.26%] md:top-[72%] md:flex md:w-[61.11%] md:flex-col md:gap-[2.83cqw]"
-  >
-    {
-      pitches.map((pitch) => (
-        <div
-          class:list={[
-            "relative w-full max-w-[38rem] md:max-w-none",
-            alignment[pitch.align],
-            BUBBLE_WIDTH,
-            bubbleOffset[pitch.id],
-          ]}
-        >
-          <img
-            src={bubbleImage[pitch.id]}
-            alt=""
-            aria-hidden="true"
+  <div class="flex items-center md:gap-4 pt-4 md:contents z-20">
+    <div
+      class="flex flex-col left-0 md:absolute md:left-[13.26%] md:top-[72%] md:flex md:w-[61.11%] md:flex-col md:gap-[2.83cqw]"
+    >
+      {
+        pitches.map((pitch) => (
+          <div
             class:list={[
-              "pointer-events-none absolute inset-0 z-5 h-full w-full object-contain",
-              pitch.id === "invite" && "scale-125",
+              "relative w-full md:max-w-none",
+              alignment[pitch.align],
+              BUBBLE_WIDTH,
+              bubbleOffset[pitch.id],
             ]}
-          />
-          <p class="relative z-10 px-[clamp(1.25rem,3vw,2.5rem)] py-[clamp(1.1rem,2.2vw,1.75rem)] text-center font-body text-copy leading-[1.7] text-haven-orange-deep md:px-[6%] md:py-[3.3%] md:text-[1.55cqw] md:leading-[1.3]">
-            {pitch.body.map((segment) =>
-              segment.mark ? (
-                <span class="marker">{segment.text}</span>
-              ) : (
-                segment.text
-              ),
-            )}
-          </p>
-        </div>
-      ))
-    }
+          >
+            <img
+              src="/images/pitch/bubble-2.png"
+              alt=""
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 z-5 h-full w-full object-contain md:hidden"
+            />
+            <img
+              src={bubbleImage[pitch.id]}
+              alt=""
+              aria-hidden="true"
+              class:list={[
+                "pointer-events-none absolute inset-0 z-5 hidden h-full w-full object-contain md:block",
+                pitch.id === "invite" ? "md:scale-[120%]" : "md:scale-125",
+              ]}
+            />
+            <p
+              class:list={[
+                "relative aspect-1268/331 w-full z-10 min-h-[80%] max-w-[90%] px-[clamp(1rem,8vw,6rem)] ml-2 py-[clamp(1.1rem,4vw,2.5rem)] text-center font-body text-[clamp(0.7rem,3vw,1.2rem)] leading-[clamp(0.8rem,3.7vw,6rem)] text-haven-orange-deep md:aspect-auto md:text-[1.55cqw] md:leading-[1.3]",
+                bubblePadding[pitch.id],
+              ]}
+            >
+              {pitch.body.map((segment) =>
+                segment.mark ? (
+                  <span class="marker">{segment.text}</span>
+                ) : (
+                  segment.text
+                ),
+              )}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <img
+      src="/images/pitch/excited-daven.png"
+      alt=""
+      aria-hidden="true"
+      class="w-[10%] scale-[500%] -translate-x-3/8 -translate-y-[180%] shrink-0 object-contain md:hidden"
+    />
   </div>
 </section>
