@@ -32,10 +32,11 @@ export const app = new App({
 });
 
 if (env.SLACK_HELP_CHANNEL) {
-  app.on(`message:normal#${env.SLACK_HELP_CHANNEL}`, async (event) => {
+  app.on(`message#${env.SLACK_HELP_CHANNEL}`, async (event) => {
     if (event.user === env.SLACK_BOT_USER_ID) return;
+    if (event.subtype && (event.subtype as string) !== "file_shared") return;
 
-    await db.transaction(async (tx) => {
+    const shouldResend = await db.transaction(async (tx) => {
       if (event.thread_ts) {
         const [ticket] = await tx
           .select()
@@ -57,8 +58,10 @@ if (env.SLACK_HELP_CHANNEL) {
             event.channel.message(event.thread_ts).react("hourglass"),
           ]);
 
-          queueResendTicketsMessage();
+          return true;
         }
+
+        return false;
       } else {
         const text =
           "Hi there! A staff member will help you soon. In the meantime, take a look at https://haven.hackclub.com/#faq to see if your question is answered!";
@@ -75,15 +78,17 @@ if (env.SLACK_HELP_CHANNEL) {
           tx.insert(ticketsTable).values({
             helpMessageTs: event.ts,
             helpReplyMessageTs: message.ts,
-            openedBy: event.user,
+            openedBy: event.user!,
             text: event.text || "No preview available",
           }),
           event.react("hourglass"),
         ]);
 
-        queueResendTicketsMessage();
+        return true;
       }
     });
+
+    if (shouldResend) queueResendTicketsMessage();
   });
 }
 
@@ -129,9 +134,9 @@ app.on("action:button.close", async (event) => {
       }),
       helpMessage.unreact("hourglass"),
     ]);
-
-    queueResendTicketsMessage();
   });
+
+  queueResendTicketsMessage();
 });
 
 let cachedAdmins: Promise<string[]> | undefined;
