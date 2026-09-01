@@ -140,6 +140,8 @@
   .stage-picnic {
     --stage-ratio: 1440 / 4329;
     background-image: url("/images/middle/picnic-bg-mobile.png");
+    aspect-ratio: none;
+    background-size: cover;
   }
 
   @media (width >= 48rem) {

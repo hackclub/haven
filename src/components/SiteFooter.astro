@@ -2,15 +2,24 @@
 import { footerLinks } from "../data/content";
 ---
 
-<footer class="pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(2rem,4vw,3rem)] text-white">
-  <div class="shell grid grid-cols-1 gap-[clamp(2rem,5vw,4rem)] md:grid-cols-[minmax(0,22rem)_1fr]">
+<footer
+  class="relative pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(2rem,4vw,3rem)] text-white md:px-[clamp(3rem,8vw,8rem)]"
+>
+  <img
+    src="/images/footer/flags.png"
+    class="absolute top-[-20%] w-full object-cover z-20 md:hidden"
+  />
+
+  <div
+    class="shell grid grid-cols-1 gap-[clamp(2rem,5vw,4rem)] md:grid-cols-[minmax(0,22rem)_1fr]"
+  >
     <div>
       <img
         src="/images/logo.webp"
         alt="Hack Club Haven"
         width="778"
         height="445"
-        class="w-[clamp(9rem,22vw,22.5rem)]"
+        class="w-[clamp(5rem,22vw,12rem)]"
       />
 
       <nav aria-label="Hack Club" class="mt-[clamp(1.5rem,3vw,2.5rem)]">
@@ -20,7 +29,7 @@ import { footerLinks } from "../data/content";
               <li>
                 <a
                   href={link.href}
-                  class="font-display text-[clamp(1.75rem,3vw,3.125rem)] leading-[1.15] tracking-[-0.05em] transition-colors hover:text-haven-yellow"
+                  class="font-display text-[clamp(0.75rem,3vw,1.5em)] leading-1 tracking-[-0.05em] transition-colors hover:text-haven-yellow"
                 >
                   {link.label}
                 </a>
@@ -31,11 +40,14 @@ import { footerLinks } from "../data/content";
       </nav>
     </div>
 
-    <div class="flex flex-col gap-4 font-body text-[clamp(1.0625rem,1.65vw,1.625rem)] leading-[1.4]">
+    <div
+      class="flex flex-col gap-4 font-body text-[clamp(0.5rem,1.65vw,1rem)] leading-[1.4] md:pt-[clamp(1rem,3vw,2rem)]"
+    >
       <p>
-        Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers. We believe
-        you learn best by building, so we’re creating community and providing grants so you can make
-        awesome projects. In the past few years, we’ve <a
+        Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high
+        schoolers. We believe you learn best by building, so we’re creating
+        community and providing grants so you can make awesome projects. In the
+        past few years, we’ve <a
           class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
           href="https://www.youtube.com/watch?v=ufMUJ9D1fi8"
           target="_blank"

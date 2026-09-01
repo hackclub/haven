@@ -244,6 +244,11 @@ export const supporters: Sponsor[] = [
     href: "https://hcb.hackclub.com",
     image: "/images/sponsors/logos/hcb-icon.png",
   },
+  {
+    name: "HCB 4",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/logos/hcb-icon.png",
+  },
 ];
 
 export const sponsorsHeading = "Our sponsors";
