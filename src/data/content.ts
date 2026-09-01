@@ -148,6 +148,10 @@ export const scheduleTbd = {
 export const stepsHeading =
   "Here is how you can organize a game jam this November!";
 
+export const stepsSubheading =
+  "(Don't worry, we'll guide you through each step)";
+
+
 export const steps = [
   {
     title: "find a team of coorganizers",

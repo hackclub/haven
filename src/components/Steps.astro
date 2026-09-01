@@ -1,52 +1,75 @@
 ---
-import { steps, stepsCta, stepsHeading } from "../data/content";
+import {
+  stepsCta,
+  stepsHeading,
+  stepsSubheading,
+} from "../data/content";
 ---
 
-<section class="relative z-0 pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(1.5rem,2vw,2rem)] bg-haven-yellow">
-  <div class="shell lg:w-[min(91.2%,109.44rem)] lg:max-w-none">
+<section
+  class="relative z-0 pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(1.5rem,2vw,2rem)] bg-haven-green md:pb-0 md:aspect-[1440/1000] md:pt-0"
+>
+  <div class="absolute inset-0">
+    <img
+      src="/images/steps/flowers-top-r.png"
+      width="872"
+      height="1372"
+      class="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
+    />
+     <img
+      src="/images/steps/flowers-top-l.png"
+      width="864"
+      height="1945"
+      class="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
+    />
+     <img
+      src="/images/steps/flowers-bottom-r.png"
+      width="660"
+      height="967"
+      class="pointer-events-none absolute right-0 bottom-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
+    />
+     <img
+      src="/images/steps/flowers-bottom-l.png"
+      width="642"
+      height="660"
+      class="pointer-events-none absolute left-0 bottom-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
+    />
+  </div>
+  <div class="relative shell mt-16">
     <h2
-      class="mx-auto max-w-[24ch] text-center font-display text-display text-white sm:max-w-none"
+      class="relative mx-auto max-w-[24ch] z-10 text-center font-display text-display text-white sm:max-w-none text-shadow-[0_0_10px_var(--color-haven-green-deep)]"
     >
       {stepsHeading}
     </h2>
 
-    <ol
-      class="mt-[clamp(1.5rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(1rem,1.6vw,1.5rem)] sm:grid-cols-2 lg:grid-cols-4 lg:gap-[min(1.25vw,1.5rem)]"
+    <h3
+      class="relative mt-4 mx-auto max-w-[24ch] z-10 text-center font-display text-lead copy text-white sm:max-w-none"
     >
-      {
-        steps.map((step, i) => (
-          <li class="flex flex-col gap-[clamp(1rem,1.6vw,1.5rem)] rounded-[1.875rem] bg-haven-butter p-[clamp(1.25rem,1.8vw,1.75rem)] lg:gap-[min(2.4vw,2.88rem)] lg:p-[min(2.63vw,3.15rem)]">
-            <div class="flex items-start gap-[clamp(0.5rem,1vw,0.875rem)]">
-              <span
-                aria-hidden="true"
-                class="font-display text-[clamp(3rem,5.5vw,5.625rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-bright lg:text-[min(4.4vw,5.28rem)]"
-              >
-                {i + 1}
-              </span>
-              <span class="font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-bright lg:text-[min(1.53vw,1.84rem)]">
-                {step.title}
-              </span>
-            </div>
-            <img
-              src={step.image}
-              alt={step.alt}
-              loading="lazy"
-              decoding="async"
-              width="239"
-              height="172"
-              class="mt-auto aspect-[239/172] w-full rounded-[1.25rem] object-cover"
-            />
-          </li>
-        ))
-      }
-    </ol>
+      {stepsSubheading}
+    </h3>
 
-    <div class="mt-[clamp(1.5rem,3vw,2.5rem)] flex justify-center">
+    <img
+      src="/images/steps/step-bg-desktop.png"
+      width="3378"
+      height="4251"
+      class="relative pointer-events-none inset-0 hidden h-full w-full object-cover px-[clamp(0rem,5vw,8rem)] md:block"
+    />
+
+    <img
+      src="/images/steps/step-bg-mobile.png"
+      width="3378"
+      height="4025"
+      class="relative pointer-events-none inset-0 h-full w-full object-cover md:hidden"
+    />
+
+    <div
+      class="relative mt-[clamp(1.5rem,3vw,2.5rem)] flex z-10 justify-center md:mt-0"
+    >
       <a
         href={stepsCta.href}
         target="_blank"
         rel="noopener noreferrer"
-        class="flex items-center gap-[clamp(0.5rem,1vw,0.75rem)] rounded-[1.25rem] bg-haven-butter px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(0.6rem,1.1vw,1rem)] font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-none tracking-[-0.05em] text-haven-orange-bright transition-transform hover:scale-[1.04] active:scale-100"
+        class="flex items-center gap-[clamp(0.5rem,1vw,0.75rem)] rounded-[1.25rem] bg-haven-green-deep/80 px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(0.6rem,1.1vw,1rem)] font-display text-[clamp(1.15rem,1.9vw,1.875rem)] leading-none tracking-[-0.05em] text-white transition-transform hover:scale-[1.04] active:scale-100 shadow-[0_0_10px_var(--color-haven-green-deep)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -58,8 +81,10 @@ import { steps, stepsCta, stepsHeading } from "../data/content";
           stroke-linejoin="round"
           class="h-[0.85em] w-[0.85em] shrink-0"
         >
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+          ></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+          ></path>
         </svg>
         {stepsCta.label}
       </a>

@@ -2,8 +2,8 @@
 import { pitchHeading, pitches } from "../data/content";
 
 const stage: Record<string, string> = {
-  triangles: "md:absolute md:left-[24.9%] md:top-[60.6%] md:w-[53.3%]",
-  heading: "md:absolute md:left-[28.2%] md:top-[64%] md:w-[46.2%]",
+  triangles: "md:absolute md:left-[24.9%] md:top-[55%] md:w-[53.3%]",
+  heading: "md:absolute md:left-[28.2%] md:top-[58%] md:w-[46.2%]",
 };
 
 const BUBBLE_WIDTH = "md:w-[66.7%] md:self-start";
@@ -36,7 +36,7 @@ const bubblePadding: Record<string, string> = {
 ---
 
 <section
-  class=" relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] md:px-3 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] md:contents"
+  class="relative flex flex-col items-stretch gap-[clamp(1.5rem,3vw,2.5rem)] md:px-3 pb-[clamp(2rem,5vw,4rem)] pt-[clamp(2.5rem,6vw,5rem)] md:contents"
 >
   <img
     src="/images/banner-triangles.webp"
@@ -56,9 +56,9 @@ const bubblePadding: Record<string, string> = {
     {pitchHeading}
   </h2>
 
-  <div class="flex items-center md:gap-4 pt-4 md:contents z-20">
+  <div class="flex items-center md:gap-4 pt-4 pb-8 md:contents z-20">
     <div
-      class="flex flex-col left-0 md:absolute md:left-[13.26%] md:top-[72%] md:flex md:w-[61.11%] md:flex-col md:gap-[2.83cqw]"
+      class="flex flex-col left-0 md:absolute md:left-[13.26%] md:top-[65%] md:flex md:w-[61.11%] md:flex-col md:gap-[2.83cqw]"
     >
       {
         pitches.map((pitch) => (
@@ -74,8 +74,22 @@ const bubblePadding: Record<string, string> = {
               src="/images/pitch/bubble-2.png"
               alt=""
               aria-hidden="true"
-              class="pointer-events-none absolute inset-0 z-5 h-full w-full object-contain md:hidden"
+              class:list={[
+                "pointer-events-none absolute inset-0 z-5 h-full w-full object-contain md:hidden",
+                pitch.id === "invite" ? "block" : "hidden",
+              ]}
             />
+
+            <img
+              src="/images/pitch/rounded-rectangle.png"
+              alt=""
+              aria-hidden="true"
+              class:list={[
+                "pointer-events-none absolute inset-0 z-5 h-full w-full object-contain md:hidden",
+                pitch.id === "invite" ? "hidden" : "block",
+              ]}
+            />
+
             <img
               src={bubbleImage[pitch.id]}
               alt=""

@@ -16,11 +16,22 @@ import { supporters, supportersHeading } from "../data/content";
   <SiteHeader />
 
   <main id="main" class="overflow-x-clip">
-    <Hero />
+    <div class="relative z-20"><Hero /></div>
 
-    <div id="about" class="stage stage-middle z-10">
+    <div id="about" class="relative stage stage-middle z-10">
       <About />
       <Pitch />
+    </div>
+
+    <div class="relative z-10 flex justify-center">
+      <img
+        src="/images/flower-border.png"
+        alt=""
+        aria-hidden="true"
+        width="3586"
+        height="819"
+        class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 object-cover md:hidden"
+      />
     </div>
 
     <div class="z-0">

@@ -24,7 +24,7 @@
   --text-display--letter-spacing: -0.05em;
 
   --text-heading: clamp(1.5rem, 3vw, 2.75rem);
-  --text-heading--line-height: 0.80;
+  --text-heading--line-height: 0.8;
   --text-heading--letter-spacing: -0.05em;
 
   --text-subheading: clamp(1.25rem, 2vw, 2rem);
@@ -105,6 +105,7 @@
     background-position: top center;
     background-size: 100% auto;
     background-color: var(--color-haven-green);
+    aspect-ratio: var(--stage-ratio);
   }
 
   @media (width >= 48rem) {
@@ -118,25 +119,33 @@
   }
 
   .stage-middle {
-    --stage-ratio: 1440 / 6582;
+    --stage-ratio: 1440 / 4500;
     background-image: url("/images/middle/mid-phone-bg.png");
+  }
+
+  @media (width >= 40rem) {
+    .stage-middle {
+      --stage-ratio: 1440 / 4000;
+      background-image: url("/images/middle/mid-phone-bg.png");
+    }
   }
 
   @media (width >= 48rem) {
     .stage-middle {
-    --stage-ratio: 1439 / 1969;
-    background-image: url("/images/bg-middle.webp");
+      --stage-ratio: 1440 / 2100;
+      background-image: url("/images/bg-middle.webp");
     }
   }
 
   .stage-picnic {
-    --stage-ratio: 1440 / 1463;
-    background-image: url("/images/middle/picnic-bg.png");
+    --stage-ratio: 1440 / 4329;
+    background-image: url("/images/middle/picnic-bg-mobile.png");
   }
 
   @media (width >= 48rem) {
     .stage-picnic {
-      margin-top: max(-5.3%, -6.36rem);
+      --stage-ratio: 1440 / 1067;
+      background-image: url("/images/middle/picnic-bg.png");
     }
   }
 
