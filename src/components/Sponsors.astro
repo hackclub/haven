@@ -13,6 +13,18 @@ const rows: Sponsor[][] = [];
 for (let i = 0; i < items.length; i += ROW_SIZE) {
   rows.push(items.slice(i, i + ROW_SIZE));
 }
+
+const sponsorRowPadding = [
+  "top-[0%]",
+  "mt-0 sm:mt-[clamp(0rem,1vw,3rem)] md:mt-[clamp(1rem,2vw,5rem)]",
+  "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
+];
+
+const boxRowPadding = [
+  "mt-0",
+  "mt-[clamp(2rem,10vw,4rem)] sm:mt-[clamp(2rem,5vw,5rem)] md:mt-[clamp(3rem,7vw,6rem)]",
+  "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
+];
 ---
 
 {
@@ -22,48 +34,68 @@ for (let i = 0; i < items.length; i += ROW_SIZE) {
         src="/images/sponsors/map-edge.png"
         class="absolute top-0 w-full object-cover -translate-y-3/4 md:-translate-y-1/2"
       />
-      <div class="pt-[clamp(2rem,6vw,10rem)]">
-        <div class="grid grid-cols-[1fr_auto_1fr] items-center h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)] pt-4 relative">
+      <div>
+        <div class="absolute grid grid-cols-[1fr_auto_1fr] z-25 translate-x-[15%] h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)] translate-y-clamp(1rem,3rem-2vw,2.5rem)] sm:translate-y-clamp(0.5rem,3rem-2.5vw,2.5rem)] md:translate-y-[clamp(1.5rem,3.5vw,4rem)]">
           <img
             src="/images/sponsors/houses-1-l.png"
-            class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-end"
+            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-end"
           />
           <img
             src="/images/sponsors/top-house.png"
-            class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-center"
+            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-center"
           />
           <img
             src="/images/sponsors/houses-1-r.png"
-            class="h-[clamp(2rem,7vw,5rem)] object-contain justify-self-start"
+            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-start"
           />
         </div>
         <div class="shell">
-          <h2 class="text-center z-25 font-display text-display text-white translate-y-[clamp(1rem,2vw,2rem)]">
+          <h2 class="absolute text-center justify-self-center z-25 font-display text-[clamp(1.5rem,6vw,3rem)] sm:text-display text-white  translate-y-[clamp(2rem,4vw,4rem)] sm:translate-y-[clamp(2rem,6vw,4rem)] md:translate-y-[clamp(3rem,8vw,8rem)]">
             {heading}
           </h2>
 
           {rows.map((row, rowIndex) => (
-            <div class="relative mx-auto mt-8 md:mt-[clamp(0.5rem,5vw,6rem)] max-w-[80rem]">
+            <div class="mx-auto max-w-7xl translate-y-[clamp(1rem,2vw,3rem)] sm:translate-y-[clamp(1.5rem,3vw,3rem)] md:translate-y-[clamp(2rem,6vw,4rem)]">
               <img
                 src={
                   rowIndex === 0
                     ? "/images/sponsors/brown-box-xl.png"
                     : "/images/sponsors/brown-box-tall.png"
                 }
-                class:list={["pointer-events-none absolute left-1/2 top-0 -z-10 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2 -translate-y-3/8 md:-translate-y-1/3 object-contain ",
-                  rowIndex === 0 ? "mt-0" : "mt-[clamp(4rem,6vw,8rem)] md:mt-[clamp(8rem,15vw,15rem)]"
+                class:list={[
+                  "pointer-events-none absolute left-1/2 -z-10 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2 object-contain block sm:hidden",
+                  boxRowPadding[rowIndex],
+                ]}
+              />
+              <img
+                src={
+                  rowIndex === 0
+                    ? "/images/sponsors/brown-box-tall.png"
+                    : "/images/sponsors/brown-box-short.png"
+                }
+                class:list={[
+                  "pointer-events-none absolute left-1/2 top-0 z-0 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2  object-contain hidden sm:block",
+                  boxRowPadding[rowIndex],
                 ]}
               />
               <img
                 src="/images/sponsors/lil-brown-trail.png"
-                class:list={["pointer-events-none absolute left-1/2 top-0 -z-10 w-[clamp(8rem,10vw,15rem)] -translate-x-1/2 -translate-y-1/2 md:-translate-y-[clamp(2rem,6rem-3vw,6rem)] object-contain",
-                  rowIndex === 0 ? "hidden" : "block"
+                class:list={[
+                  "pointer-events-none absolute left-1/2 top-0 z-0 clamp(1rem,3rem-2vw,3rem)] w-[clamp(8rem,10vw,15rem)] -translate-x-1/2 object-cover md:w-[25%]",
+                  rowIndex === 0 ? "hidden" : "block",
+                  rowIndex === 1
+                    ? "-translate-y-[clamp(1rem,4vw,3rem)] sm:-translate-y-[clamp(0rem,4vw,3rem)] md:-translate-y-[clamp(0rem,4vw,3rem)]"
+                    : "-translate-y-[clamp(1rem,4vw,3rem)] sm:-translate-y-1/2 md:-translate-y-[clamp(0rem,4vw,3rem)]",
                 ]}
               />
-              <ul class="flex items-center gap-[clamp(0rem,8vw,5rem)] px-[clamp(2rem,15vw,15rem)]">
+              <ul class="relative flex items-center z-10 gap-[clamp(0rem,8vw,5rem)] pt-[clamp(3rem,14vw,12rem)] sm:pt-[clamp(3rem,8vw,8rem)] md:pt-[clamp(2rem,10vw+100/vw,8rem)] px-[clamp(2rem,15vw,15rem)]">
                 {row.map((item) => (
-                  <li class:list={["w-full flex flex-col items-center text-center translate-y-[clamp(0rem,vw,2rem)] ",
-                  rowIndex === 0 ? "mt-0" : "mt-[clamp(3rem,12vw,12rem)]"]}>
+                  <li
+                    class:list={[
+                      "w-full flex flex-col items-center text-center translate-y-[clamp(0rem,vw,2rem)] ",
+                      sponsorRowPadding[rowIndex],
+                    ]}
+                  >
                     <a
                       href={item.href}
                       target="_blank"
@@ -75,9 +107,9 @@ for (let i = 0; i < items.length; i += ROW_SIZE) {
                         alt={item.name}
                         loading="lazy"
                         decoding="async"
-                        class="mx-auto max-h-[clamp(5rem,12vw,12rem)] w-full object-contain"
+                        class="mx-auto max-h-[clamp(2rem,10vw,12rem)] w-full max-w-32 object-contain"
                       />
-                      <p class="text-white md:text-[clamp(0.875rem,3vw,2rem)] md:leading-[1.05] md:pt-4">
+                      <p class="text-white md:text-[clamp(0.5rem,2vw,2rem)] md:leading-[1.05] md:pt-[clamp(0.5rem,1.2vw,1.2rem)]">
                         {item.name}
                       </p>
                     </a>
