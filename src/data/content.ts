@@ -86,7 +86,10 @@ export const perks: Perk[] = [
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
-        caption: { title: "office click clack", author: "by Nathan and bunnyguy" },
+        caption: {
+          title: "office click clack",
+          author: "by Nathan and bunnyguy",
+        },
       },
     ],
   },
@@ -232,7 +235,7 @@ export const steps = [
 
 export const stepsCta = {
   label: "Read the organizer guide for more info!",
-  href: "https://docs.google.com/document/d/e/2PACX-1vSDc2zLDalO4rYSbpJ_Y4dE3Utve-Gg80ao_1iEowCW2UY_IMBic-x2CjO1_bmZRasDiOH5u8C-G5UJ/pub",
+  href: "https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit",
 };
 
 /* ── Past events ────────────────────────────────────────────────────────── */
