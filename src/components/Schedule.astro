@@ -14,32 +14,59 @@ const filled = days.filter((day) => day.items.length > 0);
 
 <section
   id="schedule"
-  class="relative z-10 bg-haven-green py-[clamp(2.5rem,6vw,5rem)]"
+  class="relative z-10 bg-haven-green mt-[clamp(2.5rem,10vw,8rem)] mb-[clamp(6rem,15vw,12rem)] py-[clamp(1rem,3vw,4rem)]"
 >
-  <div class="shell">
+  <img
+    src="/images/schedule/trail-w.png"
+    class="absolute top-0 w-full object-cover translate-y-[-60%] md:-translate-y-1/2"
+  />
+  <img
+    src="/images/schedule/trail-w.png"
+    class="absolute bottom-0 w-full object-cover scale-[-1] translate-y-[30%] md:translate-y-1/2"
+  />
+  <div class="absolute inset-y-0 left-0 w-[15%] overflow-hidden">
+    <img
+      src="/images/schedule/trail-v.png"
+      class="w-full object-cover translate-y-[-5%]"
+    />
+  </div>
+  <div class="absolute inset-y-0 right-0 w-[15%] overflow-hidden">
+    <img
+      src="/images/schedule/trail-v.png"
+      class="w-full scale-[-1] object-cover translate-y-[-5%]"
+    />
+  </div>
+  <div class="w-[70%] shell bg-haven-brown-dark my-16 py-16 rounded-[5rem]">
     <h2 class="text-center font-display text-display text-white">{heading}</h2>
-
+    <img
+      src="/images/schedule/plant-l.png"
+      class="absolute z-20 top-[2%] left-[3.5%] w-[20%] object-cover"
+    />
+    <img
+      src="/images/schedule/plant-r.png"
+      class="absolute z-20 top-[2%] right-[3.5%] w-[26%] object-cover"
+    />
     {
       filled.length > 0 ? (
-        <div class="mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] grid max-w-[64rem] grid-cols-1 gap-[clamp(1rem,2vw,1.75rem)] md:grid-cols-2">
+        <div class="mx-auto px-[clamp(3rem,6vw,8rem)] mt-[clamp(1.5rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(1rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)] md:grid-cols-2">
           {filled.map((day) => (
-            <section class="panel px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.25rem,2.2vw,2rem)]">
-              <h3 class="font-display text-heading text-haven-orange-bright">
+            <section class="panel px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.25rem,2.2vw,2rem)] bg-haven-brown-light">
+              <h3 class="font-display text-heading text-haven-butter">
                 {day.day}
               </h3>
 
               <ol class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.75rem,1.4vw,1.1rem)]">
                 {day.items.map((item) => (
                   <li class="flex flex-col gap-x-[clamp(0.75rem,1.4vw,1.25rem)] sm:flex-row sm:items-baseline">
-                    <span class="font-display text-subheading whitespace-nowrap text-haven-gold sm:w-[7.25rem] sm:shrink-0">
+                    <span class="font-display text-subheading whitespace-nowrap text-white sm:w-[7.25rem] sm:shrink-0">
                       {item.time}
                     </span>
                     <span class="flex-1">
-                      <span class="block font-display text-subheading text-haven-orange-deep">
+                      <span class="block font-display text-subheading text-white">
                         {item.title}
                       </span>
                       {item.body && (
-                        <span class="mt-0.5 block font-body text-copy text-haven-orange-mid">
+                        <span class="mt-0.5 block font-body text-copy text-white">
                           {item.body}
                         </span>
                       )}

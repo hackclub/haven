@@ -16,26 +16,44 @@ const columns = [
 
 <section
   id="faq"
-  class="scene-harvest relative pb-[clamp(3rem,7vw,6rem)] pt-[clamp(3.5rem,11vw,7.875rem)] md:py-0"
+  class="relative pb-[clamp(1rem,6vw,4rem)] pt-[clamp(3.5rem,11vw,7.875rem)] md:py-0"
 >
-  <div class="shell md:contents">
+  <img
+    src="/images/footer/flags.png"
+    class="absolute inset-x-0 top-[-25%] w-full object-cover z-10"
+  />
+  <img
+    src="/images/faq/fall-shadow.png"
+    class="absolute pointer-events-none z-0 top-6 w-full"
+  />
+  <img
+    src="/images/footer/arrow.png"
+    class="absolute pointer-events-none z-0 bottom-10 w-[10%] right-[26%]"
+  />
+  <img
+    src="/images/footer/arrow.png"
+    class="absolute scale-x-[-1] pointer-events-none z-0 bottom-10 w-[10%] left-[26%]"
+  />
+  <div class="shell">
     <h2
-      class="text-center font-display text-[clamp(3.5rem,8vw,6.25rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-deep md:absolute md:inset-x-0 md:top-[11.5cqw] md:text-[6.94cqw]"
+      class="relative text-center font-display text-[clamp(3.5rem,8vw,6.25rem)] leading-[0.8] tracking-tighter text-white"
     >
       FAQ
     </h2>
 
     <div
-      class="mx-auto mt-[16vw] grid max-w-[68rem] grid-cols-1 items-start gap-x-[clamp(1rem,2vw,1.75rem)] gap-y-[clamp(0.75rem,1.5vw,1.25rem)] md:grid-cols-2 md:absolute md:left-[5.65%] md:mt-0 md:w-[88.7%] md:max-w-none md:top-[30.5cqw] md:gap-x-[21.49%] md:gap-y-[1.1cqw]"
+      class="relative z-10 mx-auto mt-[8vw] grid grid-cols-1 items-start gap-x-[clamp(1rem,2vw,1.75rem)] gap-y-[clamp(0.75rem,1.5vw,1.25rem)] md:w-[88.7%] md:grid-cols-2 md:gap-x-[21.49%] md:gap-y-[1.1cqw]"
     >
       {
         columns.map((column) => (
-          <ul class="flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] md:gap-[1.1cqw]">
-            {column.map((item) => (
-              <li>
-
-                <details class="group rounded-[1.25rem] bg-white/85 md:rounded-[1.4cqw]">
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep group-open:pb-2.5 md:px-[2cqw] md:py-[1.9cqw] md:text-[1.9cqw] md:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
+          <ul class="relative flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] md:gap-[1.1cqw]">
+            {column.map((item, i) => (
+              <li class="relative" style={{ zIndex: column.length - i }}>
+                <details
+                  name="faq-accordion"
+                  class="group relative z-10 rounded-[1.25rem] md:rounded-[1.4cqw]"
+                >
+                  <summary class="relative z-10 flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-white group-open:pb-2.5 md:px-[clamp(2rem,4vw,4rem)] md:pt-[1.5cqw] md:pb-[3cqw] md:text-[1.9cqw] md:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
                     {item.q}
                     <img
                       src="/images/faq-chevron.webp"
@@ -46,7 +64,7 @@ const columns = [
                       class="w-[clamp(1.125rem,1.6vw,1.875rem)] shrink-0 transition-transform transition-ease-in-out duration-200 group-open:rotate-180 md:w-[1.6cqw]"
                     />
                   </summary>
-                  <p class="px-[clamp(1rem,2vw,1.875rem)] pb-[clamp(0.75rem,1.2vw,1.1rem)] font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-haven-orange-deep md:px-[2cqw] md:pb-[1.9cqw] md:text-[1.15cqw]">
+                  <p class="relative z-10 px-[clamp(1rem,2vw,1.875rem)] pb-[clamp(0.75rem,1.2vw,1.1rem)] font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-white md:px-[2cqw] md:pb-[7cqw] md:text-[1.15cqw]">
                     {item.a.map((seg) =>
                       seg.href ? (
                         <a
@@ -64,6 +82,37 @@ const columns = [
                     )}
                   </p>
                 </details>
+
+                <img
+                  src={
+                    i === 0
+                      ? "/images/faq/small-fall-top.png"
+                      : "/images/faq/small-fall.png"
+                  }
+                  alt=""
+                  aria-hidden="true"
+                  class:list={[
+                    "pointer-events-none absolute left-1/2 top-1/2 z-0 max-w-none object-cover [details[open]~&]:hidden",
+                    i === 0
+                      ? "translate-x-[-40%] translate-y-[-60%] w-[50.5vw]"
+                      : "-translate-x-1/2 -translate-y-1/2 w-[40vw]",
+                  ]}
+                />
+                <img
+                  src={
+                    i === 0
+                      ? "/images/faq/big-fall-top.png"
+                      : "/images/faq/big-fall.png"
+                  }
+                  alt=""
+                  aria-hidden="true"
+                  class:list={[
+                    "pointer-events-none absolute left-1/2 top-1/2 z-0 hidden max-w-none object-cover [details[open]~&]:block",
+                    i === 0
+                      ? "translate-x-[-40%] translate-y-[-60%] w-[50.5vw]"
+                      : "-translate-x-1/2 -translate-y-1/2 w-[40vw]",
+                  ]}
+                />
               </li>
             ))}
           </ul>
@@ -73,7 +122,7 @@ const columns = [
 
     <a
       href="#top"
-      class="mx-auto mt-[clamp(2.5rem,6vw,5rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 py-[clamp(1.25rem,2.5vw,2.25rem)] text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mt-[clamp(2.5rem,6vw,5rem)] md:absolute md:left-1/2  md:w-[25%] md:max-w-none md:-translate-x-1/2 md:top-[86cqw] md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
+      class="relative mx-auto my-[clamp(2.5rem,6vw,5rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mt-[clamp(4rem,14vw,10rem)] md:mb-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
     >
       Sign up!
     </a>

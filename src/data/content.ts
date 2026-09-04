@@ -1,4 +1,4 @@
-import type { Linked, Marked, Sponsor } from "./types";
+import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
 
 export const event = {
   name: "Haven",
@@ -10,12 +10,10 @@ export const rsvpCta = {
   label: "Not looking to organize?",
 } as const;
 
-
 export const about = {
   title: "What is a game jam?",
   body: "It’s a social coding event where you make a video game with friends + free food!",
 } as const;
-
 
 export type Perk = {
   id: string;
@@ -36,9 +34,7 @@ export const perks: Perk[] = [
     id: "build",
     title: "Learn & Build",
     side: "start",
-    blurb: [
-      "follow workshops or create at your own pace",
-    ],
+    blurb: ["follow workshops or create at your own pace"],
     photos: [
       {
         src: "/images/projects-1.webp",
@@ -50,7 +46,10 @@ export const perks: Perk[] = [
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
-        caption: { title: "office click clack", author: "by bunnyguy and nathan" },
+        caption: {
+          title: "office click clack",
+          author: "by bunnyguy and nathan",
+        },
       },
     ],
   },
@@ -78,7 +77,6 @@ export const perks: Perk[] = [
     ],
   },
 ];
-
 
 export type Pitch = {
   id: string;
@@ -137,7 +135,6 @@ export const pitches: Pitch[] = [
   },
 ];
 
-
 export const scheduleHeading = "What happens on the day?";
 
 export const scheduleTbd = {
@@ -145,12 +142,44 @@ export const scheduleTbd = {
   body: "We’re still working out the schedule. Sign up and we'll let you know as soon as we figure it out!",
 } as const;
 
+export const schedule: ScheduleDay[] = [
+  {
+    day: "Saturday",
+    items: [
+      {
+        time: "10:00 am",
+        title: "check in :3",
+        body: "yada yada body text",
+      },
+      {
+        time: "11:00 am",
+        title: "meow",
+        body: "yada yada body text",
+      },
+      {
+        time: "12:00 am",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+    ],
+  },
+  {
+    day: "Sundayy",
+    items: [
+      {
+        time: "10:00 am",
+        title: "check in :3",
+        body: "yada yada body text",
+      },
+    ],
+  }
+];
+
 export const stepsHeading =
   "Here is how you can organize a game jam this November!";
 
 export const stepsSubheading =
   "(Don't worry, we'll guide you through each step)";
-
 
 export const steps = [
   {
@@ -273,7 +302,8 @@ export const supporters: Sponsor[] = [
 
 export const sponsorsHeading = "Our sponsors";
 
-const HAVEN_GUIDE_LINK = "https://docs.google.com/document/d/1f_uFvFP4gD01YhXBmU9jBfEBU9QMvr1L5yJTKWBBhbA/edit?usp=sharing";
+const HAVEN_GUIDE_LINK =
+  "https://docs.google.com/document/d/1f_uFvFP4gD01YhXBmU9jBfEBU9QMvr1L5yJTKWBBhbA/edit?usp=sharing";
 const HAVEN_EMAIL = "mailto:haven@hackclub.com";
 
 export const faqs: { q: string; a: Linked }[] = [
@@ -332,7 +362,7 @@ export const faqs: { q: string; a: Linked }[] = [
         text: "We’re here to help! You can see our ",
       },
       { text: "parent guide", href: HAVEN_GUIDE_LINK },
-      { text: " here, or they can reach out to us at "},
+      { text: " here, or they can reach out to us at " },
       { text: "haven@hackclub.com", href: HAVEN_EMAIL },
       { text: " for questions." },
     ],

@@ -151,19 +151,6 @@
     }
   }
 
-  .scene-harvest {
-    min-height: calc(100vw * 1170 / 1149);
-    background:
-      url("/images/faq-bg.webp") top center / 100% auto no-repeat,
-      var(--color-haven-green);
-  }
-
-  @media (width >= 48rem) {
-    .scene-harvest {
-      container-type: inline-size;
-    }
-  }
-
   .rule-frame {
     position: relative;
     --frame-color: var(--color-haven-yellow);

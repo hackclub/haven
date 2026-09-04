@@ -7,9 +7,11 @@ import Pitch from "../components/Pitch.astro";
 import Steps from "../components/Steps.astro";
 import PastEvents from "../components/PastEvents.astro";
 import Sponsors from "../components/Sponsors.astro";
+import Schedule from "../components/Schedule.astro";
 import Faq from "../components/Faq.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { supporters, supportersHeading } from "../data/content";
+import { schedule, scheduleHeading } from "../data/content";
 ---
 
 <Layout>
@@ -38,11 +40,14 @@ import { supporters, supportersHeading } from "../data/content";
       <Steps />
     </div>
 
+
     <div class="stage stage-picnic">
       <PastEvents />
     </div>
 
     <Sponsors heading={supportersHeading} items={supporters} />
+    <Schedule heading={scheduleHeading} days={schedule} />
+
 
     <Faq />
   </main>
