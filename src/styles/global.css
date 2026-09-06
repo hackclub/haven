@@ -14,6 +14,7 @@
   --color-haven-gold: #fba71f;
   --color-haven-brown-dark: #b8774a;
   --color-haven-brown-light: #dda47d;
+  --color-haven-blue-deep: #2cbf90;
 
   --text-hero: clamp(2.75rem, 8vw, min(9rem, 10svh));
   --text-hero--line-height: 0.82;

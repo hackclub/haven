@@ -13,16 +13,21 @@ const rows: Sponsor[][] = [];
 for (let i = 0; i < items.length; i += ROW_SIZE) {
   rows.push(items.slice(i, i + ROW_SIZE));
 }
+const hasMultipleRows = items.length > ROW_SIZE;
 
 const sponsorRowPadding = [
   "top-[0%]",
   "mt-0 sm:mt-[clamp(0rem,1vw,3rem)] md:mt-[clamp(1rem,2vw,5rem)]",
+  "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
+  "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
   "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
 ];
 
 const boxRowPadding = [
   "mt-0",
   "mt-[clamp(2rem,10vw,4rem)] sm:mt-[clamp(2rem,5vw,5rem)] md:mt-[clamp(3rem,7vw,6rem)]",
+  "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
+  "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
   "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
 ];
 ---
@@ -43,48 +48,62 @@ const boxRowPadding = [
           src="/images/sponsors/bushes-1.png"
           class="absolute top-7 z-15 left-[clamp(0.5rem,5vw,1.5rem)] w-[10%] object-cover sm:top-7 sm:left-[clamp(0.5rem,5vw,1.05rem)] md:top-[clamp(3rem,3vw,5rem)] md:left-[clamp(0.5rem,5vw,1.5rem)]"
         />
+        {hasMultipleRows && (
         <img
           src="/images/sponsors/bushes-3.png"
           class="absolute top-[clamp(8.5rem,30vw,18rem)] z-10 -left-[clamp(0.5rem,5vw,1rem)] w-[30%] object-cover sm:top-[clamp(5.5rem,20vw,15rem)] sm:-left-[clamp(1.5rem,7vw,2.5rem)] md:top-[clamp(6.5rem,25vw,20rem)] md:-left-[clamp(1.5rem,7vw,2.5rem)]"
         />
+        )}
         <img
           src="/images/sponsors/grass-1.png"
           class="absolute top-[clamp(5rem,25vw,14rem)] z-5 -left-[clamp(0.5rem,5vw,1rem)] w-[12%] object-cover sm:top-[clamp(4rem,18vw,14rem)] sm:-left-[clamp(0.5rem,5vw,1rem)] md:top-[clamp(5rem,22vw,30rem)] md:-left-[clamp(0.5rem,5vw,1rem)]"
         />
-        <img
-          src="/images/sponsors/grass-2.png"
-          class="absolute bottom-60 z-5 -left-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-left-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-left-[clamp(3rem,9vw,6rem)]"
-        />
-        <img
-          src="/images/sponsors/bushes-2.png"
-          class="absolute bottom-52 z-15 left-[clamp(1rem,6vw,3rem)] w-[15%] object-cover sm:bottom-60 sm:left-[clamp(1rem,6vw,3rem)] md:bottom-[clamp(15rem,30vw,50rem)] md:left-[clamp(1rem,6vw,3rem)]"
-        />
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/grass-2.png"
+            class="absolute bottom-60 z-5 -left-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-left-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-left-[clamp(3rem,9vw,6rem)]"
+          />
+        )}
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/bushes-2.png"
+            class="absolute bottom-52 z-15 left-[clamp(1rem,6vw,3rem)] w-[15%] object-cover sm:bottom-60 sm:left-[clamp(1rem,6vw,3rem)] md:bottom-[clamp(15rem,30vw,50rem)] md:left-[clamp(1rem,6vw,3rem)]"
+          />
+        )}
         <img
           src="/images/sponsors/pumpkin-patch.png"
           class="absolute top-10 -left-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:top-15 sm:-left-[clamp(4rem,14vw,8rem)] md:top-25 md:-left-[clamp(4rem,14vw,18rem)]"
         />
-        <img
-          src="/images/sponsors/pumpkin-patch.png"
-          class="absolute bottom-30 -left-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-35 sm:-left-[clamp(4rem,14vw,8rem)] md:bottom-[clamp(5rem,18vw,14rem)] md:-left-[clamp(4rem,15vw,17rem)]"
-        />
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/pumpkin-patch.png"
+            class="absolute bottom-30 -left-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-35 sm:-left-[clamp(4rem,14vw,8rem)] md:bottom-[clamp(5rem,18vw,14rem)] md:-left-[clamp(4rem,15vw,17rem)]"
+          />
+        )}
       </div>
       <div>
         <img
           src="/images/sponsors/bushes-1.png"
           class="absolute scale-x-[-1] top-7 z-15 right-[clamp(0.5rem,5vw,1.5rem)] w-[10%] object-cover sm:top-7 sm:right-[clamp(0.5rem,5vw,1.05rem)] md:top-[clamp(3rem,3vw,5rem)] md:right[clamp(0.5rem,5vw,1.5rem)]"
         />
-        <img
-          src="/images/sponsors/bushes-3.png"
-          class="absolute scale-x-[-1] bottom-[clamp(8rem,45vw,10rem)] z-15 -right-[clamp(0.5rem,5vw,1rem)] w-[30%] object-cover sm:bottom-43 sm:-right-[clamp(1.5rem,7vw,2.5rem)] md:bottom-[clamp(10rem,20vw,45rem)] md:-right-[clamp(1.5rem,7vw,2.5rem)]"
-        />
-        <img
-          src="/images/sponsors/grass-1.png"
-          class="absolute bottom-52 z-5 -right-[clamp(0.5rem,5vw,1rem)] w-[12%] object-cover sm:top-[clamp(4rem,18vw,14rem)] sm:-right-[clamp(0.5rem,5vw,1rem)] md:top-[clamp(5rem,22vw,30rem)] md:-right-[clamp(0.5rem,5vw,1rem)]"
-        />
-        <img
-          src="/images/sponsors/grass-2.png"
-          class="absolute bottom-60 z-5 -right-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-right-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-right-[clamp(3rem,9vw,6rem)]"
-        />
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/bushes-3.png"
+            class="absolute scale-x-[-1] bottom-[clamp(8rem,45vw,10rem)] z-15 -right-[clamp(0.5rem,5vw,1rem)] w-[30%] object-cover sm:bottom-43 sm:-right-[clamp(1.5rem,7vw,2.5rem)] md:bottom-[clamp(10rem,20vw,45rem)] md:-right-[clamp(1.5rem,7vw,2.5rem)]"
+          />
+        )}
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/grass-1.png"
+            class="absolute bottom-52 z-5 -right-[clamp(0.5rem,5vw,1rem)] w-[12%] object-cover sm:top-[clamp(4rem,18vw,14rem)] sm:-right-[clamp(0.5rem,5vw,1rem)] md:top-[clamp(5rem,22vw,30rem)] md:-right-[clamp(0.5rem,5vw,1rem)]"
+          />
+        )}
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/grass-2.png"
+            class="absolute bottom-60 z-5 -right-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-right-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-right-[clamp(3rem,9vw,6rem)]"
+          />
+        )}
         <img
           src="/images/sponsors/bushes-2.png"
           class="absolute scale-x-[-1] top-[clamp(10rem,30vw,40rem)] z-15 right-[clamp(1rem,6vw,3rem)] w-[15%] object-cover sm:top-[clamp(3.5rem,18vw,1-0rem)] sm:right-[clamp(1rem,6vw,3rem)] md:top-[clamp(6.5rem,25vw,20rem)] md:right-[clamp(1rem,6vw,3rem)]"
@@ -93,10 +112,12 @@ const boxRowPadding = [
           src="/images/sponsors/pumpkin-patch.png"
           class="absolute top-10 -right-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:top-15 sm:-right-[clamp(4rem,14vw,8rem)] md:top-25 md:-right-[clamp(4rem,14vw,18rem)]"
         />
-        <img
-        src="/images/sponsors/pumpkin-patch.png"
-        class="absolute bottom-60 -right-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-75 sm:-right-[clamp(5rem,16vw,9rem)] md:bottom-[clamp(15rem,40vw,50rem)] md:-right-[clamp(5rem,16vw,19rem)]"
-      />
+        {hasMultipleRows && (
+          <img
+            src="/images/sponsors/pumpkin-patch.png"
+            class="absolute bottom-60 -right-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-75 sm:-right-[clamp(5rem,16vw,9rem)] md:bottom-[clamp(15rem,40vw,50rem)] md:-right-[clamp(5rem,16vw,19rem)]"
+          />
+        )}
       </div>
       <div class="pb-[clamp(8rem,20vw,40rem)]">
         <div class="absolute grid grid-cols-[1fr_auto_1fr] z-25 translate-x-[15%] h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)] translate-y-clamp(1rem,3rem-2vw,2.5rem)] sm:translate-y-clamp(0.5rem,3rem-2.5vw,2.5rem)] md:translate-y-[clamp(1.5rem,3.5vw,4rem)]">

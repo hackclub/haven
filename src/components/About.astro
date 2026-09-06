@@ -58,7 +58,7 @@ const stage: Record<string, string> = {
           />
 
           <div class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.png')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]">
-            <ul class="px-2 pt-[clamp(2.5rem,8vw,9rem)] md:px-6 grid grid-cols-2 gap-[clamp(1rem,3vw,5rem)] md:pt-[15%] md:gap-[3%]">
+            <ul class="px-2 pt-[clamp(2.5rem,8vw,7rem)] md:px-6 grid grid-cols-2 gap-[clamp(1rem,3vw,5rem)] md:pt-[15%] md:gap-[3%]">
               {perk.photos.map((photo) => {
                 const Cell = photo.href ? "a" : "div";
                 return (
@@ -81,14 +81,14 @@ const stage: Record<string, string> = {
                         class:list={[
                           "w-full rounded-[clamp(0.625rem,1vw,1rem)] object-cover transition-transform md:rounded-[1cqw]",
                           perk.id === "build"
-                            ? "mt-4 h-[clamp(2.5rem,15vw,4.5rem)] md:h-[6.5cqw]"
+                            ? "mt-[clamp(0.3rem,2vw,3rem)] h-[clamp(2.5rem,15vw,6rem)] md:h-[6.5cqw]"
                             : "h-[clamp(3.5rem,18vw,5rem)] md:h-[9cqw]",
                           photo.href && "group-hover:scale-[1.03]",
                           photo.position,
                         ]}
                       />
                       {photo.caption && (
-                        <span class="mt-1.5 block font-body text-[clamp(0.5rem,1vw,0.8rem)] leading-[clamp(0.5rem,1vw,1.5rem)] tracking-[-0.03em] text-haven-brown-light md:mt-[3%] md:text-[1cqw]">
+                        <span class="mt-1.5 block font-body text-[clamp(0.3rem,1.2vw,1.2rem)] leading-[clamp(0.2rem,1vw,1.5rem)] tracking-[-0.03em] text-haven-brown-light md:mt-[3%] md:text-[1cqw]">
                           <span class="block">{photo.caption.title}</span>
                           <span class="block text-[0.8em]">
                             {photo.caption.author}
@@ -103,10 +103,10 @@ const stage: Record<string, string> = {
             {perk.blurb.map((line) => (
               <p
                 class:list={[
-                  "font-body text-[clamp(0.75rem,3vw,3rem)] leading-[clamp(0.75rem,3vw,1.5rem)] text-haven-brown-dark pb-4 md:text-[1.4cqw] md:leading-[1.15]",
+                  "font-body leading-[clamp(0.75rem,3vw,1.5rem)] text-haven-brown-dark pb-4 md:text-[1.4cqw] md:leading-[1.15]",
                   perk.id === "build"
-                    ? "mt-[clamp(0.3rem,2vw,3rem)] md:mt-[3%]"
-                    : "mt-[clamp(0.5rem,2vw,3rem)] md:mt-[3%]",
+                    ? "text-[clamp(0.45rem,2.1vw,3rem)] mt-[clamp(0.3rem,1vw,1rem)] md:mt-[3%]"
+                    : "text-[clamp(0.75rem,3vw,3rem)] mt-[clamp(0.5rem,2vw,3rem)] md:mt-[3%]",
                 ]}
               >
                 {line}

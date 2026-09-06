@@ -161,6 +161,31 @@ export const schedule: ScheduleDay[] = [
         title: "mraow",
         body: "yada yada body text",
       },
+      {
+        time: "12:00 am",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "1:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "2:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "3:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "4:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
     ],
   },
   {
@@ -270,31 +295,6 @@ export const supporters: Sponsor[] = [
   },
   {
     name: "HCB 3",
-    href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/logos/hcb-icon.png",
-  },
-  {
-    name: "HCB 4",
-    href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/logos/hcb-icon.png",
-  },
-  {
-    name: "HCB 5",
-    href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/logos/hcb-icon.png",
-  },
-  {
-    name: "HCB 6",
-    href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/logos/hcb-icon.png",
-  },
-  {
-    name: "HCB 7",
-    href: "https://hcb.hackclub.com",
-    image: "/images/sponsors/logos/hcb-icon.png",
-  },
-  {
-    name: "HCB 8",
     href: "https://hcb.hackclub.com",
     image: "/images/sponsors/logos/hcb-icon.png",
   },
