@@ -113,8 +113,6 @@
     .stage {
       container-type: inline-size;
       position: relative;
-      max-width: 120rem;
-      margin-inline: auto;
       aspect-ratio: var(--stage-ratio);
     }
   }
