@@ -48,7 +48,7 @@ const stage: Record<string, string> = {
       >
         <div class="relative w-full aspect-1972/1413">
           <img
-            src="/images/about/sign-side.png"
+            src="/images/about/sign-side.webp"
             alt=""
             aria-hidden="true"
             class:list={[
@@ -57,7 +57,7 @@ const stage: Record<string, string> = {
             ]}
           />
 
-          <div class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.png')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]">
+          <div class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.webp')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]">
             <ul class="px-2 pt-[clamp(2.5rem,8vw,7rem)] md:px-6 grid grid-cols-2 gap-[clamp(1rem,3vw,5rem)] md:pt-[15%] md:gap-[3%]">
               {perk.photos.map((photo) => {
                 const Cell = photo.href ? "a" : "div";

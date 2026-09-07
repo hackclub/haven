@@ -121,13 +121,13 @@
 
   .stage-middle {
     --stage-ratio: 1440 / 4500;
-    background-image: url("/images/middle/mid-phone-bg.png");
+    background-image: url("/images/middle/mid-phone-bg.webp");
   }
 
   @media (width >= 40rem) {
     .stage-middle {
       --stage-ratio: 1440 / 4000;
-      background-image: url("/images/middle/mid-phone-bg.png");
+      background-image: url("/images/middle/mid-phone-bg.webp");
     }
   }
 
@@ -140,7 +140,7 @@
 
   .stage-picnic {
     --stage-ratio: 1440 / 4329;
-    background-image: url("/images/middle/picnic-bg-mobile.png");
+    background-image: url("/images/middle/picnic-bg-mobile.webp");
     aspect-ratio: none;
     background-size: cover;
   }
@@ -148,7 +148,7 @@
   @media (width >= 48rem) {
     .stage-picnic {
       --stage-ratio: 1440 / 1067;
-      background-image: url("/images/middle/picnic-bg.png");
+      background-image: url("/images/middle/picnic-bg.webp");
     }
   }
 
