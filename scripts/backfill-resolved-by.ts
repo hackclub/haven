@@ -1,8 +1,11 @@
 import { and, eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/node-postgres";
 import { App, SlackWebAPIPlatformError } from "slack.ts";
-import { db } from "../src/lib/db";
 import { ticketsTable } from "../src/lib/db/schema";
-import { env } from "../src/lib/env";
+
+const db = drizzle(
+  required("SCRIPT_DATABASE_URL", process.env.SCRIPT_DATABASE_URL),
+);
 
 // The migration that turned `resolved` (boolean) into `resolvedBy` (text) had
 // no closer to record, so it stamped every already-closed ticket with this
@@ -20,14 +23,17 @@ function required(name: string, value: string | undefined): string {
   return value;
 }
 
-const botUserId = required("SLACK_BOT_USER_ID", env.SLACK_BOT_USER_ID);
+const botUserId = required(
+  "SCRIPT_SLACK_USER_ID",
+  process.env.SCRIPT_SLACK_USER_ID,
+);
 
 const app = new App({
-  token: required("SLACK_BOT_TOKEN", env.SLACK_BOT_TOKEN),
+  token: required("SCRIPT_SLACK_TOKEN", process.env.SCRIPT_SLACK_TOKEN),
 });
 
 const helpChannel = app.channel(
-  required("SLACK_HELP_CHANNEL", env.SLACK_HELP_CHANNEL),
+  required("SCRIPT_HELP_CHANNEL", process.env.SCRIPT_HELP_CHANNEL),
 );
 
 /** Turns a Slack message timestamp ("1755109123.456789") into a Date. */
