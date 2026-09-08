@@ -58,6 +58,8 @@ export const ticketsTable = pgTable(
     index().on(table.openedBy),
     index().on(table.latestMessageAt),
     index().on(table.createdAt),
+    index().on(table.resolvedBy),
+    index().on(table.resolvedAt),
   ],
 );
 

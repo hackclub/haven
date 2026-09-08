@@ -1,4 +1,5 @@
 import { randomBytes } from "crypto";
+import cron from "node-cron";
 import {
   actions,
   App,
@@ -13,7 +14,17 @@ import {
 import { env } from "./env";
 import { db } from "./db";
 import { ticketsTable, ticketSummariesTable } from "./db/schema";
-import { and, asc, desc, eq, isNotNull, isNull } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gt,
+  isNotNull,
+  isNull,
+  lt,
+} from "drizzle-orm";
 
 export const app = new App({
   token: env.SLACK_BOT_TOKEN,
@@ -125,6 +136,47 @@ if (env.SLACK_HELP_CHANNEL) {
       queueResendTicketsMessage();
 
       await report("add the hourglass reaction", event.react("hourglass"));
+    }
+  });
+}
+
+async function sendLeaderboard() {
+  const resolvers = (
+    await db
+      .select({ user: ticketsTable.resolvedBy, count: count() })
+      .from(ticketsTable)
+      .where(gt(ticketsTable.resolvedAt, new Date(Date.now() - 86400000)))
+      .groupBy(ticketsTable.resolvedBy)
+  ).filter((r) => r.user);
+
+  await app.channel(env.SLACK_TICKETS_CHANNEL!).send({
+    text: "Ticket leaderboard (past 24h)",
+    blocks: blocks(
+      header("Ticket leaderboard (past 24h)"),
+      resolvers.length
+        ? richText(
+            R.list(
+              ...resolvers.map((r) =>
+                R.section(
+                  R.user(r.user!),
+                  ": ",
+                  R.text(`${r.count}`).bold(),
+                  " tickets resolved",
+                ),
+              ),
+            ).numbered(),
+          )
+        : section("No tickets resolved in the past 24h."),
+    ),
+  });
+}
+
+if (env.SLACK_TICKETS_CHANNEL) {
+  cron.schedule("0 0 * * *", sendLeaderboard);
+
+  app.on(`message#${env.SLACK_TICKETS_CHANNEL}`, async (message) => {
+    if (message.text === "!leaderboard") {
+      await sendLeaderboard();
     }
   });
 }
