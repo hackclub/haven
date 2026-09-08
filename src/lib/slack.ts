@@ -13,7 +13,7 @@ import {
 import { env } from "./env";
 import { db } from "./db";
 import { ticketsTable, ticketSummariesTable } from "./db/schema";
-import { and, asc, desc, eq, not } from "drizzle-orm";
+import { and, asc, desc, eq, isNotNull, isNull } from "drizzle-orm";
 
 export const app = new App({
   token: env.SLACK_BOT_TOKEN,
@@ -53,13 +53,16 @@ if (env.SLACK_HELP_CHANNEL) {
         .where(eq(ticketsTable.helpMessageTs, event.thread_ts));
 
       if (!ticket) return;
-      if (ticket.resolved && event.user !== ticket.openedBy) return;
+      if (ticket.resolvedBy && event.user !== ticket.openedBy) return;
 
       const [reopened] = await db
         .update(ticketsTable)
-        .set({ resolved: false, latestMessageAt: new Date() })
+        .set({ resolvedBy: null, latestMessageAt: new Date() })
         .where(
-          and(eq(ticketsTable.id, ticket.id), eq(ticketsTable.resolved, true)),
+          and(
+            eq(ticketsTable.id, ticket.id),
+            isNotNull(ticketsTable.resolvedBy),
+          ),
         )
         .returning({ id: ticketsTable.id });
 
@@ -131,7 +134,7 @@ app.on("action:button.close", async (event) => {
     .where(
       and(
         eq(ticketsTable.helpReplyMessageTs, event.event.container.message_ts),
-        not(ticketsTable.resolved),
+        isNull(ticketsTable.resolvedBy),
       ),
     );
   if (!ticket) return;
@@ -171,8 +174,8 @@ app.on("action:button.close", async (event) => {
   // only announces once.
   const [closed] = await db
     .update(ticketsTable)
-    .set({ resolved: true })
-    .where(and(eq(ticketsTable.id, ticket.id), not(ticketsTable.resolved)))
+    .set({ resolvedBy: event.event.user.id })
+    .where(and(eq(ticketsTable.id, ticket.id), isNull(ticketsTable.resolvedBy)))
     .returning({ id: ticketsTable.id });
   if (!closed) return;
 
@@ -232,7 +235,7 @@ async function resendTicketsMessage() {
   const tickets = await db
     .select()
     .from(ticketsTable)
-    .where(not(ticketsTable.resolved))
+    .where(isNull(ticketsTable.resolvedBy))
     .orderBy(asc(ticketsTable.createdAt))
     .limit(50);
 
