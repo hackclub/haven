@@ -24,6 +24,7 @@ import {
   isNotNull,
   isNull,
   lt,
+  ne,
 } from "drizzle-orm";
 
 export const app = new App({
@@ -145,9 +146,16 @@ async function sendLeaderboard() {
     await db
       .select({ user: ticketsTable.resolvedBy, count: count() })
       .from(ticketsTable)
-      .where(gt(ticketsTable.resolvedAt, new Date(Date.now() - 86400000)))
+      .where(
+        and(
+          gt(ticketsTable.resolvedAt, new Date(Date.now() - 86400000)),
+          ne(ticketsTable.resolvedBy, ticketsTable.openedBy),
+        ),
+      )
       .groupBy(ticketsTable.resolvedBy)
-  ).filter((r) => r.user);
+  )
+    .filter((r) => r.user)
+    .sort((a, b) => b.count - a.count);
 
   await app.channel(env.SLACK_TICKETS_CHANNEL!).send({
     text: "Ticket leaderboard (past 24h)",
