@@ -57,7 +57,11 @@ if (env.SLACK_HELP_CHANNEL) {
 
       const [reopened] = await db
         .update(ticketsTable)
-        .set({ resolvedBy: null, latestMessageAt: new Date() })
+        .set({
+          resolvedBy: null,
+          resolvedAt: null,
+          latestMessageAt: new Date(),
+        })
         .where(
           and(
             eq(ticketsTable.id, ticket.id),
@@ -174,7 +178,7 @@ app.on("action:button.close", async (event) => {
   // only announces once.
   const [closed] = await db
     .update(ticketsTable)
-    .set({ resolvedBy: event.event.user.id })
+    .set({ resolvedBy: event.event.user.id, resolvedAt: new Date() })
     .where(and(eq(ticketsTable.id, ticket.id), isNull(ticketsTable.resolvedBy)))
     .returning({ id: ticketsTable.id });
   if (!closed) return;

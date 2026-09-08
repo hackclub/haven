@@ -45,6 +45,7 @@ export const ticketsTable = pgTable(
     helpMessageTs: text().notNull(),
     helpReplyMessageTs: text().notNull(),
     resolvedBy: text(),
+    resolvedAt: timestamp({ withTimezone: true }),
     openedBy: text().notNull(),
     text: text().notNull(),
     latestMessageAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
