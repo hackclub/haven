@@ -20,7 +20,7 @@ const rsvpUrl = env.RSVP_URL;
 >
   <div class="relative z-10 flex flex-1 items-center justify-center">
     <div
-      class="mx-auto flex w-full max-w-[90rem] flex-col items-center text-center"
+      class="mx-auto flex w-full max-w-[120rem] flex-col items-center text-center"
     >
       <h1
         class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
@@ -46,7 +46,9 @@ const rsvpUrl = env.RSVP_URL;
                   &hearts;
                 </span>
               )}
-              <span class:list={[i === 0 ? "whitespace-nowrap" : "block sm:inline"]}>
+              <span
+                class:list={[i === 0 ? "whitespace-nowrap" : "block sm:inline"]}
+              >
                 {part}
               </span>
             </Fragment>
