@@ -1,14 +1,20 @@
 ---
-import {
-  stepsCta,
-  stepsHeading,
-  stepsSubheading,
-} from "../data/content";
+import { stepsCta, stepsHeading, stepsSubheading } from "../data/content";
 ---
 
 <section
-  class="relative z-0 pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(1.5rem,2vw,2rem)] bg-haven-green md:pb-0 md:aspect-[1440/1000] md:pt-0"
+  class="relative z-20 pt-[clamp(2.5rem,6vw,5rem)] pb-[clamp(1.5rem,2vw,2rem)] bg-haven-green md:pb-0 md:aspect-[1440/1000] md:pt-0"
 >
+  <div class="relative z-10 flex justify-center">
+    <img
+      src="/images/flower-border.webp"
+      alt=""
+      aria-hidden="true"
+      width="3586"
+      height="819"
+      class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-[80%] object-cover md:hidden"
+    />
+  </div>
   <div class="absolute inset-0">
     <img
       src="/images/steps/flowers-top-r.webp"
@@ -16,19 +22,19 @@ import {
       height="1372"
       class="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
-     <img
+    <img
       src="/images/steps/flowers-top-l.webp"
       width="864"
       height="1945"
       class="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
-     <img
+    <img
       src="/images/steps/flowers-bottom-r.webp"
       width="660"
       height="967"
       class="pointer-events-none absolute right-0 bottom-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
-     <img
+    <img
       src="/images/steps/flowers-bottom-l.webp"
       width="642"
       height="660"
