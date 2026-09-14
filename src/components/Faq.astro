@@ -16,7 +16,7 @@ const columns = [
 
 <section
   id="faq"
-  class="relative pb-0 pt-[clamp(3.5rem,11vw,7.875rem)] md:pt-[clamp(2rem,5vw,5rem)]"
+  class="relative pb-0 pt-[clamp(3.5rem,11vw,7.875rem)] md:pt-[clamp(2rem,6vw,15rem)] md:pb-[clamp(2rem,6vw,15rem)]"
 >
   <img
     src="/images/faq/sky.webp"
@@ -34,20 +34,12 @@ const columns = [
     src="/images/faq/bushes-2.webp"
     class="absolute z-15 pointer-events-none -right-[clamp(2rem,28vw,17rem)] top-[clamp(9rem,32vw,20rem)] w-[clamp(8rem,40vw,30rem)] md:top-[clamp(3.5rem,24vw,22rem)]"
   />
-  <img
-    src="/images/footer/arrow.webp"
-    class="absolute pointer-events-none z-20 bottom-[clamp(2rem,30vw,120rem)] w-[18%] right-[8%] md:bottom-[clamp(2rem,20vw,120rem)] md:w-[10%] md:right-[26%]"
-  />
-  <img
-    src="/images/footer/arrow.webp"
-    class="absolute scale-x-[-1] pointer-events-none z-20 bottom-[clamp(2rem,30vw,120rem)] w-[18%] left-[8%] md:bottom-[clamp(2rem,20vw,120rem)] md:w-[10%] md:left-[26%]"
-  />
   <div
-    class="shell pt-[clamp(1rem,8vw,10rem)] pb-[clamp(1rem,4vw,10rem)] md:pt-[clamp(3rem,10vw,10rem)] md:pb-[clamp(2rem,5vw,6rem)]"
+    class="shell pt-[clamp(1rem,8vw,10rem)] pb-[clamp(1rem,4vw,10rem)] md:pt-[clamp(3rem,10vw,10rem)] md:pb-[clamp(2rem,5vw,6rem)] md:px-[clamp(2rem,5vw,6rem)]"
   >
     <img
       src="/images/faq/bushes-3.webp"
-      class="absolute z-10 pointer-events-none left-1/2 -translate-x-1/2 bottom-[clamp(5rem,20vw,25rem)] w-[120%] max-w-none md:bottom-[clamp(0rem,8vw,20rem)]"
+      class="absolute z-10 pointer-events-none left-1/2 -translate-x-1/2 bottom-[clamp(5rem,20vw,25rem)] w-[120%] max-w-none max-h-[80rem] md:bottom-[clamp(0rem,8vw,20rem)]"
     />
     <img
       src="/images/faq/pond-1.webp"
@@ -70,7 +62,7 @@ const columns = [
       class="absolute z-10 pointer-events-none -right-[clamp(2rem,12vw,15rem)] bottom-0 translate-y-1/8 w-[70%] max-w-none md:w-[50%] md:translate-y-1/8 md:bottom-0"
     />
     <h2
-      class="relative z-15 text-center font-display text-[clamp(3.5rem,8vw,6.25rem)] leading-[0.8] tracking-tighter text-white text-shadow-[0_0_10px_var(--color-haven-blue-deep)]"
+      class="relative z-15 text-center font-display text-[clamp(3.5rem,8vw,10rem)] leading-[0.8] tracking-tighter text-white text-shadow-[0_0_10px_var(--color-haven-blue-deep)]"
     >
       FAQ
     </h2>
@@ -101,7 +93,7 @@ const columns = [
                   name="faq-accordion"
                   class="group relative z-10 rounded-[1.25rem] md:rounded-[1.4cqw]"
                 >
-                  <summary class="relative z-10 flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(2rem,12vw,12rem)] pt-[clamp(1rem,2vw,5rem)] pb-[clamp(1rem,12vw,12rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-white group-open:pb-2.5 sm:px-[clamp(2rem,12vw,12rem)] sm:pt-[clamp(1rem,3vw,6rem)] sm:pb-[clamp(1rem,12vw,15rem)] md:px-[clamp(2rem,8vw,8rem)] md:pt-[clamp(0rem,1vw,2rem)] md:pb-[clamp(2rem,6vw,8rem)] md:leading-[1.1] md:text-[clamp(1.125rem,1.6vw,2rem)] md:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
+                  <summary class="relative z-10 flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(2rem,12vw,12rem)] pt-[clamp(1rem,2vw,5rem)] pb-[clamp(1rem,12vw,12rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-white group-open:pb-2.5 sm:px-[clamp(2rem,12vw,12rem)] sm:pt-[clamp(1rem,3vw,6rem)] sm:pb-[clamp(1rem,12vw,15rem)] md:px-[clamp(2rem,8vw,8rem)] md:pt-[clamp(0rem,1vw,2rem)] md:pb-[clamp(2rem,6vw,10rem)] md:leading-[1.1] md:text-[clamp(1.125rem,1.6vw,2rem)] md:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
                     {item.q}
                     <img
                       src="/images/faq/faq-chevron.webp"
@@ -148,11 +140,23 @@ const columns = [
       }
     </div>
 
-    <a
-      href="#top"
-      class="relative z-20 mx-auto py-[clamp(1rem,3vw,5rem)] mt-[clamp(2rem,4vw,8rem)] mb-[clamp(4rem,24vw,20rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mb-[clamp(4rem,14vw,10rem)] md:mt-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
-    >
-      Sign up!
-    </a>
+    <div class="relative flex items-center justify-center mx-auto gap-[clamp(1rem,4vw,5rem)]">
+      <img
+        src="/images/footer/arrow.webp"
+        class="relative scale-x-[-1] pointer-events-none z-20 w-[18%] md:w-[10%] h-auto"
+      />
+
+      <a
+        href="#top"
+        class="relative translate-y-[80%] z-20 py-[clamp(1rem,3vw,5rem)] mt-[clamp(2rem,4vw,8rem)] mb-[clamp(4rem,24vw,20rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mb-[clamp(4rem,14vw,6rem)] md:mt-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
+      >
+        Sign up!
+      </a>
+
+      <img
+        src="/images/footer/arrow.webp"
+        class="relative  pointer-events-none z-20 w-[18%] md:w-[10%] h-auto"
+      />
+    </div>
   </div>
 </section>

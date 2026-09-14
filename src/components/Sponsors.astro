@@ -120,18 +120,18 @@ const boxRowPadding = [
         )}
       </div>
       <div class="pb-[clamp(8rem,20vw,40rem)]">
-        <div class="absolute grid grid-cols-[1fr_auto_1fr] z-25 translate-x-[15%] h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)] translate-y-clamp(1rem,3rem-2vw,2.5rem)] sm:translate-y-clamp(0.5rem,3rem-2.5vw,2.5rem)] md:translate-y-[clamp(1.5rem,3.5vw,4rem)]">
+        <div class="absolute grid grid-cols-[1fr_auto_1fr] z-25 left-1/2 -translate-x-1/2 h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)]">
           <img
             src="/images/sponsors/houses-1-l.webp"
-            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-end"
+            class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-end"
           />
           <img
             src="/images/sponsors/top-house.webp"
-            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-center"
+            class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-center"
           />
           <img
             src="/images/sponsors/houses-1-r.webp"
-            class="h-[clamp(2rem,7vw,10rem)] object-contain justify-self-start"
+            class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-start"
           />
         </div>
         <div class="shell">
@@ -183,7 +183,7 @@ const boxRowPadding = [
                 {row.map((item) => (
                   <li
                     class:list={[
-                      "w-full flex flex-col items-center text-center translate-y-[clamp(0rem,vw,2rem)] ",
+                      "relative w-full flex flex-col items-center z-20 text-center translate-y-[clamp(0rem,vw,2rem)] ",
                       sponsorRowPadding[rowIndex],
                     ]}
                   >
@@ -198,7 +198,7 @@ const boxRowPadding = [
                         alt={item.name}
                         loading="lazy"
                         decoding="async"
-                        class="mx-auto max-h-[clamp(2rem,10vw,12rem)] w-full max-w-32 object-contain"
+                        class="relative mx-auto max-h-[clamp(2rem,10vw,12rem)] z-20 w-full max-w-32 object-contain"
                       />
                       <p class="text-white md:text-[clamp(0.5rem,2vw,2rem)] md:leading-[1.05] md:pt-[clamp(0.5rem,1.2vw,1.2rem)]">
                         {item.name}

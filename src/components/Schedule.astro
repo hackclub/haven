@@ -14,7 +14,7 @@ const filled = days.filter((day) => day.items.length > 0);
 
 <section
   id="schedule"
-  class="relative z-10 bg-haven-green mt-[clamp(2.5rem,10vw,8rem)] mb-[clamp(1rem,5vw,4rem)] py-[clamp(1rem,3vw,4rem)]"
+  class="relative z-10 bg-haven-green mt-[clamp(2.5rem,10vw,15rem)] mb-[clamp(1rem,5vw,8rem)] py-[clamp(1rem,3vw,4rem)]"
 >
   <img
     src="/images/schedule/trail-w.webp"
@@ -54,14 +54,14 @@ const filled = days.filter((day) => day.items.length > 0);
   />
   <img
     src="/images/schedule/sheep.webp"
-    class="absolute z-0 h-[50%] max-h-200 left-[clamp(0rem,3vw,4rem)] bottom-30 object-cover md:left-[clamp(1rem,5vw,4rem)]"
+    class="absolute z-0 h-[50%] max-h-200 left-[clamp(0rem,3vw,4rem)] bottom-30 object-cover md:left-[clamp(1rem,5vw,14rem)]"
   />
   <img
     src="/images/schedule/daven-smol.webp"
     class="absolute z-0 w-[8%] right-3 top-18 object-cover md:right-[clamp(1rem,3vw,4rem)]"
   />
   <div
-    class="w-[70%] shell bg-haven-brown-dark my-2 mb-[clamp(1.5rem,6vw,5rem)] py-6 rounded-[clamp(1rem,2vw,2rem)] sm:my-8 sm:mb-[clamp(2rem,8vw,5rem)] sm:py-8 sm:rounded-[3rem] md:my-16 md:py-16 md:rounded-[5rem]"
+    class="relative w-[70%] z-20 shell bg-haven-brown-dark my-2 mb-[clamp(1.5rem,6vw,5rem)] py-6 rounded-[clamp(1rem,2vw,2rem)] sm:my-8 sm:mb-[clamp(2rem,8vw,5rem)] sm:py-8 sm:rounded-[3rem] md:my-16 md:py-16 md:rounded-[5rem]"
   >
     <h2
       class="relative text-center z-15 font-display text-[clamp(1.75rem,5vw,4rem)] leading-[clamp(1.5rem,1.5vw,1.75rem)] tracking-[-0.05em] text-white"
@@ -70,11 +70,11 @@ const filled = days.filter((day) => day.items.length > 0);
     </h2>
     <img
       src="/images/schedule/plant-l.webp"
-      class="absolute z-10 top-[clamp(-0.9rem,0.8rem-4vw,0.2rem)] left-[clamp(1.8rem,8vw,6rem)] w-[20%] object-cover sm:w-[26%] sm:left-[clamp(2rem,6vw,4rem)] sm:top-[clamp(-0.2rem,1rem-4vw,0.6rem)] md:left-[clamp(2rem,6vw,5rem)] md:top-[clamp(-1rem,16rem-24vw,2rem)]"
+      class="absolute z-10 top-[clamp(-0.9rem,0.8rem-4vw,0.2rem)] left-[clamp(1.8rem,8vw,6rem)] w-[20%] object-cover block sm:w-[26%] sm:left-[clamp(2rem,6vw,4rem)] sm:top-[clamp(-0.2rem,1rem-4vw,0.6rem)] md:hidden"
     />
     <img
       src="/images/schedule/plant-r.webp"
-      class="absolute z-10 top-[clamp(-0.7rem,1rem-4vw,0.2rem)] right-[clamp(2.3rem,9vw,6rem)] w-[26%] object-cover sm:w-[32%] sm:right-[clamp(3rem,8vw,6rem)] sm:top-[clamp(0.8rem,0.1rem-4vw,1.5rem)] md:right-[clamp(3rem,8vw,7.5rem)] md:top-[clamp(0.2rem,28rem-30vw,2rem)]"
+      class="absolute z-10 top-[clamp(-0.7rem,1rem-4vw,0.2rem)] right-[clamp(2.3rem,9vw,6rem)] w-[26%] object-cover block sm:w-[32%] sm:right-[clamp(3rem,8vw,6rem)] sm:top-[clamp(0.8rem,0.1rem-4vw,1.5rem)] md:hidden"
     />
     {
       filled.length > 0 ? (
