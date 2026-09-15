@@ -1,5 +1,5 @@
 ---
-import { event, rsvpCta } from "../data/content";
+import { event, eventPoc, rsvpCta } from "../data/content";
 import { env } from "../lib/env";
 import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
@@ -10,7 +10,11 @@ interface Props {
   poc: boolean;
 }
 
-const { title = event.title, tagline = event.tagline, poc } = Astro.props;
+const {
+  poc,
+  title = poc ? eventPoc.title : event.title,
+  tagline = poc ? eventPoc.tagline : event.tagline,
+} = Astro.props;
 
 const rsvpUrl = env.RSVP_URL;
 ---
@@ -130,7 +134,7 @@ const rsvpUrl = env.RSVP_URL;
   <div class:list={[poc ? "block" : "hidden"]}>
     <div class="relative z-10 flex flex-1 items-center justify-center">
       <div
-        class="mx-auto flex w-full max-w-[120rem] flex-col items-center text-center"
+        class="mx-auto flex w-full mt-[clamp(1rem,7vw,15rem)] max-w-[120rem] flex-col items-center text-center"
       >
         <h1
           class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
@@ -146,7 +150,7 @@ const rsvpUrl = env.RSVP_URL;
         </h1>
 
         <p
-          class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
+          class="glow-orange mt-[clamp(1rem,2.5vw,4rem)] font-body text-subheading text-white"
         >
           {
             tagline.map((part, i) => (
@@ -170,7 +174,7 @@ const rsvpUrl = env.RSVP_URL;
 
         <SignupForm
           poc={poc}
-          class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,35vw,52rem)]"
+          class="mt-[clamp(1.5rem,3vw,4rem)] w-[clamp(15rem,35vw,52rem)]"
         />
 
         {
@@ -190,7 +194,7 @@ const rsvpUrl = env.RSVP_URL;
     </div>
 
     <div
-      class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center"
+      class="absolute z-10 shell left-1/2 -translate-x-1/2 bottom-[clamp(3rem,3vw,10rem)] justify-center"
     >
       <a href="#about" class="flex-col items-center gap-1">
         <span class="font-body text-[clamp(0.5rem,3vw,1.5rem)] text-white/60"
