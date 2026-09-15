@@ -16,7 +16,7 @@
   --color-haven-brown-light: #dda47d;
   --color-haven-blue-deep: #2cbf90;
 
-  --text-hero: clamp(2.75rem, 8vw, min(9rem, 10svh));
+  --text-hero: clamp(2.75rem, 6vw, 10rem);
   --text-hero--line-height: 0.82;
   --text-hero--letter-spacing: -0.05em;
 
@@ -45,7 +45,7 @@
 
 @layer base {
   :root {
-    --logo-w: clamp(8rem, 15vw, 12rem);
+    --logo-w: clamp(8rem, 10vw, 12rem);
     --logo-top: clamp(2.5rem, 3vw, 3.75rem);
     --logo-h: calc(var(--logo-w) * 445 / 778);
     --logo-gap: clamp(2rem, 2.5vw, 3rem);

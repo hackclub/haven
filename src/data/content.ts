@@ -2,13 +2,24 @@ import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
 
 export const event = {
   name: "Haven",
-  title: ["Organize a game jam", "in your city!"],
+  title: ["Game jam in", "200+ cities worldwide!"],
   tagline: ["Nov 14–15", "For teens 13-18 around the world"],
 } as const;
 
 export const rsvpCta = {
+  label: "Want to organize your own Haven?",
+} as const;
+
+export const eventPoc = {
+  name: "Haven",
+  title: ["Organize a game jam", "in your city!"],
+  tagline: ["Nov 14–15", "For teens 13-18 around the world"],
+} as const;
+
+export const rsvpCtaPoc = {
   label: "Not looking to organize?",
 } as const;
+
 
 export const about = {
   title: "What is a game jam?",
@@ -88,6 +99,55 @@ export type Pitch = {
 export const pitchHeading = "Don’t game jams sound awesome?";
 
 export const pitches: Pitch[] = [
+  {
+    id: "invite",
+    align: "end",
+    tail: {
+      "--tail-size": "4.5rem",
+      "--tail-rotate": "18deg",
+      "--tail-right": "2.5rem",
+      "--tail-bottom": "-2.25rem",
+    },
+    body: [
+      { text: "This November, " },
+      { text: "YOU can join the world's largest teen game jam.", mark: true },
+      {
+        text: " Yes, you! It doesn’t matter if you have years of experience, or just learned what they are today.",
+      },
+    ],
+  },
+  {
+    id: "support",
+    align: "start",
+    body: [
+      { text: "You’ll " },
+      { text: "join thousands of teens", mark: true },
+      {
+        text: " making games from all around the world. Don't consider yourself a game dev? No problem - we have tons of workshops for you to make your game!",
+      },
+    ],
+  },
+  {
+    id: "impact",
+    align: "center",
+    tail: {
+      "--tail-size": "4.5rem",
+      "--tail-rotate": "-28deg",
+      "--tail-right": "-2.25rem",
+      "--tail-top": "2.5rem",
+    },
+    body: [
+      { text: "This is your chance to " },
+      { text: "learn something new,", mark: true },
+      { text: " " },
+      { text: "meet new friends,", mark: true },
+      { text: " and" },
+      { text: "go on an incredible adventure together!", mark: true },
+    ],
+  },
+];
+
+export const pitchesPoc: Pitch[] = [
   {
     id: "invite",
     align: "end",
@@ -201,11 +261,15 @@ export const schedule: ScheduleDay[] = [
 ];
 
 export const stepsHeading =
+  "Here is how you can join a game jam this November!";
+
+export const stepsHeadingPoc =
   "Here is how you can organize a game jam this November!";
 
 export const stepsSubheading =
   "(Don't worry, we'll guide you through each step)";
 
+  
 export const steps = [
   {
     title: "find a team of coorganizers",
@@ -235,7 +299,7 @@ export const stepsCta = {
 };
 
 export const pastEventsHeading = [
-  "We’ve helped teens organize hundreds of events around the world!",
+  "Hack Club has helped teens organize hundreds of events woldwide!",
   "Check out some of our past events ~",
 ];
 

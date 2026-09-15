@@ -1,5 +1,11 @@
 ---
-import { pitchHeading, pitches } from "../data/content";
+import { pitchHeading, pitches, pitchesPoc } from "../data/content";
+
+interface Props {
+  poc: boolean;
+}
+
+const { poc } = Astro.props;
 
 const stage: Record<string, string> = {
   triangles: "md:absolute md:left-[24.9%] md:top-[55%] md:w-[53.3%]",
@@ -61,7 +67,7 @@ const bubblePadding: Record<string, string> = {
       class="flex flex-col left-0 md:absolute md:left-[13.26%] md:top-[65%] md:flex md:w-[61.11%] md:flex-col md:gap-[2.83cqw]"
     >
       {
-        pitches.map((pitch) => (
+        (poc ? pitchesPoc : pitches).map((pitch) => (
           <div
             class:list={[
               "relative w-full md:max-w-none",

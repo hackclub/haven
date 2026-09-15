@@ -7,9 +7,10 @@ import VideoPanel from "./VideoPanel.astro";
 interface Props {
   title?: readonly string[];
   tagline?: readonly string[];
+  poc: boolean;
 }
 
-const { title = event.title, tagline = event.tagline } = Astro.props;
+const { title = event.title, tagline = event.tagline, poc } = Astro.props;
 
 const rsvpUrl = env.RSVP_URL;
 ---
@@ -18,102 +19,218 @@ const rsvpUrl = env.RSVP_URL;
   id="top"
   class="rule-frame relative isolate flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero/hero-bg-no-sticky-tree.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
-  <div class="relative z-10 flex flex-1 items-center justify-center">
-    <div
-      class="mx-auto flex w-full max-w-[120rem] flex-col items-center text-center"
-    >
-      <h1
-        class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+  <div class:list={[poc ? "hidden" : "block md:contents"]}>
+    <div class="relative z-10 flex flex-1 items-center justify-center mt-[clamp(1rem,3vw,15rem)] md:mt-0 md:-translate-y-[5svh]">
+      <div
+        class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center md:pl-[clamp(1rem,4vw,8rem)] md:pr-[clamp(20rem,45vw,60rem)]"
       >
-        {
-          title.map((line, i) => (
-            <span class="block">
-              {i > 0 ? " " : ""}
-              {line}
-            </span>
-          ))
-        }
-      </h1>
-
-      <p
-        class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
-      >
-        {
-          tagline.map((part, i) => (
-            <Fragment>
-              {i > 0 && (
-                <span aria-hidden="true" class="mx-2 hidden sm:inline">
-                  &hearts;
-                </span>
-              )}
-              <span
-                class:list={[i === 0 ? "whitespace-nowrap" : "block sm:inline"]}
-              >
-                {part}
+        <h1
+          class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+        >
+          {
+            title.map((line, i) => (
+              <span class="block">
+                {i > 0 ? " " : ""}
+                {line}
               </span>
-            </Fragment>
-          ))
+            ))
+          }
+        </h1>
+
+        <p
+          class="glow-orange mt-[clamp(1rem,2.5vw,3rem)] font-body text-subheading text-white"
+        >
+          {
+            tagline.map((part, i) => (
+              <Fragment>
+                {i > 0 && (
+                  <span aria-hidden="true" class="mx-2 hidden sm:inline">
+                    &hearts;
+                  </span>
+                )}
+                <span
+                  class:list={[
+                    i === 0 ? "whitespace-nowrap" : "block sm:inline",
+                  ]}
+                >
+                  {part}
+                </span>
+              </Fragment>
+            ))
+          }
+        </p>
+
+        <SignupForm
+          poc={poc}
+          class="mt-[clamp(1.5rem,3vw,3rem)] w-[min(90%,28rem)] md:w-[clamp(15rem,35vw,60rem)]"
+        />
+
+        {
+          rsvpUrl && (
+            <a
+              data-rsvp-link
+              href={rsvpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 md:text-[clamp(0.9rem,1.6vw,1.75rem)]"
+            >
+              {rsvpCta.label}
+            </a>
+          )
         }
-      </p>
-
-      <SignupForm
-        class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]"
-      />
-
-      {
-        rsvpUrl && (
-          <a
-            data-rsvp-link
-            href={rsvpUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
-          >
-            {rsvpCta.label}
-          </a>
-        )
-      }
+      </div>
     </div>
+
+    <div
+      class="absolute z-10 shell left-1/2 -translate-x-1/2 bottom-[clamp(3rem,3vw,10rem)] justify-center"
+    >
+      <a href="#about" class="flex-col items-center gap-1">
+        <span class="font-body text-[clamp(0.5rem,3vw,3rem)] text-white/60"
+          >more info</span
+        >
+        <img
+          src="/images/triangle-down.svg"
+          alt=""
+          aria-hidden="true"
+          width="207"
+          height="69"
+          class="w-[clamp(2rem,12vw,12rem)] -scale-y-100"
+        />
+      </a>
+    </div>
+
+    <div
+      class:list={[
+        "panel bg-haven-green-deep relative z-20 mx-auto mt-[clamp(2rem,6vw,3rem)] w-[min(90%,28rem)] h-[clamp(12rem,50vw,30rem)] md:absolute md:right-0 md:top-1/2 md:mx-[clamp(1.5rem,4vw,8rem)] md:mt-0 md:w-[clamp(15rem,35vw,52rem)] md:h-[clamp(15rem,20vw,30rem)] md:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] lg:h-[clamp(15rem,30vw,60rem)]",
+        poc ? "hidden" : "block",
+      ]}
+    >
+    </div>
+
+    <img
+      src="/images/hedgehog.webp"
+      alt=""
+      aria-hidden="true"
+      width="422"
+      height="308"
+      class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[15%] sm:max-w-[21rem]"
+    />
+
+    <img
+      src="/images/hero-foreground.webp"
+      alt=""
+      aria-hidden="true"
+      width="1414"
+      height="501"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
+    />
   </div>
 
-  <div
-    class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center"
-  >
-    <a href="#about" class="flex-col items-center gap-1">
-      <span class="font-body text-[clamp(0.5rem,3vw,1.5rem)] text-white/60">more info</span>
-      <img
-        src="/images/triangle-down.svg"
-        alt=""
-        aria-hidden="true"
-        width="207"
-        height="69"
-        class="w-[clamp(2rem,12vw,6rem)] -scale-y-100"
-      />
-    </a>
+  {/* poc version ok don't change thisss */}
+  <div class:list={[poc ? "block" : "hidden"]}>
+    <div class="relative z-10 flex flex-1 items-center justify-center">
+      <div
+        class="mx-auto flex w-full max-w-[120rem] flex-col items-center text-center"
+      >
+        <h1
+          class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+        >
+          {
+            title.map((line, i) => (
+              <span class="block">
+                {i > 0 ? " " : ""}
+                {line}
+              </span>
+            ))
+          }
+        </h1>
+
+        <p
+          class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
+        >
+          {
+            tagline.map((part, i) => (
+              <Fragment>
+                {i > 0 && (
+                  <span aria-hidden="true" class="mx-2 hidden sm:inline">
+                    &hearts;
+                  </span>
+                )}
+                <span
+                  class:list={[
+                    i === 0 ? "whitespace-nowrap" : "block sm:inline",
+                  ]}
+                >
+                  {part}
+                </span>
+              </Fragment>
+            ))
+          }
+        </p>
+
+        <SignupForm
+          poc={poc}
+          class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,35vw,52rem)]"
+        />
+
+        {
+          rsvpUrl && (
+            <a
+              data-rsvp-link
+              href={rsvpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
+            >
+              {rsvpCta.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <div
+      class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center"
+    >
+      <a href="#about" class="flex-col items-center gap-1">
+        <span class="font-body text-[clamp(0.5rem,3vw,1.5rem)] text-white/60"
+          >more info</span
+        >
+        <img
+          src="/images/triangle-down.svg"
+          alt=""
+          aria-hidden="true"
+          width="207"
+          height="69"
+          class="w-[clamp(2rem,12vw,6rem)] -scale-y-100"
+        />
+      </a>
+    </div>
+
+    <VideoPanel
+      videoId="8tNEPMI5wss"
+      class =
+        "relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
+    />
+
+    <img
+      src="/images/hedgehog.webp"
+      alt=""
+      aria-hidden="true"
+      width="422"
+      height="308"
+      class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
+    />
+
+    <img
+      src="/images/hero-foreground.webp"
+      alt=""
+      aria-hidden="true"
+      width="1414"
+      height="501"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
+    />
   </div>
-
-  <VideoPanel
-    videoId="8tNEPMI5wss"
-    class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
-  />
-
-  <img
-    src="/images/hedgehog.webp"
-    alt=""
-    aria-hidden="true"
-    width="422"
-    height="308"
-    class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
-  />
-
-  <img
-    src="/images/hero-foreground.webp"
-    alt=""
-    aria-hidden="true"
-    width="1414"
-    height="501"
-    class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
-  />
 </section>
 
 <script>
