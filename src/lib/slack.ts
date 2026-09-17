@@ -316,12 +316,10 @@ async function resendTicketsMessage() {
     try {
       await app.request("chat.delete", { channel, ts: summary.ts });
     } catch (error) {
-      if (
-        !(
-          error instanceof SlackWebAPIPlatformError &&
-          error.error === "message_not_found"
-        )
-      ) {
+      if (!(
+        error instanceof SlackWebAPIPlatformError &&
+        error.error === "message_not_found"
+      )) {
         console.error("Failed to delete a stale tickets message:", error);
         continue;
       }
