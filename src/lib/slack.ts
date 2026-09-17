@@ -1,4 +1,5 @@
 import { randomBytes } from "crypto";
+import cron from "node-cron";
 import {
   actions,
   App,
@@ -13,7 +14,18 @@ import {
 import { env } from "./env";
 import { db } from "./db";
 import { ticketsTable, ticketSummariesTable } from "./db/schema";
-import { and, asc, desc, eq, not } from "drizzle-orm";
+import {
+  and,
+  asc,
+  count,
+  desc,
+  eq,
+  gt,
+  isNotNull,
+  isNull,
+  lt,
+  ne,
+} from "drizzle-orm";
 
 export const app = new App({
   token: env.SLACK_BOT_TOKEN,
@@ -44,7 +56,7 @@ function report<T>(what: string, promise: Promise<T>) {
 if (env.SLACK_HELP_CHANNEL) {
   app.on(`message#${env.SLACK_HELP_CHANNEL}`, async (event) => {
     if (event.user === env.SLACK_BOT_USER_ID) return;
-    if (event.subtype && (event.subtype as string) !== "file_shared") return;
+    if (event.subtype && event.subtype !== "file_share") return;
 
     if (event.thread_ts) {
       const [ticket] = await db
@@ -53,13 +65,20 @@ if (env.SLACK_HELP_CHANNEL) {
         .where(eq(ticketsTable.helpMessageTs, event.thread_ts));
 
       if (!ticket) return;
-      if (ticket.resolved && event.user !== ticket.openedBy) return;
+      if (ticket.resolvedBy && event.user !== ticket.openedBy) return;
 
       const [reopened] = await db
         .update(ticketsTable)
-        .set({ resolved: false, latestMessageAt: new Date() })
+        .set({
+          resolvedBy: null,
+          resolvedAt: null,
+          latestMessageAt: new Date(),
+        })
         .where(
-          and(eq(ticketsTable.id, ticket.id), eq(ticketsTable.resolved, true)),
+          and(
+            eq(ticketsTable.id, ticket.id),
+            isNotNull(ticketsTable.resolvedBy),
+          ),
         )
         .returning({ id: ticketsTable.id });
 
@@ -122,6 +141,54 @@ if (env.SLACK_HELP_CHANNEL) {
   });
 }
 
+async function sendLeaderboard() {
+  const resolvers = (
+    await db
+      .select({ user: ticketsTable.resolvedBy, count: count() })
+      .from(ticketsTable)
+      .where(
+        and(
+          gt(ticketsTable.resolvedAt, new Date(Date.now() - 86400000)),
+          ne(ticketsTable.resolvedBy, ticketsTable.openedBy),
+        ),
+      )
+      .groupBy(ticketsTable.resolvedBy)
+  )
+    .filter((r) => r.user)
+    .sort((a, b) => b.count - a.count);
+
+  await app.channel(env.SLACK_TICKETS_CHANNEL!).send({
+    text: "Ticket leaderboard (past 24h)",
+    blocks: blocks(
+      header("Ticket leaderboard (past 24h)"),
+      resolvers.length
+        ? richText(
+            R.list(
+              ...resolvers.map((r) =>
+                R.section(
+                  R.user(r.user!),
+                  ": ",
+                  R.text(`${r.count}`).bold(),
+                  " tickets resolved",
+                ),
+              ),
+            ).numbered(),
+          )
+        : section("No tickets resolved in the past 24h."),
+    ),
+  });
+}
+
+if (env.SLACK_TICKETS_CHANNEL) {
+  cron.schedule("0 0 * * *", sendLeaderboard);
+
+  app.on(`message#${env.SLACK_TICKETS_CHANNEL}`, async (message) => {
+    if (message.text === "!leaderboard") {
+      await sendLeaderboard();
+    }
+  });
+}
+
 app.on("action:button.close", async (event) => {
   if (event.event.container.type !== "message") return;
 
@@ -131,7 +198,7 @@ app.on("action:button.close", async (event) => {
     .where(
       and(
         eq(ticketsTable.helpReplyMessageTs, event.event.container.message_ts),
-        not(ticketsTable.resolved),
+        isNull(ticketsTable.resolvedBy),
       ),
     );
   if (!ticket) return;
@@ -171,8 +238,8 @@ app.on("action:button.close", async (event) => {
   // only announces once.
   const [closed] = await db
     .update(ticketsTable)
-    .set({ resolved: true })
-    .where(and(eq(ticketsTable.id, ticket.id), not(ticketsTable.resolved)))
+    .set({ resolvedBy: event.event.user.id, resolvedAt: new Date() })
+    .where(and(eq(ticketsTable.id, ticket.id), isNull(ticketsTable.resolvedBy)))
     .returning({ id: ticketsTable.id });
   if (!closed) return;
 
@@ -232,7 +299,7 @@ async function resendTicketsMessage() {
   const tickets = await db
     .select()
     .from(ticketsTable)
-    .where(not(ticketsTable.resolved))
+    .where(isNull(ticketsTable.resolvedBy))
     .orderBy(asc(ticketsTable.createdAt))
     .limit(50);
 

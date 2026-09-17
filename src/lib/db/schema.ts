@@ -44,8 +44,8 @@ export const ticketsTable = pgTable(
     id: uuid().primaryKey().defaultRandom(),
     helpMessageTs: text().notNull(),
     helpReplyMessageTs: text().notNull(),
-    // ticketsMessageTs: text().notNull(),
-    resolved: boolean().notNull().default(false),
+    resolvedBy: text(),
+    resolvedAt: timestamp({ withTimezone: true }),
     openedBy: text().notNull(),
     text: text().notNull(),
     latestMessageAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
@@ -58,6 +58,8 @@ export const ticketsTable = pgTable(
     index().on(table.openedBy),
     index().on(table.latestMessageAt),
     index().on(table.createdAt),
+    index().on(table.resolvedBy),
+    index().on(table.resolvedAt),
   ],
 );
 
