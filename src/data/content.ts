@@ -2,8 +2,8 @@ import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
 
 export const event = {
   name: "Haven",
-  title: ["Game jam in", "200+ cities worldwide!"],
-  tagline: ["Nov 14–15", "For teens 13-18 around the world"],
+  title: ["Burlington"],
+  tagline: ["Game jam for teens in 200+ cities", "Hosted at [venue]", "Nov 14–15, 2026"],
 } as const;
 
 export const rsvpCta = {

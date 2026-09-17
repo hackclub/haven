@@ -16,7 +16,7 @@
   --color-haven-brown-light: #dda47d;
   --color-haven-blue-deep: #2cbf90;
 
-  --text-hero: clamp(2.75rem, 6vw, 10rem);
+  --text-hero: clamp(2rem, 5vw, 10rem);
   --text-hero--line-height: 0.82;
   --text-hero--letter-spacing: -0.05em;
 
