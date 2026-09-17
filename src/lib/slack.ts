@@ -56,7 +56,7 @@ function report<T>(what: string, promise: Promise<T>) {
 if (env.SLACK_HELP_CHANNEL) {
   app.on(`message#${env.SLACK_HELP_CHANNEL}`, async (event) => {
     if (event.user === env.SLACK_BOT_USER_ID) return;
-    if (event.subtype && (event.subtype as string) !== "file_shared") return;
+    if (event.subtype && event.subtype !== "file_share") return;
 
     if (event.thread_ts) {
       const [ticket] = await db
