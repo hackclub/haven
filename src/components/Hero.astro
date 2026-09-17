@@ -1,5 +1,5 @@
 ---
-import { event, eventPoc, rsvpCta } from "../data/content";
+import { event, eventPoc, rsvpCta, rsvpCtaPoc } from "../data/content";
 import { env } from "../lib/env";
 import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
@@ -194,7 +194,7 @@ const rsvpUrl = env.RSVP_URL;
               rel="noopener noreferrer"
               class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
             >
-              {rsvpCta.label}
+              {poc? rsvpCtaPoc.label : rsvpCta.label}
             </a>
           )
         }
