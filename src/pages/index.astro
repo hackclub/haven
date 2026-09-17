@@ -8,10 +8,12 @@ import Steps from "../components/Steps.astro";
 import PastEvents from "../components/PastEvents.astro";
 import Faq from "../components/Faq.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+{/* 
 import Sponsors from "../components/Sponsors.astro";
 import Schedule from "../components/Schedule.astro";
 import { supporters, supportersHeading } from "../data/content";
 import { schedule, scheduleHeading } from "../data/content";
+*/}
 
 const isPoc = true;
 ---
@@ -31,15 +33,19 @@ const isPoc = true;
       <Steps poc={isPoc} />
     </div>
 
+    {/* 
     <div class="relative z-10">
       <Schedule heading={scheduleHeading} days={schedule} />
     </div>
+    */}
 
     <div class="stage stage-picnic">
       <PastEvents />
     </div>
 
+    {/* 
     <Sponsors heading={supportersHeading} items={supporters} />
+    */}
 
     <Faq />
   </main>
