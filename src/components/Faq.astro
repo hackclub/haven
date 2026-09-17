@@ -1,75 +1,108 @@
 ---
-import { faqs } from "../data/content";
+import { faqs} from "../data/content";
 import type { FaqItem } from "../data/types";
 
 interface Props {
-  /** City pages answer their own questions; the home page takes these. */
   items?: FaqItem[];
 }
 
 const { items = faqs } = Astro.props;
 
-/* The design reads down two columns: odd entries left, even entries right.
-   A two-column grid fills across, so split the list first to preserve order. */
 const columns = [
   items.filter((_, i) => i % 2 === 0),
   items.filter((_, i) => i % 2 === 1),
 ];
 ---
 
-{
-  /*
-  Real <details>/<summary> disclosures.
-
-  Below `lg` this is an ordinary centred column and the carrot field is just
-  ambient backdrop. From `lg` up the section becomes a stage (see
-  `.scene-harvest`) and each block is placed in `cqw`/% against the painting,
-  so the two columns sit *on* the carrot beds instead of straddling the grass
-  path between them, and the heading lands on the signpost.
-*/
-}
 <section
   id="faq"
-  class="scene-harvest relative pb-[clamp(3rem,7vw,6rem)] pt-[clamp(3.5rem,11vw,7.875rem)] lg:py-0"
+  class="relative pb-0 pt-[clamp(3.5rem,11vw,7.875rem)] md:pt-[clamp(2rem,6vw,15rem)] md:pb-[clamp(2rem,6vw,15rem)]"
 >
-  <div class="shell lg:contents">
+  <img
+    src="/images/faq/sky.webp"
+    class="absolute z-10 pointer-events-none top-0 w-full -translate-y-[clamp(0.5rem,2vw,1rem)] md:-translate-y-[clamp(2rem,9vw,6rem)]"
+  />
+  <img
+    src="/images/faq/ground.webp"
+    class="absolute z-10 pointer-events-none top-[clamp(10rem,40vw,16rem)] w-full md:top-[clamp(3.5rem,32vw,25rem)]"
+  />
+  <img
+    src="/images/faq/bushes-1.webp"
+    class="absolute z-15 pointer-events-none -left-[clamp(2rem,24vw,17rem)] top-[clamp(9rem,28vw,16rem)] w-[clamp(8rem,40vw,30rem)] md:top-[clamp(3.5rem,20vw,18rem)]"
+  />
+  <img
+    src="/images/faq/bushes-2.webp"
+    class="absolute z-15 pointer-events-none -right-[clamp(2rem,28vw,17rem)] top-[clamp(9rem,32vw,20rem)] w-[clamp(8rem,40vw,30rem)] md:top-[clamp(3.5rem,24vw,22rem)]"
+  />
+  <div
+    class="shell pt-[clamp(1rem,8vw,10rem)] pb-[clamp(1rem,4vw,10rem)] md:pt-[clamp(3rem,10vw,10rem)] md:pb-[clamp(2rem,5vw,6rem)] md:px-[clamp(2rem,5vw,6rem)]"
+  >
+    <img
+      src="/images/faq/bushes-3.webp"
+      class="absolute z-10 pointer-events-none left-1/2 -translate-x-1/2 bottom-[clamp(5rem,20vw,25rem)] w-[120%] max-w-none max-h-[80rem] md:bottom-[clamp(0rem,8vw,20rem)]"
+    />
+    <img
+      src="/images/faq/pond-1.webp"
+      class="absolute z-10 pointer-events-none left-[clamp(2rem,5vw,5rem)] bottom-[clamp(7rem,28vw,35rem)] w-[88%] sm:w-[60%] md:bottom-[clamp(2rem,20vw,24rem)]"
+    />
+    <img
+      src="/images/faq/pond-2.webp"
+      class="absolute z-10 pointer-events-none right-[clamp(2rem,5vw,5rem)] bottom-[clamp(5rem,25vw,25rem)] w-[60%] md:bottom-[clamp(2rem,10vw,15rem)]"
+    />
+    <img
+      src="/images/faq/pond-3.webp"
+      class="absolute z-10 pointer-events-none left-1/2 -translate-x-1/2 bottom-[clamp(2rem,4vw,10rem)] w-[85%] md:bottom-[clamp(1rem,0vw,10rem)]"
+    />
+    <img
+      src="/images/faq/bushes-5.webp"
+      class="absolute z-10 pointer-events-none -left-[clamp(2rem,12vw,15rem)] bottom-0 translate-y-1/8 w-[70%] max-w-none md:w-[50%] md:translate-y-1/8 md:bottom-0"
+    />
+    <img
+      src="/images/faq/bushes-4.webp"
+      class="absolute z-10 pointer-events-none -right-[clamp(2rem,12vw,15rem)] bottom-0 translate-y-1/8 w-[70%] max-w-none md:w-[50%] md:translate-y-1/8 md:bottom-0"
+    />
     <h2
-      class="text-center font-display text-[clamp(3.5rem,8vw,6.25rem)] leading-[0.8] tracking-[-0.05em] text-haven-orange-deep lg:absolute lg:inset-x-0 lg:top-[11.5cqw] lg:text-[6.94cqw]"
+      class="relative z-15 text-center font-display text-[clamp(3.5rem,8vw,10rem)] leading-[0.8] tracking-tighter text-white text-shadow-[0_0_10px_var(--color-haven-blue-deep)]"
     >
       FAQ
     </h2>
 
-    {
-      /* Left column 5.65%..40.47%, right 59.53%..94.35% — i.e. an 88.7%-wide
-        block whose 21.49% inner gutter clears the grass path down the middle. */
-    }
     <div
-      class="mx-auto mt-[16vw] grid max-w-[68rem] grid-cols-1 items-start gap-x-[clamp(1rem,2vw,1.75rem)] gap-y-[clamp(0.75rem,1.5vw,1.25rem)] md:grid-cols-2 lg:absolute lg:left-[5.65%] lg:mt-0 lg:w-[88.7%] lg:max-w-none lg:top-[30.5cqw] lg:gap-x-[21.49%] lg:gap-y-[1.1cqw]"
+      class="relative z-10 mt-[clamp(3rem,18vw,15rem)] grid grid-cols-1 items-start mx-[clamp(1rem,10vw,8rem)] gap-x-[clamp(1rem,2vw,1.75rem)] md:px-[clamp(1rem,5vw,6rem)] md:mx-auto md:w-[100%] md:grid-cols-2 md:gap-x-[2%] md:items-stretch"
     >
       {
-        columns.map((column) => (
-          <ul class="flex flex-col gap-[clamp(0.75rem,1.5vw,1.25rem)] lg:gap-[1.1cqw]">
-            {column.map((item) => (
-              <li>
-                {/* The card's padding lives on the <summary>, not the <details>
-                    — that way the summary *is* the whole card while it is
-                    closed, so clicking anywhere on it opens the answer rather
-                    than only the question text being a target. Its bottom
-                    padding shrinks to the question/answer gap once open, which
-                    keeps the open card measuring exactly as it did before. */}
-                <details class="group rounded-[1.25rem] bg-white/85 lg:rounded-[1.4cqw]">
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(1rem,2vw,1.875rem)] py-[clamp(0.75rem,1.2vw,1.1rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-haven-orange-deep group-open:pb-2.5 lg:px-[2cqw] lg:py-[1.9cqw] lg:text-[1.9cqw] lg:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
+        columns.map((column, colIndex) => (
+          <ul
+            class="relative flex flex-col md:z-auto"
+            style={{ zIndex: columns.length - colIndex }}
+          >
+            <div class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 -top-[clamp(2rem,7vw,10rem)] overflow-hidden">
+              <img
+                src="/images/faq/full-fall.webp"
+                alt=""
+                aria-hidden="true"
+                class="absolute left-1/2 top-0 -translate-x-[48%] w-[92%] h-auto object-cover object-top"
+              />
+            </div>
+            {column.map((item, i) => (
+              <li
+                class="relative overflow-hidden"
+                style={{ zIndex: column.length - i }}
+              >
+                <details
+                  name="faq-accordion"
+                  class="group relative z-10 rounded-[1.25rem] md:rounded-[1.4cqw]"
+                >
+                  <summary class="relative z-10 flex cursor-pointer list-none items-center justify-between gap-4 px-[clamp(2rem,12vw,12rem)] pt-[clamp(1rem,2vw,5rem)] pb-[clamp(1rem,12vw,12rem)] font-display text-[clamp(1.125rem,1.9vw,1.875rem)] leading-[0.9] tracking-[-0.05em] text-white group-open:pb-2.5 sm:px-[clamp(2rem,12vw,12rem)] sm:pt-[clamp(1rem,3vw,6rem)] sm:pb-[clamp(1rem,12vw,15rem)] md:px-[clamp(2rem,8vw,8rem)] md:pt-[clamp(0rem,1vw,2rem)] md:pb-[clamp(2rem,6vw,10rem)] md:leading-[1.1] md:text-[clamp(1.125rem,1.6vw,2rem)] md:group-open:pb-[0.9cqw] [&::-webkit-details-marker]:hidden">
                     {item.q}
                     <img
-                      src="/images/faq-chevron.webp"
+                      src="/images/faq/faq-chevron.webp"
                       alt=""
                       aria-hidden="true"
-                      width="416"
-                      height="256"
-                      class="w-[clamp(1.125rem,1.6vw,1.875rem)] shrink-0 transition-transform duration-200 group-open:rotate-180 lg:w-[1.6cqw]"
+                      class="w-[clamp(1.125rem,1.6vw,1.875rem)] shrink-0 transition-transform transition-ease-in-out duration-200 group-open:rotate-180 md:w-[1.6cqw]"
                     />
                   </summary>
-                  <p class="px-[clamp(1rem,2vw,1.875rem)] pb-[clamp(0.75rem,1.2vw,1.1rem)] font-body text-[clamp(0.875rem,1.15vw,1.25rem)] leading-[1.25] tracking-[-0.03em] text-haven-orange-deep lg:px-[2cqw] lg:pb-[1.9cqw] lg:text-[1.15cqw]">
+                  <p class="relative z-10 px-[clamp(2rem,12vw,12rem)] pt-[clamp(0rem,1vw,3rem)] pb-[clamp(1rem,10vw,8rem)] font-body text-[clamp(1rem,2vw,2rem)] leading-[1.25] tracking-[-0.03em] text-white sm:px-[clamp(2rem,12vw,12rem)] md:px-[clamp(2rem,8vw,8rem)] md:pb-[clamp(1rem,8vw,10rem)] md:pt-[clamp(0.5rem,1.5vw,4rem)] md:text-[clamp(1rem,1.4vw,1.5rem)] md:leading-[1.25]">
                     {item.a.map((seg) =>
                       seg.href ? (
                         <a
@@ -87,6 +120,19 @@ const columns = [
                     )}
                   </p>
                 </details>
+
+                <img
+                  src="/images/faq/big-fall.webp"
+                  alt=""
+                  aria-hidden="true"
+                  class="pointer-events-none absolute left-0 bottom-0 z-0 w-full h-auto object-cover object-bottom [details[open]~&]:hidden"
+                />
+                <img
+                  src="/images/faq/big-fall.webp"
+                  alt=""
+                  aria-hidden="true"
+                  class="pointer-events-none absolute left-0 bottom-0 z-0 hidden w-full h-auto object-cover object-bottom [details[open]~&]:block"
+                />
               </li>
             ))}
           </ul>
@@ -94,15 +140,23 @@ const columns = [
       }
     </div>
 
-    {
-      /* Sits on the open grass below the beds (which end at 83.55cqw), matching
-        the design rather than floating in the middle of the carrot field. */
-    }
-    <a
-      href="#top"
-      class="mx-auto mt-[clamp(2.5rem,6vw,5rem)] md:mt-[24vw] block w-full max-w-[34rem] rounded-[1.875rem] bg-haven-orange-mid px-6 py-[clamp(1.25rem,2.5vw,2.25rem)] text-center font-display text-[clamp(2rem,4vw,3.75rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 lg:absolute lg:left-1/2 lg:mt-0 lg:w-[37.4%] lg:max-w-none lg:-translate-x-1/2 lg:top-[86cqw] lg:rounded-[2.1cqw] lg:py-[2.2cqw] lg:text-[4.17cqw]"
-    >
-      Sign up!
-    </a>
+    <div class="relative flex items-center justify-center mx-auto gap-[clamp(1rem,4vw,5rem)]">
+      <img
+        src="/images/footer/arrow.webp"
+        class="relative scale-x-[-1] pointer-events-none z-20 w-[18%] md:w-[10%] h-auto"
+      />
+
+      <a
+        href="#top"
+        class="relative translate-y-[80%] z-20 py-[clamp(1rem,3vw,5rem)] mt-[clamp(2rem,4vw,8rem)] mb-[clamp(4rem,24vw,20rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mb-[clamp(4rem,14vw,6rem)] md:mt-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
+      >
+        Sign up!
+      </a>
+
+      <img
+        src="/images/footer/arrow.webp"
+        class="relative  pointer-events-none z-20 w-[18%] md:w-[10%] h-auto"
+      />
+    </div>
   </div>
 </section>

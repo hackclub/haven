@@ -1,56 +1,40 @@
-/**
- * Single source of truth for page copy, mirroring the Figma file
- * "Haven (Copy)" — https://www.figma.com/design/acqqsRYXbvzKRJqIb9zw5l
- *
- * The event is framed as a *game jam* in the current design; a few strings
- * still say "hackathon" because the design does.
- */
-
-import type { Linked, Marked, Sponsor } from "./types";
+import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
 
 export const event = {
   name: "Haven",
-  /** Hero headline — one entry per line. Overridable per city page. */
+  title: ["Burlington"],
+  tagline: ["Game jam for teens in 200+ cities", "Hosted at [venue]", "Nov 14–15, 2026"],
+} as const;
+
+export const rsvpCta = {
+  label: "Want to organize your own Haven?",
+} as const;
+
+export const eventPoc = {
+  name: "Haven",
   title: ["Organize a game jam", "in your city!"],
-  /**
-   * The line under the headline. Entries are separate lines on mobile and are
-   * strung together with a ♥ from `sm` up, so a city page can run one part
-   * ("Nov 15, at the Barbican") or three.
-   */
   tagline: ["Nov 14–15", "For teens 13-18 around the world"],
 } as const;
 
-/**
- * Secondary hero CTA for visitors who want to attend rather than organize.
- * The form URL itself is environment config (`RSVP_URL`), not copy.
- */
-export const rsvpCta = {
+export const rsvpCtaPoc = {
   label: "Not looking to organize?",
 } as const;
 
-/* ── What is a game jam ─────────────────────────────────────────────────── */
 
 export const about = {
   title: "What is a game jam?",
   body: "It’s a social coding event where you make a video game with friends + free food!",
 } as const;
 
-/* ── Perk cards ─────────────────────────────────────────────────────────── */
-
 export type Perk = {
   id: string;
   title: string;
-  /** Sits under the images, per the current design. */
   blurb: string[];
-  /** Which side the card hangs off, mirroring the staggered Figma layout. */
   side: "start" | "end";
-  /** Aspect ratio of this group's photo cells, taken from the Figma frame. */
-  aspect: string;
   photos: {
     src: string;
     alt: string;
     position?: string;
-    /** Projects link out to itch.io and carry a title + author credit. */
     href?: string;
     caption?: { title: string; author: string };
   }[];
@@ -59,13 +43,9 @@ export type Perk = {
 export const perks: Perk[] = [
   {
     id: "build",
-    title: "Learn and Build",
+    title: "Learn & Build",
     side: "start",
-    aspect: "aspect-[131/88]",
-    blurb: [
-      "follow workshops or create at your own pace",
-      "here are some cool projects at past hackathons!",
-    ],
+    blurb: ["follow workshops or create at your own pace"],
     photos: [
       {
         src: "/images/projects-1.webp",
@@ -74,21 +54,12 @@ export const perks: Perk[] = [
         caption: { title: "return to the sender", author: "by i1rs7" },
       },
       {
-        src: "/images/projects-2.webp",
-        alt: "Deathleap, a game made at a past event",
-        href: "https://qrosp-games-oy.itch.io/deathleap",
-        caption: {
-          title: "deathleap",
-          author: "by qrosp, juusaktmii, & 1100010101",
-        },
-      },
-      {
         src: "/images/projects-3.webp",
         alt: "Office Click Clack, a game made at a past event",
         href: "https://theavgeekbee.itch.io/office-click-clack",
         caption: {
           title: "office click clack",
-          author: "by Nathan and bunnyguy",
+          author: "by bunnyguy and nathan",
         },
       },
     ],
@@ -97,43 +68,30 @@ export const perks: Perk[] = [
     id: "friends",
     title: "Make Friends",
     side: "end",
-    aspect: "aspect-[198/120]",
-    blurb: ["meet new people and form relationships that will last a lifetime"],
+    blurb: ["meet new people and form lifelong relationships"],
     photos: [
       { src: "/images/friends-1.webp", alt: "Attendees hanging out together" },
       {
         src: "/images/friends-2.webp",
         alt: "A group of teens working at a shared table",
       },
-      {
-        src: "/images/friends-3.webp",
-        alt: "Attendees celebrating at an event",
-      },
     ],
   },
   {
     id: "food",
-    title: "Free Food and Prizes",
+    title: "Free Food & Prizes",
     side: "start",
-    aspect: "aspect-[176/116]",
     blurb: ["can’t say no to free snacks :)"],
     photos: [
       { src: "/images/food-1.webp", alt: "A spread of snacks and merch" },
-      {
-        src: "/images/food-2.webp",
-        alt: "Boxes of snacks laid out on a table",
-      },
       { src: "/images/food-3.webp", alt: "Attendees holding up their prizes" },
     ],
   },
 ];
 
-/* ── Pitch bubbles ──────────────────────────────────────────────────────── */
-
 export type Pitch = {
   id: string;
   align: "start" | "center" | "end";
-  /** Custom properties for `.speech`; omit for a bubble with no tail. */
   tail?: Record<string, string>;
   body: Marked;
 };
@@ -141,6 +99,55 @@ export type Pitch = {
 export const pitchHeading = "Don’t game jams sound awesome?";
 
 export const pitches: Pitch[] = [
+  {
+    id: "invite",
+    align: "end",
+    tail: {
+      "--tail-size": "4.5rem",
+      "--tail-rotate": "18deg",
+      "--tail-right": "2.5rem",
+      "--tail-bottom": "-2.25rem",
+    },
+    body: [
+      { text: "This November, " },
+      { text: "YOU can join the world's largest teen game jam.", mark: true },
+      {
+        text: " Yes, you! It doesn’t matter if you have years of experience, or just learned what they are today.",
+      },
+    ],
+  },
+  {
+    id: "support",
+    align: "start",
+    body: [
+      { text: "You’ll " },
+      { text: "join thousands of teens", mark: true },
+      {
+        text: " making games from all around the world. Don't consider yourself a game dev? No problem - we have tons of workshops for you to make your game!",
+      },
+    ],
+  },
+  {
+    id: "impact",
+    align: "center",
+    tail: {
+      "--tail-size": "4.5rem",
+      "--tail-rotate": "-28deg",
+      "--tail-right": "-2.25rem",
+      "--tail-top": "2.5rem",
+    },
+    body: [
+      { text: "This is your chance to " },
+      { text: "learn something new,", mark: true },
+      { text: " " },
+      { text: "meet new friends,", mark: true },
+      { text: " and" },
+      { text: "go on an incredible adventure together!", mark: true },
+    ],
+  },
+];
+
+export const pitchesPoc: Pitch[] = [
   {
     id: "invite",
     align: "end",
@@ -172,9 +179,6 @@ export const pitches: Pitch[] = [
   {
     id: "impact",
     align: "center",
-    // The hedgehog sits directly to the right of this bubble, level with it —
-    // so the tail leaves the right edge at mid-height and points at it. It used
-    // to hang off the top corner pointing up and *away* from the hedgehog.
     tail: {
       "--tail-size": "4.5rem",
       "--tail-rotate": "-28deg",
@@ -191,25 +195,81 @@ export const pitches: Pitch[] = [
   },
 ];
 
-/* ── Schedule ───────────────────────────────────────────────────────────── */
-
 export const scheduleHeading = "What happens on the day?";
 
-/**
- * Shown in place of the timetable until a city has one. Cities announce before
- * they have times pinned down, and inventing a plausible schedule for them is
- * worse than admitting it isn't set — someone would turn up at 10am for it.
- */
 export const scheduleTbd = {
   title: "TBD!",
   body: "We’re still working out the schedule. Sign up and we'll let you know as soon as we figure it out!",
 } as const;
 
-/* ── How you organize ───────────────────────────────────────────────────── */
+export const schedule: ScheduleDay[] = [
+  {
+    day: "Saturday",
+    items: [
+      {
+        time: "10:00 am",
+        title: "check in :3",
+        body: "yada yada body text",
+      },
+      {
+        time: "11:00 am",
+        title: "meow",
+        body: "yada yada body text",
+      },
+      {
+        time: "12:00 am",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "12:00 am",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "1:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "2:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "3:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+      {
+        time: "4:00 pm",
+        title: "mraow",
+        body: "yada yada body text",
+      },
+    ],
+  },
+  {
+    day: "Sundayy",
+    items: [
+      {
+        time: "10:00 am",
+        title: "check in :3",
+        body: "yada yada body text",
+      },
+    ],
+  }
+];
 
 export const stepsHeading =
+  "Here is how you can join a game jam this November!";
+
+export const stepsHeadingPoc =
   "Here is how you can organize a game jam this November!";
 
+export const stepsSubheading =
+  "(Don't worry, we'll guide you through each step)";
+
+  
 export const steps = [
   {
     title: "find a team of coorganizers",
@@ -238,10 +298,8 @@ export const stepsCta = {
   href: "https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit",
 };
 
-/* ── Past events ────────────────────────────────────────────────────────── */
-
 export const pastEventsHeading = [
-  "We’ve helped teens organize hundreds of events around the world!",
+  "Hack Club has helped teens organize hundreds of events woldwide!",
   "Check out some of our past events ~",
 ];
 
@@ -286,23 +344,32 @@ export const pastEvents: PastEvent[] = [
   },
 ];
 
-/* ── Supporters / sponsors ──────────────────────────────────────────────── */
+export const supportersHeading = "Our Supporters";
 
-export const supportersHeading = "Our supporters";
+export const supporters: Sponsor[] = [
+  {
+    name: "HCB 1",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/logos/hcb-icon.webp",
+  },
+  {
+    name: "HCB 2",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/logos/hcb-icon.webp",
+  },
+  {
+    name: "HCB 3",
+    href: "https://hcb.hackclub.com",
+    image: "/images/sponsors/logos/hcb-icon.webp",
+  },
+];
 
-export const supporters: Sponsor[] = [];
-
-/** City pages open with an empty wall until their organizers fill it in. */
 export const sponsorsHeading = "Our sponsors";
 
-/* ── FAQ ────────────────────────────────────────────────────────────────── */
-
+const HAVEN_GUIDE_LINK =
+  "https://docs.google.com/document/d/1f_uFvFP4gD01YhXBmU9jBfEBU9QMvr1L5yJTKWBBhbA/edit?usp=sharing";
 const HAVEN_EMAIL = "mailto:haven@hackclub.com";
 
-/**
- * Order matches the Figma reading order: odd entries fill the left column,
- * even entries the right.
- */
 export const faqs: { q: string; a: Linked }[] = [
   {
     q: "Am I eligible?",
@@ -355,10 +422,11 @@ export const faqs: { q: string; a: Linked }[] = [
   {
     q: "What if my parents are concerned?",
     a: [
-      // TODO: the Figma still has "[parent guide]" bracketed — no URL yet.
       {
-        text: "We’re here to help! You can see our [parent guide] here, or they can reach out to us at ",
+        text: "We’re here to help! You can see our ",
       },
+      { text: "parent guide", href: HAVEN_GUIDE_LINK },
+      { text: " here, or they can reach out to us at " },
       { text: "haven@hackclub.com", href: HAVEN_EMAIL },
       { text: " for questions." },
     ],
@@ -391,8 +459,6 @@ export const faqs: { q: string; a: Linked }[] = [
   },
 ];
 
-/* ── Chrome ─────────────────────────────────────────────────────────────── */
-
 export const footerLinks = [
   { label: "Hack Club", href: "https://hackclub.com" },
   { label: "Slack", href: "https://hackclub.com/slack/" },
@@ -401,7 +467,6 @@ export const footerLinks = [
 ];
 
 export const navLinks = [
-  // Back to the top of the page, where the hero's email field is.
   { label: "Sign up", href: "#top" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },

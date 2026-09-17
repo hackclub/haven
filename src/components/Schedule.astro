@@ -2,10 +2,6 @@
 import { scheduleTbd } from "../data/content";
 import type { ScheduleDay } from "../data/types";
 
-/**
- * City pages only — the home page has no one set of times to publish.
- * Plain colour and type for now; the artwork for this band isn't drawn yet.
- */
 interface Props {
   heading: string;
   days: ScheduleDay[];
@@ -13,46 +9,94 @@ interface Props {
 
 const { heading, days } = Astro.props;
 
-/* A day with nothing in it is an empty card, so drop it — and if that leaves
-   nothing at all, the section says so rather than vanishing. A city that has
-   announced but not planned still wants this band on the page: its absence
-   reads as "no schedule section", not as "times not set yet". */
 const filled = days.filter((day) => day.items.length > 0);
 ---
 
 <section
   id="schedule"
-  class="relative z-10 bg-haven-green py-[clamp(2.5rem,6vw,5rem)]"
+  class="relative z-10 bg-haven-green mt-[clamp(2.5rem,10vw,15rem)] mb-[clamp(1rem,5vw,8rem)] py-[clamp(1rem,3vw,4rem)]"
 >
-  <div class="shell">
-    <h2 class="text-center font-display text-display text-white">{heading}</h2>
-
+  <img
+    src="/images/schedule/trail-w.webp"
+    class="absolute top-0 w-full object-cover translate-y-[-60%] md:-translate-y-1/2"
+  />
+  <img
+    src="/images/schedule/trail-w.webp"
+    class="absolute bottom-0 w-full object-cover scale-[-1] translate-y-[30%] md:translate-y-1/2"
+  />
+  <div class="absolute inset-y-0 left-0 w-[15%] overflow-hidden">
+    <img
+      src="/images/schedule/trail-v.webp"
+      class="w-full object-cover translate-y-[-5%]"
+    />
+  </div>
+  <div class="absolute inset-y-0 right-0 w-[15%] overflow-hidden">
+    <img
+      src="/images/schedule/trail-v.webp"
+      class="w-full scale-[-1] object-cover translate-y-[-5%]"
+    />
+  </div>
+  <img
+    src="/images/schedule/side-plants-1.webp"
+    class="absolute z-20 w-[8%] right-0 top-0 object-cover translate-y-[-35%]"
+  />
+  <img
+    src="/images/schedule/side-plants-2.webp"
+    class="absolute z-20 scale-x-[-1] w-[10%] left-0 top-0 object-cover translate-y-[-30%]"
+  />
+  <img
+    src="/images/schedule/side-plants-2.webp"
+    class="absolute z-20 w-[10%] right-0 bottom-0 object-cover"
+  />
+  <img
+    src="/images/schedule/side-plants-1.webp"
+    class="absolute z-20 scale-x-[-1] w-[8%] left-0 bottom-0 object-cover"
+  />
+  <img
+    src="/images/schedule/sheep.webp"
+    class="absolute z-0 h-[50%] max-h-200 left-[clamp(0rem,3vw,4rem)] bottom-30 object-cover md:left-[clamp(1rem,5vw,14rem)]"
+  />
+  <img
+    src="/images/schedule/daven-smol.webp"
+    class="absolute z-0 w-[8%] right-3 top-18 object-cover md:right-[clamp(1rem,3vw,4rem)]"
+  />
+  <div
+    class="relative w-[70%] z-20 shell bg-haven-brown-dark my-2 mb-[clamp(1.5rem,6vw,5rem)] py-6 rounded-[clamp(1rem,2vw,2rem)] sm:my-8 sm:mb-[clamp(2rem,8vw,5rem)] sm:py-8 sm:rounded-[3rem] md:my-16 md:py-16 md:rounded-[5rem]"
+  >
+    <h2
+      class="relative text-center z-15 font-display text-[clamp(1.75rem,5vw,4rem)] leading-[clamp(1.5rem,1.5vw,1.75rem)] tracking-[-0.05em] text-white"
+    >
+      {heading}
+    </h2>
+    <img
+      src="/images/schedule/plant-l.webp"
+      class="absolute z-10 top-0 -translate-y-[45%] left-[clamp(1.8rem,8vw,6rem)] w-[20%] object-cover block sm:w-[26%] sm:left-[clamp(2rem,6vw,4rem)] md:hidden"
+    />
+    <img
+      src="/images/schedule/plant-r.webp"
+      class="absolute z-10 top-0 -translate-y-[45%] right-[clamp(2.3rem,9vw,6rem)] w-[26%] object-cover block sm:w-[32%] sm:right-[clamp(3rem,8vw,6rem)] md:hidden"
+    />
     {
       filled.length > 0 ? (
-        /* One column per day from `md` up. The rows are a <dl>-shaped pairing
-           of time and what happens then, but they carry a blurb too, so an
-           ordered list keeps the sequence without overloading dt/dd. */
-        <div class="mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] grid max-w-[64rem] grid-cols-1 gap-[clamp(1rem,2vw,1.75rem)] md:grid-cols-2">
+        <div class="mx-auto px-[clamp(1rem,6vw,8rem)] mt-[clamp(1rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(0.5rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)] md:grid-cols-2">
           {filled.map((day) => (
-            <section class="panel px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.25rem,2.2vw,2rem)]">
-              <h3 class="font-display text-heading text-haven-orange-bright">
+            <section class="panel px-[clamp(0.2rem,2.4vw,2.25rem)] py-[clamp(1rem,2.2vw,2rem)] bg-haven-brown-light">
+              <h3 class="font-display text-heading text-haven-butter">
                 {day.day}
               </h3>
 
-              <ol class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.75rem,1.4vw,1.1rem)]">
+              <ol class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.2rem,1vw,1.1rem)]">
                 {day.items.map((item) => (
-                  <li class="flex flex-col gap-x-[clamp(0.75rem,1.4vw,1.25rem)] sm:flex-row sm:items-baseline">
-                    {/* Fixed column so the times line up down the card; below
-                        `sm` there isn't room for two columns, so it stacks. */}
-                    <span class="font-display text-subheading whitespace-nowrap text-haven-gold sm:w-[7.25rem] sm:shrink-0">
+                  <li class="flex gap-x-[clamp(0.5rem,2vw,2.25rem)] flex-row items-baseline">
+                    <span class="w-[clamp(5rem,10vw,8rem)] font-display text-subheading whitespace-nowrap text-white shrink-0">
                       {item.time}
                     </span>
                     <span class="flex-1">
-                      <span class="block font-display text-subheading text-haven-orange-deep">
+                      <span class="block font-display text-subheading text-white">
                         {item.title}
                       </span>
                       {item.body && (
-                        <span class="mt-0.5 block font-body text-copy text-haven-orange-mid">
+                        <span class="mt-0.5 block font-body text-copy text-white">
                           {item.body}
                         </span>
                       )}
@@ -64,8 +108,6 @@ const filled = days.filter((day) => day.items.length > 0);
           ))}
         </div>
       ) : (
-        /* Deliberately one card the width of a single day's column, centred —
-           a full-width empty state would loom larger than a real schedule. */
         <p class="panel mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] max-w-[31.5rem] px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.5rem,2.6vw,2.25rem)] text-center">
           <span class="block font-display text-heading text-haven-orange-bright">
             {scheduleTbd.title}

@@ -1,168 +1,247 @@
 ---
-import { event, rsvpCta } from "../data/content";
+import { event, eventPoc, rsvpCta } from "../data/content";
 import { env } from "../lib/env";
 import SignupForm from "./SignupForm.astro";
 import VideoPanel from "./VideoPanel.astro";
 
-/* The headline and the line under it are the two things every city page
-   changes, so they come in as props; the home page takes the defaults. */
 interface Props {
   title?: readonly string[];
   tagline?: readonly string[];
+  poc: boolean;
 }
 
-const { title = event.title, tagline = event.tagline } = Astro.props;
+const {
+  poc,
+  title = poc ? eventPoc.title : event.title,
+  tagline = poc ? eventPoc.tagline : event.tagline,
+} = Astro.props;
 
-/* Optional config — without it there is no form to point at, so the link is
-   simply not rendered (see `env.RSVP_URL`). */
 const rsvpUrl = env.RSVP_URL;
 ---
 
 <section
   id="top"
-  class="rule-frame relative isolate z-10 flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero-bg.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] pt-[calc(var(--logo-top)+var(--logo-h)+var(--logo-gap))] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
+  class="rule-frame relative isolate flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero/hero-bg-no-sticky-tree.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
-  <div class="relative z-10 flex flex-1 items-center justify-center">
+  <div class:list={[poc ? "hidden" : "block sm:contents"]}>
     <div
-      class="mx-auto flex w-full max-w-[120rem] flex-col items-center text-center"
+      class="relative z-10 flex flex-1 items-center justify-center mt-[clamp(5rem,14vw,20rem)] sm:mt-[clamp(1rem,2vw,15rem)]"
     >
-      {
-        /* The leading space keeps the accessible name from reading "game jamin"
-          — block spans concatenate without one. It collapses visually. */
-      }
-      <h1
-        class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+      <div
+        class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center sm:pl-[clamp(1rem,4vw,8rem)] sm:items-start sm:pr-[clamp(20rem,45vw,60rem)]"
       >
-        {
-          title.map((line, i) => (
-            <span class="block">
-              {i > 0 ? " " : ""}
-              {line}
-            </span>
-          ))
-        }
-      </h1>
+        <div class="grid grid-cols-2 translate-x-[4%] sm:translate-x-0">
+          <img
+            src="/images/logo.webp"
+            alt="Hack Club Haven"
+            width="778"
+            height="445"
+            class="w-[120%] max-w-none"
+          />
+          <h1
+            class="m-0 font-display text-hero text-white translate-y-[75%] translate-x-[-12%]"
+          >
+            {title}
+          </h1>
+        </div>
 
-      {
-        /* Parts stack as blocks on mobile — the hearts that separate them from
-          `sm` up have no room there, and the second part is usually a full
-          sentence. Only the first part is held on one line: it is the short
-          one (a date), and the rest would overflow a phone if kept intact. */
-      }
-      <p
-        class="glow-orange mt-[clamp(1rem,2.5vw,2rem)] font-body text-subheading text-white"
-      >
-        {
-          tagline.map((part, i) => (
-            <Fragment>
-              {i > 0 && (
-                <span aria-hidden="true" class="mx-2 hidden sm:inline">
-                  &hearts;
-                </span>
-              )}
-              <span
-                class:list={[i === 0 ? "whitespace-nowrap" : "block sm:inline"]}
-              >
+        <p
+          class="glow-orange mt-[clamp(1rem,2.5vw,5rem)] text-[clamp(1rem,4vw,8rem)] leading-[clamp(1rem,4.75vw,5rem)] font-body text-center text-white sm:ml-[clamp(1rem,3vw,8rem)] sm:text-[clamp(1.25rem,2vw,4rem)] sm:leading-[clamp(1.5rem,2.75vw,5rem)] sm:text-start"
+        >
+          {
+            tagline.map((part, i) => (
+              <span class:list={[i === 0 ? "whitespace-nowrap" : "block"]}>
                 {part}
               </span>
-            </Fragment>
-          ))
+            ))
+          }
+        </p>
+
+        <SignupForm
+          poc={poc}
+          class="mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
+        />
+        {
+          rsvpUrl && (
+            <a
+              data-rsvp-link
+              href={rsvpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
+            >
+              {rsvpCta.label}
+            </a>
+          )
         }
-      </p>
-
-      <SignupForm
-        class="mt-[clamp(1.5rem,3vw,2.25rem)] w-[clamp(15rem,70vw,52rem)]"
-      />
-
-      {
-        /* Attendees, not organizers. The href is the bare form URL so it works
-          with no JavaScript; the script below keeps `?email=` in step with
-          whatever has been typed into the signup field above, so someone who
-          starts there and changes their mind does not retype it. */
-      }
-      {
-        rsvpUrl && (
-          <a
-            data-rsvp-link
-            href={rsvpUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
-          >
-            {rsvpCta.label}
-          </a>
-        )
-      }
+      </div>
     </div>
-  </div>
 
-  <div
-    class="relative z-10 shell hidden mt-[clamp(1rem,5vw,min(3rem,2svh))] sm:flex justify-center"
-  >
-    <a href="#about" class="flex-col items-center gap-1">
-      <span class="font-body text-[1.5em] text-white/60">more info</span>
+    <div
+      class="absolute z-10 shell left-1/2 -translate-x-1/2 bottom-[clamp(3rem,3vw,10rem)] justify-center"
+    >
+      <a href="#about" class="flex-col items-center gap-1">
+        <span
+          class="font-body text-[clamp(0.5rem,4vw,3rem)] text-white/60 md:text-[clamp(0.5rem,2vw,3rem)]"
+          >more info</span
+        >
+        <img
+          src="/images/triangle-down.svg"
+          alt=""
+          aria-hidden="true"
+          width="207"
+          height="69"
+          class="w-[clamp(2rem,16vw,12rem)] -scale-y-100 md:w-[clamp(2rem,8vw,12rem)]"
+        />
+      </a>
+    </div>
+
+    <div
+      class:list={[
+        "panel bg-haven-green-deep relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] sm:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] transition-transform hover:scale-[1.04] active:scale-100",
+        poc ? "hidden" : "block",
+      ]}
+    >
       <img
-        src="/images/triangle-down.svg"
+        src="/images/hero/hero-arrow.png"
         alt=""
         aria-hidden="true"
-        width="207"
-        height="69"
-        class="w-[clamp(2rem,12vw,6rem)] -scale-y-100"
+        class="absolute rotate-24 right-[clamp(1rem,4vw,8rem)] top-[clamp(0rem,0vw,10rem)] z-20 w-[clamp(2rem,12vw,6rem)] sm:right-[clamp(1rem,12vw,30rem)] sm:top-[clamp(-10rem,-3vw,0rem)] sm:w-[clamp(2rem,8vw,20rem)] hidden sm:block"
       />
-    </a>
+      <img
+        src="/images/hero/hero-arrow-white.png"
+        alt=""
+        aria-hidden="true"
+        class="absolute rotate-24 right-[clamp(1rem,6vw,10rem)] top-[clamp(-10rem,-2vw,0rem)] z-20 w-[clamp(2rem,12vw,6rem)] block sm:hidden"
+      />
+      <p class="text-white text-center -translate-y-[120%] left-50 text-[clamp(0.875rem,4vw,10rem)] sm:text-haven-butter sm:left-0 sm:-rotate-8 sm:text-[clamp(1rem,3vw,10rem)] sm:-translate-y-[120%] sm:-translate-x-[40%]">
+        find an event near you
+      </p>
+    </div>
+
+    <img
+      src="/images/hedgehog.webp"
+      alt=""
+      aria-hidden="true"
+      width="422"
+      height="308"
+      class="pointer-events-none absolute object-contain bottom-0 right-[6%] z-20 w-[clamp(8rem,40vw,14rem)] scale-x-[-1] aspect-422/308 select-none sm:right-[9.6%] sm:max-h-[30svh] sm:w-[15%] sm:max-w-[21rem]"
+    />
+
+    <img
+      src="/images/hero-foreground.webp"
+      alt=""
+      aria-hidden="true"
+      width="1414"
+      height="501"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
+    />
   </div>
 
-  {
-    /* From `sm` up the panel is pinned to the hero's bottom-right corner rather
-      than sitting in a flow row: opening and closing it used to resize that row
-      and shove the arrow and the hero's own height around. Absolute means the
-      toggle costs the rest of the layout nothing.
+  {/* poc version ok don't change thisss */}
+  <div class:list={[poc ? "block" : "hidden"]}>
+    <div class="relative z-10 flex flex-1 items-center justify-center">
+      <div
+        class="mx-auto flex w-full mt-[clamp(10rem,15vw,25rem)] max-w-[120rem] flex-col items-center text-center"
+      >
+        <h1
+          class="glow-orange font-display text-hero text-white [word-spacing:0.18em]"
+        >
+          {
+            title.map((line, i) => (
+              <span class="block">
+                {i > 0 ? " " : ""}
+                {line}
+              </span>
+            ))
+          }
+        </h1>
 
-      The width is capped against `svh` as well as `vw` so that on a short,
-      wide window (1400x800, say) the panel still clears the email field above
-      it instead of growing up into it. Below `sm` there is no corner to sit in,
-      so it stays a centred block in the flow. */
-  }
-  <VideoPanel
-    videoId="8tNEPMI5wss"
-    class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
-  />
+        <p
+          class="glow-orange mt-[clamp(1rem,2.5vw,4rem)] font-body text-subheading text-white"
+        >
+          {
+            tagline.map((part, i) => (
+              <Fragment>
+                {i > 0 && (
+                  <span aria-hidden="true" class="mx-2 hidden sm:inline">
+                    &hearts;
+                  </span>
+                )}
+                <span
+                  class:list={[
+                    i === 0 ? "whitespace-nowrap" : "block sm:inline",
+                  ]}
+                >
+                  {part}
+                </span>
+              </Fragment>
+            ))
+          }
+        </p>
 
-  {
-    /* Hedgehog is scenery, not content: from `sm` up it stands on the ground at
-      the hero's bottom-left rather than sitting in the flow row, where it ended
-      up floating above the grass. On mobile it keeps the same slight-left
-      placement, still on the ground.
+        <SignupForm
+          poc={poc}
+          class="mt-[clamp(1.5rem,3vw,4rem)] w-[clamp(15rem,35vw,52rem)]"
+        />
 
-      It is drawn at 29.3% of the frame in Figma, but that frame is 1440x1024;
-      on a short, wide window the same 29.3% grew tall enough to swallow the
-      email field. `max-height` in `svh` keeps it in proportion to the space it
-      actually has (a constrained max-height shrinks a replaced element's width
-      to match, so the aspect ratio holds). `pointer-events-none` because it is
-      scenery — it used to eat clicks aimed at the field behind it. */
-  }
-  <img
-    src="/images/hedgehog.webp"
-    alt=""
-    aria-hidden="true"
-    width="422"
-    height="308"
-    class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
-  />
+        {
+          rsvpUrl && (
+            <a
+              data-rsvp-link
+              href={rsvpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
+            >
+              {rsvpCta.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
 
-  {
-    /* Foreground foliage band that bridges the hero into the section below. The
-      55% offset puts the band's horizontal bar just below the frame's bottom
-      rule and lets the bushes hang into the section below, as in the design. */
-  }
-  <img
-    src="/images/hero-foreground.webp"
-    alt=""
-    aria-hidden="true"
-    width="1414"
-    height="501"
-    class="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full max-w-none translate-y-[55%] select-none"
-  />
+    <div
+      class="absolute z-10 shell left-1/2 -translate-x-1/2 bottom-[clamp(3rem,3vw,10rem)] justify-center"
+    >
+      <a href="#about" class="flex-col items-center gap-1">
+        <span class="font-body text-[clamp(0.5rem,3vw,1.5rem)] text-white/60"
+          >more info</span
+        >
+        <img
+          src="/images/triangle-down.svg"
+          alt=""
+          aria-hidden="true"
+          width="207"
+          height="69"
+          class="w-[clamp(2rem,12vw,6rem)] -scale-y-100"
+        />
+      </a>
+    </div>
+
+    <VideoPanel
+      videoId="8tNEPMI5wss"
+      class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
+    />
+
+    <img
+      src="/images/hedgehog.webp"
+      alt=""
+      aria-hidden="true"
+      width="422"
+      height="308"
+      class="pointer-events-none absolute object-contain bottom-0 left-[6%] z-10 w-[clamp(8rem,40vw,14rem)] aspect-422/308 select-none sm:left-[9.6%] sm:max-h-[30svh] sm:w-[24%] sm:max-w-[21rem]"
+    />
+
+    <img
+      src="/images/hero-foreground.webp"
+      alt=""
+      aria-hidden="true"
+      width="1414"
+      height="501"
+      class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
+    />
+  </div>
 </section>
 
 <script>
@@ -174,7 +253,6 @@ const rsvpUrl = env.RSVP_URL;
 
     email.addEventListener("input", () => {
       const url = new URL(base);
-      // A half-typed address is worse than none: only prefill once it parses.
       if (email.validity.valid && email.value) {
         url.searchParams.set("email", email.value);
       }
