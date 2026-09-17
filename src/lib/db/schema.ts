@@ -1,6 +1,7 @@
 import {
   boolean,
   date,
+  doublePrecision,
   index,
   integer,
   jsonb,
@@ -70,4 +71,27 @@ export const ticketSummariesTable = pgTable(
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [index().on(table.createdAt)],
+);
+
+/**
+ * Approved Haven satellite events, mirrored from the "Events" table of the
+ * "YSWS - Haven" Airtable base by `syncEvents`. Airtable is authoritative: this
+ * table is a read cache so a page render is a local query rather than a call
+ * out to an API with a rate limit on it.
+ *
+ * Keyed by the Airtable record id, not the slug — an event can be renamed or
+ * given an `Override Slug`, and keying on the slug would make that look like a
+ * delete plus an insert instead of the rename it is.
+ */
+export const eventsTable = pgTable(
+  "events",
+  {
+    airtableId: text().primaryKey(),
+    slug: text().notNull(),
+    name: text().notNull(),
+    latitude: doublePrecision().notNull(),
+    longitude: doublePrecision().notNull(),
+    syncedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex().on(table.slug)],
 );

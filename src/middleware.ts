@@ -1,5 +1,8 @@
 import { defineMiddleware } from "astro:middleware";
 import { checkCsrf } from "./lib/csrf";
+import { startEventSync } from "./lib/services/events";
+
+startEventSync();
 
 const UNGUARDED_PREFIXES = ["/api/slack/", "/api/fillout/", "/api/airtable/"];
 

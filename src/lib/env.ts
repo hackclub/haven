@@ -20,6 +20,29 @@ export const env = {
   get AIRTABLE_SECRET_KEY() {
     return required("AIRTABLE_SECRET_KEY");
   },
+  get AIRTABLE_TOKEN() {
+    return optional("AIRTABLE_TOKEN");
+  },
+  /** "YSWS - Haven" in production; the sandbox copy is appVRz9hCS5nlclhO. */
+  get AIRTABLE_BASE_ID() {
+    return required("AIRTABLE_BASE_ID") || "appc9YSRmmAmLI37u";
+  },
+  /** The "Events" table. Same id in the production and sandbox bases. */
+  get AIRTABLE_EVENTS_TABLE_ID() {
+    return required("AIRTABLE_EVENTS_TABLE_ID") || "tbl0BQWphHe0gWEIp";
+  },
+  /**
+   * Optional view in the Events table to read through instead of the whole
+   * table. The view's filter narrows what we sync; the status and test-event
+   * checks in `syncEvents` still apply on top, so setting this can only ever
+   * remove events, never smuggle a cancelled one in.
+   *
+   * The view must leave every field `syncEvents` asks for visible — Airtable
+   * omits a field the view hides even when it is requested by id.
+   */
+  get AIRTABLE_EVENTS_VIEW_ID() {
+    return optional("AIRTABLE_EVENTS_VIEW_ID");
+  },
   get AGE_CUTOFF_DATE() {
     return required("AGE_CUTOFF_DATE");
   },
