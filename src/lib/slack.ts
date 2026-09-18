@@ -11,9 +11,9 @@ import {
   section,
   SlackWebAPIPlatformError,
 } from "slack.ts";
-import { env } from "./env";
-import { db } from "./db";
-import { ticketsTable, ticketSummariesTable } from "./db/schema";
+import { env } from "$env/dynamic/private";
+import { db } from "./server/db";
+import { ticketsTable, ticketSummariesTable } from "./server/db/schema";
 import {
   and,
   asc,
@@ -56,7 +56,7 @@ function report<T>(what: string, promise: Promise<T>) {
 if (env.SLACK_HELP_CHANNEL) {
   app.on(`message#${env.SLACK_HELP_CHANNEL}`, async (event) => {
     if (event.user === env.SLACK_BOT_USER_ID) return;
-    if (event.subtype && event.subtype !== "file_share") return;
+    if (event.subtype && (event.subtype as string) !== "file_share") return;
 
     if (event.thread_ts) {
       const [ticket] = await db
@@ -316,10 +316,12 @@ async function resendTicketsMessage() {
     try {
       await app.request("chat.delete", { channel, ts: summary.ts });
     } catch (error) {
-      if (!(
-        error instanceof SlackWebAPIPlatformError &&
-        error.error === "message_not_found"
-      )) {
+      if (
+        !(
+          error instanceof SlackWebAPIPlatformError &&
+          error.error === "message_not_found"
+        )
+      ) {
         console.error("Failed to delete a stale tickets message:", error);
         continue;
       }

@@ -6,33 +6,38 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "check": "astro check",
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "prepare": "svelte-kit sync",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
-    "db:sync": "bun db:generate && bun db:migrate"
+    "db:sync": "npm run db:generate && npm run db:migrate"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.1",
-    "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.0",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^1.0.0-rc.4",
     "node-cron": "^4.6.0",
     "pg": "^8.23.0",
-    "slack.ts": "0.0.22",
-    "tailwindcss": "^4.3.3"
+    "slack.ts": "0.0.22"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10",
+    "@sveltejs/adapter-node": "^5.5.7",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/pg": "^8.21.0",
     "drizzle-kit": "^1.0.0-rc.4",
+    "svelte": "^5.57.0",
+    "svelte-check": "^4.7.6",
+    "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vite": "^8.3.0"
   },
   "allowScripts": {
     "esbuild@0.25.12": true,
