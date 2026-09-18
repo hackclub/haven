@@ -1,38 +1,51 @@
 <script lang="ts">
-  import { event, eventPoc, rsvpCta, rsvpCtaPoc } from "$lib/data/content";
+  import { event, eventPoc, organizeCta, organizeCtaPoc } from "$lib/data/content";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
+
+  const ORGANIZE_PATH = "/api/auth/redirect";
 
   interface Props {
     title?: readonly string[];
     tagline?: readonly string[];
     poc: boolean;
-    /** Attendee RSVP form; absent hides the "just want to attend" link. */
-    rsvpUrl?: string | undefined;
+    /** Attendee signup form; absent falls the box back to the organizer signup. */
+    signupUrl?: string | undefined;
+    /** Referral code from `?r=`, forwarded to the signup form. */
+    referral?: string | null;
   }
 
   let {
     poc,
     title = poc ? eventPoc.title : event.title,
     tagline = poc ? eventPoc.tagline : event.tagline,
-    rsvpUrl,
+    signupUrl,
+    referral = null,
   }: Props = $props();
 
-  // Carry whatever the visitor typed into the signup box over to the RSVP
-  // form, so they do not have to type their address twice.
+  // Carry whatever the visitor typed into the signup box over to the organizer
+  // signup, so they do not have to type their address twice.
   let email = $state("");
   let emailValid = $state(false);
 
-  const rsvpHref = $derived.by(() => {
-    if (!rsvpUrl) return undefined;
-    const url = new URL(rsvpUrl);
-    if (emailValid && email) url.searchParams.set("email", email);
+  const signupAction = $derived.by(() => {
+    if (!signupUrl) return undefined;
+    const url = new URL(signupUrl);
+    if (referral) url.searchParams.set("r", referral);
     return url.toString();
   });
+
+  const formAction = $derived(signupAction ?? ORGANIZE_PATH);
+
+  const organizeHref = $derived(
+    emailValid && email
+      ? `${ORGANIZE_PATH}?email=${encodeURIComponent(email)}`
+      : ORGANIZE_PATH,
+  );
 </script>
 
 <svelte:head>
-  {#if rsvpUrl}<link rel="preconnect" href={new URL(rsvpUrl).origin} />{/if}
+  {#if signupUrl}<link rel="preconnect" href={new URL(signupUrl).origin} />{/if}
 </svelte:head>
 
 <section
@@ -71,19 +84,18 @@
 
         <SignupForm
           {poc}
+          action={formAction}
           id="signup-email"
           bind:email
           bind:valid={emailValid}
           class="mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
         />
-        {#if rsvpHref}
+        {#if signupAction}
           <a
-            href={rsvpHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
+            href={organizeHref}
+            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
           >
-            {rsvpCta.label}
+            {organizeCta.label}
           </a>
         {/if}
       </div>
@@ -181,20 +193,19 @@
 
         <SignupForm
           {poc}
+          action={formAction}
           id="signup-email-poc"
           bind:email
           bind:valid={emailValid}
           class="mt-[clamp(1.5rem,3vw,4rem)] w-[clamp(15rem,35vw,52rem)]"
         />
 
-        {#if rsvpHref}
+        {#if signupAction}
           <a
-            href={rsvpHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={organizeHref}
             class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
           >
-            {poc? rsvpCtaPoc.label : rsvpCta.label}
+            {poc ? organizeCtaPoc.label : organizeCta.label}
           </a>
         {/if}
       </div>

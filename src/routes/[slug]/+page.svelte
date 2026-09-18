@@ -30,7 +30,8 @@
       title={site.title}
       tagline={site.tagline}
       poc={isPoc}
-      rsvpUrl={data.rsvpUrl}
+      signupUrl={data.signupUrl}
+      referral={data.referral}
     />
   </div>
 

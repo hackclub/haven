@@ -23,7 +23,9 @@
 <SiteHeader poc={isPoc} />
 
 <main id="main" class="overflow-x-clip">
-  <div class="relative z-20"><Hero poc={isPoc} rsvpUrl={data.rsvpUrl} /></div>
+  <div class="relative z-20">
+    <Hero poc={isPoc} signupUrl={data.signupUrl} referral={data.referral} />
+  </div>
 
   <div id="about" class="relative stage stage-middle z-10">
     <About />

@@ -6,12 +6,11 @@ import { app } from "$lib/slack";
 
 export const GET: RequestHandler = async ({ request }) => {
   const url = new URL(request.url);
+  // Optional: the hero only knows an address when the visitor typed one into
+  // the signup box first, and organizing should not require that.
   const email = url.searchParams.get("email");
-  if (!email) {
-    return new Response("Invalid parameters", { status: 400 });
-  }
 
-  if (env.SLACK_BOT_TOKEN && env.SLACK_MAIN_CHANNEL) {
+  if (email && env.SLACK_BOT_TOKEN && env.SLACK_MAIN_CHANNEL) {
     try {
       // `users.lookupByEmail` has no typings in slack.ts yet, so this falls
       // through to the untyped `request` overload.
@@ -37,6 +36,6 @@ export const GET: RequestHandler = async ({ request }) => {
   );
   authUrl.searchParams.set("client_id", env.HCA_CLIENT_ID);
   authUrl.searchParams.set("redirect_uri", `${EXTERNAL_URL}/api/auth/callback`);
-  authUrl.searchParams.set("login_hint", email);
+  if (email) authUrl.searchParams.set("login_hint", email);
   return Response.redirect(authUrl);
 };
