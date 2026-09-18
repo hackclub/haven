@@ -4,7 +4,7 @@ import {
   randomBytes,
   type CipherGCMTypes,
 } from "crypto";
-import { env } from "./env";
+import { env } from "$env/dynamic/private";
 
 // Encrypted values are stored as `v1.<iv>.<authTag>.<ciphertext>`, all base64.
 // The version prefix lets us rotate the scheme later without guessing at

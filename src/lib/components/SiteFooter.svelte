@@ -1,0 +1,95 @@
+<script lang="ts">
+  import { footerLinks } from "$lib/data/content";
+</script>
+
+<footer
+  class="relative pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(2rem,6vw,3rem)] text-white px-[clamp(1rem,4vw,5rem)] md:px-[clamp(3rem,8vw,8rem)]"
+>
+  <img
+    src="/images/footer/bottom-bushes.webp"
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-x-0 bottom-0 w-full object-cover -z-10"
+  />
+
+  <div
+    class="relative shell z-20 grid grid-cols-1 gap-[clamp(2rem,5vw,4rem)] md:grid-cols-[minmax(0,22rem)_1fr]"
+  >
+    <div>
+      <img
+        src="/images/logo.webp"
+        alt="Hack Club Haven"
+        width="778"
+        height="445"
+        class="w-[clamp(5rem,22vw,12rem)]"
+      />
+
+      <nav aria-label="Hack Club" class="mt-[clamp(1.5rem,3vw,2.5rem)]">
+        <ul class="flex flex-wrap gap-x-6 gap-y-1 md:flex-col">
+          {#each footerLinks as link (link.href)}
+            <li>
+              <a
+                href={link.href}
+                class="font-display text-[clamp(0.75rem,3vw,1.5em)] leading-1 tracking-[-0.05em] transition-colors hover:text-haven-yellow"
+              >
+                {link.label}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </nav>
+    </div>
+
+    <div
+      class="flex flex-col gap-4 font-body text-[clamp(0.5rem,1.65vw,1rem)] leading-[1.4] md:pt-[clamp(1rem,3vw,2rem)]"
+    >
+      <p>
+        Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high
+        schoolers. We believe you learn best by building, so we&rsquo;re creating
+        community and providing grants so you can make awesome projects. In the
+        past few years, we&rsquo;ve <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.youtube.com/watch?v=ufMUJ9D1fi8"
+          target="_blank"
+          rel="noopener">sent 30 teen hackers hiking the Pacific Crest Trail</a
+        >, <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.youtube.com/watch?v=8iM1W8kXrQA"
+          target="_blank"
+          rel="noopener">hosted a hackathon for the worst ideas</a
+        >, and <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.youtube.com/watch?v=kaEFv7e49mo"
+          target="_blank"
+          rel="noopener">ran the largest teen hardware hackathon at GitHub HQ</a
+        >.
+      </p>
+
+      <p>
+        Read about Hack Club in <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.wsj.com/articles/teen-hackers-try-to-convince-parents-they-are-up-to-good-11569922200"
+          target="_blank"
+          rel="noopener">The Wall Street Journal</a
+        >, <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.cbsnews.com/sanfrancisco/news/hack-club-hosts-teen-coders-san-francisco/"
+          target="_blank"
+          rel="noopener">CBS News</a
+        >, and <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.nasa.gov/learning-resources/space-out-this-summer-with-variety-of-nasa-stem-activities/"
+          target="_blank"
+          rel="noopener">NASA.gov</a
+        >, or watch us <a
+          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+          href="https://www.youtube.com/live/UbfAhFxDomE?si=5DiK1_hGqKrB_r50&t=7033"
+          target="_blank"
+          rel="noopener">on stage with AMD CEO Lisa Su at CES</a
+        >.
+      </p>
+
+      <p>Made with &hearts; by teenagers, for teenagers at Hack Club</p>
+    </div>
+  </div>
+</footer>

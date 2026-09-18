@@ -1,0 +1,258 @@
+<script lang="ts">
+  import type { Sponsor } from "$lib/data/types";
+
+  interface Props {
+    heading: string;
+    items: Sponsor[];
+  }
+
+  let { heading, items }: Props = $props();
+
+  const ROW_SIZE = 3;
+
+  const rows = $derived.by(() => {
+    const out: Sponsor[][] = [];
+    for (let i = 0; i < items.length; i += ROW_SIZE) {
+      out.push(items.slice(i, i + ROW_SIZE));
+    }
+    return out;
+  });
+
+  const hasMultipleRows = $derived(items.length > ROW_SIZE);
+
+  const sponsorRowPadding = [
+    "top-[0%]",
+    "mt-0 sm:mt-[clamp(0rem,1vw,3rem)] md:mt-[clamp(1rem,2vw,5rem)]",
+    "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
+    "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
+    "mt-0 sm:mt-[clamp(0rem,2vw,1.5rem)] md:mt-[clamp(1rem,2vw,3rem)]",
+  ];
+
+  const boxRowPadding = [
+    "mt-0",
+    "mt-[clamp(2rem,10vw,4rem)] sm:mt-[clamp(2rem,5vw,5rem)] md:mt-[clamp(3rem,7vw,6rem)]",
+    "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
+    "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
+    "mt-[clamp(2rem,8vw,4rem)] sm:mt-[clamp(2rem,5vw,4rem)] md:mt-[clamp(2rem,6vw,6rem)]",
+  ];
+</script>
+
+{#if items.length > 0}
+  <section class="relative z-10 bg-haven-green overflow-x-clip">
+    <img
+      src="/images/sponsors/map-edge-daven.webp"
+      alt=""
+      aria-hidden="true"
+      class="absolute top-0 w-full object-cover -translate-y-[80%] md:-translate-y-[60%]"
+    />
+    <img
+      src="/images/sponsors/map-edge.webp"
+      alt=""
+      aria-hidden="true"
+      class="absolute scale-[-1] bottom-0 w-full object-cover translate-y-[20%] md:translate-y-[40%]"
+    />
+    <div>
+      <img
+        src="/images/sponsors/bushes-1.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-7 z-15 left-[clamp(0.5rem,5vw,1.5rem)] w-[10%] object-cover sm:top-7 sm:left-[clamp(0.5rem,5vw,1.05rem)] md:top-[clamp(3rem,3vw,5rem)] md:left-[clamp(0.5rem,5vw,1.5rem)]"
+      />
+      {#if hasMultipleRows}
+        <img
+          src="/images/sponsors/bushes-3.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute top-[clamp(8.5rem,30vw,18rem)] z-10 -left-[clamp(0.5rem,5vw,1rem)] w-[30%] object-cover sm:top-[clamp(5.5rem,20vw,15rem)] sm:-left-[clamp(1.5rem,7vw,2.5rem)] md:top-[clamp(6.5rem,25vw,20rem)] md:-left-[clamp(1.5rem,7vw,2.5rem)]"
+        />
+      {/if}
+      <img
+        src="/images/sponsors/grass-1.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-[clamp(5rem,25vw,14rem)] z-5 -left-[clamp(0.5rem,5vw,1rem)] w-[12%] object-cover sm:top-[clamp(4rem,18vw,14rem)] sm:-left-[clamp(0.5rem,5vw,1rem)] md:top-[clamp(5rem,22vw,30rem)] md:-left-[clamp(0.5rem,5vw,1rem)]"
+      />
+      {#if hasMultipleRows}
+        <img
+          src="/images/sponsors/grass-2.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-60 z-5 -left-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-left-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-left-[clamp(3rem,9vw,6rem)]"
+        />
+        <img
+          src="/images/sponsors/bushes-2.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-52 z-15 left-[clamp(1rem,6vw,3rem)] w-[15%] object-cover sm:bottom-60 sm:left-[clamp(1rem,6vw,3rem)] md:bottom-[clamp(15rem,30vw,50rem)] md:left-[clamp(1rem,6vw,3rem)]"
+        />
+      {/if}
+      <img
+        src="/images/sponsors/pumpkin-patch.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-10 -left-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:top-15 sm:-left-[clamp(4rem,14vw,8rem)] md:top-25 md:-left-[clamp(4rem,14vw,18rem)]"
+      />
+      {#if hasMultipleRows}
+        <img
+          src="/images/sponsors/pumpkin-patch.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-30 -left-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-35 sm:-left-[clamp(4rem,14vw,8rem)] md:bottom-[clamp(5rem,18vw,14rem)] md:-left-[clamp(4rem,15vw,17rem)]"
+        />
+      {/if}
+    </div>
+    <div>
+      <img
+        src="/images/sponsors/bushes-1.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute scale-x-[-1] top-7 z-15 right-[clamp(0.5rem,5vw,1.5rem)] w-[10%] object-cover sm:top-7 sm:right-[clamp(0.5rem,5vw,1.05rem)] md:top-[clamp(3rem,3vw,5rem)] md:right[clamp(0.5rem,5vw,1.5rem)]"
+      />
+      {#if hasMultipleRows}
+        <img
+          src="/images/sponsors/bushes-3.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute scale-x-[-1] bottom-[clamp(8rem,45vw,10rem)] z-15 -right-[clamp(0.5rem,5vw,1rem)] w-[30%] object-cover sm:bottom-43 sm:-right-[clamp(1.5rem,7vw,2.5rem)] md:bottom-[clamp(10rem,20vw,45rem)] md:-right-[clamp(1.5rem,7vw,2.5rem)]"
+        />
+        <img
+          src="/images/sponsors/grass-1.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-52 z-5 -right-[clamp(0.5rem,5vw,1rem)] w-[12%] object-cover sm:top-[clamp(4rem,18vw,14rem)] sm:-right-[clamp(0.5rem,5vw,1rem)] md:top-[clamp(5rem,22vw,30rem)] md:-right-[clamp(0.5rem,5vw,1rem)]"
+        />
+        <img
+          src="/images/sponsors/grass-2.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-60 z-5 -right-[clamp(1.5rem,6vw,3rem)] w-[20%] object-cover sm:bottom-75 sm:-right-[clamp(3rem,9vw,6rem)] md:bottom-[clamp(25rem,40vw,40rem)] md:-right-[clamp(3rem,9vw,6rem)]"
+        />
+      {/if}
+      <img
+        src="/images/sponsors/bushes-2.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute scale-x-[-1] top-[clamp(10rem,30vw,40rem)] z-15 right-[clamp(1rem,6vw,3rem)] w-[15%] object-cover sm:top-[clamp(3.5rem,18vw,1-0rem)] sm:right-[clamp(1rem,6vw,3rem)] md:top-[clamp(6.5rem,25vw,20rem)] md:right-[clamp(1rem,6vw,3rem)]"
+      />
+      <img
+        src="/images/sponsors/pumpkin-patch.webp"
+        alt=""
+        aria-hidden="true"
+        class="absolute top-10 -right-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:top-15 sm:-right-[clamp(4rem,14vw,8rem)] md:top-25 md:-right-[clamp(4rem,14vw,18rem)]"
+      />
+      {#if hasMultipleRows}
+        <img
+          src="/images/sponsors/pumpkin-patch.webp"
+          alt=""
+          aria-hidden="true"
+          class="absolute bottom-60 -right-[clamp(2rem,15vw,6rem)] z-10 w-[25%] object-cover sm:bottom-75 sm:-right-[clamp(5rem,16vw,9rem)] md:bottom-[clamp(15rem,40vw,50rem)] md:-right-[clamp(5rem,16vw,19rem)]"
+        />
+      {/if}
+    </div>
+    <div class="pb-[clamp(8rem,20vw,40rem)]">
+      <div
+        class="absolute grid grid-cols-[1fr_auto_1fr] z-25 left-1/2 -translate-x-1/2 h-[clamp(2rem,7vw,5rem)] gap-[clamp(1rem,8vw,8rem)]"
+      >
+        <img
+          src="/images/sponsors/houses-1-l.webp"
+          alt=""
+          aria-hidden="true"
+          class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-end"
+        />
+        <img
+          src="/images/sponsors/top-house.webp"
+          alt=""
+          aria-hidden="true"
+          class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-center"
+        />
+        <img
+          src="/images/sponsors/houses-1-r.webp"
+          alt=""
+          aria-hidden="true"
+          class="z-5 h-[clamp(2rem,7vw,10rem)] object-contain justify-self-start"
+        />
+      </div>
+      <div class="shell relative">
+        <h2
+          class="absolute inset-x-0 text-center z-25 font-display text-[clamp(1.5rem,6vw,3rem)] sm:text-display text-white translate-y-[clamp(2rem,4vw,4rem)] sm:translate-y-[clamp(2rem,6vw,4rem)] md:translate-y-[clamp(3rem,8vw,8rem)]"
+        >
+          {heading}
+        </h2>
+
+        {#each rows as row, rowIndex}
+          <div
+            class="relative mx-auto max-w-7xl translate-y-[clamp(1rem,2vw,3rem)] sm:translate-y-[clamp(1.5rem,3vw,3rem)] md:translate-y-[clamp(2rem,6vw,4rem)]"
+            style="z-index: {rows.length - rowIndex}"
+          >
+            <img
+              src={rowIndex === 0
+                ? "/images/sponsors/brown-box-xl.webp"
+                : "/images/sponsors/brown-box-tall.webp"}
+              alt=""
+              aria-hidden="true"
+              class={[
+                "pointer-events-none absolute left-1/2 -z-10 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2 object-contain block sm:hidden",
+                boxRowPadding[rowIndex],
+              ]}
+            />
+            <img
+              src={rowIndex === 0
+                ? "/images/sponsors/brown-box-tall.webp"
+                : "/images/sponsors/brown-box-short.webp"}
+              alt=""
+              aria-hidden="true"
+              class={[
+                "pointer-events-none absolute left-1/2 top-0 z-0 w-[clamp(5rem,80vw,80rem)] -translate-x-1/2 object-contain hidden sm:block",
+                boxRowPadding[rowIndex],
+              ]}
+            />
+            <img
+              src="/images/sponsors/lil-brown-trail.webp"
+              alt=""
+              aria-hidden="true"
+              class={[
+                "pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 object-cover w-[15%] md:w-[20%]",
+                rowIndex === 0 ? "hidden" : "block",
+                rowIndex === 1
+                  ? "translate-y-[clamp(1rem,4vw,3rem)] sm:-translate-y-[clamp(1rem,3vw,3rem)] md:-translate-y-[clamp(0rem,3vw,3rem)]"
+                  : "translate-y-[clamp(0rem,2vw,2rem)] sm:-translate-y-[clamp(1rem,3vw,3rem)] md:-translate-y-[clamp(0rem,3vw,3rem)]",
+              ]}
+            />
+            <ul
+              class="relative flex items-center z-10 gap-[clamp(0rem,8vw,5rem)] pt-[clamp(3rem,14vw,12rem)] sm:pt-[clamp(3rem,8vw,8rem)] md:pt-[clamp(2rem,10vw+100/vw,8rem)] px-[clamp(2rem,15vw,15rem)]"
+            >
+              {#each row as item (item.href)}
+                <li
+                  class={[
+                    "relative w-full flex flex-col items-center z-20 text-center translate-y-[clamp(0rem,vw,2rem)] ",
+                    sponsorRowPadding[rowIndex],
+                  ]}
+                >
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="block transition-transform hover:scale-[1.02] active:scale-100"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      loading="lazy"
+                      decoding="async"
+                      class="relative mx-auto max-h-[clamp(2rem,10vw,12rem)] z-20 w-full max-w-32 object-contain"
+                    />
+                    <p
+                      class="text-white md:text-[clamp(0.5rem,2vw,2rem)] md:leading-[1.05] md:pt-[clamp(0.5rem,1.2vw,1.2rem)]"
+                    >
+                      {item.name}
+                    </p>
+                  </a>
+                </li>
+              {/each}
+            </ul>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </section>
+{/if}

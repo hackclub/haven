@@ -1,5 +1,5 @@
 import { createHash, timingSafeEqual } from "crypto";
-import { env } from "./env";
+import { env } from "$env/dynamic/private";
 
 /**
  * Airtable automations cannot sign a request the way Slack does, so the shared
@@ -9,10 +9,13 @@ import { env } from "./env";
  * the length of the real key.
  */
 function matchesSecret(presented: string): boolean {
+  const secret = env.AIRTABLE_SECRET_KEY;
+  if (!secret) throw new Error("AIRTABLE_SECRET_KEY is not set");
+
   const digest = (value: string) =>
     createHash("sha256").update(value, "utf8").digest();
 
-  return timingSafeEqual(digest(presented), digest(env.AIRTABLE_SECRET_KEY));
+  return timingSafeEqual(digest(presented), digest(secret));
 }
 
 /**
