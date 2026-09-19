@@ -4,6 +4,7 @@ import { db } from "../db";
 import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
 import { listRecords } from "./airtable";
+import { siteDataJsonSchema, type SiteDataInput } from "$lib/data/types";
 
 /**
  * Field ids in the "Events" table of the "YSWS - Haven" base. Ids rather than
@@ -16,6 +17,7 @@ const FIELDS = {
   latitude: "fldvdwlur1tFgV0bI",
   longitude: "fldwx4BdUQw9yHGSp",
   status: "fldP2oeMSijEs3FnR",
+  websiteData: "fldML1eUwOBMwWyoy",
 } as const;
 
 /**
@@ -34,6 +36,26 @@ export interface HavenEvent {
   name: string;
   latitude: number;
   longitude: number;
+  /** The city page's copy, as the JSON string Airtable stores it in. */
+  websiteData: string | null;
+}
+
+/**
+ * The stored copy for an event's page. Airtable is the editor, so the field is
+ * routinely empty (a city that has not been written yet) and can hold anything
+ * someone typed into it — either way the page falls back to the defaults in
+ * `resolveSiteData` rather than failing to render.
+ */
+export function parseSiteData(event: HavenEvent): SiteDataInput {
+  if (!event.websiteData) return {};
+
+  const parsed = siteDataJsonSchema.safeParse(event.websiteData);
+  if (!parsed.success) {
+    console.warn(`Ignoring invalid website data for /${event.slug}`);
+    return {};
+  }
+
+  return parsed.data;
 }
 
 /**
@@ -89,6 +111,7 @@ export async function syncEvents(): Promise<number> {
       name: record.fields[FIELDS.name] as string,
       latitude: record.fields[FIELDS.latitude] as number,
       longitude: record.fields[FIELDS.longitude] as number,
+      websiteData: (record.fields[FIELDS.websiteData] as string) || null,
       syncedAt: new Date(),
     }));
 
@@ -118,6 +141,7 @@ export async function syncEvents(): Promise<number> {
           name: sql`excluded."name"`,
           latitude: sql`excluded."latitude"`,
           longitude: sql`excluded."longitude"`,
+          websiteData: sql`excluded."websiteData"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });
@@ -134,6 +158,7 @@ export async function getEvents(): Promise<HavenEvent[]> {
       name: eventsTable.name,
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
+      websiteData: eventsTable.websiteData,
     })
     .from(eventsTable)
     .orderBy(asc(eventsTable.name));
@@ -147,6 +172,7 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       name: eventsTable.name,
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
+      websiteData: eventsTable.websiteData,
     })
     .from(eventsTable)
     .where(eq(eventsTable.slug, slug))

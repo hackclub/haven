@@ -38,7 +38,6 @@ export interface SiteData {
 }
 
 export const siteDataInputSchema = z.object({
-  title: z.string().array().optional(),
   tagline: z.string().array().optional(),
   faq: faqItemSchema.array().optional(),
   sponsors: z
@@ -56,3 +55,17 @@ export const siteDataInputSchema = z.object({
 });
 
 export type SiteDataInput = z.infer<typeof siteDataInputSchema>;
+
+/**
+ * Airtable long-text fields hold the copy as a JSON *string*, while a scripting
+ * action can send a real object. Accept both, and let a string that is not JSON
+ * fall through to the schema so the caller gets a field-level error either way.
+ */
+export const siteDataJsonSchema = z.preprocess((value) => {
+  if (typeof value !== "string") return value;
+  try {
+    return JSON.parse(value);
+  } catch {
+    return value;
+  }
+}, siteDataInputSchema);

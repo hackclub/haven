@@ -2,30 +2,16 @@ import type { RequestHandler } from "./$types";
 import z from "zod";
 import { checkAirtableAuth } from "$lib/airtable";
 import { saveDataForSlug } from "$lib/server/services/websites";
-import { siteDataInputSchema } from "$lib/data/types";
+import { siteDataJsonSchema } from "$lib/data/types";
 
 const SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$/;
-
-/**
- * Airtable long-text fields hold the copy as a JSON *string*, while a scripting
- * action can send a real object. Accept both, and let a string that is not JSON
- * fall through to the schema so the caller gets a field-level error either way.
- */
-const jsonInput = z.preprocess((value) => {
-  if (typeof value !== "string") return value;
-  try {
-    return JSON.parse(value);
-  } catch {
-    return value;
-  }
-}, siteDataInputSchema);
 
 const payloadSchema = z.object({
   slug: z
     .string()
     .trim()
     .regex(SLUG_RE, "must be lowercase letters, numbers and hyphens"),
-  data: jsonInput,
+  data: siteDataJsonSchema,
 });
 
 /**

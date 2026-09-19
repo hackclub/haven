@@ -4,7 +4,11 @@ import {
   randomBytes,
   type CipherGCMTypes,
 } from "crypto";
-import { env } from "$env/dynamic/private";
+// Read the key from `process.env` rather than `$env/dynamic/private` so this
+// module stays importable outside the SvelteKit runtime — the Drizzle schema
+// pulls it in through `encryptedText`, and drizzle-kit can't resolve `$env`.
+// `dotenv` fills in `.env` the way SvelteKit otherwise would.
+import "dotenv/config";
 
 // Encrypted values are stored as `v1.<iv>.<authTag>.<ciphertext>`, all base64.
 // The version prefix lets us rotate the scheme later without guessing at
@@ -19,7 +23,7 @@ let cachedKey: Buffer | null = null;
 function getKey(): Buffer {
   if (cachedKey) return cachedKey;
 
-  const raw = env.ENCRYPTION_KEY;
+  const raw = process.env.ENCRYPTION_KEY;
   if (!raw) {
     throw new Error("ENCRYPTION_KEY is not set");
   }

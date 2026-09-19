@@ -2,8 +2,7 @@ import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
 
 export const event = {
   name: "Haven",
-  title: ["Burlington"],
-  tagline: ["Game jam for teens in 200+ cities", "Hosted at [venue]", "Nov 14–15, 2026"],
+  tagline: ["Game jam for teens in 200+ cities", "Nov 14–15, 2026"],
 } as const;
 
 export const organizeCta = {
@@ -19,7 +18,6 @@ export const eventPoc = {
 export const organizeCtaPoc = {
   label: "Want to organize a Haven in your city?",
 } as const;
-
 
 export const about = {
   title: "What is a game jam?",
@@ -257,7 +255,7 @@ export const schedule: ScheduleDay[] = [
         body: "yada yada body text",
       },
     ],
-  }
+  },
 ];
 
 export const stepsHeading =
@@ -269,7 +267,6 @@ export const stepsHeadingPoc =
 export const stepsSubheading =
   "(Don't worry, we'll guide you through each step)";
 
-  
 export const steps = [
   {
     title: "find a team of coorganizers",

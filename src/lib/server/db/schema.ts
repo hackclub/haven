@@ -92,6 +92,7 @@ export const eventsTable = pgTable(
     latitude: doublePrecision().notNull(),
     longitude: doublePrecision().notNull(),
     syncedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    websiteData: text(),
   },
   (table) => [uniqueIndex().on(table.slug)],
 );

@@ -3,5 +3,15 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig(() => {
-  return { plugins: [tailwindcss(), sveltekit()] };
+  return {
+    plugins: [tailwindcss(), sveltekit()],
+    server: {
+      watch: {
+        ignored: ["**/.direnv/**"],
+      },
+    },
+    optimizeDeps: {
+      exclude: [".direnv"],
+    },
+  };
 });
