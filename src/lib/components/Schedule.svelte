@@ -102,7 +102,7 @@
     />
     {#if filled.length > 0}
       <div
-        class="mx-auto px-[clamp(1rem,6vw,8rem)] mt-[clamp(1rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(0.5rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)] md:grid-cols-2"
+        class="mx-auto px-[clamp(1rem,6vw,8rem)] mt-[clamp(1rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(0.5rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)] 2xl:grid-cols-2"
       >
         {#each filled as day (day.day)}
           <section
@@ -123,11 +123,11 @@
                     {item.time}
                   </span>
                   <span class="flex-1">
-                    <span class="block font-display text-subheading text-white">
+                    <span class="block font-display text-subheading line-height leading-none text-white">
                       {item.title}
                     </span>
                     {#if item.body}
-                      <span class="mt-0.5 block font-body text-copy text-white">
+                      <span class="mt-2 block font-body text-copy text-white">
                         {item.body}
                       </span>
                     {/if}
