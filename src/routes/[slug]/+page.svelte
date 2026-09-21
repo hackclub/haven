@@ -40,7 +40,7 @@
     <Pitch poc={isPoc} />
   </div>
 
-  <div class="z-0">
+  <div class="z-20">
     <Steps poc={isPoc} />
   </div>
 
