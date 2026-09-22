@@ -19,10 +19,13 @@
     "db:sync": "npm run db:generate && npm run db:migrate"
   },
   "dependencies": {
+    "@protomaps/basemaps": "^5.7.2",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^1.0.0-rc.4",
+    "maplibre-gl": "^6.10.0",
     "node-cron": "^4.6.0",
     "pg": "^8.23.0",
+    "pmtiles": "^4.5.0",
     "slack.ts": "0.0.22"
   },
   "devDependencies": {
@@ -30,6 +33,7 @@
     "@sveltejs/kit": "^2.70.3",
     "@sveltejs/vite-plugin-svelte": "^7.3.0",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/geojson": "^7946.0.16",
     "@types/pg": "^8.21.0",
     "drizzle-kit": "^1.0.0-rc.4",
     "svelte": "^5.57.0",

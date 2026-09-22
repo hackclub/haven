@@ -1,5 +1,6 @@
 import type { LayoutServerLoad } from "./$types";
 import { env } from "$env/dynamic/private";
+import { getHavenCities } from "$lib/server/services/events";
 
 /** Referral codes arrive as `?r=` and outlive the landing page they came in on. */
 const REFERRAL_COOKIE = "haven_referral";
@@ -14,7 +15,7 @@ const REFERRAL_MAX_AGE = 60 * 60 * 24 * 90; // 90 days
  * lands on `/?r=abc` and then wanders the site still signs up with the code
  * attached.
  */
-export const load: LayoutServerLoad = ({ url, cookies }) => {
+export const load: LayoutServerLoad = async ({ url, cookies }) => {
   const incoming = url.searchParams.get("r");
 
   if (incoming) {
@@ -29,5 +30,6 @@ export const load: LayoutServerLoad = ({ url, cookies }) => {
     // `RSVP_URL` keeps its old name in the environment; the deployment sets it.
     signupUrl: env.RSVP_URL,
     referral: incoming ?? cookies.get(REFERRAL_COOKIE) ?? null,
+    cities: await getHavenCities(),
   };
 };
