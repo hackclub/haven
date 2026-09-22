@@ -13,5 +13,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
   if (!event) error(404, "Not found");
 
-  return { site: resolveSiteData(parseSiteData(event), event) };
+  return {
+    site: resolveSiteData(parseSiteData(event), event),
+    eventId: event.id,
+  };
 };

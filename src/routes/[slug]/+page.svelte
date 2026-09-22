@@ -16,6 +16,11 @@
 
   const site = $derived(data.site);
   const pageTitle = $derived(`${event.name} — ${site.title.join(" ")}`);
+  const signupUrl = $derived.by(() => {
+    const url = new URL(data.signupUrl)
+    url.searchParams.set('event', data.eventId)
+    return url.toString()
+  })
 
   const isPoc = false;
 </script>
@@ -30,7 +35,7 @@
       title={site.title}
       tagline={site.tagline}
       poc={isPoc}
-      signupUrl={data.signupUrl}
+      signupUrl={signupUrl}
       referral={data.referral}
     />
   </div>

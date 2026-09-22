@@ -32,6 +32,7 @@ const ACTIVE_STATUS = "Active";
 const SCHEDULE = "*/2 * * * *";
 
 export interface HavenEvent {
+  id: string;
   slug: string;
   name: string;
   latitude: number;
@@ -154,6 +155,7 @@ export async function syncEvents(): Promise<number> {
 export async function getEvents(): Promise<HavenEvent[]> {
   return db
     .select({
+      id: eventsTable.airtableId,
       slug: eventsTable.slug,
       name: eventsTable.name,
       latitude: eventsTable.latitude,
@@ -168,6 +170,7 @@ export async function getEvents(): Promise<HavenEvent[]> {
 export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
   const [row] = await db
     .select({
+      id: eventsTable.airtableId,
       slug: eventsTable.slug,
       name: eventsTable.name,
       latitude: eventsTable.latitude,
