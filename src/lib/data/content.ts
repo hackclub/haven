@@ -7,7 +7,7 @@ export const event = {
 } as const;
 
 export const organizeCta = {
-  label: "Want to organize your own Haven?",
+  label: "Want to organize your own Hack Club Haven?",
 } as const;
 
 export const eventPoc = {
@@ -17,7 +17,7 @@ export const eventPoc = {
 } as const;
 
 export const organizeCtaPoc = {
-  label: "Want to organize a Haven in your city?",
+  label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
 export const about = {
