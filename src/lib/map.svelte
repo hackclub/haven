@@ -79,7 +79,7 @@
   ></div>
 
   {#if failed}
-    <p class="haven-map__fallback">The map didn’t load. The full list of cities is below.</p>
+    <p class="haven-map__fallback">The map didn't load :( Please try again later!</p>
   {/if}
 
   <!-- Pins live on a canvas, so they are invisible to screen readers and
@@ -88,7 +88,7 @@
   <ul class="haven-map__cities">
     {#each cities as city (city.id)}
       <li>
-        <a href={city.href}>{city.name}{city.region ? `, ${city.region}` : ''}</a>
+        <a href={city.href}>{city.name}</a>
       </li>
     {/each}
   </ul>
@@ -98,11 +98,19 @@
   .haven-map {
     position: relative;
     height: var(--haven-map-height);
+    border-radius: inherit;
   }
 
   .haven-map__canvas {
     position: absolute;
     inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+
+  .haven-map__canvas :global(.maplibregl-canvas-container),
+  .haven-map__canvas :global(.maplibregl-canvas) {
+    border-radius: inherit;
   }
 
   .haven-map__fallback {
