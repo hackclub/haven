@@ -11,7 +11,7 @@ export default defineConfig(() => {
       },
     },
     optimizeDeps: {
-      exclude: [".direnv"],
+      exclude: [".direnv", 'maplibre-gl'],
     },
   };
 });

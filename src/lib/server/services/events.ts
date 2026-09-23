@@ -5,6 +5,7 @@ import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
 import { listRecords } from "./airtable";
 import { siteDataJsonSchema, type SiteDataInput } from "$lib/data/types";
+import type { City } from "$lib/map";
 
 /**
  * Field ids in the "Events" table of the "YSWS - Haven" base. Ids rather than
@@ -164,6 +165,17 @@ export async function getEvents(): Promise<HavenEvent[]> {
     })
     .from(eventsTable)
     .orderBy(asc(eventsTable.name));
+}
+
+export async function getHavenCities(): Promise<City[]> {
+  const events = await getEvents();
+  return events.map((e) => ({
+    id: e.slug,
+    name: e.name,
+    lat: e.latitude,
+    lng: e.longitude,
+    href: `/${e.slug}`,
+  }));
 }
 
 /** One event by slug, or null when nothing is synced under that slug. */

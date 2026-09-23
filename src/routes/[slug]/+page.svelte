@@ -37,6 +37,7 @@
       poc={isPoc}
       signupUrl={signupUrl}
       referral={data.referral}
+      cities={data.cities}
     />
   </div>
 

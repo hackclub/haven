@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { event, eventPoc, organizeCta, organizeCtaPoc } from "$lib/data/content";
+  import {
+    event,
+    eventPoc,
+    organizeCta,
+    organizeCtaPoc,
+  } from "$lib/data/content";
+  import HavenMap from "$lib/components/Map.svelte";
+  import type { City } from "$lib/map";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
 
@@ -13,6 +20,7 @@
     signupUrl?: string | undefined;
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
+    cities?: City[];
   }
 
   let {
@@ -21,12 +29,54 @@
     tagline = poc ? eventPoc.tagline : event.tagline,
     signupUrl,
     referral = null,
+    cities = [],
   }: Props = $props();
 
   // Carry whatever the visitor typed into the signup box over to the organizer
   // signup, so they do not have to type their address twice.
   let email = $state("");
   let emailValid = $state(false);
+
+  // A tap opens the full map; a drag pans the small one. Distinguished by how
+  // far the pointer travelled between down and up, since MapLibre's own pan
+  // handling means a plain click listener can't tell the two apart.
+  let mapExpanded = $state(false);
+  let mapPointerDown: { x: number; y: number } | null = null;
+
+  // `#top`'s `isolate` (and the `z-20` wrapper the page renders this Hero
+  // into) caps this modal's stacking priority no matter what z-index it's
+  // given, since the whole section paints as a single layer against
+  // SiteHeader's fixed, z-30 nav. Moving the node to <body> escapes that.
+  function portal(node: HTMLElement) {
+    document.body.appendChild(node);
+    return { destroy: () => node.remove() };
+  }
+
+  function handleMapPointerDown(e: PointerEvent) {
+    mapPointerDown = { x: e.clientX, y: e.clientY };
+  }
+
+  function handleMapPointerUp(e: PointerEvent) {
+    if (!mapPointerDown) return;
+    const moved = Math.hypot(e.clientX - mapPointerDown.x, e.clientY - mapPointerDown.y);
+    mapPointerDown = null;
+    if (moved < 6) mapExpanded = true;
+  }
+
+  $effect(() => {
+    if (!mapExpanded) return;
+
+    document.body.style.overflow = "hidden";
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") mapExpanded = false;
+    };
+    window.addEventListener("keydown", onKeydown);
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeydown);
+    };
+  });
 
   const signupAction = $derived.by(() => {
     if (!signupUrl) return undefined;
@@ -54,7 +104,7 @@
 >
   <div class={poc ? "hidden" : "block sm:contents"}>
     <div
-      class="relative z-10 flex flex-1 items-center justify-center mt-[clamp(5rem,14vw,20rem)] sm:mt-[clamp(1rem,2vw,15rem)]"
+      class="pointer-events-none relative z-10 flex flex-1 items-center justify-center mt-[clamp(5rem,14vw,20rem)] sm:mt-[clamp(1rem,2vw,15rem)]"
     >
       <div
         class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center sm:pl-[clamp(1rem,4vw,8rem)] sm:items-start sm:pr-[clamp(20rem,45vw,60rem)]"
@@ -88,12 +138,12 @@
           id="signup-email"
           bind:email
           bind:valid={emailValid}
-          class="mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
+          class="pointer-events-auto mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
         />
         {#if signupAction}
           <a
             href={organizeHref}
-            class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
+            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
           >
             {organizeCta.label}
           </a>
@@ -122,10 +172,29 @@
 
     <div
       class={[
-        "panel bg-haven-green-deep relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] sm:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] transition-transform hover:scale-[1.04] active:scale-100",
+        "panel relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] sm:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] transition-transform hover:scale-[1.04] active:scale-100",
         poc ? "hidden" : "block",
       ]}
+      role="button"
+      tabindex="0"
+      aria-label="Open full map of Haven events"
+      onpointerdown={handleMapPointerDown}
+      onpointerup={handleMapPointerUp}
+      onkeydown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          mapExpanded = true;
+        }
+      }}
     >
+      <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
+        <HavenMap
+          {cities}
+          tilesUrl="https://haven.hackclub-assets.com/planet_z7.pmtiles"
+          height="100%"
+        />
+      </div>
+
       <img
         src="/images/hero/hero-arrow.webp"
         alt=""
@@ -183,7 +252,9 @@
         >
           {#each tagline as part, i}
             {#if i > 0}
-              <span aria-hidden="true" class="mx-2 hidden sm:inline">&hearts;</span>
+              <span aria-hidden="true" class="mx-2 hidden sm:inline"
+                >&hearts;</span
+              >
             {/if}
             <span class={i === 0 ? "whitespace-nowrap" : "block sm:inline"}>
               {part}
@@ -252,4 +323,47 @@
       class="pointer-events-none absolute inset-x-0 bottom-0 z-20 w-full max-w-none translate-y-[55%] select-none"
     />
   </div>
+
+  {#if mapExpanded}
+    <!-- svelte-ignore a11y_click_events_have_key_events -- Escape is handled globally in the $effect above, regardless of focus -->
+    <div
+      use:portal
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-10"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Map of Haven events"
+      tabindex="-1"
+      onclick={(e) => {
+        if (e.target === e.currentTarget) mapExpanded = false;
+      }}
+    >
+      <button
+        type="button"
+        onclick={() => (mapExpanded = false)}
+        aria-label="Close map"
+        class="fixed left-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white text-haven-orange-deep shadow-lg transition-transform hover:scale-110 active:scale-100"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          aria-hidden="true"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+
+      <div class="panel relative h-[min(90vh,56rem)] w-[min(94vw,80rem)] overflow-hidden">
+        <HavenMap
+          {cities}
+          tilesUrl="https://haven.hackclub-assets.com/planet_z7.pmtiles"
+          height="100%"
+        />
+      </div>
+    </div>
+  {/if}
 </section>
