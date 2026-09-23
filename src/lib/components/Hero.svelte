@@ -5,8 +5,8 @@
     organizeCta,
     organizeCtaPoc,
   } from "$lib/data/content";
-  import HavenMap from "$lib/map.svelte";
-  import type { City } from "$lib/haven-map";
+  import HavenMap from "$lib/components/Map.svelte";
+  import type { City } from "$lib/map";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
 

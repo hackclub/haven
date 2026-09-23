@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { City, HavenMapHandle } from '$lib/haven-map';
+  import type { City, HavenMapHandle } from '$lib/map';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
   type Props = {
@@ -37,7 +37,7 @@
 
     // MapLibre touches `window` on import, so it can only be pulled in once
     // we're past SSR. A static import at the top would break the server render.
-    import('$lib/haven-map').then(({ createHavenMap }) => {
+    import('$lib/map').then(({ createHavenMap }) => {
       if (disposed) return;
       handle = createHavenMap({
         container,

@@ -9,8 +9,6 @@ export type City = {
   id: string;
   /** Display name, e.g. "Lisbon". */
   name: string;
-  /** Country or region shown under the name in the popup. */
-  region?: string;
   lat: number;
   lng: number;
   /** Where the pin links to, e.g. "/c/lisbon". */
@@ -77,7 +75,6 @@ function toFeatureCollection(cities: City[]): FeatureCollection<Point> {
       properties: {
         id: city.id,
         name: city.name,
-        region: city.region ?? "",
         organizer: city.organizer ?? "",
         href: city.href,
       },
@@ -109,7 +106,7 @@ function pinImage(accent: string, pinImageUrl?: string): Promise<HTMLImageElemen
 }
 
 function popupHtml(props: Record<string, string>) {
-  const meta = [props.region, props.organizer].filter(Boolean).map(escapeHtml).join(" · ");
+  const meta = props.organizer ? escapeHtml(props.organizer) : "";
   return `
     <div class="haven-popup">
       <h3>${escapeHtml(props.name)}</h3>

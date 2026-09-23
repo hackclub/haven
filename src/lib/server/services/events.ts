@@ -5,7 +5,7 @@ import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
 import { listRecords } from "./airtable";
 import { siteDataJsonSchema, type SiteDataInput } from "$lib/data/types";
-import type { City } from "$lib/haven-map";
+import type { City } from "$lib/map";
 
 /**
  * Field ids in the "Events" table of the "YSWS - Haven" base. Ids rather than
