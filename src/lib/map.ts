@@ -1,5 +1,6 @@
 import * as maplibregl from "maplibre-gl";
 import type { Map as MaplibreMap, GeoJSONSource } from "maplibre-gl";
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import { Protocol } from "pmtiles";
 import { layers, namedFlavor } from "@protomaps/basemaps";
 import type { FeatureCollection, Point } from "geojson";
@@ -42,14 +43,24 @@ const ASSETS_DEFAULT = "https://protomaps.github.io/basemaps-assets";
 const PIN_IMAGE_ID = "haven-pin";
 
 /**
- * addProtocol registers globally, so it must happen once per page rather than
- * once per map. Client-side navigations back to this route land here again.
+ * Both of these register globally, so they must happen once per page rather
+ * than once per map. Client-side navigations back to this route land here
+ * again.
+ *
+ * MapLibre locates its worker by resolving `maplibre-gl-worker.mjs` against
+ * its own `import.meta.url`. That holds on the dev server, where
+ * `optimizeDeps.exclude` leaves the package unbundled next to its siblings,
+ * but not in the production build, where the module is a hashed chunk with no
+ * such sibling: the request 404s, and a 404 carries no content type, so the
+ * browser blocks the worker and the map renders blank. Point it at the copy
+ * Vite bundled for us instead.
  */
-let protocolRegistered = false;
-function registerPmtilesProtocol() {
-  if (protocolRegistered) return;
+let globalsRegistered = false;
+function registerMaplibreGlobals() {
+  if (globalsRegistered) return;
+  maplibregl.setWorkerUrl(maplibreWorkerUrl);
   maplibregl.addProtocol("pmtiles", new Protocol().tile);
-  protocolRegistered = true;
+  globalsRegistered = true;
 }
 
 function escapeHtml(value: string) {
@@ -87,7 +98,10 @@ function toFeatureCollection(cities: City[]): FeatureCollection<Point> {
  * teardrop is generated and rasterised at 2x so it stays crisp on retina
  * displays.
  */
-function pinImage(accent: string, pinImageUrl?: string): Promise<HTMLImageElement> {
+function pinImage(
+  accent: string,
+  pinImageUrl?: string,
+): Promise<HTMLImageElement> {
   const src = pinImageUrl
     ? pinImageUrl
     : `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
@@ -126,7 +140,7 @@ export function createHavenMap({
 }: HavenMapOptions): HavenMapHandle {
   let cities = initialCities;
 
-  registerPmtilesProtocol();
+  registerMaplibreGlobals();
 
   const map = new maplibregl.Map({
     container,
@@ -155,12 +169,17 @@ export function createHavenMap({
     attributionControl: { compact: true },
   });
 
-  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+  map.addControl(
+    new maplibregl.NavigationControl({ showCompass: false }),
+    "top-right",
+  );
   map.on("error", (e) => onError?.(e.error));
 
   map.on("load", async () => {
     try {
-      map.addImage(PIN_IMAGE_ID, await pinImage(accent, pinImageUrl), { pixelRatio: 2 });
+      map.addImage(PIN_IMAGE_ID, await pinImage(accent, pinImageUrl), {
+        pixelRatio: 2,
+      });
     } catch {
       // Fall through: the symbol layer degrades to its text label.
     }
@@ -256,14 +275,20 @@ export function createHavenMap({
     const feature = e.features?.[0];
     if (!feature) return;
     const source = map.getSource("cities") as GeoJSONSource;
-    const zoom = await source.getClusterExpansionZoom(feature.properties.cluster_id);
+    const zoom = await source.getClusterExpansionZoom(
+      feature.properties.cluster_id,
+    );
     const center = (feature.geometry as Point).coordinates as [number, number];
     if (prefersReducedMotion()) map.jumpTo({ center, zoom });
     else map.easeTo({ center, zoom, duration: 420 });
   });
 
   for (const layer of ["pins", "clusters"]) {
-    map.on("mouseenter", layer, () => (map.getCanvas().style.cursor = "pointer"));
+    map.on(
+      "mouseenter",
+      layer,
+      () => (map.getCanvas().style.cursor = "pointer"),
+    );
     map.on("mouseleave", layer, () => (map.getCanvas().style.cursor = ""));
   }
 

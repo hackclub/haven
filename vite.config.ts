@@ -13,5 +13,10 @@ export default defineConfig(() => {
     optimizeDeps: {
       exclude: [".direnv", 'maplibre-gl'],
     },
+    // MapLibre asks for its worker with `{ type: "module" }`, so the chunk
+    // Vite emits for it has to be ESM rather than the default IIFE.
+    worker: {
+      format: "es" as const,
+    },
   };
 });
