@@ -190,7 +190,6 @@
       <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
         <HavenMap
           {cities}
-          tilesUrl="https://haven.hackclub-assets.com/planet_z7.pmtiles"
           height="100%"
         />
       </div>
@@ -360,7 +359,6 @@
       <div class="panel relative h-[min(90vh,56rem)] w-[min(94vw,80rem)] overflow-hidden">
         <HavenMap
           {cities}
-          tilesUrl="https://haven.hackclub-assets.com/planet_z7.pmtiles"
           height="100%"
         />
       </div>

@@ -6,7 +6,7 @@
   type Props = {
     cities: City[];
     /** Absolute URL of the .pmtiles archive, without the pmtiles:// prefix. */
-    tilesUrl: string;
+    tilesUrl?: string;
     /** Glyph and sprite root. Point this at your own CDN in production. */
     assetsUrl?: string;
     /** Accent colour for the generated pin/cluster shapes; ignored if `pinImageUrl` is set. */
@@ -19,7 +19,7 @@
 
   let {
     cities,
-    tilesUrl,
+    tilesUrl = 'https://haven.hackclub-assets.com/planet_z7.pmtiles',
     assetsUrl = 'https://protomaps.github.io/basemaps-assets',
     accent = '#FC8616',
     pinImageUrl = '/images/map-flag.png',
