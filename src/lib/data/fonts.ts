@@ -4,8 +4,9 @@
  * front of it so a font that fails to load falls back to Haven's own.
  */
 export const fontDefaults = {
-  display: '"Darumadrop One", "Jua", ui-rounded, system-ui, sans-serif',
-  body: '"Jua", ui-rounded, system-ui, sans-serif',
+  display:
+    '"Darumadrop One", "Jua Extras", "Jua", ui-rounded, system-ui, sans-serif',
+  body: '"Jua Extras", "Jua", ui-rounded, system-ui, sans-serif',
 } as const;
 
 export type FontRole = keyof typeof fontDefaults;
