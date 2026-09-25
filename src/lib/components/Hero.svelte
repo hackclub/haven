@@ -122,7 +122,7 @@
       <div
         class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center sm:pl-[clamp(1rem,4vw,8rem)] sm:items-start sm:pr-[clamp(20rem,45vw,60rem)]"
       >
-        <div class="grid grid-cols-2 translate-x-[4%] sm:translate-x-0">
+        <div class="grid grid-cols-2 max-w-[1700px]">
           <img
             src={images.logo}
             alt="Hack Club Haven"
@@ -131,14 +131,14 @@
             class="w-[120%] max-w-none"
           />
           <h1
-            class="m-0 font-display text-hero text-white translate-y-[75%] translate-x-[-12%]"
+            class="m-0 font-display text-[clamp(1rem,8vw,10rem)] leading-[clamp(1rem,6vw,8rem)]  text-white translate-y-[75%] translate-x-[-10%] sm:text-hero sm:leading-[clamp(1rem,4vw,8rem)]"
           >
             {title.join(" ")}
           </h1>
         </div>
 
         <p
-          class="glow-orange mt-[clamp(1rem,2.5vw,5rem)] text-[clamp(1rem,4vw,8rem)] leading-[clamp(1rem,4.75vw,5rem)] font-body text-center text-white sm:ml-[clamp(1rem,3vw,8rem)] sm:text-[clamp(1.25rem,2vw,4rem)] sm:leading-[clamp(1.5rem,2.75vw,5rem)] sm:text-start"
+          class="glow-orange mt-[clamp(1rem,10vw,10rem)] text-[clamp(1rem,4vw,8rem)] leading-[clamp(1rem,4.75vw,5rem)] font-body text-center text-white sm:ml-[clamp(1rem,3vw,8rem)] sm:mt-[clamp(1rem,5vw,10rem)] sm:text-[clamp(1.25rem,2vw,4rem)] sm:leading-[clamp(1.5rem,2.75vw,5rem)] sm:text-start"
         >
           {#each tagline as part, i}
             <span class={i === 0 ? "whitespace-nowrap" : "block"}>{part}</span>
