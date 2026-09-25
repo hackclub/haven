@@ -19,6 +19,7 @@
   const signupUrl = $derived.by(() => {
     const url = new URL(data.signupUrl)
     url.searchParams.set('event', data.eventId)
+    if (data.ref) url.searchParams.set('ref', data.ref)
     return url.toString()
   })
 
