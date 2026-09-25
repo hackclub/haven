@@ -52,6 +52,7 @@ export const defaultSiteData: SiteData = {
   sponsors: { heading: supportersHeading, items: supporters },
   faq: { heading: faqHeading, cta: faqCta, items: faqs },
   images: { ...imageDefaults },
+  fonts: {},
 };
 
 /** Drop keys a parse left undefined so they cannot shadow a default. */
@@ -134,5 +135,6 @@ export function resolveSiteData(
       items: data.faq?.items ?? base.faq.items,
     },
     images: { ...imageDefaults, ...defined(data.images) } as SiteImages,
+    fonts: defined(data.fonts),
   };
 }

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Meta from "$lib/components/Meta.svelte";
+  import Fonts from "$lib/components/Fonts.svelte";
   import SiteHeader from "$lib/components/SiteHeader.svelte";
   import Hero from "$lib/components/Hero.svelte";
   import About from "$lib/components/About.svelte";
@@ -44,6 +45,7 @@
   description={site.meta.description}
   image={site.meta.image}
 />
+<Fonts fonts={site.fonts} />
 
 <SiteHeader {images} />
 

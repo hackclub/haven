@@ -358,6 +358,7 @@ in. Copy it, delete what you are not editing, and change the rest.
       }
     ]
   },
+  "fonts": { "display": "Darumadrop One", "body": "Jua" },
   "images": { "hedgehog": "https://example.com/our-mascot.png" }
 }
 ```
@@ -493,6 +494,39 @@ left and right, so an even number balances.
 
 This is the section most worth adding to rather than replacing: copy the default
 list from the template and add your own venue, parking and food questions to it.
+
+### `fonts` - the lettering
+
+There are two fonts on the page: `display` is the big rounded one used for the
+name at the top and the headings, and `body` is everything else. Change either,
+both or neither.
+
+The easy way is to pick a font from [Google Fonts](https://fonts.google.com)
+and type its name exactly as it appears there:
+
+```json
+{ "fonts": { "display": "Press Start 2P", "body": "Nunito" } }
+```
+
+To use a font that is not on Google Fonts, upload the font file (a `.woff2` is
+best) somewhere public and give it a name of your choosing:
+
+```json
+{
+  "fonts": {
+    "display": {
+      "family": "Burlington Hand",
+      "src": "https://cdn.hackclub.com/burlington-hand.woff2"
+    }
+  }
+}
+```
+
+Font names may only use letters, numbers, spaces and hyphens. Only the regular
+weight is loaded, and if the font cannot be found the page quietly falls back to
+Haven's own, so if nothing changes, check the spelling first. The sizes and
+spacing on the page were tuned for Haven's fonts, so a much wider font can push
+long headings onto an extra line - have a look on a phone.
 
 ### What you cannot change
 

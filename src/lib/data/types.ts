@@ -1,4 +1,5 @@
 import z from "zod";
+import type { SiteFonts } from "./fonts";
 import { imageKeys, type ImageKey, type SiteImages } from "./images";
 
 /**
@@ -132,6 +133,28 @@ const imagesSchema = z.object(
   Object.fromEntries(imageKeys.map((key) => [key, srcSchema.optional()])),
 ) as unknown as z.ZodType<Partial<Record<ImageKey, string>>>;
 
+/**
+ * A font is either a Google Fonts family name (`"Press Start 2P"`) or a font
+ * file the organizer hosts (`{ "family": ..., "src": ... }`). The name ends up
+ * inside a CSS string and a stylesheet URL, so it is held to the characters
+ * real family names use.
+ */
+const fontFamilySchema = z
+  .string()
+  .trim()
+  .max(64)
+  .regex(
+    /^[A-Za-z0-9][A-Za-z0-9 -]*$/,
+    "must be only letters, digits, spaces and hyphens",
+  );
+
+const fontSchema = z
+  .union([
+    fontFamilySchema,
+    z.object({ family: fontFamilySchema, src: srcSchema.optional() }),
+  ])
+  .transform((value) => (typeof value === "string" ? { family: value } : value));
+
 export interface SiteData {
   meta: { title: string | undefined; description: string; image: string };
   /** Always the event's own name; a city page cannot rename itself. */
@@ -155,6 +178,8 @@ export interface SiteData {
   sponsors: { heading: string; items: Sponsor[] };
   faq: { heading: string; cta: string; items: FaqItem[] };
   images: SiteImages;
+  /** Only the roles a page overrides; the rest keep Haven's fonts. */
+  fonts: SiteFonts;
 }
 
 /**
@@ -238,6 +263,9 @@ export const siteDataInputSchema = z.object({
     .optional(),
   faq: faqSectionSchema.optional(),
   images: imagesSchema.optional(),
+  fonts: z
+    .object({ display: fontSchema.optional(), body: fontSchema.optional() })
+    .optional(),
 });
 
 export type SiteDataInput = z.infer<typeof siteDataInputSchema>;
