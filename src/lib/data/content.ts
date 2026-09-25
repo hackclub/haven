@@ -1,4 +1,19 @@
-import type { Linked, Marked, Sponsor, ScheduleDay } from "./types";
+import type {
+  Linked,
+  Link,
+  PastEvent,
+  Perk,
+  PitchItem,
+  ScheduleDay,
+  Sponsor,
+} from "./types";
+
+export const meta = {
+  title: "Haven — Organize a game jam in your city!",
+  description:
+    "Hack Club Haven is a global event for hundreds of teenagers to organize their own game jams",
+  image: "/images/haven-logo-color.webp",
+} as const;
 
 export const event = {
   name: "Haven",
@@ -20,24 +35,26 @@ export const organizeCtaPoc = {
   label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
+/** Copy for the hero that is not the title or the tagline. */
+export const heroCopy = {
+  mapLabel: "find an event near you",
+  scrollLabel: "more info",
+} as const;
+
+export const signupCopy = {
+  placeholder: "you@hackclub.com",
+  button: "sign up!",
+} as const;
+
+export const signupCopyPoc = {
+  placeholder: "enter email to sign up",
+  button: "sign up!",
+} as const;
+
 export const about = {
   title: "What is a game jam?",
   body: "It’s a social coding event where you make a video game with friends + free food!",
 } as const;
-
-export type Perk = {
-  id: string;
-  title: string;
-  blurb: string[];
-  side: "start" | "end";
-  photos: {
-    src: string;
-    alt: string;
-    position?: string;
-    href?: string;
-    caption?: { title: string; author: string };
-  }[];
-};
 
 export const perks: Perk[] = [
   {
@@ -88,25 +105,12 @@ export const perks: Perk[] = [
   },
 ];
 
-export type Pitch = {
-  id: string;
-  align: "start" | "center" | "end";
-  tail?: Record<string, string>;
-  body: Marked;
-};
-
 export const pitchHeading = "Don’t game jams sound awesome?";
 
-export const pitches: Pitch[] = [
+export const pitches: PitchItem[] = [
   {
     id: "invite",
     align: "end",
-    tail: {
-      "--tail-size": "4.5rem",
-      "--tail-rotate": "18deg",
-      "--tail-right": "2.5rem",
-      "--tail-bottom": "-2.25rem",
-    },
     body: [
       { text: "This November, " },
       { text: "YOU can join the world's largest teen game jam.", mark: true },
@@ -129,12 +133,6 @@ export const pitches: Pitch[] = [
   {
     id: "impact",
     align: "center",
-    tail: {
-      "--tail-size": "4.5rem",
-      "--tail-rotate": "-28deg",
-      "--tail-right": "-2.25rem",
-      "--tail-top": "2.5rem",
-    },
     body: [
       { text: "This is your chance to " },
       { text: "learn something new,", mark: true },
@@ -146,16 +144,10 @@ export const pitches: Pitch[] = [
   },
 ];
 
-export const pitchesPoc: Pitch[] = [
+export const pitchesPoc: PitchItem[] = [
   {
     id: "invite",
     align: "end",
-    tail: {
-      "--tail-size": "4.5rem",
-      "--tail-rotate": "18deg",
-      "--tail-right": "2.5rem",
-      "--tail-bottom": "-2.25rem",
-    },
     body: [
       { text: "This November, " },
       { text: "we want YOU", mark: true },
@@ -178,12 +170,6 @@ export const pitchesPoc: Pitch[] = [
   {
     id: "impact",
     align: "center",
-    tail: {
-      "--tail-size": "4.5rem",
-      "--tail-rotate": "-28deg",
-      "--tail-right": "-2.25rem",
-      "--tail-top": "2.5rem",
-    },
     body: [
       { text: "It may be challenging but this is your chance to " },
       { text: "start something truly impactful", mark: true },
@@ -291,7 +277,7 @@ export const steps = [
   },
 ];
 
-export const stepsCta = {
+export const stepsCta: Link = {
   label: "Read the organizer guide for more info!",
   href: "https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit",
 };
@@ -300,16 +286,6 @@ export const pastEventsHeading = [
   "Hack Club has helped teens organize hundreds of events woldwide!",
   "Check out some of our past events ~",
 ];
-
-export type PastEvent = {
-  title: string;
-  caption: string;
-  image: string;
-  alt: string;
-  play: string;
-  href: string;
-  position?: string;
-};
 
 export const pastEvents: PastEvent[] = [
   {
@@ -367,6 +343,11 @@ export const sponsorsHeading = "Our sponsors";
 const HAVEN_GUIDE_LINK =
   "https://docs.google.com/document/d/1f_uFvFP4gD01YhXBmU9jBfEBU9QMvr1L5yJTKWBBhbA/edit?usp=sharing";
 const HAVEN_EMAIL = "mailto:haven@hackclub.com";
+
+export const faqHeading = "FAQ";
+
+/** The button under the FAQ column, which scrolls back up to the signup box. */
+export const faqCta = "Sign up!";
 
 export const faqs: { q: string; a: Linked }[] = [
   {
@@ -457,14 +438,62 @@ export const faqs: { q: string; a: Linked }[] = [
   },
 ];
 
-export const footerLinks = [
+export const footerLinks: Link[] = [
   { label: "Hack Club", href: "https://hackclub.com" },
   { label: "Slack", href: "https://hackclub.com/slack/" },
   { label: "Clubs", href: "https://hackclub.com/clubs/" },
   { label: "Hackathons", href: "https://hackathons.hackclub.com" },
 ];
 
-export const navLinks = [
+/** One entry per paragraph of the "who is Hack Club" blurb in the footer. */
+export const footerBody: Linked[] = [
+  [
+    {
+      text: "Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers. We believe you learn best by building, so we’re creating community and providing grants so you can make awesome projects. In the past few years, we’ve ",
+    },
+    {
+      text: "sent 30 teen hackers hiking the Pacific Crest Trail",
+      href: "https://www.youtube.com/watch?v=ufMUJ9D1fi8",
+    },
+    { text: ", " },
+    {
+      text: "hosted a hackathon for the worst ideas",
+      href: "https://www.youtube.com/watch?v=8iM1W8kXrQA",
+    },
+    { text: ", and " },
+    {
+      text: "ran the largest teen hardware hackathon at GitHub HQ",
+      href: "https://www.youtube.com/watch?v=kaEFv7e49mo",
+    },
+    { text: "." },
+  ],
+  [
+    { text: "Read about Hack Club in " },
+    {
+      text: "The Wall Street Journal",
+      href: "https://www.wsj.com/articles/teen-hackers-try-to-convince-parents-they-are-up-to-good-11569922200",
+    },
+    { text: ", " },
+    {
+      text: "CBS News",
+      href: "https://www.cbsnews.com/sanfrancisco/news/hack-club-hosts-teen-coders-san-francisco/",
+    },
+    { text: ", and " },
+    {
+      text: "NASA.gov",
+      href: "https://www.nasa.gov/learning-resources/space-out-this-summer-with-variety-of-nasa-stem-activities/",
+    },
+    { text: ", or watch us " },
+    {
+      text: "on stage with AMD CEO Lisa Su at CES",
+      href: "https://www.youtube.com/live/UbfAhFxDomE?si=5DiK1_hGqKrB_r50&t=7033",
+    },
+    { text: "." },
+  ],
+  [{ text: "Made with ♥ by teenagers, for teenagers at Hack Club" }],
+];
+
+export const navLinks: Link[] = [
   { label: "Sign up", href: "#top" },
   { label: "About", href: "#about" },
   { label: "FAQ", href: "#faq" },

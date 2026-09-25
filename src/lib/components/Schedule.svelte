@@ -1,13 +1,22 @@
 <script lang="ts">
-  import { scheduleTbd } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import type { SiteImages } from "$lib/data/images";
   import type { ScheduleDay } from "$lib/data/types";
 
   interface Props {
-    heading: string;
-    days: ScheduleDay[];
+    heading?: string;
+    days?: ScheduleDay[];
+    /** Shown in place of the timetable until there are any days with items. */
+    tbd?: { title: string; body: string };
+    images?: SiteImages;
   }
 
-  let { heading, days }: Props = $props();
+  let {
+    heading = defaultSiteData.schedule.heading,
+    days = defaultSiteData.schedule.days,
+    tbd = defaultSiteData.schedule.tbd,
+    images = defaultSiteData.images,
+  }: Props = $props();
 
   const filled = $derived(days.filter((day) => day.items.length > 0));
 </script>
@@ -17,20 +26,20 @@
   class="relative z-10 bg-haven-green mt-[clamp(2.5rem,10vw,15rem)] mb-[clamp(1rem,5vw,8rem)] py-[clamp(1rem,3vw,4rem)]"
 >
   <img
-    src="/images/schedule/trail-w.webp"
+    src={images.scheduleTrail}
     alt=""
     aria-hidden="true"
     class="absolute top-0 w-full object-cover translate-y-[-60%] md:-translate-y-1/2"
   />
   <img
-    src="/images/schedule/trail-w.webp"
+    src={images.scheduleTrail}
     alt=""
     aria-hidden="true"
     class="absolute bottom-0 w-full object-cover scale-[-1] translate-y-[30%] md:translate-y-1/2"
   />
   <div class="absolute inset-y-0 left-0 w-[15%] overflow-hidden">
     <img
-      src="/images/schedule/trail-v.webp"
+      src={images.scheduleTrailSide}
       alt=""
       aria-hidden="true"
       class="w-full object-cover translate-y-[-5%]"
@@ -38,44 +47,44 @@
   </div>
   <div class="absolute inset-y-0 right-0 w-[15%] overflow-hidden">
     <img
-      src="/images/schedule/trail-v.webp"
+      src={images.scheduleTrailSide}
       alt=""
       aria-hidden="true"
       class="w-full scale-[-1] object-cover translate-y-[-5%]"
     />
   </div>
   <img
-    src="/images/schedule/side-plants-1.webp"
+    src={images.schedulePlantsSmall}
     alt=""
     aria-hidden="true"
     class="absolute z-20 w-[8%] right-0 top-0 object-cover translate-y-[-35%]"
   />
   <img
-    src="/images/schedule/side-plants-2.webp"
+    src={images.schedulePlantsLarge}
     alt=""
     aria-hidden="true"
     class="absolute z-20 scale-x-[-1] w-[10%] left-0 top-0 object-cover translate-y-[-30%]"
   />
   <img
-    src="/images/schedule/side-plants-2.webp"
+    src={images.schedulePlantsLarge}
     alt=""
     aria-hidden="true"
     class="absolute z-20 w-[10%] right-0 bottom-0 object-cover"
   />
   <img
-    src="/images/schedule/side-plants-1.webp"
+    src={images.schedulePlantsSmall}
     alt=""
     aria-hidden="true"
     class="absolute z-20 scale-x-[-1] w-[8%] left-0 bottom-0 object-cover"
   />
   <img
-    src="/images/schedule/sheep.webp"
+    src={images.scheduleSheep}
     alt=""
     aria-hidden="true"
     class="absolute z-0 h-[50%] max-h-200 left-[clamp(0rem,3vw,4rem)] bottom-30 object-cover md:left-[clamp(1rem,5vw,14rem)]"
   />
   <img
-    src="/images/schedule/daven-smol.webp"
+    src={images.scheduleDaven}
     alt=""
     aria-hidden="true"
     class="absolute z-0 w-[8%] right-3 top-18 object-cover md:right-[clamp(1rem,3vw,4rem)]"
@@ -89,22 +98,27 @@
       {heading}
     </h2>
     <img
-      src="/images/schedule/plant-l.webp"
+      src={images.schedulePlantLeft}
       alt=""
       aria-hidden="true"
       class="absolute z-10 top-0 -translate-y-[45%] left-[clamp(1.8rem,8vw,6rem)] w-[20%] object-cover block sm:w-[26%] sm:left-[clamp(2rem,6vw,4rem)] md:hidden"
     />
     <img
-      src="/images/schedule/plant-r.webp"
+      src={images.schedulePlantRight}
       alt=""
       aria-hidden="true"
       class="absolute z-10 top-0 -translate-y-[45%] right-[clamp(2.3rem,9vw,6rem)] w-[26%] object-cover block sm:w-[32%] sm:right-[clamp(3rem,8vw,6rem)] md:hidden"
     />
     {#if filled.length > 0}
       <div
-        class="mx-auto px-[clamp(1rem,6vw,8rem)] mt-[clamp(1rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(0.5rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)] 2xl:grid-cols-2"
+        class={[
+          "mx-auto px-[clamp(1rem,6vw,8rem)] mt-[clamp(1rem,3.5vw,3rem)] grid grid-cols-1 gap-[clamp(0.5rem,2vw,1.75rem)] md:px-[clamp(2rem,6vw,8rem)]",
+          // A lone day would otherwise sit in a half-width column with nothing
+          // beside it, so it only splits into two once there is a second day.
+          filled.length > 1 && "2xl:grid-cols-2",
+        ]}
       >
-        {#each filled as day (day.day)}
+        {#each filled as day, dayIndex (dayIndex)}
           <section
             class="panel px-[clamp(0.2rem,2.4vw,2.25rem)] py-[clamp(1rem,2.2vw,2rem)] bg-haven-brown-light"
           >
@@ -115,7 +129,7 @@
             <ol
               class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.2rem,1vw,1.1rem)]"
             >
-              {#each day.items as item (item.time + item.title)}
+              {#each day.items as item, itemIndex (itemIndex)}
                 <li class="flex gap-x-[clamp(0.5rem,2vw,2.25rem)] flex-row items-baseline">
                   <span
                     class="w-[clamp(5rem,10vw,8rem)] font-display text-subheading whitespace-nowrap text-white shrink-0"
@@ -143,12 +157,12 @@
         class="panel mx-auto mt-[clamp(1.5rem,3.5vw,3rem)] max-w-[31.5rem] px-[clamp(1.25rem,2.4vw,2.25rem)] py-[clamp(1.5rem,2.6vw,2.25rem)] text-center"
       >
         <span class="block font-display text-heading text-haven-orange-bright">
-          {scheduleTbd.title}
+          {tbd.title}
         </span>
         <span
           class="mt-[clamp(0.5rem,1vw,0.75rem)] block font-body text-copy text-haven-orange-mid"
         >
-          {scheduleTbd.body}
+          {tbd.body}
         </span>
       </p>
     {/if}

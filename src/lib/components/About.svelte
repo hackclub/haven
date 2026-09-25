@@ -1,53 +1,73 @@
 <script lang="ts">
-  import { about, perks } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import { cssUrl, type SiteImages } from "$lib/data/images";
+  import type { Perk } from "$lib/data/types";
 
-  const stage: Record<string, string> = {
-    intro: "md:absolute md:left-[16.1%] md:top-[5.6%] md:w-[30%]",
-    daven: "md:absolute md:left-[65.8%] md:top-[5.6%] md:w-[7.5%]",
-    build: "md:absolute md:left-[4.8%] md:top-[13%] md:w-[40%]",
-    friends: "md:absolute md:left-[56%] md:top-[18%] md:w-[40%]",
-    food: "md:absolute md:left-[20 %] md:top-[35%] md:w-[40%]",
-  };
+  interface Props {
+    title?: string;
+    body?: string;
+    perks?: Perk[];
+    images?: SiteImages;
+  }
+
+  let {
+    title = defaultSiteData.about.title,
+    body = defaultSiteData.about.body,
+    perks = defaultSiteData.about.perks,
+    images = defaultSiteData.images,
+  }: Props = $props();
+
+  const intro = "md:absolute md:left-[16.1%] md:top-[5.6%] md:w-[30%]";
+  const daven = "md:absolute md:left-[65.8%] md:top-[5.6%] md:w-[7.5%]";
+
+  // The illustration behind this section has three sign-shaped gaps in it, so
+  // the perks are placed by position rather than by name — a page that renames
+  // them still lands in the slots, and a fourth one simply stacks below.
+  const stage = [
+    "md:absolute md:left-[4.8%] md:top-[13%] md:w-[40%]",
+    "md:absolute md:left-[56%] md:top-[18%] md:w-[40%]",
+    "md:absolute md:left-[20 %] md:top-[35%] md:w-[40%]",
+  ];
 </script>
 
 <section
   class="relative flex flex-col gap-[clamp(2.5rem,6vw,4rem)] overflow-x-clip px-18 pb-[clamp(3rem,7vw,6rem)] pt-[max(3.5rem,14vw)] sm:px-36 md:contents"
 >
   <div
-    class="panel bg-haven-green-deep/60 shadow-[0_0_10px_var(--color-haven-green-deep)] w-full max-w-[40rem] self-center px-[clamp(2rem,4vw,4rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:shadow-none md:self-start md:max-w-[42rem] md:bg-transparent md:p-0 md:text-left {stage.intro}"
+    class="panel bg-haven-green-deep/60 shadow-[0_0_10px_var(--color-haven-green-deep)] w-full max-w-[40rem] self-center px-[clamp(2rem,4vw,4rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:shadow-none md:self-start md:max-w-[42rem] md:bg-transparent md:p-0 md:text-left {intro}"
   >
     <h2
       class="font-display text-heading text-white md:text-[3cqw] md:leading-[0.8]"
     >
-      {about.title}
+      {title}
     </h2>
     <p
       class="mt-[1em] font-body text-lead leading-[1.15] text-white md:text-[1.5cqw]"
     >
-      {about.body}
+      {body}
     </p>
   </div>
 
   <img
-    src="/images/daven.webp"
+    src={images.aboutDaven}
     alt=""
     aria-hidden="true"
     width="108"
     height="108"
-    class="hidden select-none md:block {stage.daven}"
+    class="hidden select-none md:block {daven}"
   />
 
-  {#each perks as perk (perk.id)}
+  {#each perks as perk, index (index)}
     <div
       class={[
         "w-full max-w-[40rem] md:max-w-none md:p-[2.1%]",
         perk.side === "end" ? "self-end" : "self-start",
-        stage[perk.id],
+        stage[index],
       ]}
     >
       <div class="relative w-full aspect-1972/1413">
         <img
-          src="/images/about/sign-side.webp"
+          src={images.aboutSignSide}
           alt=""
           aria-hidden="true"
           class={[
@@ -57,12 +77,13 @@
         />
 
         <div
-          class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-[url('/images/about/sign-back.webp')] bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]"
+          class="absolute inset-0 flex flex-col justify-center overflow-hidden bg-cover bg-no-repeat bg-center px-[clamp(1.5rem,8vw,6rem)] py-[clamp(1.25rem,2.2vw,1.75rem)] text-center md:px-[12%] md:py-[4%]"
+          style="background-image: {cssUrl(images.aboutSignBack)}"
         >
           <ul
             class="px-2 pt-[clamp(2.5rem,8vw,7rem)] md:px-6 grid grid-cols-2 gap-[clamp(1rem,3vw,5rem)] md:pt-[15%] md:gap-[3%]"
           >
-            {#each perk.photos as photo (photo.src)}
+            {#each perk.photos as photo, photoIndex (photoIndex)}
               <li>
                 <svelte:element
                   this={photo.href ? "a" : "div"}
@@ -78,7 +99,7 @@
                     decoding="async"
                     class={[
                       "w-full rounded-[clamp(0.625rem,1vw,1rem)] object-cover transition-transform md:rounded-[1cqw]",
-                      perk.id === "build"
+                      index === 0
                         ? "mt-[clamp(0.3rem,2vw,3rem)] h-[clamp(2.5rem,15vw,6rem)] md:h-[6.5cqw]"
                         : "h-[clamp(3.5rem,18vw,5rem)] md:h-[9cqw]",
                       photo.href && "group-hover:scale-[1.03]",
@@ -99,11 +120,11 @@
               </li>
             {/each}
           </ul>
-          {#each perk.blurb as line (line)}
+          {#each perk.blurb as line, lineIndex (lineIndex)}
             <p
               class={[
                 "font-body leading-[clamp(0.75rem,3vw,1.5rem)] text-haven-brown-dark pb-4 md:text-[1.4cqw] md:leading-[1.15]",
-                perk.id === "build"
+                index === 0
                   ? "text-[clamp(0.45rem,2.1vw,3rem)] mt-[clamp(0.3rem,1vw,1rem)] md:mt-[3%]"
                   : "text-[clamp(0.75rem,3vw,3rem)] mt-[clamp(0.5rem,2vw,3rem)] md:mt-[3%]",
               ]}

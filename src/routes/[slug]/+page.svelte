@@ -11,11 +11,15 @@
   import Faq from "$lib/components/Faq.svelte";
   import SiteFooter from "$lib/components/SiteFooter.svelte";
   import { event } from "$lib/data/content";
+  import { cssUrl } from "$lib/data/images";
 
   let { data } = $props();
 
   const site = $derived(data.site);
-  const pageTitle = $derived(`${event.name} — ${site.title.join(" ")}`);
+  const images = $derived(site.images);
+  const pageTitle = $derived(
+    site.meta.title ?? `${event.name} — ${site.title.join(" ")}`,
+  );
   const signupUrl = $derived.by(() => {
     const url = new URL(data.signupUrl)
     url.searchParams.set('event', data.eventId)
@@ -23,12 +27,25 @@
     return url.toString()
   })
 
+  // The two illustrated backdrops are CSS backgrounds, so they are swapped
+  // through the custom properties `.stage-*` reads rather than an `img` src.
+  const middleStage = $derived(
+    `--stage-bg: ${cssUrl(images.stageMiddle)}; --stage-bg-mobile: ${cssUrl(images.stageMiddleMobile)}`,
+  );
+  const picnicStage = $derived(
+    `--stage-bg: ${cssUrl(images.stagePicnic)}; --stage-bg-mobile: ${cssUrl(images.stagePicnicMobile)}`,
+  );
+
   const isPoc = false;
 </script>
 
-<Meta title={pageTitle} />
+<Meta
+  title={pageTitle}
+  description={site.meta.description}
+  image={site.meta.image}
+/>
 
-<SiteHeader />
+<SiteHeader {images} />
 
 <main id="main" class="overflow-x-clip">
   <div class="relative z-20">
@@ -39,27 +56,65 @@
       signupUrl={signupUrl}
       referral={data.referral}
       cities={data.cities}
+      organizeCta={site.hero.organizeCta}
+      mapLabel={site.hero.mapLabel}
+      scrollLabel={site.hero.scrollLabel}
+      signup={site.hero.signup}
+      {images}
     />
   </div>
 
-  <div id="about" class="stage stage-middle z-10">
-    <About />
-    <Pitch poc={isPoc} />
+  <div id="about" class="stage stage-middle z-10" style={middleStage}>
+    <About
+      title={site.about.title}
+      body={site.about.body}
+      perks={site.about.perks}
+      {images}
+    />
+    <Pitch
+      poc={isPoc}
+      heading={site.pitch.heading}
+      items={site.pitch.items}
+      {images}
+    />
   </div>
 
   <div class="z-20">
-    <Steps poc={isPoc} />
+    <Steps
+      poc={isPoc}
+      heading={site.steps.heading}
+      subheading={site.steps.subheading}
+      cta={site.steps.cta}
+      {images}
+    />
   </div>
 
-  <Schedule heading={site.schedule.heading} days={site.schedule.days} />
+  <Schedule
+    heading={site.schedule.heading}
+    days={site.schedule.days}
+    tbd={site.schedule.tbd}
+    {images}
+  />
 
-  <div class="stage stage-picnic">
-    <PastEvents />
+  <div class="stage stage-picnic" style={picnicStage}>
+    <PastEvents
+      heading={site.pastEvents.heading}
+      items={site.pastEvents.items}
+    />
   </div>
 
-  <Sponsors heading={site.sponsors.heading} items={site.sponsors.items} />
+  <Sponsors
+    heading={site.sponsors.heading}
+    items={site.sponsors.items}
+    {images}
+  />
 
-  <Faq items={site.faq} />
+  <Faq
+    heading={site.faq.heading}
+    items={site.faq.items}
+    cta={site.faq.cta}
+    {images}
+  />
 </main>
 
-<SiteFooter />
+<SiteFooter {images} />

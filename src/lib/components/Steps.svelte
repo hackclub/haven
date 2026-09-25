@@ -1,16 +1,25 @@
 <script lang="ts">
-  import {
-    stepsCta,
-    stepsHeading,
-    stepsHeadingPoc,
-    stepsSubheading,
-  } from "$lib/data/content";
+  import { stepsHeadingPoc } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import type { SiteImages } from "$lib/data/images";
+  import type { Link } from "$lib/data/types";
 
   interface Props {
     poc: boolean;
+    heading?: string;
+    subheading?: string;
+    /** Only shown on the organizer page, but editable either way. */
+    cta?: Link;
+    images?: SiteImages;
   }
 
-  let { poc }: Props = $props();
+  let {
+    poc,
+    heading = poc ? stepsHeadingPoc : defaultSiteData.steps.heading,
+    subheading = defaultSiteData.steps.subheading,
+    cta = defaultSiteData.steps.cta,
+    images = defaultSiteData.images,
+  }: Props = $props();
 </script>
 
 <section
@@ -18,7 +27,7 @@
 >
   <div class="relative z-10 flex justify-center">
     <img
-      src="/images/flower-border.webp"
+      src={images.stepsFlowerBorder}
       alt=""
       aria-hidden="true"
       width="3586"
@@ -28,7 +37,7 @@
   </div>
   <div class="absolute inset-0">
     <img
-      src="/images/steps/flowers-top-r.webp"
+      src={images.stepsFlowersTopRight}
       alt=""
       aria-hidden="true"
       width="872"
@@ -36,7 +45,7 @@
       class="pointer-events-none absolute right-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
     <img
-      src="/images/steps/flowers-top-l.webp"
+      src={images.stepsFlowersTopLeft}
       alt=""
       aria-hidden="true"
       width="864"
@@ -44,7 +53,7 @@
       class="pointer-events-none absolute left-0 top-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
     <img
-      src="/images/steps/flowers-bottom-r.webp"
+      src={images.stepsFlowersBottomRight}
       alt=""
       aria-hidden="true"
       width="660"
@@ -52,7 +61,7 @@
       class="pointer-events-none absolute right-0 bottom-0 z-10 w-[clamp(6rem,26vw,20rem)] object-contain"
     />
     <img
-      src="/images/steps/flowers-bottom-l.webp"
+      src={images.stepsFlowersBottomLeft}
       alt=""
       aria-hidden="true"
       width="642"
@@ -64,19 +73,17 @@
     <h2
       class="relative mx-auto max-w-[24ch] z-10 text-center font-display text-display text-white sm:max-w-none sm:px-[clamp(0rem,6vw,10rem)] text-shadow-[0_0_10px_var(--color-haven-green-deep)] md:text-[clamp(2.5rem,6vw,8rem)] md:leading-[1.05]"
     >
-      {poc ? stepsHeadingPoc : stepsHeading}
+      {heading}
     </h2>
 
     <h3
       class="relative mt-4 mx-auto max-w-[24ch] z-10 text-center font-display text-lead copy text-white sm:max-w-none"
     >
-      {stepsSubheading}
+      {subheading}
     </h3>
 
     <img
-      src={poc
-        ? "/images/steps/step-poc-bg-desktop.webp"
-        : "/images/steps/step-bg-desktop.webp"}
+      src={poc ? images.stepsBackgroundPoc : images.stepsBackground}
       alt=""
       aria-hidden="true"
       width="3378"
@@ -85,7 +92,7 @@
     />
 
     <img
-      src="/images/steps/step-bg-mobile.webp"
+      src={images.stepsBackgroundMobile}
       alt=""
       aria-hidden="true"
       width="3378"
@@ -97,7 +104,7 @@
       class="relative mt-[clamp(1.5rem,3vw,2.5rem)] flex z-10 justify-center md:mt-0"
     >
       <a
-        href={stepsCta.href}
+        href={cta.href}
         target="_blank"
         rel="noopener noreferrer"
         class={[
@@ -120,7 +127,7 @@
           <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
           ></path>
         </svg>
-        {stepsCta.label}
+        {cta.label}
       </a>
     </div>
   </div>

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { imageDefaults } from "$lib/data/images";
+
   const EMBED_ALLOW =
     "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
 
@@ -6,12 +8,16 @@
     videoId: string;
     title?: string;
     class?: string;
+    chevron?: string;
+    playIcon?: string;
   }
 
   let {
     videoId,
     title = "Watch the Haven intro video",
     class: className,
+    chevron = imageDefaults.videoChevron,
+    playIcon = imageDefaults.videoPlay,
   }: Props = $props();
 
   const poster = $derived(`https://i.ytimg.com/vi/${videoId}/hq720.jpg`);
@@ -38,7 +44,7 @@
     <span class="group-open:hidden">watch video</span>
     <span class="hidden group-open:inline">close video</span>
     <img
-      src="/images/faq-chevron.webp"
+      src={chevron}
       alt=""
       aria-hidden="true"
       width="416"
@@ -74,7 +80,7 @@
           class="absolute inset-0 h-full w-full object-cover"
         />
         <img
-          src="/images/play-triangle-1.svg"
+          src={playIcon}
           alt=""
           aria-hidden="true"
           width="72"

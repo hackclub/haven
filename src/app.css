@@ -117,29 +117,40 @@
     }
   }
 
+  /* `--stage-bg` and `--stage-bg-mobile` let a city page swap the backdrop it
+     is drawn on; unset, each stage keeps its own illustration. */
   .stage-middle {
     --stage-ratio: 1440 / 4500;
-    background-image: url("/images/middle/mid-phone-bg.webp");
+    background-image: var(
+      --stage-bg-mobile,
+      url("/images/middle/mid-phone-bg.webp")
+    );
   }
 
   @media (width >= 40rem) {
     .stage-middle {
       --stage-ratio: 1440 / 4000;
-      background-image: url("/images/middle/mid-phone-bg.webp");
+      background-image: var(
+        --stage-bg-mobile,
+        url("/images/middle/mid-phone-bg.webp")
+      );
     }
   }
 
   @media (width >= 48rem) {
     .stage-middle {
       --stage-ratio: 1440 / 2100;
-      background-image: url("/images/bg-middle.webp");
+      background-image: var(--stage-bg, url("/images/bg-middle.webp"));
       background-size: cover;
     }
   }
 
   .stage-picnic {
     --stage-ratio: 1440 / 4329;
-    background-image: url("/images/middle/picnic-bg-mobile.webp");
+    background-image: var(
+      --stage-bg-mobile,
+      url("/images/middle/picnic-bg-mobile.webp")
+    );
     aspect-ratio: none;
     background-size: cover;
   }
@@ -147,7 +158,7 @@
   @media (width >= 48rem) {
     .stage-picnic {
       --stage-ratio: 1440 / 1067;
-      background-image: url("/images/middle/picnic-bg.webp");
+      background-image: var(--stage-bg, url("/images/middle/picnic-bg.webp"));
     }
   }
 

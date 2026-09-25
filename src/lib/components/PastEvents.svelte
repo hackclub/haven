@@ -1,5 +1,17 @@
 <script lang="ts">
-  import { pastEvents, pastEventsHeading } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import type { PastEvent } from "$lib/data/types";
+
+  interface Props {
+    /** One line per entry. */
+    heading?: string[];
+    items?: PastEvent[];
+  }
+
+  let {
+    heading = defaultSiteData.pastEvents.heading,
+    items = defaultSiteData.pastEvents.items,
+  }: Props = $props();
 
   const stage = [
     "ml-[clamp(0rem,28vw-6rem,8rem)] md:absolute md:left-[9.2%] md:top-[31.2%] md:w-[25.8%]",
@@ -14,11 +26,11 @@
   <h2
     class="mx-auto max-w-[42ch] -rotate-3 text-center font-display text-subheading text-white pt-[clamp(6rem,40vw,20rem)] md:pt-0 md:absolute md:left-[15.2%] md:top-[20%] md:w-[71.1%] md:max-w-none md:-rotate-4 md:text-[2.43cqw] md:leading-[0.9]"
   >
-    {#each pastEventsHeading as line (line)}<span class="block">{line}</span
+    {#each heading as line, lineIndex (lineIndex)}<span class="block">{line}</span
       >{/each}
   </h2>
 
-  {#each pastEvents as item, i (item.href)}
+  {#each items as item, i (i)}
     <article
       class={[
         "polaroid mx-auto flex w-[85%] max-w-[24rem] px-8 mt-12 md:mt-0 flex-col items-center gap-4 text-center md:px-[clamp(1.25rem,2vw,2rem)] md:mx-0 md:max-w-none",

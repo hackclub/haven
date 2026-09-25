@@ -1,11 +1,15 @@
 <script lang="ts">
+  // The same three links on every page, city or not.
   import { navLinks } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import type { SiteImages } from "$lib/data/images";
 
   interface Props {
     poc?: boolean;
+    images?: SiteImages;
   }
 
-  let { poc = false }: Props = $props();
+  let { poc = false, images = defaultSiteData.images }: Props = $props();
 
   let scrolled = $state(false);
 
@@ -19,7 +23,7 @@
 
 <header class="absolute inset-x-0 top-0 z-30">
   <img
-    src="/images/nav-banner.png"
+    src={images.navBanner}
     alt=""
     aria-hidden="true"
     width="646"
@@ -39,7 +43,7 @@
       aria-label="Hack Club Haven — home"
     >
       <img
-        src="/images/logo.webp"
+        src={images.logo}
         alt="Hack Club Haven"
         width="778"
         height="445"

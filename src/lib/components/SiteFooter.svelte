@@ -1,12 +1,22 @@
 <script lang="ts">
-  import { footerLinks } from "$lib/data/content";
+  // Who Hack Club is, and where to find it: the same on every page, and not
+  // something a city page may reword. Only the artwork here is overridable.
+  import { footerBody, footerLinks } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import type { SiteImages } from "$lib/data/images";
+
+  interface Props {
+    images?: SiteImages;
+  }
+
+  let { images = defaultSiteData.images }: Props = $props();
 </script>
 
 <footer
   class="relative pb-[clamp(2.5rem,5vw,4rem)] pt-[clamp(2rem,6vw,3rem)] text-white px-[clamp(1rem,4vw,5rem)] md:px-[clamp(3rem,8vw,8rem)]"
 >
   <img
-    src="/images/footer/bottom-bushes.webp"
+    src={images.footerBushes}
     alt=""
     aria-hidden="true"
     class="absolute inset-x-0 bottom-0 w-full object-cover -z-10"
@@ -17,7 +27,7 @@
   >
     <div>
       <img
-        src="/images/logo.webp"
+        src={images.logo}
         alt="Hack Club Haven"
         width="778"
         height="445"
@@ -43,53 +53,16 @@
     <div
       class="flex flex-col gap-4 font-body text-[clamp(0.5rem,1.65vw,1rem)] leading-[1.4] md:pt-[clamp(1rem,3vw,2rem)]"
     >
-      <p>
-        Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high
-        schoolers. We believe you learn best by building, so we&rsquo;re creating
-        community and providing grants so you can make awesome projects. In the
-        past few years, we&rsquo;ve <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.youtube.com/watch?v=ufMUJ9D1fi8"
-          target="_blank"
-          rel="noopener">sent 30 teen hackers hiking the Pacific Crest Trail</a
-        >, <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.youtube.com/watch?v=8iM1W8kXrQA"
-          target="_blank"
-          rel="noopener">hosted a hackathon for the worst ideas</a
-        >, and <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.youtube.com/watch?v=kaEFv7e49mo"
-          target="_blank"
-          rel="noopener">ran the largest teen hardware hackathon at GitHub HQ</a
-        >.
-      </p>
-
-      <p>
-        Read about Hack Club in <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.wsj.com/articles/teen-hackers-try-to-convince-parents-they-are-up-to-good-11569922200"
-          target="_blank"
-          rel="noopener">The Wall Street Journal</a
-        >, <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.cbsnews.com/sanfrancisco/news/hack-club-hosts-teen-coders-san-francisco/"
-          target="_blank"
-          rel="noopener">CBS News</a
-        >, and <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.nasa.gov/learning-resources/space-out-this-summer-with-variety-of-nasa-stem-activities/"
-          target="_blank"
-          rel="noopener">NASA.gov</a
-        >, or watch us <a
-          class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
-          href="https://www.youtube.com/live/UbfAhFxDomE?si=5DiK1_hGqKrB_r50&t=7033"
-          target="_blank"
-          rel="noopener">on stage with AMD CEO Lisa Su at CES</a
-        >.
-      </p>
-
-      <p>Made with &hearts; by teenagers, for teenagers at Hack Club</p>
+      {#each footerBody as paragraph, i (i)}
+        <p>{#each paragraph as seg}{#if seg.href}<a
+                class="underline decoration-from-font underline-offset-2 hover:text-haven-yellow"
+                href={seg.href}
+                target={seg.href.startsWith("http") ? "_blank" : undefined}
+                rel={seg.href.startsWith("http")
+                  ? "noopener"
+                  : undefined}>{seg.text}</a
+              >{:else}{seg.text}{/if}{/each}</p>
+      {/each}
     </div>
   </div>
 </footer>

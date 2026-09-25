@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { signupCopy, signupCopyPoc } from "$lib/data/content";
+  import { imageDefaults } from "$lib/data/images";
+
   interface Props {
     class?: string;
     poc: boolean;
@@ -9,6 +12,10 @@
     email?: string;
     /** Mirrors the input's own validity, so callers can reuse the address. */
     valid?: boolean;
+    placeholder?: string;
+    /** Label on the submit button; the poc hero shows an arrow instead. */
+    button?: string;
+    arrow?: string;
   }
 
   let {
@@ -18,6 +25,9 @@
     id = "signup-email",
     email = $bindable(""),
     valid = $bindable(false),
+    placeholder = poc ? signupCopyPoc.placeholder : signupCopy.placeholder,
+    button = poc ? signupCopyPoc.button : signupCopy.button,
+    arrow = imageDefaults.signupArrow,
   }: Props = $props();
 
   let input: HTMLInputElement | undefined = $state();
@@ -52,7 +62,7 @@
     autocomplete="email"
     bind:this={input}
     bind:value={email}
-    placeholder={poc ? "enter email to sign up" : "you@hackclub.com"}
+    {placeholder}
     class="min-w-0 flex-1 bg-transparent px-[clamp(0.75rem,1.6vw,1.5rem)] py-1 font-body text-[clamp(1rem,2vw,3.125rem)] leading-tight tracking-[-0.03em] text-haven-orange-deep placeholder:text-haven-orange-deep focus:outline-none"
   />
   <button
@@ -61,7 +71,7 @@
   >
     <span class="sr-only">Sign up for Haven</span>
     <img
-      src="/images/signup-arrow.webp"
+      src={arrow}
       alt=""
       aria-hidden="true"
       width="293"
@@ -74,7 +84,7 @@
         poc ? "hidden" : "block",
       ]}
     >
-      sign up!
+      {button}
     </p>
   </button>
 </form>

@@ -1,10 +1,7 @@
 <script lang="ts">
-  import {
-    event,
-    eventPoc,
-    organizeCta,
-    organizeCtaPoc,
-  } from "$lib/data/content";
+  import { event, eventPoc, organizeCtaPoc } from "$lib/data/content";
+  import { defaultSiteData } from "$lib/data/site";
+  import { cssUrl, type SiteImages } from "$lib/data/images";
   import HavenMap from "$lib/components/Map.svelte";
   import type { City } from "$lib/map";
   import SignupForm from "./SignupForm.svelte";
@@ -21,6 +18,14 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
+    /** Link under the signup box, over to the organizer signup. */
+    organizeCta?: string;
+    /** Caption pointing at the map of events. */
+    mapLabel?: string;
+    /** Caption on the arrow down to the rest of the page. */
+    scrollLabel?: string;
+    signup?: { placeholder: string; button: string };
+    images?: SiteImages;
   }
 
   let {
@@ -30,6 +35,13 @@
     signupUrl,
     referral = null,
     cities = [],
+    organizeCta = poc
+      ? organizeCtaPoc.label
+      : defaultSiteData.hero.organizeCta,
+    mapLabel = defaultSiteData.hero.mapLabel,
+    scrollLabel = defaultSiteData.hero.scrollLabel,
+    signup = defaultSiteData.hero.signup,
+    images = defaultSiteData.images,
   }: Props = $props();
 
   // Carry whatever the visitor typed into the signup box over to the organizer
@@ -100,7 +112,8 @@
 
 <section
   id="top"
-  class="rule-frame relative isolate flex min-h-svh flex-col bg-haven-green bg-[url('/images/hero/hero-bg-no-sticky-tree.webp')] bg-cover bg-top bg-no-repeat px-4 pb-[36vw] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
+  style="background-image: {cssUrl(images.heroBackground)}"
+  class="rule-frame relative isolate flex min-h-svh flex-col bg-haven-green bg-cover bg-top bg-no-repeat px-4 pb-[36vw] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
   <div class={poc ? "hidden" : "block sm:contents"}>
     <div
@@ -111,7 +124,7 @@
       >
         <div class="grid grid-cols-2 translate-x-[4%] sm:translate-x-0">
           <img
-            src="/images/logo.webp"
+            src={images.logo}
             alt="Hack Club Haven"
             width="778"
             height="445"
@@ -120,7 +133,7 @@
           <h1
             class="m-0 font-display text-hero text-white translate-y-[75%] translate-x-[-12%]"
           >
-            {title}
+            {title.join(" ")}
           </h1>
         </div>
 
@@ -136,6 +149,9 @@
           {poc}
           action={formAction}
           id="signup-email"
+          placeholder={signup.placeholder}
+          button={signup.button}
+          arrow={images.signupArrow}
           bind:email
           bind:valid={emailValid}
           class="pointer-events-auto mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
@@ -145,7 +161,7 @@
             href={organizeHref}
             class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
           >
-            {organizeCta.label}
+            {organizeCta}
           </a>
         {/if}
       </div>
@@ -157,10 +173,10 @@
       <a href="#about" class="flex-col items-center gap-1">
         <span
           class="font-body text-[clamp(0.5rem,4vw,3rem)] text-white/60 md:text-[clamp(0.5rem,2vw,3rem)]"
-          >more info</span
+          >{scrollLabel}</span
         >
         <img
-          src="/images/triangle-down.svg"
+          src={images.scrollArrow}
           alt=""
           aria-hidden="true"
           width="207"
@@ -188,20 +204,17 @@
       }}
     >
       <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
-        <HavenMap
-          {cities}
-          height="100%"
-        />
+        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
       </div>
 
       <img
-        src="/images/hero/hero-arrow.webp"
+        src={images.heroArrow}
         alt=""
         aria-hidden="true"
         class="absolute rotate-24 right-[clamp(1rem,4vw,8rem)] top-[clamp(0rem,0vw,10rem)] z-20 w-[clamp(2rem,12vw,6rem)] sm:right-[clamp(1rem,12vw,30rem)] sm:top-[clamp(-10rem,-3vw,0rem)] sm:w-[clamp(2rem,8vw,20rem)] hidden sm:block"
       />
       <img
-        src="/images/hero/hero-arrow-white.webp"
+        src={images.heroArrowMobile}
         alt=""
         aria-hidden="true"
         class="absolute rotate-24 right-[clamp(1rem,6vw,10rem)] top-[clamp(-10rem,-2vw,0rem)] z-20 w-[clamp(2rem,12vw,6rem)] block sm:hidden"
@@ -209,12 +222,12 @@
       <p
         class="text-white text-center -translate-y-[120%] left-50 text-[clamp(0.875rem,4vw,10rem)] sm:text-haven-butter sm:left-0 sm:-rotate-8 sm:text-[clamp(1rem,3vw,10rem)] sm:-translate-y-[120%] sm:-translate-x-[40%]"
       >
-        find an event near you
+        {mapLabel}
       </p>
     </div>
 
     <img
-      src="/images/hedgehog.webp"
+      src={images.hedgehog}
       alt=""
       aria-hidden="true"
       width="422"
@@ -223,7 +236,7 @@
     />
 
     <img
-      src="/images/hero-foreground.webp"
+      src={images.heroForeground}
       alt=""
       aria-hidden="true"
       width="1414"
@@ -265,6 +278,9 @@
           {poc}
           action={formAction}
           id="signup-email-poc"
+          placeholder={signup.placeholder}
+          button={signup.button}
+          arrow={images.signupArrow}
           bind:email
           bind:valid={emailValid}
           class="mt-[clamp(1.5rem,3vw,4rem)] w-[clamp(15rem,35vw,52rem)]"
@@ -275,7 +291,7 @@
             href={organizeHref}
             class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
           >
-            {poc ? organizeCtaPoc.label : organizeCta.label}
+            {organizeCta}
           </a>
         {/if}
       </div>
@@ -286,10 +302,10 @@
     >
       <a href="#about" class="flex-col items-center gap-1">
         <span class="font-body text-[clamp(0.5rem,3vw,1.5rem)] text-white/60"
-          >more info</span
+          >{scrollLabel}</span
         >
         <img
-          src="/images/triangle-down.svg"
+          src={images.scrollArrow}
           alt=""
           aria-hidden="true"
           width="207"
@@ -301,11 +317,13 @@
 
     <VideoPanel
       videoId="8tNEPMI5wss"
+      chevron={images.videoChevron}
+      playIcon={images.videoPlay}
       class="relative z-20 mx-auto mt-8 w-full max-w-[25rem] sm:absolute sm:right-[clamp(1.25rem,2.4vw,2.5rem)] sm:bottom-[clamp(1.25rem,2.4vw,2.5rem)] sm:m-0 sm:w-[min(24vw,26rem,34svh)] sm:max-w-none"
     />
 
     <img
-      src="/images/hedgehog.webp"
+      src={images.hedgehog}
       alt=""
       aria-hidden="true"
       width="422"
@@ -314,7 +332,7 @@
     />
 
     <img
-      src="/images/hero-foreground.webp"
+      src={images.heroForeground}
       alt=""
       aria-hidden="true"
       width="1414"
@@ -357,10 +375,7 @@
       </button>
 
       <div class="panel relative h-[min(90vh,56rem)] w-[min(94vw,80rem)] overflow-hidden">
-        <HavenMap
-          {cities}
-          height="100%"
-        />
+        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
       </div>
     </div>
   {/if}
