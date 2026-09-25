@@ -50,17 +50,6 @@ function isSameOrigin(request: Request, url: URL): boolean {
   return false;
 }
 
-/**
- * Our replacement for Astro's `security.checkOrigin` (disabled in
- * astro.config.mjs — see the comment there). Returns a 403 to send back, or
- * `null` when the request may proceed.
- *
- * Deliberately stricter than Astro's version in one way: it checks every
- * unsafe method regardless of content type, not just form-like bodies. Every
- * browser-driven write on this site is same-origin, and the routes that are
- * legitimately called from elsewhere are exempted by path in
- * src/middleware.ts rather than by guessing from a `Content-Type`.
- */
 export function checkCsrf(request: Request, url: URL): Response | null {
   if (SAFE_METHODS.has(request.method)) return null;
   if (isSameOrigin(request, url)) return null;

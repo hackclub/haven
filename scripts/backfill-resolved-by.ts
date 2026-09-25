@@ -1,7 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { App, SlackWebAPIPlatformError } from "slack.ts";
-import { ticketsTable } from "../src/lib/db/schema";
+import { ticketsTable } from "../src/lib/server/db/schema";
 
 const db = drizzle(
   required("SCRIPT_DATABASE_URL", process.env.SCRIPT_DATABASE_URL),
