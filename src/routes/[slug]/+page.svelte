@@ -11,8 +11,9 @@
   import Sponsors from "$lib/components/Sponsors.svelte";
   import Faq from "$lib/components/Faq.svelte";
   import SiteFooter from "$lib/components/SiteFooter.svelte";
-  import { event } from "$lib/data/content";
+  import { event, organizeCta } from "$lib/data/content";
   import { cssUrl } from "$lib/data/images";
+  import { getLang } from "$lib/lang.svelte.js";
 
   let { data } = $props();
 
@@ -26,7 +27,12 @@
     url.searchParams.set('event', data.eventId)
     if (data.ref) url.searchParams.set('ref', data.ref)
     return url.toString()
-  })
+  });
+  const lang = getLang();
+  const langSite = site.langs?.find(p => p.lang == lang) || site;
+  const langImages = $derived(langSite.images);
+  
+
 
   // The two illustrated backdrops are CSS backgrounds, so they are swapped
   // through the custom properties `.stage-*` reads rather than an `img` src.
@@ -45,78 +51,78 @@
   description={site.meta.description}
   image={site.meta.image}
 />
-<Fonts fonts={site.fonts} />
+<Fonts fonts={site.defaultLang == lang ? site.fonts : langSite.fonts} />
 
-<SiteHeader {images} />
+<SiteHeader images={site.defaultLang == lang ? images : langImages} lang={lang} poc={isPoc} />
 
 <main id="main" class="overflow-x-clip">
   <div class="relative z-20">
     <Hero
       title={site.title}
-      tagline={site.tagline}
+      tagline={site.defaultLang == lang ? site.tagline : langSite.tagline}
       poc={isPoc}
       signupUrl={signupUrl}
       referral={data.referral}
       cities={data.cities}
-      organizeCta={site.hero.organizeCta}
-      mapLabel={site.hero.mapLabel}
-      scrollLabel={site.hero.scrollLabel}
-      signup={site.hero.signup}
-      {images}
+      organizeCta={site.defaultLang == lang ? site.hero.organizeCta : langSite.hero?.organizeCta}
+      mapLabel={site.defaultLang == lang ? site.hero.mapLabel : langSite.hero?.mapLabel}
+      scrollLabel={site.defaultLang == lang ? site.hero.scrollLabel: langSite.hero?.scrollLabel}
+      signup={site.defaultLang == lang ? site.hero.signup : langSite.hero?.signup}
+      images={site.defaultLang == lang ? images : langImages}
     />
   </div>
 
   <div id="about" class="stage stage-middle z-10" style={middleStage}>
     <About
-      title={site.about.title}
-      body={site.about.body}
-      perks={site.about.perks}
-      {images}
+      title={site.defaultLang == lang ? site.about.title : langSite.about?.title}
+      body={site.defaultLang == lang ? site.about.body : langSite.about?.body}
+      perks={site.defaultLang == lang ? site.about.perks : langSite.about?.perks}
+      images={site.defaultLang == lang ? images : langImages}
     />
     <Pitch
       poc={isPoc}
-      heading={site.pitch.heading}
-      items={site.pitch.items}
-      {images}
+      heading={site.defaultLang == lang ? site.pitch.heading : langSite.pitch?.heading}
+      items={site.defaultLang == lang ? site.pitch.items : langSite.pitch?.items}
+      images={site.defaultLang == lang ? images : langImages}
     />
   </div>
 
   <div class="z-20">
     <Steps
       poc={isPoc}
-      heading={site.steps.heading}
-      subheading={site.steps.subheading}
-      cta={site.steps.cta}
-      {images}
+      heading={site.defaultLang == lang ? site.steps.heading : langSite.steps?.heading}
+      subheading={site.defaultLang == lang ? site.steps.subheading : langSite.steps?.subheading}
+      cta={site.defaultLang == lang ? site.steps.cta : langSite.steps?.cta}
+      images={site.defaultLang == lang ? images : langImages}
     />
   </div>
 
   <Schedule
-    heading={site.schedule.heading}
-    days={site.schedule.days}
-    tbd={site.schedule.tbd}
-    {images}
+    heading={site.defaultLang == lang ? site.schedule.heading : langSite.schedule?.heading}
+    days={site.defaultLang == lang ? site.schedule.days : langSite.schedule?.days}
+    tbd={site.defaultLang == lang ? site.schedule.tbd : langSite.schedule?.tbd}
+    images={site.defaultLang == lang ? images : langImages}
   />
 
   <div class="stage stage-picnic" style={picnicStage}>
     <PastEvents
-      heading={site.pastEvents.heading}
-      items={site.pastEvents.items}
+      heading={site.defaultLang == lang ? site.pastEvents.heading : langSite.pastEvents?.heading}
+      items={site.defaultLang == lang ? site.pastEvents.items : langSite.pastEvents?.items}
     />
   </div>
 
   <Sponsors
-    heading={site.sponsors.heading}
-    items={site.sponsors.items}
-    {images}
+    heading={site.defaultLang == lang ? site.sponsors.heading : langSite.sponsors?.heading}
+    items={site.defaultLang == lang ? site.sponsors.items : langSite.sponsors?.items}
+    images={site.defaultLang == lang ? images : langImages}
   />
 
   <Faq
-    heading={site.faq.heading}
-    items={site.faq.items}
-    cta={site.faq.cta}
-    {images}
+    heading={site.defaultLang == lang ? site.faq.heading : langSite.faq?.heading}
+    items={site.defaultLang == lang ? site.faq.items : langSite.faq?.items}
+    cta={site.defaultLang == lang ? site.faq.cta : langSite.faq?.cta}
+    images={site.defaultLang == lang ? images : langImages}
   />
 </main>
 
-<SiteFooter {images} />
+<SiteFooter images={site.defaultLang == lang ? images : langImages} />
