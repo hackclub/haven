@@ -53,7 +53,7 @@
 />
 <Fonts fonts={site.defaultLang == lang ? site.fonts : langSite.fonts} />
 
-<SiteHeader images={site.defaultLang == lang ? images : langImages} lang={lang} poc={isPoc} />
+<SiteHeader images={site.defaultLang == lang ? images : langImages} lang={lang} poc={isPoc} nav={site.defaultLang == lang ? site.nav : langSite.nav} />
 
 <main id="main" class="overflow-x-clip">
   <div class="relative z-20">
@@ -125,4 +125,4 @@
   />
 </main>
 
-<SiteFooter images={site.defaultLang == lang ? images : langImages} />
+<SiteFooter images={site.defaultLang == lang ? images : langImages} footer={site.defaultLang == lang ? site.footer : langSite.footer} />

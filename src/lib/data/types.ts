@@ -1,5 +1,6 @@
 import z from "zod";
-import type { SiteFonts } from "./fonts";
+import type { NavKey } from "./content";
+import type { FooterLinkKey, SiteFonts } from "./fonts";
 import { imageKeys, type ImageKey, type SiteImages } from "./images";
 
 /**
@@ -156,6 +157,8 @@ const fontSchema = z
   .transform((value) => (typeof value === "string" ? { family: value } : value));
 
 interface SiteDataBase {
+  /** Labels only; where each link goes is fixed. */
+  nav: Record<NavKey, string>;
   meta: { title: string | undefined; description: string; image: string };
   /** Always the event's own name; a city page cannot rename itself. */
   title: string[];
@@ -177,6 +180,9 @@ interface SiteDataBase {
   pastEvents: { heading: string[]; items: PastEvent[] };
   sponsors: { heading: string; items: Sponsor[] };
   faq: { heading: string; cta: string; items: FaqItem[] };
+  /** The "who is Hack Club" paragraphs, and the labels (not the targets) of
+   * the Hack Club links beside them. */
+  footer: { body: Linked[]; links: Record<FooterLinkKey, string> };
   defaultLang: string;
   images: SiteImages;
   /** Only the roles a page overrides; the rest keep Haven's fonts. */
@@ -200,6 +206,13 @@ const faqSectionSchema = z
   .transform((value) => (Array.isArray(value) ? { items: value } : value));
 
 const baseSiteDataInputSchema = z.object({
+   nav: z
+    .object({
+      signup: z.string().optional(),
+      about: z.string().optional(),
+      faq: z.string().optional(),
+    })
+    .optional(),
   tagline: z.string().array().optional(),
   hero: z
     .object({
@@ -256,6 +269,19 @@ const baseSiteDataInputSchema = z.object({
     })
     .optional(),
   faq: faqSectionSchema.optional(),
+  footer: z
+    .object({
+      body: linkedSchema.array().optional(),
+      links: z
+        .object({
+          hackClub: z.string().optional(),
+          slack: z.string().optional(),
+          clubs: z.string().optional(),
+          hackathons: z.string().optional(),
+        })
+        .optional(),
+    })
+    .optional(),
   images: imagesSchema.optional(),
   fonts: z
     .object({ display: fontSchema.optional(), body: fontSchema.optional() })

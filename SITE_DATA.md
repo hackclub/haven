@@ -82,6 +82,7 @@ in. Copy it, delete what you are not editing, and change the rest.
     "description": "Hack Club Haven is a global event for hundreds of teenagers to organize their own game jams",
     "image": "/images/haven-logo-color.webp"
   },
+  "nav": { "signup": "Sign up", "about": "About", "faq": "FAQ" },
   "tagline": ["Game jam for teens 13-18", "Nov 14–15 · Burlington, VT"],
   "hero": {
     "organizeCta": "Want to organize your own Hack Club Haven?",
@@ -358,6 +359,61 @@ in. Copy it, delete what you are not editing, and change the rest.
       }
     ]
   },
+  "footer": {
+    "body": [
+      [
+        {
+          "text": "Hack Club is a 501(c)(3) nonprofit and network of 100k+ technical high schoolers. We believe you learn best by building, so we’re creating community and providing grants so you can make awesome projects. In the past few years, we’ve "
+        },
+        {
+          "text": "sent 30 teen hackers hiking the Pacific Crest Trail",
+          "href": "https://www.youtube.com/watch?v=ufMUJ9D1fi8"
+        },
+        { "text": ", " },
+        {
+          "text": "hosted a hackathon for the worst ideas",
+          "href": "https://www.youtube.com/watch?v=8iM1W8kXrQA"
+        },
+        { "text": ", and " },
+        {
+          "text": "ran the largest teen hardware hackathon at GitHub HQ",
+          "href": "https://www.youtube.com/watch?v=kaEFv7e49mo"
+        },
+        { "text": "." }
+      ],
+      [
+        { "text": "Read about Hack Club in " },
+        {
+          "text": "The Wall Street Journal",
+          "href": "https://www.wsj.com/articles/teen-hackers-try-to-convince-parents-they-are-up-to-good-11569922200"
+        },
+        { "text": ", " },
+        {
+          "text": "CBS News",
+          "href": "https://www.cbsnews.com/sanfrancisco/news/hack-club-hosts-teen-coders-san-francisco/"
+        },
+        { "text": ", and " },
+        {
+          "text": "NASA.gov",
+          "href": "https://www.nasa.gov/learning-resources/space-out-this-summer-with-variety-of-nasa-stem-activities/"
+        },
+        { "text": ", or watch us " },
+        {
+          "text": "on stage with AMD CEO Lisa Su at CES",
+          "href": "https://www.youtube.com/live/UbfAhFxDomE?si=5DiK1_hGqKrB_r50&t=7033"
+        },
+        { "text": "." }
+      ],
+      [{ "text": "Made with ♥ by teenagers, for teenagers at Hack Club" }]
+    ],
+    "links": {
+      "hackClub": "Hack Club",
+      "slack": "Slack",
+      "clubs": "Clubs",
+      "hackathons": "Hackathons"
+    }
+  },
+  "defaultLang": "en",
   "fonts": { "display": "Darumadrop One", "body": "Jua" },
   "images": { "hedgehog": "https://example.com/our-mascot.png" }
 }
@@ -375,6 +431,12 @@ there are 72 of them, so they are listed at the end instead.
 | `title`       | The browser tab, and the headline in a Slack or iMessage preview. Leave it out and you get "Haven - <your city>". |
 | `description` | The grey line under the title in that preview.                                                                    |
 | `image`       | The picture in that preview. Make it at least 1200×630 or it shows up as a small square.                          |
+
+### `nav` - the three links in the top-right corner
+
+`signup`, `about` and `faq` are the words shown for each link, so you can
+translate or reword them. Where they go is fixed: they always jump to the signup
+box, the "what is a game jam?" section and the FAQ.
 
 ### `tagline` - the lines under your city's name
 
@@ -495,6 +557,30 @@ left and right, so an even number balances.
 This is the section most worth adding to rather than replacing: copy the default
 list from the template and add your own venue, parking and food questions to it.
 
+### `footer` - the bottom of the page
+
+`body` is a list of paragraphs, and each paragraph is a list of pieces in the
+same shape as a FAQ answer, so you can put links in the middle of a sentence.
+Setting it replaces all of the default "who is Hack Club" paragraphs, so start
+from the full default text in the template above and edit from there.
+
+`links` holds the words for the four Hack Club links beside the paragraphs
+(`hackClub`, `slack`, `clubs` and `hackathons`), so you can translate or reword
+them. Where they go is fixed, the same as the links in the top-right corner.
+
+### `defaultLang` - the language of the JSON
+
+`defaultLang` is the language the full site date is written in. This is `en`
+by default.
+
+### `langs` - other languages
+
+`langs` is an array where you can put multiple other languages. Each object in the
+array follows this same schema but excludes `meta` and `defaultLang`. You can
+specify each of the object's languages by setting the `lang` parameter in one 
+(ie. `en` for English, `es` for Spanish, `fi` for Finnish), and if you want
+you can also specify a `prettyLang` for a name for the language.
+
 ### `fonts` - the lettering
 
 There are two fonts on the page: `display` is the big rounded one used for the
@@ -533,12 +619,15 @@ long headings onto an extra line - have a look on a phone.
 These things are not in the JSON document:
 
 - **The name at the top**, which always follows your event's name in Airtable.
-- **The links in the top-right corner** (Sign up, About, FAQ).
-- **The footer** - the Hack Club links and the paragraphs about who we are.
+- **Where the top-right links go.** Their words are in `nav`, but they always
+  point at the same three sections.
+- **Where the four Hack Club links in the footer go.** Their words are in
+  `footer.links`, but they always point at the same Hack Club pages.
 
 The artwork around them is still yours to change: `logo`, `navBanner` and
-`footerBushes` are all in `images`. If you include a `"title"`, `"nav"` or
-`"footer"` key anyway, it is ignored rather than breaking your document.
+`footerBushes` are all in `images`. If you include a `"title"` key or an `href`
+in `nav` or `footer.links` anyway, it is ignored rather than breaking your
+document.
 
 ### `images` - every picture on the page
 
@@ -562,11 +651,12 @@ the page, so a photo in place of an illustration usually looks stretched.
 
 **Everywhere**
 
-| Key         | Default                  |
-| ----------- | ------------------------ |
-| `logo`      | `/images/logo.webp`      |
-| `navBanner` | `/images/nav-banner.png` |
-| `mapPin`    | `/images/map-flag.png`   |
+| Key          | Default                   |
+| ------------ | ------------------------- |
+| `logo`       | `/images/logo.webp`       |
+| `navBanner`  | `/images/nav-banner.png`  |
+| `langBanner` | `/images/lang-banner.png` |
+| `mapPin`     | `/images/map-flag.png`    |
 
 **Top of the page**
 
