@@ -19,6 +19,7 @@ const FIELDS = {
   longitude: "fldwx4BdUQw9yHGSp",
   status: "fldP2oeMSijEs3FnR",
   websiteData: "fldML1eUwOBMwWyoy",
+  participantCount: "fldmQ636z6otYRTtz",
 } as const;
 
 /**
@@ -114,6 +115,10 @@ export async function syncEvents(): Promise<number> {
       latitude: record.fields[FIELDS.latitude] as number,
       longitude: record.fields[FIELDS.longitude] as number,
       websiteData: (record.fields[FIELDS.websiteData] as string) || null,
+      participantCount:
+        typeof record.fields[FIELDS.participantCount] === "number"
+          ? (record.fields[FIELDS.participantCount] as number)
+          : 0,
       syncedAt: new Date(),
     }));
 
@@ -144,6 +149,7 @@ export async function syncEvents(): Promise<number> {
           latitude: sql`excluded."latitude"`,
           longitude: sql`excluded."longitude"`,
           websiteData: sql`excluded."websiteData"`,
+          participantCount: sql`excluded."participantCount"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });

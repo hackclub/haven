@@ -10,7 +10,8 @@ Besides the landing page, the site:
 - shows all events on a map at `/map`;
 - runs the organizer (POC) signup flow: Hack Club Auth sign-in, then a Fillout
   form prefilled from the organizer's profile;
-- runs a Slack bot that turns messages in the help channel into support tickets.
+- runs a Slack bot that turns messages in the help channel into support tickets
+  and posts a daily signup leaderboard of every event.
 
 Events come from an Airtable base, which the server syncs into Postgres every
 two minutes.

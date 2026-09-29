@@ -92,7 +92,7 @@
     />
 
     <img
-      src={images.stepsBackgroundMobile}
+      src={poc ? images.stepsBackgroundPocMobile : images.stepsBackgroundMobile}
       alt=""
       aria-hidden="true"
       width="3378"

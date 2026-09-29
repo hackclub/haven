@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Hack_Club_Docs__askQuestion"
+    ]
+  }
+}

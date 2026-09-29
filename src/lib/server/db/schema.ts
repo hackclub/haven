@@ -87,6 +87,22 @@ export const eventsTable = pgTable(
     longitude: doublePrecision().notNull(),
     syncedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
     websiteData: text(),
+    participantCount: integer().notNull().default(0),
   },
   (table) => [uniqueIndex().on(table.slug)],
+);
+
+/**
+ * Every event's participant count as of each daily signup leaderboard, keyed
+ * by Airtable record id. The next leaderboard diffs against the newest row to
+ * show how many people signed up for each event since.
+ */
+export const signupSnapshotsTable = pgTable(
+  "signup_snapshots",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    counts: jsonb().$type<Record<string, number>>().notNull(),
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [index().on(table.createdAt)],
 );

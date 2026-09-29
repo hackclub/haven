@@ -145,4 +145,8 @@
     font-size: 0.8rem;
     opacity: 0.7;
   }
+
+  :global(.maplibregl-popup-close-button) {
+  right: 0.5rem;
+}
 </style>

@@ -13,7 +13,12 @@ import {
 } from "slack.ts";
 import { env } from "$env/dynamic/private";
 import { db } from "./server/db";
-import { ticketsTable, ticketSummariesTable } from "./server/db/schema";
+import {
+  eventsTable,
+  signupSnapshotsTable,
+  ticketsTable,
+  ticketSummariesTable,
+} from "./server/db/schema";
 import {
   and,
   asc,
@@ -185,6 +190,151 @@ if (env.SLACK_TICKETS_CHANNEL) {
   app.on(`message#${env.SLACK_TICKETS_CHANNEL}`, async (message) => {
     if (message.text === "!leaderboard") {
       await sendLeaderboard();
+    }
+  });
+}
+
+/**
+ * Shortens event names to fit chart labels (20 characters max), keeping them
+ * unique, since each chart category has to match exactly one data point.
+ */
+function chartLabels(names: string[]) {
+  const seen = new Set<string>();
+  return names.map((name) => {
+    let label = name.length > 20 ? `${name.slice(0, 19)}…` : name;
+    for (let i = 2; seen.has(label); i++) {
+      const suffix = ` ${i}`;
+      label = `${name.slice(0, 19 - suffix.length)}…${suffix}`;
+    }
+    seen.add(label);
+    return label;
+  });
+}
+
+function barChart(title: string, series: string, points: [string, number][]) {
+  const labels = chartLabels(points.map(([name]) => name));
+  return {
+    type: "data_visualization",
+    title,
+    chart: {
+      type: "bar",
+      series: [
+        {
+          name: series,
+          data: points.map(([, value], i) => ({ label: labels[i], value })),
+        },
+      ],
+      axis_config: { categories: labels },
+    },
+  };
+}
+
+/**
+ * Posts every active event ranked by participant count, with how many signed
+ * up since the last daily post. Only the daily post saves a new baseline, so
+ * asking for the leaderboard by hand does not reset the day's numbers.
+ */
+async function sendSignupLeaderboard({ daily }: { daily: boolean }) {
+  const events = await db
+    .select({
+      id: eventsTable.airtableId,
+      name: eventsTable.name,
+      count: eventsTable.participantCount,
+    })
+    .from(eventsTable)
+    .orderBy(desc(eventsTable.participantCount), asc(eventsTable.name));
+
+  const [baseline] = await db
+    .select()
+    .from(signupSnapshotsTable)
+    .orderBy(desc(signupSnapshotsTable.createdAt))
+    .limit(1);
+
+  const ranked = events.map((e) => ({
+    ...e,
+    // An event that is new since the baseline started from zero.
+    gained: baseline ? e.count - (baseline.counts[e.id] ?? 0) : 0,
+  }));
+  const total = ranked.reduce((sum, e) => sum + e.count, 0);
+  const gained = ranked.reduce((sum, e) => sum + Math.max(e.gained, 0), 0);
+  const movers = ranked
+    .filter((e) => e.gained > 0)
+    .sort((a, b) => b.gained - a.gained)
+    .slice(0, 10);
+
+  const summary = baseline
+    ? `*${total}* signups across *${ranked.length}* events, *+${gained}* since the last leaderboard.`
+    : `*${total}* signups across *${ranked.length}* events.`;
+
+  await app.channel(env.SLACK_SIGNUPS_CHANNEL!).send({
+    text: `Signup leaderboard: ${total} signups across ${ranked.length} events`,
+    blocks: [
+      ...blocks(header("Signup leaderboard"), section(summary)),
+      ...(ranked.length
+        ? [
+            barChart(
+              "Top events by signups",
+              "Signups",
+              ranked.slice(0, 15).map((e) => [e.name, e.count]),
+            ),
+          ]
+        : []),
+      ...(movers.length
+        ? [
+            barChart(
+              "Most new signups",
+              "New signups",
+              movers.map((e) => [e.name, e.gained]),
+            ),
+          ]
+        : []),
+      ...(ranked.length
+        ? [
+            {
+              type: "data_table",
+              caption: "All events by signups",
+              page_size: 10,
+              row_header_column_index: 1,
+              rows: [
+                ["#", "Event", "Signups", "New"].map((text) => ({
+                  type: "raw_text",
+                  text,
+                })),
+                // A table holds at most 200 data rows.
+                ...ranked.slice(0, 200).map((e, i) => [
+                  { type: "raw_number", value: i + 1, text: `${i + 1}` },
+                  { type: "raw_text", text: e.name },
+                  { type: "raw_number", value: e.count, text: `${e.count}` },
+                  {
+                    type: "raw_number",
+                    value: e.gained,
+                    text: e.gained > 0 ? `+${e.gained}` : `${e.gained}`,
+                  },
+                ]),
+              ],
+            },
+          ]
+        : []),
+    ],
+  });
+
+  if (daily) {
+    await db.insert(signupSnapshotsTable).values({
+      counts: Object.fromEntries(ranked.map((e) => [e.id, e.count])),
+    });
+  }
+}
+
+if (env.SLACK_SIGNUPS_CHANNEL) {
+  cron.schedule("0 0 * * *", () => sendSignupLeaderboard({ daily: true }));
+
+  app.on(`message#${env.SLACK_SIGNUPS_CHANNEL}`, async (message) => {
+    if (
+      env.SLACK_SIGNUPS_USER_ID &&
+      message.text === "!signups" &&
+      message.user === env.SLACK_SIGNUPS_USER_ID
+    ) {
+      await sendSignupLeaderboard({ daily: false });
     }
   });
 }
