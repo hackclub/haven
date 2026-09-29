@@ -22,6 +22,7 @@ import {
   stepsSubheading,
   supporters,
   supportersHeading,
+  defaultLang
 } from "./content";
 import { imageDefaults, type SiteImages } from "./images";
 import type { SiteData, SiteDataInput } from "./types";
@@ -51,6 +52,7 @@ export const defaultSiteData: SiteData = {
   pastEvents: { heading: [...pastEventsHeading], items: pastEvents },
   sponsors: { heading: supportersHeading, items: supporters },
   faq: { heading: faqHeading, cta: faqCta, items: faqs },
+  defaultLang,
   images: { ...imageDefaults },
   fonts: {},
 };
@@ -134,6 +136,8 @@ export function resolveSiteData(
       cta: data.faq?.cta ?? base.faq.cta,
       items: data.faq?.items ?? base.faq.items,
     },
+    defaultLang: data.defaultLang ?? base.defaultLang,
+    langs: data.langs ?? undefined,
     images: { ...imageDefaults, ...defined(data.images) } as SiteImages,
     fonts: defined(data.fonts),
   };

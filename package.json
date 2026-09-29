@@ -26,7 +26,8 @@
     "node-cron": "^4.6.0",
     "pg": "^8.23.0",
     "pmtiles": "^4.5.0",
-    "slack.ts": "0.0.22"
+    "slack.ts": "0.0.22",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@sveltejs/adapter-node": "^5.5.7",

@@ -11,6 +11,7 @@ export const imageDefaults = {
   // Shared
   logo: "/images/logo.webp",
   navBanner: "/images/nav-banner.png",
+  langBanner: "/images/lang-banner.png",
   mapPin: "/images/map-flag.png",
 
   // Hero

@@ -15,6 +15,8 @@ export const meta = {
   image: "/images/haven-logo-color.webp",
 } as const;
 
+export const defaultLang = "en";
+
 export const event = {
   name: "Haven",
   title: [],

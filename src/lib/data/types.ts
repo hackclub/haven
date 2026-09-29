@@ -155,7 +155,7 @@ const fontSchema = z
   ])
   .transform((value) => (typeof value === "string" ? { family: value } : value));
 
-export interface SiteData {
+interface SiteDataBase {
   meta: { title: string | undefined; description: string; image: string };
   /** Always the event's own name; a city page cannot rename itself. */
   title: string[];
@@ -177,6 +177,7 @@ export interface SiteData {
   pastEvents: { heading: string[]; items: PastEvent[] };
   sponsors: { heading: string; items: Sponsor[] };
   faq: { heading: string; cta: string; items: FaqItem[] };
+  defaultLang: string;
   images: SiteImages;
   /** Only the roles a page overrides; the rest keep Haven's fonts. */
   fonts: SiteFonts;
@@ -198,14 +199,7 @@ const faqSectionSchema = z
   ])
   .transform((value) => (Array.isArray(value) ? { items: value } : value));
 
-export const siteDataInputSchema = z.object({
-  meta: z
-    .object({
-      title: z.string().optional(),
-      description: z.string().optional(),
-      image: srcSchema.optional(),
-    })
-    .optional(),
+const baseSiteDataInputSchema = z.object({
   tagline: z.string().array().optional(),
   hero: z
     .object({
@@ -268,7 +262,29 @@ export const siteDataInputSchema = z.object({
     .optional(),
 });
 
+const langSiteDataInputSchema = baseSiteDataInputSchema.extend({
+  lang: z.string(),
+  prettyLang: z.string()
+});
+
+export const siteDataInputSchema = baseSiteDataInputSchema.extend({
+  meta: z
+    .object({
+      title: z.string().optional(),
+      description: z.string().optional(),
+      image: srcSchema.optional(),
+    })
+    .optional(),
+  defaultLang: z.string().optional(),
+  langs: z.array(langSiteDataInputSchema).optional(),
+})
+
 export type SiteDataInput = z.infer<typeof siteDataInputSchema>;
+export type LangsType = z.infer<typeof langSiteDataInputSchema>[];
+
+export interface SiteData extends SiteDataBase {
+  langs?: LangsType
+}
 
 /**
  * Airtable long-text fields hold the copy as a JSON *string*, while a scripting
