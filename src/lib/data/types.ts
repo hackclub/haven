@@ -213,6 +213,13 @@ const baseSiteDataInputSchema = z.object({
       faq: z.string().optional(),
     })
     .optional(),
+  nav: z
+    .object({
+      signup: z.string().optional(),
+      about: z.string().optional(),
+      faq: z.string().optional(),
+    })
+    .optional(),
   tagline: z.string().array().optional(),
   hero: z
     .object({

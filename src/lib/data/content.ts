@@ -9,9 +9,8 @@ import type {
 } from "./types";
 
 export const meta = {
-  title: "Haven — Organize a game jam in your city!",
-  description:
-    "Hack Club Haven is a global event for hundreds of teenagers to organize their own game jams",
+  title: "Haven — Come join a game jam in your city!",
+  description: "Hack Club Haven is a global game jam in 200+ cities worldwide for teenagers 13-18",
   image: "/images/haven-logo-color.webp",
 } as const;
 
@@ -502,6 +501,7 @@ export const footerBody: Linked[] = [
   [{ text: "Made with ♥ by teenagers, for teenagers at Hack Club" }],
 ];
 
+/** Keyed so a city page can reword a label without touching where it goes. */
 export const navLinks = [
   { key: "signup", label: "Sign up", href: "#top" },
   { key: "about", label: "About", href: "#about" },
