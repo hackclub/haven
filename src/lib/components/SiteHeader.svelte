@@ -19,7 +19,7 @@
     images = defaultSiteData.images,
     nav = defaultSiteData.nav
   }: Props = $props();
-  const lang = getLang();
+  let lang = getLang();
 
   let scrolled = $state(false);
 
