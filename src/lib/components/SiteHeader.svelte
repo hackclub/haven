@@ -95,7 +95,7 @@
   data-scrolled={scrolled ? "" : undefined}
   class={["fixed inset-x-0 top-0 justify-start z-30 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none transition-[background-color,backdrop-filter,box-shadow] duration-200", langs ? "block" : "hidden"]}
 >
-  <select name="lang" class="pointer-events-auto inline-block font-display text-[clamp(1rem,3.5vw,8rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white" bind:value={lang} on:change={(e) => setLang(e.currentTarget.value)}>
+  <select name="lang" class="pointer-events-auto inline-block font-display text-[clamp(1rem,3.5vw,8rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white" bind:value={lang} onchange={(e) => setLang(e.currentTarget.value)}>
     {#each langs as lang (lang.lang)}
       <option class="leading-none" value={lang.lang}>{lang.prettyLang}</option>
     {/each}
