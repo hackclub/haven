@@ -9,12 +9,15 @@
     poc?: boolean;
     images?: SiteImages;
     nav?: SiteData["nav"];
+    /** Prefix for the section links, e.g. "/" on pages that don't have those sections. */
+    base?: string;
   }
 
   let {
     poc = false,
     images = defaultSiteData.images,
     nav = defaultSiteData.nav,
+    base = "",
   }: Props = $props();
 
   let scrolled = $state(false);
@@ -44,7 +47,7 @@
     ]}
   >
     <a
-      href="#top"
+      href="{base}#top"
       class="absolute left-1/2 top-[var(--logo-top)] -translate-x-1/2"
       aria-label="Hack Club Haven — home"
     >
@@ -69,7 +72,7 @@
       {#each navLinks as link (link.href)}
         <li>
           <a
-            href={link.href}
+            href={base + link.href}
             class="inline-block py-1 font-display text-[clamp(1rem,3.5vw,8rem)] leading-none tracking-[-0.03em] text-haven-yellow transition-colors hover:text-white"
           >
             {nav[link.key]}
