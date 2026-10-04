@@ -1,5 +1,6 @@
 import { asc, eq, notInArray, sql } from "drizzle-orm";
 import cron from "node-cron";
+import type z from "zod";
 import { db, hasDatabase } from "../db";
 import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
@@ -49,13 +50,16 @@ export interface HavenEvent {
  * someone typed into it — either way the page falls back to the defaults in
  * `resolveSiteData` rather than failing to render.
  */
-export function parseSiteData(event: HavenEvent): SiteDataInput {
-  if (!event.websiteData) return {};
+export function parseSiteData<T extends SiteDataInput = SiteDataInput>(
+  event: HavenEvent,
+  schema: z.ZodType<T> = siteDataJsonSchema as z.ZodType<SiteDataInput> as z.ZodType<T>,
+): T {
+  if (!event.websiteData) return {} as T;
 
-  const parsed = siteDataJsonSchema.safeParse(event.websiteData);
+  const parsed = schema.safeParse(event.websiteData);
   if (!parsed.success) {
     console.warn(`Ignoring invalid website data for /${event.slug}`);
-    return {};
+    return {} as T;
   }
 
   return parsed.data;
