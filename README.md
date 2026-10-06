@@ -50,7 +50,6 @@ Haven is happening on **November 14 & 15**.
 
 ## Upcoming Community Huddles
 
-- Mon 10/5 @ 3:00 PM EDT: [Skribbl.io Game Night](https://luma.com/ha7bprl6) hosted by Arielle
 - Tue 10/6 @ 6:00 PM EDT: [USA Venue Hunting](https://luma.com/5lz6vlgj) hosted by Aryan
 - Wed 10/7 @ 8:00 PM EDT: [Email CS Teachers](https://luma.com/iqrybfm3) hosted by Elliot
 
