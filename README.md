@@ -14,6 +14,7 @@ Haven is happening on **November 14 & 15**.
 - [Jumpstart](https://haven.jumpstart.hackclub.com/): all organizers MUST complete jumpstart!
 - [Per-signup funding & caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): How much funding you get per signup in each country
 - [Sponsor advice slides](https://canva.link/huw3xd32mkwswlh) by Aryan Brite
+- [Hack Club Haven calendar on Luma](https://luma.com/hack-club-haven): Follow it to get reminded about all the calls
 - [Gas Fund](https://gas.hackclub.com/) can be used for Haven events
 - [The Haven website](https://github.com/hackclub/haven) is open source!
 
@@ -36,7 +37,7 @@ Haven is happening on **November 14 & 15**.
 
 ## Extra Funding & Prizes
 
-- **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak to earn **$100**
+- **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak to earn **$100** (track your streak at [daven.haven.hackclub.com](https://daven.haven.hackclub.com/))
 - **Email CS teachers:** join a [lock-in call](https://luma.com/iqrybfm3) to email CS teachers in your area and get extra funding
 - **Referral raffle:** every signup through your [referral link](https://forms.hackclub.com/haven-referrals) enters you into a raffle for a **Framework Laptop 12** (co-organizers: ask your POC for the co-organizer form on the dashboard first)
 
@@ -50,8 +51,10 @@ Haven is happening on **November 14 & 15**.
 
 ## Upcoming Community Huddles
 
-- Tue 10/6 @ 6:00 PM EDT: [USA Venue Hunting](https://luma.com/5lz6vlgj) hosted by Aryan
 - Wed 10/7 @ 8:00 PM EDT: [Email CS Teachers](https://luma.com/iqrybfm3) hosted by Elliot
+- Thu 10/8 @ 12:00 PM EDT: [Get Sponsors](https://luma.com/b8w72bon) w/ Jonas
+- Sat 10/10 @ 8:00 PM EDT: [Sponsor Hunting](https://luma.com/g6cblks5) w/ Arielle
+- Sat 10/10 @ 9:00 PM EDT: [Make/Hang Up 20 Posters](https://luma.com/g6cblks5) w/ Xin Bing
 
 ## Check-in Calls
 
