@@ -65,7 +65,8 @@ server never runs against an outdated schema.
 ```
 src/
   routes/            pages and API endpoints
-    [slug]/          city pages
+    (cities)/        city pages, rendered here (`[slug]/` and individual cities)
+    (redirects)/     cities with their own website elsewhere
     api/auth/        Hack Club Auth sign-in
     api/fillout/     endpoints the POC signup form calls
     api/airtable/    endpoints Airtable automations call

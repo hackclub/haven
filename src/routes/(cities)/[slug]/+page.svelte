@@ -103,6 +103,7 @@
     <PastEvents
       heading={site.pastEvents.heading}
       items={site.pastEvents.items}
+      safety={site.pastEvents.safety}
     />
   </div>
 
