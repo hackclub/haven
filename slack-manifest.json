@@ -9,7 +9,7 @@
     },
     "slash_commands": [
       {
-        "command": "/haven-signups",
+        "command": "/dev-haven-signups",
         "url": "https://haven.jollyy.dev/api/slack/events",
         "description": "Choose where new signups for your event are announced",
         "usage_hint": "[event slug]",
