@@ -6,21 +6,25 @@ import {
   blocks,
   button,
   header,
+  input,
   R,
   richText,
   section,
+  select,
   SlackWebAPIPlatformError,
 } from "slack.ts";
 import { env } from "$env/dynamic/private";
 import { db } from "./server/db";
 import {
   eventsTable,
+  signupNotificationsTable,
   signupSnapshotsTable,
   ticketsTable,
   ticketSummariesTable,
 } from "./server/db/schema";
 import {
   and,
+  arrayContains,
   asc,
   count,
   desc,
@@ -577,4 +581,255 @@ async function resendTicketsMessage() {
     );
     throw error;
   }
+}
+
+const COMMAND_PREFIX = env.SLACK_COMMAND_PREFIX ?? "";
+
+const SIGNUP_COMMAND = `/${COMMAND_PREFIX}haven-signups` as const;
+const SIGNUP_CALLBACK = "signup_notifications";
+
+/** Whether a picked conversation is a person, to be sent a DM by the bot. */
+const isUserId = (id: string) => /^[UW][A-Z0-9]+$/.test(id);
+
+/** How to mention a picked conversation in a message. */
+const mention = (id: string) => (isUserId(id) ? `<@${id}>` : `<#${id}>`);
+
+/**
+ * Why signups cannot be posted to a channel, or null when they can. They carry
+ * an attendee's email and age, so the channel has to be private, internal to
+ * the workspace and already have the bot in it. The bot is never added to a
+ * channel on a POC's behalf.
+ */
+async function signupChannelProblem(id: string): Promise<string | null> {
+  let channel;
+  try {
+    ({ channel } = await app.request("conversations.info", { channel: id }));
+  } catch (error) {
+    // A private channel the bot is not in looks exactly like one that does
+    // not exist.
+    if (
+      error instanceof SlackWebAPIPlatformError &&
+      error.error === "channel_not_found"
+    ) {
+      console.log(error, id);
+      return "the bot is not in it";
+    }
+    throw error;
+  }
+
+  // A DM id here is someone else's DM, which the bot cannot post in.
+  if (!channel.is_private || channel.is_im || channel.is_mpim) {
+    return "it is not a private channel";
+  }
+  if (channel.is_ext_shared) return "it is shared with another organization";
+  if (channel.is_archived) return "it is archived";
+  if (!channel.is_member) return "the bot is not in it";
+  return null;
+}
+
+/** The active events a Slack user is a POC of, alphabetically. */
+function eventsForPoc(userId: string) {
+  return db
+    .select({
+      id: eventsTable.airtableId,
+      slug: eventsTable.slug,
+      name: eventsTable.name,
+    })
+    .from(eventsTable)
+    .where(arrayContains(eventsTable.pocSlackIds, [userId]))
+    .orderBy(asc(eventsTable.name));
+}
+
+app.on(SIGNUP_COMMAND, async (command) => {
+  const events = await eventsForPoc(command.user_id);
+
+  if (!events.length) {
+    await command.respond.message({
+      ephemeral: true,
+      text: "Only the POC of an active Haven event can set up its signup notifications.",
+    });
+    return;
+  }
+
+  const slug = command.text.trim();
+  const event =
+    events.length === 1 && !slug
+      ? events[0]
+      : events.find((e) => e.slug === slug);
+
+  if (!event) {
+    await command.respond.message({
+      ephemeral: true,
+      text: `Which event? Run \`${SIGNUP_COMMAND} <slug>\` with one of: ${events.map((e) => `\`${e.slug}\``).join(", ")}.`,
+    });
+    return;
+  }
+
+  const [current] = await db
+    .select()
+    .from(signupNotificationsTable)
+    .where(eq(signupNotificationsTable.eventId, event.id));
+
+  const picker = select()
+    .multiple()
+    .conversations()
+    .id(`signup_conversations::${event.id}`)
+    .placeholder("Pick private channels or people");
+  if (current?.conversationIds.length) {
+    picker.default(...current.conversationIds);
+  }
+
+  const pickerInput = input("Send signups to", picker)
+    .id("conversations")
+    .hint(
+      "Private channels need the Haven bot added first. People get a DM from the bot.",
+    )
+    .optional()
+    .build();
+
+  await command.respond.message({
+    ephemeral: true,
+    blocks: [
+      ...blocks(
+        richText(
+          R.section(
+            "Choose where to hear about new signups for ",
+            R.text(event.name).bold(),
+            ". Each one includes the attendee's name, email, pronouns and age, so keep the list to people who need it.",
+          ),
+        ),
+      ),
+      {
+        ...pickerInput,
+        element: {
+          ...pickerInput.element,
+          // The bot checks this again on save; the filter just keeps public
+          // channels and group DMs out of the picker. A person picked from
+          // "im" comes back as their user id.
+          filter: {
+            include: ["private", "im"],
+            exclude_external_shared_channels: true,
+            exclude_bot_users: true,
+          },
+        },
+      },
+    ],
+  });
+});
+
+app.on(`action:multi_conversations_select`, async (action) => {
+  if (!action.action_id.startsWith("signup_conversations::")) return;
+
+  const userId = action.event.user.id;
+  const eventId = action.action_id.substring(22);
+  const user = app.user(userId);
+
+  // The POC list can change while the modal is open.
+  const [event] = (await eventsForPoc(userId)).filter((e) => e.id === eventId);
+  if (!event) {
+    await action.respond.edit(
+      "Your signup notification settings were not saved: you are no longer the POC of that event.",
+    );
+    return;
+  }
+
+  const requested = action.selected_conversations ?? [];
+
+  const problems = await Promise.all(
+    requested.map((id) => (isUserId(id) ? null : signupChannelProblem(id))),
+  );
+  const conversationIds = requested.filter((_, i) => !problems[i]);
+  const rejected = requested
+    .map((id, i) => ({ id, problem: problems[i] }))
+    .filter((c) => c.problem);
+
+  await db
+    .insert(signupNotificationsTable)
+    .values({ eventId, conversationIds, updatedBy: userId })
+    .onConflictDoUpdate({
+      target: signupNotificationsTable.eventId,
+      set: { conversationIds, updatedBy: userId, updatedAt: new Date() },
+    });
+
+  const where = conversationIds.map(mention);
+  const lines = [
+    where.length
+      ? `New signups for *${event.name}* will go to ${where.join(", ")}.`
+      : `Signup notifications for *${event.name}* are off.`,
+    ...rejected.map(
+      (c) =>
+        `:warning: ${mention(c.id)} was not added because ${c.problem}. Signups include personal information, so only people and private channels the bot is in can be used.`,
+    ),
+  ];
+  await action.respond.message({
+    ephemeral: true,
+    text: lines.join("\n"),
+  });
+});
+
+export interface Signup {
+  eventId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: "Organizer" | "Participant" | "Volunteer";
+  pronouns?: string | null;
+  age?: number | string | null;
+}
+
+/**
+ * Announces a new signup wherever its event's POC asked. Channels are checked
+ * again first, in case one was made public or had the bot removed since it was
+ * saved. Returns how many messages went out.
+ */
+export async function notifySignup(signup: Signup) {
+  const [settings] = await db
+    .select()
+    .from(signupNotificationsTable)
+    .where(eq(signupNotificationsTable.eventId, signup.eventId));
+  if (!settings) return { sent: 0, failed: 0 };
+
+  const [event] = await db
+    .select({ name: eventsTable.name })
+    .from(eventsTable)
+    .where(eq(eventsTable.airtableId, signup.eventId));
+  const eventName = event?.name ?? "your event";
+
+  const name = `${signup.firstName} ${signup.lastName}`.trim();
+  const message = {
+    // The fallback ends up in push notifications, so it has no PII in it.
+    text: `New signup for ${eventName}`,
+    // Rich text rather than mrkdwn, so nothing the attendee typed is parsed as
+    // a mention or a link.
+    blocks: blocks(
+      richText(
+        R.section(R.text(`New signup for ${eventName}`).bold()),
+        R.list(
+          R.section(R.text("Role: ").bold(), signup.role),
+          R.section(R.text("Name: ").bold(), name),
+          R.section(R.text("Pronouns: ").bold(), signup.pronouns || "-"),
+          R.section(R.text("Age at event: ").bold(), `${signup.age ?? "-"}`),
+          R.section(R.text("Email: ").bold(), signup.email),
+        ),
+      ),
+    ),
+    unfurl_links: false,
+  } as const;
+
+  const results = await Promise.allSettled(
+    settings.conversationIds.map(async (id) => {
+      if (isUserId(id)) return app.user(id).send(message);
+
+      const problem = await signupChannelProblem(id);
+      if (problem) throw new Error(`Skipped <#${id}>: ${problem}`);
+      return app.channel(id).send(message);
+    }),
+  );
+
+  const failures = results.filter((r) => r.status === "rejected");
+  for (const failure of failures) {
+    console.error("Failed to send a signup notification:", failure.reason);
+  }
+
+  return { sent: results.length - failures.length, failed: failures.length };
 }

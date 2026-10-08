@@ -6,7 +6,16 @@
     "bot_user": {
       "display_name": "Haven (dev)",
       "always_online": false
-    }
+    },
+    "slash_commands": [
+      {
+        "command": "/haven-signups",
+        "url": "https://haven.jollyy.dev/api/slack/events",
+        "description": "Choose where new signups for your event are announced",
+        "usage_hint": "[event slug]",
+        "should_escape": false
+      }
+    ]
   },
   "oauth_config": {
     "scopes": {
@@ -16,6 +25,7 @@
         "channels:join",
         "channels:write.invites",
         "chat:write",
+        "commands",
         "chat:write.customize",
         "groups:history",
         "groups:write.invites",

@@ -11,7 +11,10 @@ Besides the landing page, the site:
 - runs the organizer (POC) signup flow: Hack Club Auth sign-in, then a Fillout
   form prefilled from the organizer's profile;
 - runs a Slack bot that turns messages in the help channel into support tickets
-  and posts a daily signup leaderboard of every event.
+  and posts a daily signup leaderboard of every event;
+- announces each new signup in the private channels and DMs an event's POC
+  picks with `/haven-signups`, when an Airtable automation calls
+  `/api/airtable/signup`.
 
 Events come from an Airtable base, which the server syncs into Postgres every
 two minutes.

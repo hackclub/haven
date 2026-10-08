@@ -21,7 +21,10 @@ const FIELDS = {
   status: "fldP2oeMSijEs3FnR",
   websiteData: "fldML1eUwOBMwWyoy",
   participantCount: "fldmQ636z6otYRTtz",
+  pocSlackIds: "fld65q0Ht28BtCNko",
 } as const;
+
+const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
 
 /**
  * The only status that means "this event is really happening". The other three
@@ -79,6 +82,19 @@ function selectName(value: unknown): string | null {
 }
 
 /**
+ * The POCs' Slack ids, from a lookup through the POC link. They are typed in
+ * by hand on the user record, so anything that is not plausibly a user id is
+ * dropped rather than allowed to grant someone else's access.
+ */
+function pocSlackIds(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((id): id is string => typeof id === "string")
+    .map((id) => id.trim())
+    .filter((id) => SLACK_USER_ID_RE.test(id));
+}
+
+/**
  * Pull the Events table and replace our mirror of it. Reads through
  * `AIRTABLE_EVENTS_VIEW_ID` when that is set, and the whole table when it is
  * not; either way the filtering below still runs.
@@ -123,6 +139,7 @@ export async function syncEvents(): Promise<number> {
         typeof record.fields[FIELDS.participantCount] === "number"
           ? (record.fields[FIELDS.participantCount] as number)
           : 0,
+      pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
       syncedAt: new Date(),
     }));
 
@@ -154,6 +171,7 @@ export async function syncEvents(): Promise<number> {
           longitude: sql`excluded."longitude"`,
           websiteData: sql`excluded."websiteData"`,
           participantCount: sql`excluded."participantCount"`,
+          pocSlackIds: sql`excluded."pocSlackIds"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });

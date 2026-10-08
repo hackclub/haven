@@ -90,9 +90,31 @@ export const eventsTable = pgTable(
     syncedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
     websiteData: text(),
     participantCount: integer().notNull().default(0),
+    /** Slack ids of the event's POCs, which may edit its signup notifications. */
+    pocSlackIds: text().array().notNull().default([]),
   },
-  (table) => [uniqueIndex().on(table.slug)],
+  (table) => [
+    uniqueIndex().on(table.slug),
+    index().using("gin", table.pocSlackIds),
+  ],
 );
+
+/**
+ * Where to announce new signups for each event, as chosen by its POC with the
+ * signup notifications slash command. Keyed by Airtable record id but not a
+ * foreign key: an event that drops out of the sync (put on hold, say) should
+ * get its settings back when it returns.
+ *
+ * Signups carry PII, so every channel here was checked to be private and to
+ * have the bot in it when it was saved, and is checked again before each post.
+ */
+export const signupNotificationsTable = pgTable("signup_notifications", {
+  eventId: text().primaryKey(),
+  /** Channel ids, plus user ids for people who get the signups as a DM. */
+  conversationIds: text().array().notNull().default([]),
+  updatedBy: text().notNull(),
+  updatedAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+});
 
 /**
  * Every event's participant count as of each daily signup leaderboard, keyed
