@@ -611,7 +611,6 @@ async function signupChannelProblem(id: string): Promise<string | null> {
       error instanceof SlackWebAPIPlatformError &&
       error.error === "channel_not_found"
     ) {
-      console.log(error, id);
       return "the bot is not in it";
     }
     throw error;
