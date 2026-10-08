@@ -196,8 +196,6 @@ if (env.SLACK_TICKETS_CHANNEL) {
 
 /** The @haven-helpers user group, pinged about tickets open for a day. */
 const HELPERS_GROUP = "S0C7XSYK884";
-/** #haven-tickets, where the helpers are pinged. */
-const HELPERS_CHANNEL = "C0BSEM473UL";
 
 function ticketLink(helpMessageTs: string) {
   return `https://hackclub.slack.com/archives/${env.SLACK_HELP_CHANNEL}/p${helpMessageTs.replace(/\./g, "")}`;
@@ -210,6 +208,8 @@ function ticketLink(helpMessageTs: string) {
  * for the next run to retry.
  */
 async function escalateTickets() {
+  const channel = env.SLACK_TICKETS_CHANNEL!;
+
   const due = await db
     .update(ticketsTable)
     .set({ escalatedAt: new Date() })
@@ -225,7 +225,7 @@ async function escalateTickets() {
   for (const ticket of due) {
     const link = ticketLink(ticket.helpMessageTs);
     try {
-      await app.channel(HELPERS_CHANNEL).send({
+      await app.channel(channel).send({
         text: `<!subteam^${HELPERS_GROUP}> A ticket has been open for 24 hours without being resolved: ${link}`,
         blocks: blocks(
           richText(
@@ -251,8 +251,7 @@ async function escalateTickets() {
   }
 }
 
-// Tickets only exist when there is a help channel to open them in.
-if (env.SLACK_HELP_CHANNEL) {
+if (env.SLACK_TICKETS_CHANNEL) {
   cron.schedule("* * * * *", escalateTickets);
 }
 
