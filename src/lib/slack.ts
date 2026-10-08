@@ -194,6 +194,67 @@ if (env.SLACK_TICKETS_CHANNEL) {
   });
 }
 
+/** The @haven-helpers user group, pinged about tickets open for a day. */
+const HELPERS_GROUP = "S0C7XSYK884";
+
+function ticketLink(helpMessageTs: string) {
+  return `https://hackclub.slack.com/archives/${env.SLACK_HELP_CHANNEL}/p${helpMessageTs.replace(/\./g, "")}`;
+}
+
+/**
+ * Pings the helpers once about every ticket that has gone a day since it was
+ * opened without being resolved. Tickets are claimed before the ping so two
+ * overlapping runs cannot both send one, and a failed ping releases its claim
+ * for the next run to retry.
+ */
+async function escalateTickets() {
+  const channel = env.SLACK_TICKETS_CHANNEL!;
+
+  const due = await db
+    .update(ticketsTable)
+    .set({ escalatedAt: new Date() })
+    .where(
+      and(
+        isNull(ticketsTable.resolvedBy),
+        isNull(ticketsTable.escalatedAt),
+        lt(ticketsTable.createdAt, new Date(Date.now() - 86400000)),
+      ),
+    )
+    .returning();
+
+  for (const ticket of due) {
+    const link = ticketLink(ticket.helpMessageTs);
+    try {
+      await app.channel(channel).send({
+        text: `<!subteam^${HELPERS_GROUP}> A ticket has been open for 24 hours without being resolved: ${link}`,
+        blocks: blocks(
+          richText(
+            R.section(
+              R.usergroup(HELPERS_GROUP),
+              " this ticket from ",
+              R.user(ticket.openedBy),
+              " has been open for 24 hours without being resolved: ",
+              R.link(link, `"${ticket.text.substring(0, 50)}"`),
+              ". Can someone take a look and resolve it?",
+            ),
+          ),
+        ),
+        unfurl_links: false,
+      });
+    } catch (error) {
+      console.error("Failed to escalate a ticket:", error);
+      await db
+        .update(ticketsTable)
+        .set({ escalatedAt: null })
+        .where(eq(ticketsTable.id, ticket.id));
+    }
+  }
+}
+
+if (env.SLACK_TICKETS_CHANNEL) {
+  cron.schedule("* * * * *", escalateTickets);
+}
+
 /**
  * Shortens event names to fit chart labels (20 characters max), keeping them
  * unique, since each chart category has to match exactly one data point.
@@ -493,7 +554,7 @@ async function resendTicketsMessage() {
               R.user(t.openedBy),
               ` - `,
               R.link(
-                `https://hackclub.slack.com/archives/${env.SLACK_HELP_CHANNEL}/p${t.helpMessageTs.replace(/\./g, "")}`,
+                ticketLink(t.helpMessageTs),
                 `"${t.text.substring(0, 50)}"`,
               ),
             ),

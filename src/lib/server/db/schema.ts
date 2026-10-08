@@ -44,6 +44,8 @@ export const ticketsTable = pgTable(
     openedBy: text().notNull(),
     text: text().notNull(),
     latestMessageAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+    /** When the helpers were pinged about the ticket being open for a day. */
+    escalatedAt: timestamp({ withTimezone: true }),
     createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
