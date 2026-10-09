@@ -17,6 +17,7 @@ Haven is happening on **November 14 & 15**.
 - [Hack Club Haven calendar on Luma](https://luma.com/hack-club-haven): Follow it to get reminded about all the calls
 - [Gas Fund](https://gas.hackclub.com/) can be used for Haven events
 - [The Haven website](https://github.com/hackclub/haven) is open source!
+- **Slack signup notifications (POCs):** invite Daven to your private organizer channel, run `/haven-signups`, then pick which private channels/users get a message on every new signup. Messages include the attendee's name, email, pronouns & age, so only private channels are allowed
 
 ## Forms
 
@@ -54,7 +55,6 @@ Haven is happening on **November 14 & 15**.
 
 ## Upcoming Community Huddles
 
-- Thu 10/8 @ 12:00 PM EDT: [Get Sponsors](https://luma.com/b8w72bon) w/ Jonas
 - Sat 10/10 @ 8:00 PM EDT: [Sponsor Hunting](https://luma.com/g6cblks5) w/ Arielle
 - Sat 10/10 @ 9:00 PM EDT: [Make/Hang Up 20 Posters](https://luma.com/g6cblks5) w/ Xin Bing
 
