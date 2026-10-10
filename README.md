@@ -12,8 +12,10 @@ Haven is happening on **November 14 & 15**.
 - [Organizer dashboard](https://forms.hackclub.com/haven-dashboard): See event stats & manage organizers
 - [Attend](https://attend.hackclub.com): Manage participants
 - [Jumpstart](https://haven.jumpstart.hackclub.com/): all organizers MUST complete jumpstart!
+  - New [Godot guide](https://hack.club/haven-tutorial) (try it out and leave [feedback](http://hack.club/haven-tutorial-feedback)): submitting a game you make with it can waive your jumpstart requirement if you haven't done it yet
 - [Per-signup funding & caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): How much funding you get per signup in each country
 - [Sponsor advice slides](https://canva.link/huw3xd32mkwswlh) by Aryan Brite
+- [Venue slides](https://canva.link/haven-venue) by Aryan Brite
 - [Hack Club Haven calendar on Luma](https://luma.com/hack-club-haven): Follow it to get reminded about all the calls
 - [Gas Fund](https://gas.hackclub.com/) can be used for Haven events
 - [The Haven website](https://github.com/hackclub/haven) is open source!
@@ -60,8 +62,8 @@ Haven is happening on **November 14 & 15**.
 
 ## Check-in Calls
 
-- Check-in #5 (RSVP): [Fri 10/9 @ 8:00 PM EDT](https://luma.com/hedf8x4f) or [Sat 10/10 @ 11:00 AM EDT](https://luma.com/si9m70gu). Starts promptly, no Q&A afterward (ask in [#haven-help](https://hackclub.slack.com/archives/C0BM9DZ0CR0) or [book a call](https://booking.haven.hackclub.com))
-  - **How to Get A Venue 101** workshop with Kaylee right after each call. Go if you don't have a confirmed venue yet!
+- Check-in #5 (RSVP): [Sat 10/10 @ 11:00 AM EDT](https://luma.com/si9m70gu). Starts promptly, no Q&A afterward (ask in [#haven-help](https://hackclub.slack.com/archives/C0BM9DZ0CR0) or [book a call](https://booking.haven.hackclub.com))
+  - **How to Get A Venue 101** workshop with Kaylee right after the call. Go if you don't have a confirmed venue yet!
 - Check-in #1 (kickoff): [Recording](https://cdn.hackclub.com/01a096b9-6d3e-7ba9-aac2-db942832d929/Haven.mp4), [Slides](https://docs.google.com/presentation/d/1zy4LjW28xiR8lyQEX2O-OdcE4rlPteeH60aJQA0La7w/edit?usp=sharing), [Form](https://hack.club/haven-c1), [Notes](https://notes.granola.ai/t/f8cc6709-d250-4f48-9a20-51357a2cd374-009c2hma)
 - Check-in #2: [Recording](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5), [Slides](https://docs.google.com/presentation/d/1xZ8xn6o1-D_tdWa2b6qofyyKDMfCnwPCSQax-gVoFOw/edit?usp=sharing), [Form](https://hack.club/haven-c2)
   - Jumpstart workshop: [Recording](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5&autoplay=true&startTime=1789832912000)
