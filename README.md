@@ -54,11 +54,7 @@ Haven is happening on **November 14 & 15**.
 - [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF): help with socials
 - [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
 - [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
-
-## Upcoming Community Huddles
-
-- Sat 10/10 @ 8:00 PM EDT: [Sponsor Hunting](https://luma.com/g6cblks5) w/ Arielle
-- Sat 10/10 @ 9:00 PM EDT: [Make/Hang Up 20 Posters](https://luma.com/g6cblks5) w/ Xin Bing
+- [#godot](https://hackclub.slack.com/archives/C06HM4CFSQL): Godot/gamedev help (may be monitored during Haven so attendees can ask questions)
 
 ## Check-in Calls
 
