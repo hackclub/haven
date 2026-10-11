@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "title": "Haven — Meet the team",
+    "description": "The Hack Clubbers behind Haven, a global game jam for teens in 200+ cities."
+  },
+  "heading": "Meet the team",
+  "subheading": "The Hack Clubbers making Haven happen",
+  "sections": [
+    {
+      "heading": "Core team",
+      "members": [
+        {
+          "name": "Jolly",
+          "image": "https://github.com/jollyroger182.png",
+          "links": [
+            { "label": "GitHub", "href": "https://github.com/jollyroger182" }
+          ]
+        },
+        {
+          "name": "Katsu",
+          "image": "https://github.com/the-kat-kat.png",
+          "links": [
+            { "label": "GitHub", "href": "https://github.com/the-kat-kat" }
+          ]
+        },
+        {
+          "name": "Kaylee",
+          "image": "https://github.com/kaylz-d.png",
+          "links": [{ "label": "GitHub", "href": "https://github.com/kaylz-d" }]
+        },
+        {
+          "name": "Daamin",
+          "image": "https://github.com/daaminashai.png",
+          "links": [
+            { "label": "GitHub", "href": "https://github.com/daaminashai" }
+          ]
+        }
+      ]
+    }
+  ],
+  "cta": {
+    "label": "Want to organize a Haven in your city?",
+    "href": "/?poc=1"
+  }
+}

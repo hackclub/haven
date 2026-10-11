@@ -8,6 +8,8 @@ Besides the landing page, the site:
 - gives every active event its own city page at `/<slug>`, customized by the
   organizer (see [SITE_DATA.md](SITE_DATA.md));
 - shows all events on a map at `/map`;
+- introduces the people behind Haven at `/team`, from a JSON file in the repo
+  (see [Team page](#team-page));
 - runs the organizer (POC) signup flow: Hack Club Auth sign-in, then a Fillout
   form prefilled from the organizer's profile;
 - runs a Slack bot that turns messages in the help channel into support tickets
@@ -58,6 +60,34 @@ Edit `src/lib/server/db/schema.ts`, then run `npm run db:generate` to write a
 migration into `drizzle/` and `npm run db:migrate` to apply it. Commit the
 generated migration.
 
+## Team page
+
+`/team` is built from [src/lib/data/team.json](src/lib/data/team.json). To add
+someone, add an entry to a section's `members`:
+
+```json
+{
+  "name": "Ada Lovelace",
+  "pronouns": "she/her",
+  "role": "Workshops",
+  "bio": "Writes the workshops people follow on the day.",
+  "image": "https://github.com/your-github-handle.png",
+  "links": [{ "label": "GitHub", "href": "https://github.com/your-github-handle" }]
+}
+```
+
+Only `name` is required; a card without an `image` shows the person's initials,
+and `position` (`object-top`, `object-bottom`, ...) picks which part of a photo
+survives the square crop. Each section takes an optional `heading` and `blurb`,
+and the page itself a `heading`, an optional `subheading`, `meta` (title,
+description, social image) and a closing `cta` link.
+
+Links and pictures follow the same rules as city pages (see
+[SITE_DATA.md](SITE_DATA.md#five-rules)). The file is checked against the schema
+in [src/lib/data/team.ts](src/lib/data/team.ts) when the site builds, so a
+misspelt key or a bad link fails `npm run build` with a message that points at
+it, rather than shipping a broken page.
+
 ## Deployment
 
 The [Dockerfile](Dockerfile) builds a production image that serves on port 4321. It applies pending migrations on boot and exits if they fail, so the
@@ -76,7 +106,7 @@ src/
     api/slack/       Slack events and interactivity
   lib/
     components/      page sections
-    data/            default page content and the site data schema
+    data/            default page content, the site data schema and team.json
     server/          database and services (Airtable sync, HCA)
     slack.ts         the Slack bot
 drizzle/             generated migrations

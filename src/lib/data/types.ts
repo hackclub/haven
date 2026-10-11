@@ -28,7 +28,7 @@ const hrefSchema = z
       "must not contain quotes, brackets or spaces (percent-encode them)",
   });
 
-const srcSchema = z
+export const srcSchema = z
   .string()
   .trim()
   .regex(SAFE_SRC, "must be an http(s) URL or a /-relative path")
@@ -39,7 +39,7 @@ const srcSchema = z
 
 /** Which part of a photo to keep when it is cropped. A fixed set, because the
  * value is rendered as a CSS class. */
-const objectPositionSchema = z
+export const objectPositionSchema = z
   .enum([
     "object-top",
     "object-bottom",
@@ -71,7 +71,7 @@ const safetySchema = z
     typeof value === "string" ? [{ text: value }] : value,
   );
 
-const linkSchema = z.object({ label: z.string(), href: hrefSchema });
+export const linkSchema = z.object({ label: z.string(), href: hrefSchema });
 export type Link = z.infer<typeof linkSchema>;
 
 const faqItemSchema = z.object({ q: z.string(), a: linkedSchema });
