@@ -80,7 +80,7 @@ in. Copy it, delete what you are not editing, and change the rest.
   "meta": {
     "title": "Haven — Burlington",
     "description": "Hack Club Haven is a global event for hundreds of teenagers to organize their own game jams",
-    "image": "/images/haven-logo-color.webp"
+    "image": "https://haven.hackclub.com/images/haven-logo-color.webp"
   },
   "nav": { "signup": "Sign up", "about": "About", "faq": "FAQ" },
   "tagline": ["Game jam for teens 13-18", "Nov 14–15 · Burlington, VT"],
