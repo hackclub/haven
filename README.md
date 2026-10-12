@@ -55,11 +55,6 @@ Haven is happening on **November 14 & 15**.
 - [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
 - [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
 
-## Upcoming Community Huddles
-
-- Sat 10/10 @ 8:00 PM EDT: [Sponsor Hunting](https://luma.com/g6cblks5) w/ Arielle
-- Sat 10/10 @ 9:00 PM EDT: [Make/Hang Up 20 Posters](https://luma.com/g6cblks5) w/ Xin Bing
-
 ## Check-in Calls
 
 - Check-in #1 (kickoff): [Recording](https://cdn.hackclub.com/01a096b9-6d3e-7ba9-aac2-db942832d929/Haven.mp4), [Slides](https://docs.google.com/presentation/d/1zy4LjW28xiR8lyQEX2O-OdcE4rlPteeH60aJQA0La7w/edit?usp=sharing), [Form](https://hack.club/haven-c1), [Notes](https://notes.granola.ai/t/f8cc6709-d250-4f48-9a20-51357a2cd374-009c2hma)
@@ -70,3 +65,4 @@ Haven is happening on **November 14 & 15**.
 - Check-in #4: [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4), [Form](https://hack.club/haven-c4)
 - Check-in #5: [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H), [Form](https://forms.hackclub.com/haven-c5)
   - **How to Get A Venue 101** workshop with Kaylee was at the end of the call, so watch the recording if you don't have a confirmed venue yet
+- **Safety Workshop** with Spencer (Safeguarding): happens right after Check-in #6 this week. Covers what it takes to run a safe event and what to do beforehand, especially for overnight or large events. Please attend (even as a refresher); a quick safeguarding training module to complete is coming soon
