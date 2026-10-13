@@ -1,4 +1,4 @@
-import { randomBytes } from "crypto";
+import { createHash, randomBytes } from "crypto";
 import cron from "node-cron";
 import {
   actions,
@@ -35,6 +35,9 @@ import {
   lt,
   ne,
 } from "drizzle-orm";
+import { prettifyError } from "zod";
+import { EXTERNAL_URL } from "./consts";
+import { siteDataJsonSchema } from "./data/types";
 
 export const app = new App({
   token: env.SLACK_BOT_TOKEN,
@@ -831,4 +834,82 @@ export async function notifySignup(signup: Signup) {
   }
 
   return { sent: results.length - failures.length, failed: failures.length };
+}
+
+/**
+ * DMs each event's POCs when its website data stops parsing, since the page
+ * quietly falls back to the defaults and nothing else would tell them. Each
+ * broken version is reported once: the hash of what was reported is kept, and
+ * cleared once the data is valid again.
+ */
+export async function warnInvalidSiteData() {
+  const events = await db
+    .select({
+      id: eventsTable.airtableId,
+      slug: eventsTable.slug,
+      name: eventsTable.name,
+      websiteData: eventsTable.websiteData,
+      pocSlackIds: eventsTable.pocSlackIds,
+      warnedHash: eventsTable.websiteDataWarnedHash,
+    })
+    .from(eventsTable);
+
+  for (const event of events) {
+    const parsed = event.websiteData
+      ? siteDataJsonSchema.safeParse(event.websiteData)
+      : null;
+    const hash =
+      parsed && !parsed.success
+        ? createHash("sha256").update(event.websiteData!).digest("hex")
+        : null;
+    if (hash === event.warnedHash) continue;
+
+    if (parsed && !parsed.success) {
+      // Nobody to tell yet. Leave it unrecorded so the POCs hear about it once
+      // they are linked.
+      if (!event.pocSlackIds.length) continue;
+
+      const url = `${EXTERNAL_URL}/${event.slug}`;
+      const message = {
+        text: `The website data for ${event.name} has a problem`,
+        // Rich text, so nothing quoted back from the data is parsed as a
+        // mention or a link.
+        blocks: blocks(
+          richText(
+            R.section(
+              "The website data for ",
+              R.text(event.name).bold(),
+              " has a problem, so ",
+              R.link(url, url),
+              " is showing the default Haven page instead of yours:",
+            ),
+            R.pre(R.text(prettifyError(parsed.error))),
+            R.section(
+              "Fix it in the form and your page will update within a couple of minutes.",
+            ),
+          ),
+        ),
+        unfurl_links: false,
+      } as const;
+
+      const results = await Promise.allSettled(
+        event.pocSlackIds.map((id) => app.user(id).send(message)),
+      );
+      for (const result of results) {
+        if (result.status === "rejected") {
+          console.error(
+            `Failed to warn a POC of /${event.slug} about invalid website data:`,
+            result.reason,
+          );
+        }
+      }
+      // Try again next sync only if nobody heard about it at all.
+      if (!results.some((r) => r.status === "fulfilled")) continue;
+    }
+
+    await db
+      .update(eventsTable)
+      .set({ websiteDataWarnedHash: hash })
+      .where(eq(eventsTable.airtableId, event.id));
+  }
 }

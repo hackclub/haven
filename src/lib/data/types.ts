@@ -319,15 +319,49 @@ export const siteDataInputSchema = z.object({
 export type SiteDataInput = z.infer<typeof siteDataInputSchema>;
 
 /**
- * Airtable long-text fields hold the copy as a JSON *string*, while a scripting
- * action can send a real object. Accept both, and let a string that is not JSON
- * fall through to the schema so the caller gets a field-level error either way.
+ * Characters that look like JSON whitespace or quotes in an editor but are not,
+ * named so an organizer can find them. They arrive by pasting the copy through
+ * a doc or a chat, which swap in typographic versions.
  */
-export const siteDataJsonSchema = z.preprocess((value) => {
+const LOOKALIKES: Record<string, string> = {
+  "\u00a0": "a non-breaking space",
+  "\u200b": "a zero-width space",
+  "\ufeff": "a byte order mark",
+  "\u201c": "a curly quote (“)",
+  "\u201d": "a curly quote (”)",
+  "\u2018": "a curly quote (‘)",
+  "\u2019": "a curly quote (’)",
+};
+
+/** `JSON.parse`'s message, plus what is actually sitting where it stopped. */
+function describeJsonError(text: string, error: unknown) {
+  const message = error instanceof Error ? error.message : String(error);
+  // Depending on the mistake, V8 says either where it stopped or what it found.
+  const position = /at position (\d+)/.exec(message)?.[1];
+  const char = position
+    ? text[Number(position)]
+    : /^Unexpected token '(.)'/u.exec(message)?.[1];
+  // Anything visible is already clear from the message; only call out what an
+  // editor would not show.
+  if (!char || /^[\x20-\x7e\n\r\t]$/.test(char)) return `Not valid JSON: ${message}`;
+
+  const code = `U+${char.codePointAt(0)!.toString(16).toUpperCase().padStart(4, "0")}`;
+  const name = LOOKALIKES[char] ?? JSON.stringify(char);
+  return `Not valid JSON: ${message}. The character there is ${name} (${code}), which usually comes from copying through a doc or chat — paste the JSON from a plain-text editor instead.`;
+}
+
+/**
+ * Airtable long-text fields hold the copy as a JSON *string*, while a scripting
+ * action can send a real object. Accept both. A string that is not JSON is
+ * reported as such, rather than as the confusing "expected object" the schema
+ * would say about it.
+ */
+export const siteDataJsonSchema = z.preprocess((value, ctx) => {
   if (typeof value !== "string") return value;
   try {
     return JSON.parse(value);
-  } catch {
-    return value;
+  } catch (error) {
+    ctx.addIssue({ code: "custom", message: describeJsonError(value, error) });
+    return z.NEVER;
   }
 }, siteDataInputSchema);

@@ -92,6 +92,11 @@ export const eventsTable = pgTable(
     participantCount: integer().notNull().default(0),
     /** Slack ids of the event's POCs, which may edit its signup notifications. */
     pocSlackIds: text().array().notNull().default([]),
+    /**
+     * SHA-256 of the `websiteData` the POCs were last told is invalid, so each
+     * broken version is reported once rather than on every sync.
+     */
+    websiteDataWarnedHash: text(),
   },
   (table) => [
     uniqueIndex().on(table.slug),

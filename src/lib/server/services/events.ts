@@ -1,10 +1,11 @@
 import { asc, eq, notInArray, sql } from "drizzle-orm";
 import cron from "node-cron";
-import type z from "zod";
+import z from "zod";
 import { db, hasDatabase } from "../db";
 import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
 import { listRecords } from "./airtable";
+import { warnInvalidSiteData } from "$lib/slack";
 import { siteDataJsonSchema, type SiteDataInput } from "$lib/data/types";
 import type { City } from "$lib/map";
 
@@ -61,7 +62,9 @@ export function parseSiteData<T extends SiteDataInput = SiteDataInput>(
 
   const parsed = schema.safeParse(event.websiteData);
   if (!parsed.success) {
-    console.warn(`Ignoring invalid website data for /${event.slug}`);
+    console.warn(
+      `Ignoring invalid website data for /${event.slug}:\n${z.prettifyError(parsed.error)}`,
+    );
     return {} as T;
   }
 
@@ -243,6 +246,12 @@ async function runSync() {
   try {
     const count = await syncEvents();
     console.log(`Synced ${count} Haven events from Airtable`);
+
+    if (env.SLACK_BOT_TOKEN) {
+      await warnInvalidSiteData().catch((error: unknown) => {
+        console.error("Failed to warn POCs about invalid website data:", error);
+      });
+    }
   } catch (error) {
     // A failed sync leaves the last good copy in place, so log and wait for the
     // next tick rather than taking the server down.
