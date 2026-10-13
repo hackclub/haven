@@ -41,7 +41,7 @@ Haven is happening on **November 14 & 15**.
 
 ## Extra Funding & Prizes
 
-- **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak to earn **$100** (track your streak at [daven.haven.hackclub.com](https://daven.haven.hackclub.com/))
+- **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak, **or** get 2 signups/day for a 14-day streak, to earn **$100** (one or the other, not both; track your streak at [daven.haven.hackclub.com](https://daven.haven.hackclub.com/))
 - **Email CS teachers:** join a [lock-in call](https://luma.com/iqrybfm3) to email CS teachers in your area and get extra funding
 - **Referral raffle:** every signup through your [referral link](https://forms.hackclub.com/haven-referrals) enters you into a raffle for a **Framework Laptop 12** (co-organizers: ask your POC for the co-organizer form on the dashboard first)
 
@@ -54,11 +54,6 @@ Haven is happening on **November 14 & 15**.
 - [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF): help with socials
 - [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
 - [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
-
-## Upcoming Community Huddles
-
-- Sat 10/10 @ 8:00 PM EDT: [Sponsor Hunting](https://luma.com/g6cblks5) w/ Arielle
-- Sat 10/10 @ 9:00 PM EDT: [Make/Hang Up 20 Posters](https://luma.com/g6cblks5) w/ Xin Bing
 
 ## Check-in Calls
 
