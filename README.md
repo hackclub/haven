@@ -54,6 +54,7 @@ Haven is happening on **November 14 & 15**.
 - [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF): help with socials
 - [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
 - [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
+- [#godot](https://hackclub.slack.com/archives/C06HM4CFSQL): Godot/gamedev help (may be monitored during Haven so attendees can ask questions)
 
 ## Check-in Calls
 
