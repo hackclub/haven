@@ -12,7 +12,7 @@ export const meta = {
   title: "Haven — Come join a game jam in your city!",
   description:
     "Hack Club Haven is a global game jam in 200+ cities worldwide for teenagers 13-18",
-  image: "/images/haven-logo-color.webp",
+  image: "https://haven.hackclub.com/images/haven-logo-color.webp",
 } as const;
 
 export const event = {
