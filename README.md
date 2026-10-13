@@ -54,6 +54,7 @@ Haven is happening on **November 14 & 15**.
 - [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF): help with socials
 - [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
 - [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
+- [#godot](https://hackclub.slack.com/archives/C06HM4CFSQL): Godot/gamedev help (may be monitored during Haven so attendees can ask questions)
 
 ## Check-in Calls
 
@@ -65,3 +66,4 @@ Haven is happening on **November 14 & 15**.
 - Check-in #4: [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4), [Form](https://hack.club/haven-c4)
 - Check-in #5: [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H), [Form](https://forms.hackclub.com/haven-c5)
   - **How to Get A Venue 101** workshop with Kaylee was at the end of the call, so watch the recording if you don't have a confirmed venue yet
+- **Safety Workshop** with Spencer (Safeguarding): happens right after Check-in #6 this week. Covers what it takes to run a safe event and what to do beforehand, especially for overnight or large events. Please attend (even as a refresher); a quick safeguarding training module to complete is coming soon
