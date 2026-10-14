@@ -37,12 +37,14 @@ Haven is happening on **November 14 & 15**.
 - **Don't click "Send Invitation"** on participants in Attend. Invitations are being held on purpose so participants don't get a giant form right after signing up.
 - **Don't share the organizer signup form** (on the dashboard) with anyone outside your organizing team. It gives access to your event's participant info. POCs don't need to fill it out.
 - **Signup caps:** every country has a cap of 200 signups (some countries are lower, see the [funding & caps sheet](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831)). Hit the cap? Reach out to an EM or director to discuss getting it lifted.
+- **Check your `@haven.hackclub.com` inbox!** Questions from participants are now being forwarded there. Set up a forwarding rule to your organizer channel ([Slack: email to channel](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V), [Gmail forwarding](https://support.google.com/mail/answer/10957?hl=en))
 - Your `@haven.hackclub.com` Google account name can be changed [here](https://myaccount.google.com/u/1/profile/name/edit). Try first name "Haven" and last name your city!
 
 ## Extra Funding & Prizes
 
 - **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak, **or** get 2 signups/day for a 14-day streak, to earn **$100** (one or the other, not both; track your streak at [daven.haven.hackclub.com](https://daven.haven.hackclub.com/))
 - **Email CS teachers:** join a [lock-in call](https://luma.com/iqrybfm3) to email CS teachers in your area and get extra funding
+  - New session in a better timezone: [RSVP here](https://luma.com/4e7s4r8d)
 - **Referral raffle:** every signup through your [referral link](https://forms.hackclub.com/haven-referrals) enters you into a raffle for a **Framework Laptop 12** (co-organizers: ask your POC for the co-organizer form on the dashboard first)
 
 - **Haven Daven Horse Galloping Challenge:** post an Instagram reel of someone on your team hobby horsing on your Haven's Instagram account, then reply with the link in [this thread](https://hackclub.slack.com/archives/C0BM46V4X7F/p1791408818049839) to win a Fujifilm Instax Mini 12 polaroid camera. Deadline: **Wed Oct 14**. Judged on gallop form, style/creativity, and enthusiasm; use a caption that promotes your event to people outside Haven
