@@ -14,9 +14,38 @@ export const load: PageServerLoad = async ({ params, url }) => {
   if (!event) error(404, "Not found");
 
   const ref = url.searchParams.get("ref") || undefined;
+  const site = resolveSiteData(parseSiteData(event), event);
+
+  if (params.slug === "boise") {
+    // Keep the organizer's other sponsors and copy from Airtable intact.
+    if (
+      !site.sponsors.items.some((sponsor) => sponsor.name === "CodeCrafters")
+    ) {
+      site.sponsors.items = [
+        ...site.sponsors.items,
+        {
+          name: "CodeCrafters",
+          image: "/images/sponsors/logos/codecrafters.svg",
+          href: "https://codecrafters.io",
+        },
+      ];
+    }
+    site.faq.items = [
+      ...site.faq.items,
+      {
+        q: "What prizes can our team win?",
+        a: [
+          { text: "CodeCrafters", href: "https://codecrafters.io" },
+          {
+            text: " is providing VIP memberships for our top three teams: 2 years for first place, 1 year for second place, and 6 months for third place!",
+          },
+        ],
+      },
+    ];
+  }
 
   return {
-    site: resolveSiteData(parseSiteData(event), event),
+    site,
     eventId: event.id,
     ref,
   };
