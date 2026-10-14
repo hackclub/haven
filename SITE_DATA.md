@@ -464,6 +464,7 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `signup.placeholder` | The grey example text inside the email box.                                                 |
 | `signup.button`      | The button next to it. Keep it to a couple of words.                                        |
+| `signup.lang`        | Optional two-letter language code (like `"fi"`). If set, the signup form opens in that language (it is sent as `?lang=`). |
 
 ### `about` - "what is a game jam?" and the three signs
 
