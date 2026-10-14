@@ -1,4 +1,4 @@
-import { asc, eq, notInArray, sql } from "drizzle-orm";
+import { asc, desc, eq, notInArray, sql } from "drizzle-orm";
 import cron from "node-cron";
 import z from "zod";
 import { db, hasDatabase } from "../db";
@@ -209,6 +209,26 @@ export async function getHavenCities(): Promise<City[]> {
     lng: e.longitude,
     href: `/${e.slug}`,
   }));
+}
+
+export interface EventSignupCount {
+  slug: string;
+  name: string;
+  signups: number;
+}
+
+/** Every synced event's participant count, most signups first. */
+export async function getSignupCounts(): Promise<EventSignupCount[]> {
+  if (!hasDatabase) return [];
+
+  return db
+    .select({
+      slug: eventsTable.slug,
+      name: eventsTable.name,
+      signups: eventsTable.participantCount,
+    })
+    .from(eventsTable)
+    .orderBy(desc(eventsTable.participantCount), asc(eventsTable.name));
 }
 
 /** One event by slug, or null when nothing is synced under that slug. */
