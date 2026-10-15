@@ -17,6 +17,16 @@
   let { data } = $props();
 
   const isPoc = $derived(page.url.searchParams.get("poc") === "1");
+
+  // Forwarded as-is, the way the city pages do; unlike `r` it is not kept in
+  // a cookie, so it only applies to the page it arrived on.
+  const signupUrl = $derived.by(() => {
+    if (!data.signupUrl) return undefined;
+    const url = new URL(data.signupUrl);
+    const ref = page.url.searchParams.get("ref");
+    if (ref) url.searchParams.set("ref", ref);
+    return url.toString();
+  });
 </script>
 
 <Meta />
@@ -27,7 +37,7 @@
   <div class="relative z-20">
     <Hero
       poc={isPoc}
-      signupUrl={data.signupUrl}
+      {signupUrl}
       referral={data.referral}
       cities={data.cities}
     />

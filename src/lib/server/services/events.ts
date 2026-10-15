@@ -117,7 +117,7 @@ export async function syncEvents(): Promise<number> {
     viewId: env.AIRTABLE_EVENTS_VIEW_ID,
   });
 
-  const rows = records
+  const active = records
     .filter((record) => {
       const { fields } = record;
       if (selectName(fields[FIELDS.status]) !== ACTIVE_STATUS) return false;
@@ -131,20 +131,40 @@ export async function syncEvents(): Promise<number> {
         typeof fields[FIELDS.longitude] === "number"
       );
     })
-    .map((record) => ({
-      airtableId: record.id,
-      slug: record.fields[FIELDS.slug] as string,
-      name: record.fields[FIELDS.name] as string,
-      latitude: record.fields[FIELDS.latitude] as number,
-      longitude: record.fields[FIELDS.longitude] as number,
-      websiteData: (record.fields[FIELDS.websiteData] as string) || null,
-      participantCount:
-        typeof record.fields[FIELDS.participantCount] === "number"
-          ? (record.fields[FIELDS.participantCount] as number)
-          : 0,
-      pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
-      syncedAt: new Date(),
-    }));
+    // Oldest first, so the dedupe below keeps the same record on every run.
+    .sort((a, b) => a.createdTime.localeCompare(b.createdTime));
+
+  // Two active records sharing a slug would trip the slug index and fail the
+  // whole write, taking every other event's updates down with it. Keep the
+  // first one created — almost always the original, with the other a
+  // duplicate someone submitted again — and leave the rest for a human.
+  const bySlug = new Map<string, (typeof active)[number]>();
+  for (const record of active) {
+    const slug = record.fields[FIELDS.slug] as string;
+    const kept = bySlug.get(slug);
+    if (kept) {
+      console.warn(
+        `Skipping event ${record.id}: slug /${slug} is already taken by ${kept.id}`,
+      );
+      continue;
+    }
+    bySlug.set(slug, record);
+  }
+
+  const rows = [...bySlug.values()].map((record) => ({
+    airtableId: record.id,
+    slug: record.fields[FIELDS.slug] as string,
+    name: record.fields[FIELDS.name] as string,
+    latitude: record.fields[FIELDS.latitude] as number,
+    longitude: record.fields[FIELDS.longitude] as number,
+    websiteData: (record.fields[FIELDS.websiteData] as string) || null,
+    participantCount:
+      typeof record.fields[FIELDS.participantCount] === "number"
+        ? (record.fields[FIELDS.participantCount] as number)
+        : 0,
+    pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
+    syncedAt: new Date(),
+  }));
 
   await db.transaction(async (tx) => {
     // An empty result is far more likely to be a filter or permissions problem
