@@ -16,6 +16,10 @@ export type City = {
   href: string;
   /** Organizer name, shown in the popup when present. */
   organizer?: string;
+  /** Street address, shown in the popup when present — for a venue pin. */
+  address?: string;
+  /** The popup link's text; "See this event" when absent. */
+  linkLabel?: string;
 };
 
 export type HavenMapOptions = {
@@ -31,6 +35,8 @@ export type HavenMapOptions = {
   pinImageUrl?: string;
   /** Open centered here instead of fitting every city, e.g. the visitor's location. */
   focus?: { lat: number; lng: number };
+  /** Scales the pins and their labels; 1 is the size the world map uses. */
+  pinScale?: number;
   onError?: (error: unknown) => void;
 };
 
@@ -47,6 +53,13 @@ const ASSETS_DEFAULT = "https://protomaps.github.io/basemaps-assets";
 const PIN_IMAGE_ID = "haven-pin";
 /** Roughly a region: an IP lookup is only accurate to a city or country, and neighbouring cities stay in view. */
 const FOCUS_ZOOM = 4;
+/**
+ * A lone pin is a venue, framed so the streets around it are readable. Capped
+ * by whatever detail the tile archive actually has — see `maxZoom` below.
+ */
+const VENUE_ZOOM = 16;
+/** Used until the archive's own header has been read. */
+const DEFAULT_MAX_ZOOM = 7;
 
 /**
  * Both of these register globally, so they must happen once per page rather
@@ -94,6 +107,8 @@ function toFeatureCollection(cities: City[]): FeatureCollection<Point> {
         name: city.name,
         organizer: city.organizer ?? "",
         href: city.href,
+        address: city.address ?? "",
+        linkLabel: city.linkLabel ?? "",
       },
     })),
   };
@@ -126,12 +141,19 @@ function pinImage(
 }
 
 function popupHtml(props: Record<string, string>) {
-  const meta = props.organizer ? escapeHtml(props.organizer) : "";
+  const meta = [props.organizer, props.address]
+    .filter(Boolean)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+  // Off-site links (directions, say) open in a new tab rather than leaving the page.
+  const external = /^https?:\/\//.test(props.href)
+    ? ' target="_blank" rel="noopener noreferrer"'
+    : "";
   return `
     <div class="haven-popup">
       <h3>${escapeHtml(props.name)}</h3>
-      ${meta ? `<p>${meta}</p>` : ""}
-      <a href="${escapeHtml(props.href)}">See this event</a>
+      ${meta}
+      <a href="${escapeHtml(props.href)}"${external}>${escapeHtml(props.linkLabel || "See this event")}</a>
     </div>`;
 }
 
@@ -143,6 +165,7 @@ export function createHavenMap({
   accent = "#ec3750",
   pinImageUrl,
   focus,
+  pinScale = 1,
   onError,
 }: HavenMapOptions): HavenMapHandle {
   let cities = initialCities;
@@ -168,8 +191,8 @@ export function createHavenMap({
     },
     center: focus ? [focus.lng, focus.lat] : [10, 25],
     zoom: focus ? FOCUS_ZOOM : 1.4,
-    // The archive stops at z6; past z7 MapLibre upscales and the basemap blurs.
-    maxZoom: 7,
+    // Replaced by the archive's own limit once its header is in; see below.
+    maxZoom: DEFAULT_MAX_ZOOM,
     minZoom: 1,
     // Stops the world repeating sideways, which would strand pins on copies of
     // the earth that the fitBounds call never visits.
@@ -182,6 +205,15 @@ export function createHavenMap({
     "top-right",
   );
   map.on("error", (e) => onError?.(e.error));
+  // One zoom level past the deepest tiles in the archive: MapLibre overzooms
+  // that far cleanly, and any further the basemap blurs. The world map's
+  // archive stops at z6, so it stays at z7; a street-level archive for venue
+  // maps opens up as far as it was built to.
+  map.on("sourcedata", (e) => {
+    if (e.sourceId !== "protomaps" || e.sourceDataType !== "metadata") return;
+    const { maxzoom } = map.getSource("protomaps") as { maxzoom: number };
+    if (Number.isFinite(maxzoom)) map.setMaxZoom(maxzoom + 1);
+  });
   // Only gestures carry an `originalEvent`; our own camera moves don't.
   map.on("movestart", (e) => {
     if (e.originalEvent) userMoved = true;
@@ -238,12 +270,12 @@ export function createHavenMap({
       filter: ["!", ["has", "point_count"]],
       layout: {
         "icon-image": PIN_IMAGE_ID,
-        "icon-size": 0.8,
+        "icon-size": 0.8 * pinScale,
         "icon-anchor": "bottom",
         "icon-allow-overlap": true,
         "text-field": ["get", "name"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": 11,
+        "text-size": 11 * pinScale,
         "text-offset": [0, 0.4],
         "text-anchor": "top",
         "text-optional": true,
@@ -262,7 +294,11 @@ export function createHavenMap({
     const bounds = new maplibregl.LngLatBounds();
     for (const city of cities) bounds.extend([city.lng, city.lat]);
     if (!bounds.isEmpty()) {
-      map.fitBounds(bounds, { padding: 56, maxZoom: 4, animate: false });
+      map.fitBounds(bounds, {
+        padding: 56,
+        maxZoom: cities.length === 1 ? VENUE_ZOOM : FOCUS_ZOOM,
+        animate: false,
+      });
     }
   }
 
@@ -310,6 +346,7 @@ export function createHavenMap({
       cities = next;
       const source = map.getSource("cities") as GeoJSONSource | undefined;
       source?.setData(toFeatureCollection(next));
+      popup.remove();
     },
     focusOn({ lat, lng }) {
       if (userMoved) return;

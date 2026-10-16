@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import type { City, HavenMapHandle } from '$lib/map';
   import { readGeoCookie, type GeoPoint } from '$lib/geo';
+  import { env } from '$env/dynamic/public';
   import 'maplibre-gl/dist/maplibre-gl.css';
 
   type Props = {
@@ -16,6 +17,11 @@
     pinImageUrl?: string;
     /** Any height value; the map fills it. */
     height?: string;
+    /**
+     * The event's own venue. When given, this is a venue map instead: just
+     * that pin, bigger, at street level, ignoring `cities`.
+     */
+    venue?: City;
   };
 
   let {
@@ -24,8 +30,16 @@
     assetsUrl = 'https://protomaps.github.io/basemaps-assets',
     accent = '#FC8616',
     pinImageUrl = '/images/map-flag.png',
-    height = 'min(70vh, 640px)'
+    height = 'min(70vh, 640px)',
+    venue
   }: Props = $props();
+
+  const shown = $derived(venue ? [venue] : cities);
+
+  // The world map's archive stops at z6, which is a whole region on a venue
+  // map. A street-level archive goes here once one is hosted; until then the
+  // venue map uses the world tiles and stops zooming at z7.
+  const tiles = $derived((venue && env.PUBLIC_VENUE_TILES_URL) || tilesUrl);
 
   let container: HTMLElement;
   let handle: HavenMapHandle | null = null;
@@ -38,7 +52,8 @@
 
     // A cached location centers the map on first paint. Without one the map
     // opens on every city and flies over once `/api/geo` answers (and caches).
-    const cached = readGeoCookie();
+    // A venue page opens on its venue, so the visitor's location is irrelevant.
+    const cached = venue ? null : readGeoCookie();
     const located: Promise<GeoPoint | null> =
       cached !== undefined
         ? Promise.resolve(cached)
@@ -52,11 +67,12 @@
       if (disposed) return;
       handle = createHavenMap({
         container,
-        cities,
-        tilesUrl,
+        cities: shown,
+        tilesUrl: tiles,
         assetsUrl,
         accent,
         pinImageUrl,
+        pinScale: venue ? 1.5 : 1,
         focus: cached ?? undefined,
         onError: (error) => {
           console.error('[haven-map]', error);
@@ -83,8 +99,12 @@
   });
 
   // Push city updates into the live source rather than rebuilding the map.
+  // `shown` is read up front: `handle` is still null on the first run, and
+  // reading it only behind `handle?.` would leave the effect subscribed to
+  // nothing.
   $effect(() => {
-    handle?.setCities(cities);
+    const next = shown;
+    handle?.setCities(next);
   });
 </script>
 
@@ -93,7 +113,7 @@
     bind:this={container}
     class="haven-map__canvas"
     role="application"
-    aria-label="Map of Haven events worldwide"
+    aria-label={venue ? `Map showing ${venue.name}` : 'Map of Haven events worldwide'}
   ></div>
 
   {#if failed}
@@ -104,7 +124,7 @@
        crawlers. This list is the real, navigable copy of the same data, and it
        is server-rendered whether or not the map ever boots. -->
   <ul class="haven-map__cities">
-    {#each cities as city (city.id)}
+    {#each shown as city (city.id)}
       <li>
         <a href={city.href}>{city.name}</a>
       </li>

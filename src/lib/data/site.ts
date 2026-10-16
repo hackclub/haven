@@ -107,7 +107,9 @@ export function resolveSiteData(
     tagline: data.tagline ?? base.tagline,
     hero: {
       organizeCta: data.hero?.organizeCta ?? base.hero.organizeCta,
-      mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
+      mapLabel:
+        data.hero?.mapLabel ??
+        (event.venueName ? heroCopy.venueMapLabel : base.hero.mapLabel),
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
       signup: {
         placeholder:

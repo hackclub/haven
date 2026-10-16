@@ -38,6 +38,8 @@ export const organizeCtaPoc = {
 /** Copy for the hero that is not the title or the tagline. */
 export const heroCopy = {
   mapLabel: "find an event near you",
+  /** The caption instead, on a city page whose map shows its venue. */
+  venueMapLabel: "here's where we'll be",
   scrollLabel: "more info",
 } as const;
 

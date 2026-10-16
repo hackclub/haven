@@ -23,7 +23,25 @@ const FIELDS = {
   websiteData: "fldML1eUwOBMwWyoy",
   participantCount: "fldmQ636z6otYRTtz",
   pocSlackIds: "fld65q0Ht28BtCNko",
+  venue: "fldCHcSHBtDw0FFzG",
 } as const;
+
+/** Field ids in the "Venues" table, which POCs submit and staff approve. */
+const VENUE_FIELDS = {
+  name: "fld4nzqJYaqIQ3ep2",
+  status: "fldru928uWydwCKu8",
+  addressLine1: "fldO3zZ57q0fk9JDr",
+  addressLine2: "fld5OxCfWXzowDMiL",
+  city: "fldkmqXMaI09CzFD4",
+  state: "fldXRE3cYL98rwUnM",
+  postalCode: "fldzt3ssJar1ltCQe",
+  country: "fldVuWG8AmYXq5LnX",
+  isPrivate: "fld6Q7pBdyxNqOM5t",
+  statusModifiedAt: "fldSarqEkdiAKmeAn",
+} as const;
+
+/** A venue only goes on the map once staff have signed it off. */
+const APPROVED_VENUE_STATUS = "Approved";
 
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
 
@@ -46,6 +64,14 @@ export interface HavenEvent {
   longitude: number;
   /** The city page's copy, as the JSON string Airtable stores it in. */
   websiteData: string | null;
+  /** The approved, public venue — both set or both null. */
+  venueName: string | null;
+  venueAddress: string | null;
+}
+
+interface PublicVenue {
+  name: string;
+  address: string;
 }
 
 /**
@@ -97,6 +123,71 @@ function pocSlackIds(value: unknown): string[] {
     .filter((id) => SLACK_USER_ID_RE.test(id));
 }
 
+function text(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+/**
+ * Every approved venue a POC has not marked private, keyed by venue record id,
+ * as the one-line address a visitor would paste into a maps app.
+ *
+ * Optional: without `AIRTABLE_VENUES_TABLE_ID` no event gets a venue and the
+ * city pages keep showing every event on their map.
+ */
+async function getApprovedVenues(): Promise<
+  Map<string, PublicVenue & { approvedAt: string }>
+> {
+  const venues = new Map<string, PublicVenue & { approvedAt: string }>();
+  const tableId = env.AIRTABLE_VENUES_TABLE_ID;
+  if (!tableId) return venues;
+
+  const records = await listRecords(tableId, Object.values(VENUE_FIELDS));
+  for (const { id, fields } of records) {
+    if (selectName(fields[VENUE_FIELDS.status]) !== APPROVED_VENUE_STATUS)
+      continue;
+    if (fields[VENUE_FIELDS.isPrivate] === true) continue;
+
+    const name = text(fields[VENUE_FIELDS.name]);
+    const region = [text(fields[VENUE_FIELDS.state]), text(fields[VENUE_FIELDS.postalCode])]
+      .filter(Boolean)
+      .join(" ");
+    const address = [
+      text(fields[VENUE_FIELDS.addressLine1]),
+      text(fields[VENUE_FIELDS.addressLine2]),
+      text(fields[VENUE_FIELDS.city]),
+      region,
+      text(fields[VENUE_FIELDS.country]),
+    ]
+      .filter(Boolean)
+      .join(", ");
+    if (!name || !address) continue;
+
+    venues.set(id, {
+      name,
+      address,
+      approvedAt: text(fields[VENUE_FIELDS.statusModifiedAt]),
+    });
+  }
+  return venues;
+}
+
+/**
+ * An event can have several venues linked — ones that were denied, or a move
+ * to a new place. Use the one approved most recently.
+ */
+function pickVenue(
+  linked: unknown,
+  venues: Map<string, PublicVenue & { approvedAt: string }>,
+): PublicVenue | null {
+  if (!Array.isArray(linked)) return null;
+  let best: (PublicVenue & { approvedAt: string }) | null = null;
+  for (const id of linked) {
+    const venue = typeof id === "string" ? venues.get(id) : undefined;
+    if (venue && (!best || venue.approvedAt > best.approvedAt)) best = venue;
+  }
+  return best && { name: best.name, address: best.address };
+}
+
 /**
  * Pull the Events table and replace our mirror of it. Reads through
  * `AIRTABLE_EVENTS_VIEW_ID` when that is set, and the whole table when it is
@@ -116,6 +207,7 @@ export async function syncEvents(): Promise<number> {
   const records = await listRecords(tableId, Object.values(FIELDS), {
     viewId: env.AIRTABLE_EVENTS_VIEW_ID,
   });
+  const venues = await getApprovedVenues();
 
   const active = records
     .filter((record) => {
@@ -151,7 +243,9 @@ export async function syncEvents(): Promise<number> {
     bySlug.set(slug, record);
   }
 
-  const rows = [...bySlug.values()].map((record) => ({
+  const rows = [...bySlug.values()].map((record) => {
+    const venue = pickVenue(record.fields[FIELDS.venue], venues);
+    return {
     airtableId: record.id,
     slug: record.fields[FIELDS.slug] as string,
     name: record.fields[FIELDS.name] as string,
@@ -163,8 +257,11 @@ export async function syncEvents(): Promise<number> {
         ? (record.fields[FIELDS.participantCount] as number)
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
+    venueName: venue?.name ?? null,
+    venueAddress: venue?.address ?? null,
     syncedAt: new Date(),
-  }));
+  };
+  });
 
   await db.transaction(async (tx) => {
     // An empty result is far more likely to be a filter or permissions problem
@@ -195,6 +292,8 @@ export async function syncEvents(): Promise<number> {
           websiteData: sql`excluded."websiteData"`,
           participantCount: sql`excluded."participantCount"`,
           pocSlackIds: sql`excluded."pocSlackIds"`,
+          venueName: sql`excluded."venueName"`,
+          venueAddress: sql`excluded."venueAddress"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });
@@ -215,6 +314,8 @@ export async function getEvents(): Promise<HavenEvent[]> {
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
+      venueName: eventsTable.venueName,
+      venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)
     .orderBy(asc(eventsTable.name));
@@ -263,6 +364,8 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
+      venueName: eventsTable.venueName,
+      venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)
     .where(eq(eventsTable.slug, slug))

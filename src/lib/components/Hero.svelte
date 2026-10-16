@@ -18,6 +18,8 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
+    /** The event's approved venue; swaps the events map for a bigger venue map. */
+    venue?: City;
     /** Link under the signup box, over to the organizer signup. */
     organizeCta?: string;
     /** Caption pointing at the map of events. */
@@ -35,6 +37,7 @@
     signupUrl,
     referral = null,
     cities = [],
+    venue,
     organizeCta = poc
       ? organizeCtaPoc.label
       : defaultSiteData.hero.organizeCta,
@@ -188,12 +191,17 @@
 
     <div
       class={[
-        "panel relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] sm:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] transition-transform hover:scale-[1.04] active:scale-100",
+        "panel relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:-translate-y-1/2 transition-transform hover:scale-[1.04] active:scale-100",
+        // A venue map is the one place this event happens, so it gets more
+        // room than the world map, whose pins only need to read as "lots".
+        venue
+          ? "h-[clamp(22rem,80vw,40rem)] sm:w-[clamp(15rem,40vw,56rem)] sm:h-[clamp(12rem,32vw,50rem)] lg:w-[clamp(15rem,40vw,80rem)]"
+          : "h-[clamp(20rem,60vw,40rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] lg:w-[clamp(15rem,35vw,80rem)]",
         poc ? "hidden" : "block",
       ]}
       role="button"
       tabindex="0"
-      aria-label="Open full map of Haven events"
+      aria-label={venue ? `Open full map of ${venue.name}` : "Open full map of Haven events"}
       onpointerdown={handleMapPointerDown}
       onpointerup={handleMapPointerUp}
       onkeydown={(e) => {
@@ -204,7 +212,12 @@
       }}
     >
       <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
-        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
+        <HavenMap
+          {cities}
+          {venue}
+          height="100%"
+          pinImageUrl={images.mapPin}
+        />
       </div>
 
       <img
@@ -348,7 +361,7 @@
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-10"
       role="dialog"
       aria-modal="true"
-      aria-label="Map of Haven events"
+      aria-label={venue ? `Map of ${venue.name}` : "Map of Haven events"}
       tabindex="-1"
       onclick={(e) => {
         if (e.target === e.currentTarget) mapExpanded = false;
@@ -375,7 +388,12 @@
       </button>
 
       <div class="panel relative h-[min(90vh,56rem)] w-[min(94vw,80rem)] overflow-hidden">
-        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
+        <HavenMap
+          {cities}
+          {venue}
+          height="100%"
+          pinImageUrl={images.mapPin}
+        />
       </div>
     </div>
   {/if}
