@@ -16,6 +16,7 @@ Haven is happening on **November 14 & 15**.
 - [Per-signup funding & caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): How much funding you get per signup in each country
 - [Sponsor advice slides](https://canva.link/huw3xd32mkwswlh) by Aryan Brite
 - [Venue slides](https://canva.link/haven-venue) by Aryan Brite
+- [Budgeting lock-in slides](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (the session wasn't recorded; another one is planned for next week)
 - [Hack Club Haven calendar on Luma](https://luma.com/hack-club-haven): Follow it to get reminded about all the calls
 - [Gas Fund](https://gas.hackclub.com/) can be used for Haven events
 - [The Haven website](https://github.com/hackclub/haven) is open source!
