@@ -16,6 +16,10 @@ export type City = {
   href: string;
   /** Organizer name, shown in the popup when present. */
   organizer?: string;
+  /** Street address, shown in the popup when present — for a venue pin. */
+  address?: string;
+  /** The popup link's text; "See this event" when absent. */
+  linkLabel?: string;
 };
 
 export type HavenMapOptions = {
@@ -38,6 +42,8 @@ export type HavenMapHandle = {
   map: MaplibreMap;
   /** Swap the pins without rebuilding the map — for filter UI. */
   setCities: (cities: City[]) => void;
+  /** Frame every pin, closer in when there is only one. */
+  fit: () => void;
   /** Move to a point, unless the visitor has already moved the map themselves. */
   focusOn: (point: { lat: number; lng: number }) => void;
   destroy: () => void;
@@ -47,6 +53,8 @@ const ASSETS_DEFAULT = "https://protomaps.github.io/basemaps-assets";
 const PIN_IMAGE_ID = "haven-pin";
 /** Roughly a region: an IP lookup is only accurate to a city or country, and neighbouring cities stay in view. */
 const FOCUS_ZOOM = 4;
+/** A lone pin, such as a venue, as close as the basemap stays sharp. */
+const SINGLE_PIN_ZOOM = 6;
 
 /**
  * Both of these register globally, so they must happen once per page rather
@@ -94,6 +102,8 @@ function toFeatureCollection(cities: City[]): FeatureCollection<Point> {
         name: city.name,
         organizer: city.organizer ?? "",
         href: city.href,
+        address: city.address ?? "",
+        linkLabel: city.linkLabel ?? "",
       },
     })),
   };
@@ -126,12 +136,19 @@ function pinImage(
 }
 
 function popupHtml(props: Record<string, string>) {
-  const meta = props.organizer ? escapeHtml(props.organizer) : "";
+  const meta = [props.organizer, props.address]
+    .filter(Boolean)
+    .map((line) => `<p>${escapeHtml(line)}</p>`)
+    .join("");
+  // Off-site links (directions, say) open in a new tab rather than leaving the page.
+  const external = /^https?:\/\//.test(props.href)
+    ? ' target="_blank" rel="noopener noreferrer"'
+    : "";
   return `
     <div class="haven-popup">
       <h3>${escapeHtml(props.name)}</h3>
-      ${meta ? `<p>${meta}</p>` : ""}
-      <a href="${escapeHtml(props.href)}">See this event</a>
+      ${meta}
+      <a href="${escapeHtml(props.href)}"${external}>${escapeHtml(props.linkLabel || "See this event")}</a>
     </div>`;
 }
 
@@ -262,7 +279,11 @@ export function createHavenMap({
     const bounds = new maplibregl.LngLatBounds();
     for (const city of cities) bounds.extend([city.lng, city.lat]);
     if (!bounds.isEmpty()) {
-      map.fitBounds(bounds, { padding: 56, maxZoom: 4, animate: false });
+      map.fitBounds(bounds, {
+        padding: 56,
+        maxZoom: cities.length === 1 ? SINGLE_PIN_ZOOM : FOCUS_ZOOM,
+        animate: false,
+      });
     }
   }
 
@@ -310,7 +331,9 @@ export function createHavenMap({
       cities = next;
       const source = map.getSource("cities") as GeoJSONSource | undefined;
       source?.setData(toFeatureCollection(next));
+      popup.remove();
     },
+    fit: fitToCities,
     focusOn({ lat, lng }) {
       if (userMoved) return;
       const options = { center: [lng, lat] as [number, number], zoom: FOCUS_ZOOM };

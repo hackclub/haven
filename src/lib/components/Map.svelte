@@ -16,6 +16,14 @@
     pinImageUrl?: string;
     /** Any height value; the map fills it. */
     height?: string;
+    /**
+     * The event's own venue. When given, a toggle over the map switches
+     * between just this pin and every event; it starts on the venue.
+     */
+    venue?: City;
+    /** Whether the venue (rather than every event) is showing. Bindable, so
+     * two maps of the same page can stay in step. */
+    showVenue?: boolean;
   };
 
   let {
@@ -24,8 +32,16 @@
     assetsUrl = 'https://protomaps.github.io/basemaps-assets',
     accent = '#FC8616',
     pinImageUrl = '/images/map-flag.png',
-    height = 'min(70vh, 640px)'
+    height = 'min(70vh, 640px)',
+    venue,
+    showVenue = $bindable(true)
   }: Props = $props();
+
+  const shown = $derived(venue && showVenue ? [venue] : cities);
+
+  // The toggle sits over the map, and the hero opens the full-size map on any
+  // tap that lands on it, so keep the toggle's own events to itself.
+  const stop = (e: Event) => e.stopPropagation();
 
   let container: HTMLElement;
   let handle: HavenMapHandle | null = null;
@@ -38,7 +54,8 @@
 
     // A cached location centers the map on first paint. Without one the map
     // opens on every city and flies over once `/api/geo` answers (and caches).
-    const cached = readGeoCookie();
+    // A venue page opens on its venue, so the visitor's location is irrelevant.
+    const cached = venue ? null : readGeoCookie();
     const located: Promise<GeoPoint | null> =
       cached !== undefined
         ? Promise.resolve(cached)
@@ -52,7 +69,7 @@
       if (disposed) return;
       handle = createHavenMap({
         container,
-        cities,
+        cities: shown,
         tilesUrl,
         assetsUrl,
         accent,
@@ -82,9 +99,15 @@
     };
   });
 
-  // Push city updates into the live source rather than rebuilding the map.
+  // Push city updates into the live source rather than rebuilding the map,
+  // and reframe so flipping the venue toggle actually moves somewhere. `shown`
+  // is read up front: `handle` is still null on the first run, and reading it
+  // only behind `handle?.` would leave the effect subscribed to nothing.
   $effect(() => {
-    handle?.setCities(cities);
+    const next = shown;
+    if (!handle) return;
+    handle.setCities(next);
+    handle.fit();
   });
 </script>
 
@@ -96,6 +119,26 @@
     aria-label="Map of Haven events worldwide"
   ></div>
 
+  {#if venue}
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions -- only swallows events bubbling from the buttons inside -->
+    <div
+      class="haven-map__toggle"
+      role="group"
+      aria-label="What the map shows"
+      onpointerdown={stop}
+      onpointerup={stop}
+      onclick={stop}
+      onkeydown={stop}
+    >
+      <button type="button" aria-pressed={showVenue} onclick={() => (showVenue = true)}>
+        Our venue
+      </button>
+      <button type="button" aria-pressed={!showVenue} onclick={() => (showVenue = false)}>
+        All events
+      </button>
+    </div>
+  {/if}
+
   {#if failed}
     <p class="haven-map__fallback">The map didn't load :( Please try again later!</p>
   {/if}
@@ -104,7 +147,7 @@
        crawlers. This list is the real, navigable copy of the same data, and it
        is server-rendered whether or not the map ever boots. -->
   <ul class="haven-map__cities">
-    {#each cities as city (city.id)}
+    {#each shown as city (city.id)}
       <li>
         <a href={city.href}>{city.name}</a>
       </li>
@@ -129,6 +172,41 @@
   .haven-map__canvas :global(.maplibregl-canvas-container),
   .haven-map__canvas :global(.maplibregl-canvas) {
     border-radius: inherit;
+  }
+
+  .haven-map__toggle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    display: flex;
+    padding: 3px;
+    gap: 2px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 0 0 2px rgb(0 0 0 / 0.1);
+  }
+
+  .haven-map__toggle button {
+    padding: 0.3rem 0.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #33333d;
+    font: inherit;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  .haven-map__toggle button[aria-pressed='true'] {
+    background: #fc8616;
+    color: #fff;
+  }
+
+  .haven-map__toggle button:focus-visible {
+    outline: 2px solid #33333d;
+    outline-offset: 1px;
   }
 
   .haven-map__fallback {

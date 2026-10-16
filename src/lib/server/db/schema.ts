@@ -97,6 +97,12 @@ export const eventsTable = pgTable(
      * broken version is reported once rather than on every sync.
      */
     websiteDataWarnedHash: text(),
+    /**
+     * The event's approved venue, when it has one that is not marked private.
+     * Shown on the city page's map; null hides the venue toggle there.
+     */
+    venueName: text(),
+    venueAddress: text(),
   },
   (table) => [
     uniqueIndex().on(table.slug),

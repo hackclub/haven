@@ -2,6 +2,7 @@ import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { resolveSiteData } from "$lib/data/site";
 import { getEventBySlug, parseSiteData } from "$lib/server/services/events";
+import type { City } from "$lib/map";
 
 /**
  * A city page exists exactly when an active event is synced under that slug —
@@ -15,9 +16,27 @@ export const load: PageServerLoad = async ({ params, url }) => {
 
   const ref = url.searchParams.get("ref") || undefined;
 
+  // Pinned at the event's own coordinates: those are geocoded from its city,
+  // and the map stops zooming in well before a street address would differ.
+  const venue: City | undefined =
+    event.venueName && event.venueAddress
+      ? {
+          id: `${event.slug}-venue`,
+          name: event.venueName,
+          lat: event.latitude,
+          lng: event.longitude,
+          address: event.venueAddress,
+          href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+            `${event.venueName}, ${event.venueAddress}`,
+          )}`,
+          linkLabel: "Get directions",
+        }
+      : undefined;
+
   return {
     site: resolveSiteData(parseSiteData(event), event),
     eventId: event.id,
+    venue,
     ref,
   };
 };

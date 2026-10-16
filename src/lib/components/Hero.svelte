@@ -18,6 +18,8 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
+    /** The event's approved venue; adds a venue/all-events toggle to the map. */
+    venue?: City;
     /** Link under the signup box, over to the organizer signup. */
     organizeCta?: string;
     /** Caption pointing at the map of events. */
@@ -35,6 +37,7 @@
     signupUrl,
     referral = null,
     cities = [],
+    venue,
     organizeCta = poc
       ? organizeCtaPoc.label
       : defaultSiteData.hero.organizeCta,
@@ -53,6 +56,8 @@
   // far the pointer travelled between down and up, since MapLibre's own pan
   // handling means a plain click listener can't tell the two apart.
   let mapExpanded = $state(false);
+  // Shared by the small map and the full-size one, so opening it keeps the view.
+  let showVenue = $state(true);
   let mapPointerDown: { x: number; y: number } | null = null;
 
   // `#top`'s `isolate` (and the `z-20` wrapper the page renders this Hero
@@ -204,7 +209,13 @@
       }}
     >
       <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
-        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
+        <HavenMap
+          {cities}
+          {venue}
+          bind:showVenue
+          height="100%"
+          pinImageUrl={images.mapPin}
+        />
       </div>
 
       <img
@@ -375,7 +386,13 @@
       </button>
 
       <div class="panel relative h-[min(90vh,56rem)] w-[min(94vw,80rem)] overflow-hidden">
-        <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
+        <HavenMap
+          {cities}
+          {venue}
+          bind:showVenue
+          height="100%"
+          pinImageUrl={images.mapPin}
+        />
       </div>
     </div>
   {/if}
