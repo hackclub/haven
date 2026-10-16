@@ -16,8 +16,8 @@ export const load: PageServerLoad = async ({ params, url }) => {
 
   const ref = url.searchParams.get("ref") || undefined;
 
-  // Pinned at the event's own coordinates: those are geocoded from its city,
-  // and the map stops zooming in well before a street address would differ.
+  // Pinned at the event's own coordinates: once a venue is approved, Airtable
+  // geocodes the event from the venue's address rather than its city.
   const venue: City | undefined =
     event.venueName && event.venueAddress
       ? {
