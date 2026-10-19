@@ -1,76 +1,65 @@
 # Haven tl;dr
 
-This page contains all the information you need to run your [Haven](https://haven.hackclub.com/) event!
+Everything you need to run your [Haven](https://haven.hackclub.com/) event. Haven is **November 14 & 15**.
 
-Haven is happening on **November 14 & 15**.
+## Must-dos
 
-## Resources
+- **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
+- **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
+- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof
+- **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
-- [Organizer Guide](https://haven.hackclub.com/docs): Help every step along the way!
-- [Branding Guide](https://haven.hackclub.com/branding): Rules & tips for promoting your Haven on social media
-- [Book a call](https://booking.haven.hackclub.com/) with an EM if you have more questions/need time to sit and talk
-- [Organizer dashboard](https://forms.hackclub.com/haven-dashboard): See event stats & manage organizers
-- [Attend](https://attend.hackclub.com): Manage participants
-- [Jumpstart](https://haven.jumpstart.hackclub.com/): all organizers MUST complete jumpstart!
-  - New [Godot guide](https://hack.club/haven-tutorial) (try it out and leave [feedback](http://hack.club/haven-tutorial-feedback)): submitting a game you make with it can waive your jumpstart requirement if you haven't done it yet
-- [Per-signup funding & caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): How much funding you get per signup in each country
-- [Sponsor advice slides](https://canva.link/huw3xd32mkwswlh) by Aryan Brite
-- [Venue slides](https://canva.link/haven-venue) by Aryan Brite
-- [Budgeting lock-in slides](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (the session wasn't recorded; another one is planned for next week)
-- [Hack Club Haven calendar on Luma](https://luma.com/hack-club-haven): Follow it to get reminded about all the calls
-- [Gas Fund](https://gas.hackclub.com/) can be used for Haven events
-- [The Haven website](https://github.com/hackclub/haven) is open source!
-- **Haven posters & postcards:** 3,000 posters and 15,000 postcards arrive at Hack Club HQ on **Thu Oct 22**. Request them (plus mini-magazines, pins, stickers & other swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the USA; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster) source files) or pay for shipping out of your event's budget
-- **Slack signup notifications (POCs):** invite Daven to your private organizer channel, run `/haven-signups`, then pick which private channels/users get a message on every new signup. Messages include the attendee's name, email, pronouns & age, so only private channels are allowed
+## Don'ts
+
+- **Don't apply for HCB yourself.** POCs get a special account with no fee (under 18? a parent/guardian signs too)
+- **Don't click "Send Invitation"** in Attend. Invites are held on purpose.
+- **Don't share the organizer signup form** outside your team. It exposes participant info.
+- **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
+
+## Key Links
+
+- [Organizer Guide](https://haven.hackclub.com/docs) · [Branding Guide](https://haven.hackclub.com/branding)
+- [Organizer dashboard](https://forms.hackclub.com/haven-dashboard) (stats, organizers, volunteer/mentor form) · [Attend](https://attend.hackclub.com) (participants)
+- [Funding & signup caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): caps are 200/country (some lower); hit it? ask an EM or director
+- [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls
+- Slides: [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
+- [Gas Fund](https://gas.hackclub.com/) works for Haven · [Haven website source](https://github.com/hackclub/haven)
+- [Rename your `@haven.hackclub.com` account](https://myaccount.google.com/u/1/profile/name/edit) (try "Haven [City]")
 
 ## Forms
 
-- [Website update](https://forms.hackclub.com/haven-website)
-  - If this doesn't work, try [this one](https://forms.hackclub.com/haven-website-2) with your `@haven.hackclub.com` email. Also try another browser!
-- [Venue confirmation](https://forms.hackclub.com/haven-venue): Submit once you have a confirmed venue, with proof
-- [Referral link](https://forms.hackclub.com/haven-referrals): Get your personal signup referral link
-- [POC Application Re-review](https://forms.hackclub.com/t/dsJ1MaW8pYus)
-- **Volunteer / mentor sign-up form:** it's on your event dashboard!
+- [Website update](https://forms.hackclub.com/haven-website) (broken? try [this one](https://forms.hackclub.com/haven-website-2) with your `@haven.hackclub.com` email, or another browser)
+- [Referral link](https://forms.hackclub.com/haven-referrals) · [POC application re-review](https://forms.hackclub.com/t/dsJ1MaW8pYus) · [T-shirt quote](https://forms.hackclub.com/haven-tshirts)
 
-## Important Reminders
+## Swag & Tools
 
-- **POCs: get identity verified** at [auth.hackclub.com](https://auth.hackclub.com/), or you won't receive funding!
-- **Don't apply for HCB yourself.** POCs get a special HCB account with no fiscal sponsorship fee. If you're under 18, your parent/guardian also needs to sign the HCB contract.
-- **Don't click "Send Invitation"** on participants in Attend. Invitations are being held on purpose so participants don't get a giant form right after signing up.
-- **Don't share the organizer signup form** (on the dashboard) with anyone outside your organizing team. It gives access to your event's participant info. POCs don't need to fill it out.
-- **Signup caps:** every country has a cap of 200 signups (some countries are lower, see the [funding & caps sheet](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831)). Hit the cap? Reach out to an EM or director to discuss getting it lifted.
-- **Check your `@haven.hackclub.com` inbox!** Questions from participants are now being forwarded there. Set up a forwarding rule to your organizer channel ([Slack: email to channel](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V), [Gmail forwarding](https://support.google.com/mail/answer/10957?hl=en))
-- Your `@haven.hackclub.com` Google account name can be changed [here](https://myaccount.google.com/u/1/profile/name/edit). Try first name "Haven" and last name your city!
+- **Posters & postcards** arrive at HQ **Thu Oct 22**. Request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
+- **Signup pings (POCs):** invite Daven to a *private* organizer channel and run `/haven-signups`
 
 ## Extra Funding & Prizes
 
-- **[#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4):** get at least one signup every day and keep a 30-day streak, **or** get 2 signups/day for a 14-day streak, to earn **$100** (one or the other, not both; track your streak at [daven.haven.hackclub.com](https://daven.haven.hackclub.com/))
-- **Email CS teachers:** join a [lock-in call](https://luma.com/iqrybfm3) to email CS teachers in your area and get extra funding
-  - New session in a better timezone: [RSVP here](https://luma.com/4e7s4r8d)
-- **Referral raffle:** every signup through your [referral link](https://forms.hackclub.com/haven-referrals) enters you into a raffle for a **Framework Laptop 12** (co-organizers: ask your POC for the co-organizer form on the dashboard first)
-- **Free Haven T-shirts:** every attendee who ships a project and every organizer who has completed Jumpstart gets one. Contiguous US, Canada & Europe ([country list](https://help.printful.com/hc/en-us/articles/50265219092753-Which-countries-apply-to-which-Printful-shipping-regions)): shirts are shipped via Printful. Everywhere else: you get funding to print locally. Start asking local print shops for quotes now (template in the [t-shirt guide](https://docs.google.com/document/d/1hc0W0iDjXEoAWda23s8ZkFefZ6vSQVGsub04a654Wr4/edit?tab=t.5fn89abennyk)), but **don't finalize anything** until the shirt count is confirmed (~2 weeks before Haven)
-  - Outside the contiguous US, Canada & Europe, this week: reach out to 3+ local print shops using the guide's email template, ask how long printing takes (shirts must arrive before Haven), compare quotes and get everything but the shirt count confirmed with your chosen shop (mockup, design/printing details, timeline). The next check-in form will ask which shops you contacted. Funded shirt counts will be released in the next few days; then submit your shop's final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) for approval, and you'll receive funds to buy them
-  - The UK and EU are covered by Printful, so shirts are shipped to you
-  - Your shirt count is estimated from your signups around **Oct 20** (not a flat 50%, it will be inflated for late signups), so more signups by then = more shirts. If more people show up than shirts sent, the rest will be shipped
-- **Sponsors:** **don't email CraftPix** (they're already sponsoring Haven events globally: top 10 teams per city get a CraftPix membership, up to 5 participants per team). Do email CodeCrafters and fill out the form on XYZ Domains (gen.xyz), they're open to sponsoring Haven events
+- **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/))
+- **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
+- **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
+- **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
 
-## Slack Channels
+## Free T-shirts
 
-- [#haven-organizers](https://hackclub.slack.com/archives/C0BMP0TU43Y): main organizer chat & community huddles
-- [#haven-wins](https://hackclub.slack.com/archives/C0C2STBS6CS): share your wins (venues, sponsors, signups!)
-- [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF): help with socials
-- [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW): Jumpstart help & discussion
-- [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4): signup streaks
-- [#godot](https://hackclub.slack.com/archives/C06HM4CFSQL): Godot/gamedev help (may be monitored during Haven so attendees can ask questions)
+For every attendee who ships a project and every organizer who finished Jumpstart. See the [t-shirt guide](https://docs.google.com/document/d/1hc0W0iDjXEoAWda23s8ZkFefZ6vSQVGsub04a654Wr4/edit?tab=t.5fn89abennyk).
+
+- **Contiguous US, Canada, UK & EU** ([regions](https://help.printful.com/hc/en-us/articles/50265219092753-Which-countries-apply-to-which-Printful-shipping-regions)): shipped to you via Printful
+- **Everywhere else:** get quotes from 3+ local print shops now (check they can deliver before Haven), lock in everything but the count, then submit the final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) once counts are out. **Don't finalize** before then.
+- **Count** is based on signups around **Oct 20** (padded for late signups). Extra shirts get shipped if more people show up.
+
+## Slack
+
+[#haven-organizers](https://hackclub.slack.com/archives/C0BMP0TU43Y) (main) · [#haven-wins](https://hackclub.slack.com/archives/C0C2STBS6CS) · [#haven-social-media](https://hackclub.slack.com/archives/C0C4VF719DF) · [#jumpstart-haven](https://hackclub.slack.com/archives/C0BRKUKHCJW) · [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) · [#godot](https://hackclub.slack.com/archives/C06HM4CFSQL) (gamedev help)
 
 ## Check-in Calls
 
-- Check-in #1 (kickoff): [Recording](https://cdn.hackclub.com/01a096b9-6d3e-7ba9-aac2-db942832d929/Haven.mp4), [Slides](https://docs.google.com/presentation/d/1zy4LjW28xiR8lyQEX2O-OdcE4rlPteeH60aJQA0La7w/edit?usp=sharing), [Form](https://hack.club/haven-c1), [Notes](https://notes.granola.ai/t/f8cc6709-d250-4f48-9a20-51357a2cd374-009c2hma)
-- Check-in #2: [Recording](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5), [Slides](https://docs.google.com/presentation/d/1xZ8xn6o1-D_tdWa2b6qofyyKDMfCnwPCSQax-gVoFOw/edit?usp=sharing), [Form](https://hack.club/haven-c2)
-  - Jumpstart workshop: [Recording](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5&autoplay=true&startTime=1789832912000)
-- Check-in #3: [Recording](https://hackclub.zoom.us/rec/play/yvClbhK6EYXpsH7e7-cVs_ZZ1mpIq-CawvEpp3RWfVRrda98sJ_pIt0WwAZPyaRZQBw7LtFCTMivELAv.FhKyHL8koenwSxdq?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2F9_AwwQPXnlKJgcZ65tPBYoK4rzv0MVgvsflReg4Mb_K4AS9eohKPl-GIT2ve_W4.tSarCSOG05Y8LFi5), [Slides](https://docs.google.com/presentation/d/1ay9iPube21wS66s8iqqTwqdtPgPGxnyZtbVsRJxwZTg/edit?usp=sharing), [Form](https://hack.club/haven-c3)
-  - Social media workshop: Recording (at the end of check-in recording), [Slides](https://docs.google.com/presentation/d/10gYMVY18Nr0X1BGBtHdrsjr1BpndTVFHmUiLa0PhWoE/edit?usp=sharing)
-- Check-in #4: [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4), [Form](https://hack.club/haven-c4)
-- Check-in #5: [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H), [Form](https://forms.hackclub.com/haven-c5)
-  - **How to Get A Venue 101** workshop with Kaylee was at the end of the call, so watch the recording if you don't have a confirmed venue yet
-- **Safety Workshop** with Spencer (Safeguarding): **rescheduled to a later date** (it will no longer happen right after Check-in #6). Covers what it takes to run a safe event and what to do beforehand, especially for overnight or large events. Please attend (even as a refresher); a quick safeguarding training module to complete is coming soon
+- **#1 (kickoff):** [Recording](https://cdn.hackclub.com/01a096b9-6d3e-7ba9-aac2-db942832d929/Haven.mp4) · [Slides](https://docs.google.com/presentation/d/1zy4LjW28xiR8lyQEX2O-OdcE4rlPteeH60aJQA0La7w/edit?usp=sharing) · [Form](https://hack.club/haven-c1) · [Notes](https://notes.granola.ai/t/f8cc6709-d250-4f48-9a20-51357a2cd374-009c2hma)
+- **#2:** [Recording](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5) · [Slides](https://docs.google.com/presentation/d/1xZ8xn6o1-D_tdWa2b6qofyyKDMfCnwPCSQax-gVoFOw/edit?usp=sharing) · [Form](https://hack.club/haven-c2) · [Jumpstart workshop](https://hackclub.zoom.us/rec/play/GVCHdHdbeJf49ru9rBYD21YkScZF1ACEMmm886XtjVYsRkVCZ3JurUJTHW-s3bZCGPGeN5NOEXj1hs2B.jcojVuL0EYNWxdm1?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FFbjN813pTf-wYpQ4MeeAazDPfIPcJA3ee6f_JodpfTlJmWDo9fFXXV9fSE3057eP.GCN6J6vI2huNIZK5&autoplay=true&startTime=1789832912000)
+- **#3:** [Recording](https://hackclub.zoom.us/rec/play/yvClbhK6EYXpsH7e7-cVs_ZZ1mpIq-CawvEpp3RWfVRrda98sJ_pIt0WwAZPyaRZQBw7LtFCTMivELAv.FhKyHL8koenwSxdq?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2F9_AwwQPXnlKJgcZ65tPBYoK4rzv0MVgvsflReg4Mb_K4AS9eohKPl-GIT2ve_W4.tSarCSOG05Y8LFi5) (social media workshop at the end) · [Slides](https://docs.google.com/presentation/d/1ay9iPube21wS66s8iqqTwqdtPgPGxnyZtbVsRJxwZTg/edit?usp=sharing) · [Social media slides](https://docs.google.com/presentation/d/10gYMVY18Nr0X1BGBtHdrsjr1BpndTVFHmUiLa0PhWoE/edit?usp=sharing) · [Form](https://hack.club/haven-c3)
+- **#4:** [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4) · [Form](https://hack.club/haven-c4)
+- **#5:** [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H) (Venue 101 workshop with Kaylee at the end) · [Form](https://forms.hackclub.com/haven-c5)
+- **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
