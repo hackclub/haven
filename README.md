@@ -44,7 +44,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
 - **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
-- **Sponsor says they're already talking to another organizer?** DM navbar with who + a screenshot of the email chain
+- **Sponsor says they're already talking to another organizer?** DM barnav with who + a screenshot of the email chain
 
 ## Free T-shirts
 
