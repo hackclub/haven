@@ -7,6 +7,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof
+- **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -15,6 +16,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't click "Send Invitation"** in Attend. Invites are held on purpose.
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
+- **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
 
 ## Key Links
 
@@ -42,6 +44,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
 - **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
+- **Sponsor says they're already talking to another organizer?** DM barnav with who + a screenshot of the email chain
 
 ## Free T-shirts
 
@@ -63,5 +66,5 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#4:** [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4) · [Form](https://hack.club/haven-c4)
 - **#5:** [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H) (Venue 101 workshop with Kaylee at the end) · [Form](https://forms.hackclub.com/haven-c5)
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
-- **Dev AMA & motivation session:** **Wed Oct 21**. [RSVP](https://hack.club/deven-ama)
+- **#7:** RSVP: [Fri Oct 23, 8 PM EDT](https://luma.com/zvwu3yra) · [Sat Oct 24, 11 AM EDT](https://luma.com/jw29p2uv) (public demos)
 - **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
