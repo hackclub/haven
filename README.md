@@ -23,7 +23,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - [Organizer Guide](https://haven.hackclub.com/docs) · [Branding Guide](https://haven.hackclub.com/branding)
 - [Organizer dashboard](https://forms.hackclub.com/haven-dashboard) (stats, organizers, volunteer/mentor form) · [Attend](https://attend.hackclub.com) (participants)
 - [Funding & signup caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): caps are 200/country (some lower); hit it? ask an EM or director
-- [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls
+- [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls · [Add community calls to your calendar](https://hack.club/haven-cal)
 - Slides: [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
 - [Gas Fund](https://gas.hackclub.com/) works for Haven · [Haven website source](https://github.com/hackclub/haven)
 - [Rename your `@haven.hackclub.com` account](https://myaccount.google.com/u/1/profile/name/edit) (try "Haven [City]")
