@@ -6,7 +6,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
-- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof
+- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
@@ -16,6 +16,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't click "Send Invitation"** in Attend. Invites are held on purpose.
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
+- **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
 
 ## Key Links
@@ -35,7 +36,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 ## Swag & Tools
 
-- **Posters & postcards** arrive at HQ **Thu Oct 22**. Request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
+- **Posters & postcards:** request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
+- [Customizable flyer template](https://canva.link/c84mt0an3bpw8ap) (Canva)
 - **Signup pings (POCs):** invite Daven to a *private* organizer channel and run `/haven-signups`
 
 ## Extra Funding & Prizes
