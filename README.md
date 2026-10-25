@@ -25,7 +25,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - [Organizer dashboard](https://forms.hackclub.com/haven-dashboard) (stats, organizers, volunteer/mentor form) · [Attend](https://attend.hackclub.com) (participants)
 - [Funding & signup caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): caps are 200/country (some lower); hit it? ask an EM or director
 - [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls · [Add community calls to your calendar](https://hack.club/haven-cal)
-- Slides: [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
+- Slides: [Event planning](https://canva.link/will-your-haven-survive) by Xin Bing Lim · [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
 - [Gas Fund](https://gas.hackclub.com/) works for Haven · [Haven website source](https://github.com/hackclub/haven)
 - [Rename your `@haven.hackclub.com` account](https://myaccount.google.com/u/1/profile/name/edit) (try "Haven [City]")
 
@@ -43,6 +43,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 ## Extra Funding & Prizes
 
 - **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/))
+- **Sponsorship workshop:** [RSVP](https://luma.com/oanaotyd) (helped 3 events land their first sponsors)
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
 - **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
@@ -68,5 +69,5 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#4:** [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4) · [Form](https://hack.club/haven-c4)
 - **#5:** [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H) (Venue 101 workshop with Kaylee at the end) · [Form](https://forms.hackclub.com/haven-c5)
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
-- **#7:** RSVP: [Fri Oct 23, 8 PM EDT](https://luma.com/zvwu3yra) · [Sat Oct 24, 11 AM EDT](https://luma.com/jw29p2uv) (public demos)
+- **#7:** [Recording](https://hackclub.zoom.us/rec/play/POkDzOPGrE728JbU5MBq3JekWsT_o9My4KD2mWsu7eCu_o-GB9-SEekQnx3wqCLqx4xrRNy6eujIQiZW.BMES9rvAxyy69YOa?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FLlGgBDuSGPtkx6QTlCd7ORwlPDImfoO3wgInbvVKztvI62MD9H6mEagCR5iU-TSU.VPOedwwfpzZChWGu) (public demos)
 - **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
