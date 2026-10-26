@@ -8,6 +8,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
+- **Instagram?** Repost the [workshop post](https://www.instagram.com/p/De3CyI_GwfV/) to your story with the [RSVP link](https://luma.com/thcxq5xj) (optional if timezone doesn't fit)
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -38,11 +39,12 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **Posters & postcards:** request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
 - [Customizable flyer template](https://canva.link/c84mt0an3bpw8ap) (Canva)
+- [Email signature maker](https://haven-signature-maker.netlify.app/)
 - **Signup pings (POCs):** invite Daven to a *private* organizer channel and run `/haven-signups`
 
 ## Extra Funding & Prizes
 
-- **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/))
+- **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/)). Dashboard now counts only ages 13-18; wrong-age signups don't count, so have them re-sign up with the right age (fix before event ends)
 - **Sponsorship workshop:** [RSVP](https://luma.com/oanaotyd) (helped 3 events land their first sponsors)
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
@@ -56,6 +58,11 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **Contiguous US, Canada, UK & EU** ([regions](https://help.printful.com/hc/en-us/articles/50265219092753-Which-countries-apply-to-which-Printful-shipping-regions)): shipped to you via Printful
 - **Everywhere else:** get quotes from 3+ local print shops now (check they can deliver before Haven), lock in everything but the count, then submit the final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) once counts are out. **Don't finalize** before then.
 - **Count** is based on signups around **Oct 20** (padded for late signups). Extra shirts get shipped if more people show up.
+
+## Community Calls & Workshops (all EDT)
+
+- **Game dev (beginner friendly):** [GameMaker](https://luma.com/pzqqgpdv) Oct 24, 7 PM · [Godot leaf game](https://luma.com/thcxq5xj) Oct 25, 9 PM · [Ren'Py](https://luma.com/b97crb9f) Oct 29, 5 PM · [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
+- [Sponsorships with AI](https://luma.com/oanaotyd) Oct 26, 11 AM · [Budgeting](https://luma.com/vefn0sbo) Oct 27, 6 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
 
 ## Slack
 
