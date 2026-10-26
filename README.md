@@ -8,6 +8,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
+- **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -68,5 +69,4 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#4:** [Recording](https://hackclub.zoom.us/rec/share/3cdT86KuOkK9DLWcpBXsyfYyPl1OSWvw8eqW6RQx7lU85wvVjclrQKKYX2_YPAXn.k_1m8DvF8nFJM9M4) · [Form](https://hack.club/haven-c4)
 - **#5:** [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H) (Venue 101 workshop with Kaylee at the end) · [Form](https://forms.hackclub.com/haven-c5)
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
-- **#7:** RSVP: [Fri Oct 23, 8 PM EDT](https://luma.com/zvwu3yra) · [Sat Oct 24, 11 AM EDT](https://luma.com/jw29p2uv) (public demos)
 - **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
