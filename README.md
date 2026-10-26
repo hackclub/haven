@@ -8,6 +8,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
+- **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Instagram?** Repost the [workshop post](https://www.instagram.com/p/De3CyI_GwfV/) to your story with the [RSVP link](https://luma.com/thcxq5xj) (optional if timezone doesn't fit)
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
