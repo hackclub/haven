@@ -38,6 +38,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 ## Swag & Tools
 
 - **Posters & postcards:** request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
+- [Info poster & teacher email template](https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit?tab=t.vev3hj1q8m2g) (org handbook, outreach pages 3 & 4)
 - [Customizable flyer template](https://canva.link/c84mt0an3bpw8ap) (Canva)
 - [Email signature maker](https://haven-signature-maker.netlify.app/)
 - **Signup pings (POCs):** invite Daven to a *private* organizer channel and run `/haven-signups`
@@ -46,6 +47,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/)). Dashboard now counts only ages 13-18; wrong-age signups don't count, so have them re-sign up with the right age (fix before event ends)
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
+- **Social media campaign:** your Haven HCB gets **$10 per 10,000 views**, capped at **$100 per event** (100k views). Redeem via the [rewards form](https://forms.hackclub.com/haven-socials-rewards)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
 - **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
 - **Sponsor says they're already talking to another organizer?** DM barnav with who + a screenshot of the email chain
@@ -61,7 +63,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 ## Community Calls & Workshops (all EDT)
 
 - **Game dev (beginner friendly):** [Ren'Py](https://luma.com/b97crb9f) Oct 29, 5 PM · [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
-- [Budgeting](https://luma.com/vefn0sbo) Oct 27, 6 PM · [Sponsor Outreach Call](https://luma.com/2ti1prjv) Oct 28, 3 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
+- [Budgeting](https://luma.com/vefn0sbo) Oct 27, 6 PM · [Sponsor Outreach Call](https://luma.com/2ti1prjv) Oct 28, 3 PM · [Teacher Outreach Lock-In](https://luma.com/phjxvifp) Oct 27, 8 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
 
 ## Slack
 
