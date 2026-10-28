@@ -59,7 +59,6 @@
       signupUrl={signupUrl}
       referral={data.referral}
       cities={data.cities}
-      organizeCta={site.hero.organizeCta}
       mapLabel={site.hero.mapLabel}
       scrollLabel={site.hero.scrollLabel}
       signup={site.hero.signup}

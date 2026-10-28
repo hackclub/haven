@@ -85,7 +85,6 @@ in. Copy it, delete what you are not editing, and change the rest.
   "nav": { "signup": "Sign up", "about": "About", "faq": "FAQ" },
   "tagline": ["Game jam for teens 13-18", "Nov 14–15 · Burlington, VT"],
   "hero": {
-    "organizeCta": "Want to organize your own Hack Club Haven?",
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
     "signup": { "placeholder": "you@hackclub.com", "button": "sign up!" }
@@ -461,7 +460,6 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 
 | Field                | What it is                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------- |
-| `organizeCta`        | The small underlined link below the signup box, for people who want to run their own event. |
 | `mapLabel`           | The handwritten label pointing at the map.                                                  |
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `venueTbd`           | Shown where the venue goes until your venue is approved, like `"Lugar por confirmar"`.      |

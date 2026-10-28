@@ -19,8 +19,6 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
-    /** Link under the signup box, over to the organizer signup. */
-    organizeCta?: string;
     /** Caption pointing at the map of events. */
     mapLabel?: string;
     /** Caption on the arrow down to the rest of the page. */
@@ -39,9 +37,6 @@
     signupUrl,
     referral = null,
     cities = [],
-    organizeCta = poc
-      ? organizeCtaPoc.label
-      : defaultSiteData.hero.organizeCta,
     mapLabel = defaultSiteData.hero.mapLabel,
     scrollLabel = defaultSiteData.hero.scrollLabel,
     signup = defaultSiteData.hero.signup,
@@ -192,14 +187,6 @@
           bind:valid={emailValid}
           class="pointer-events-auto mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
         />
-        {#if signupAction}
-          <a
-            href={organizeHref}
-            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
-          >
-            {organizeCta}
-          </a>
-        {/if}
       </div>
     </div>
 
@@ -327,7 +314,7 @@
             href={organizeHref}
             class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
           >
-            {organizeCta}
+            {organizeCtaPoc.label}
           </a>
         {/if}
       </div>

@@ -21,10 +21,6 @@ export const event = {
   tagline: ["Game jam for teens in 200+ cities", "Nov 14–15, 2026"],
 } as const;
 
-export const organizeCta = {
-  label: "Want to organize your own Hack Club Haven?",
-} as const;
-
 export const eventPoc = {
   name: "Haven",
   title: ["Organize a game jam", "in your city!"],
