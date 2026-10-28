@@ -63,7 +63,8 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 ## Community Calls & Workshops (all EDT)
 
 - **Game dev (beginner friendly):** [Ren'Py](https://luma.com/b97crb9f) Oct 29, 5 PM · [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
-- [Budgeting](https://luma.com/vefn0sbo) Oct 27, 6 PM · [Sponsor Outreach Call](https://luma.com/2ti1prjv) Oct 28, 3 PM · [Teacher Outreach Lock-In](https://luma.com/phjxvifp) Oct 27, 8 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
+- [Sponsor Outreach Call](https://luma.com/2ti1prjv) Oct 28, 3 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
+- **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
 
