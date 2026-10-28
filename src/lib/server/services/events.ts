@@ -25,6 +25,26 @@ const FIELDS = {
   pocSlackIds: "fld65q0Ht28BtCNko",
 } as const;
 
+/**
+ * Field ids in the "Venues" table. A venue links back to its event, and only
+ * one a Haven staffer has approved is shown — the rest are proposals an
+ * organizer is still working through.
+ */
+const VENUE_FIELDS = {
+  name: "fld4nzqJYaqIQ3ep2",
+  event: "fldBkfN0Z52kXzEvN",
+  status: "fldru928uWydwCKu8",
+  addressLine1: "fldO3zZ57q0fk9JDr",
+  addressLine2: "fld5OxCfWXzowDMiL",
+  city: "fldkmqXMaI09CzFD4",
+  state: "fldXRE3cYL98rwUnM",
+  country: "fldVuWG8AmYXq5LnX",
+  postalCode: "fldzt3ssJar1ltCQe",
+  isPrivate: "fld6Q7pBdyxNqOM5t",
+} as const;
+
+const APPROVED_VENUE_STATUS = "Approved";
+
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
 
 /**
@@ -46,6 +66,15 @@ export interface HavenEvent {
   longitude: number;
   /** The city page's copy, as the JSON string Airtable stores it in. */
   websiteData: string | null;
+  venue: EventVenue | null;
+}
+
+export interface EventVenue {
+  name: string;
+  /** "City, Region, Country". */
+  area: string | null;
+  /** The full street address on one line. */
+  address: string | null;
 }
 
 /**
@@ -97,6 +126,79 @@ function pocSlackIds(value: unknown): string[] {
     .filter((id) => SLACK_USER_ID_RE.test(id));
 }
 
+/** Trimmed text from a free-text field, or null when there is none. */
+function text(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+type VenueColumns = {
+  venueName: string | null;
+  venueArea: string | null;
+  venueAddress: string | null;
+};
+
+/**
+ * Each event's approved venue, keyed by event record id. Returns null when
+ * `AIRTABLE_VENUES_TABLE_ID` is not set, so the sync leaves the venue columns
+ * alone rather than clearing them.
+ *
+ * An event can have more than one approved venue (it moved, or someone
+ * approved a backup), so the most recently submitted one wins.
+ */
+async function fetchVenues(): Promise<Map<string, VenueColumns> | null> {
+  const tableId = env.AIRTABLE_VENUES_TABLE_ID;
+  if (!tableId) return null;
+
+  const records = await listRecords(tableId, Object.values(VENUE_FIELDS));
+
+  const byEvent = new Map<string, VenueColumns>();
+  const approved = records
+    // A private venue — someone's office or home, say — is not published at
+    // all, not even its name; the page's city is enough to go on.
+    .filter(
+      ({ fields }) =>
+        selectName(fields[VENUE_FIELDS.status]) === APPROVED_VENUE_STATUS &&
+        !fields[VENUE_FIELDS.isPrivate],
+    )
+    .sort((a, b) => b.createdTime.localeCompare(a.createdTime));
+
+  for (const { fields } of approved) {
+    const name = text(fields[VENUE_FIELDS.name]);
+    if (!name) continue;
+
+    const area = [VENUE_FIELDS.city, VENUE_FIELDS.state, VENUE_FIELDS.country]
+      .map((id) => text(fields[id]))
+      .filter(Boolean)
+      .join(", ");
+    const address = [
+      VENUE_FIELDS.addressLine1,
+      VENUE_FIELDS.addressLine2,
+      VENUE_FIELDS.city,
+      VENUE_FIELDS.state,
+      VENUE_FIELDS.postalCode,
+      VENUE_FIELDS.country,
+    ]
+      .map((id) => text(fields[id]))
+      .filter(Boolean)
+      .join(", ");
+
+    const venue = {
+      venueName: name,
+      venueArea: area || null,
+      venueAddress: address || null,
+    };
+
+    const events = fields[VENUE_FIELDS.event];
+    if (!Array.isArray(events)) continue;
+    for (const eventId of events) {
+      if (typeof eventId === "string" && !byEvent.has(eventId))
+        byEvent.set(eventId, venue);
+    }
+  }
+
+  return byEvent;
+}
+
 /**
  * Pull the Events table and replace our mirror of it. Reads through
  * `AIRTABLE_EVENTS_VIEW_ID` when that is set, and the whole table when it is
@@ -116,6 +218,7 @@ export async function syncEvents(): Promise<number> {
   const records = await listRecords(tableId, Object.values(FIELDS), {
     viewId: env.AIRTABLE_EVENTS_VIEW_ID,
   });
+  const venues = await fetchVenues();
 
   const active = records
     .filter((record) => {
@@ -163,6 +266,12 @@ export async function syncEvents(): Promise<number> {
         ? (record.fields[FIELDS.participantCount] as number)
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
+    ...(venues && {
+      venueName: null,
+      venueArea: null,
+      venueAddress: null,
+      ...venues.get(record.id),
+    }),
     syncedAt: new Date(),
   }));
 
@@ -195,6 +304,11 @@ export async function syncEvents(): Promise<number> {
           websiteData: sql`excluded."websiteData"`,
           participantCount: sql`excluded."participantCount"`,
           pocSlackIds: sql`excluded."pocSlackIds"`,
+          ...(venues && {
+            venueName: sql`excluded."venueName"`,
+            venueArea: sql`excluded."venueArea"`,
+            venueAddress: sql`excluded."venueAddress"`,
+          }),
           syncedAt: sql`excluded."syncedAt"`,
         },
       });
@@ -203,11 +317,25 @@ export async function syncEvents(): Promise<number> {
   return rows.length;
 }
 
+function toEvent({
+  venueName,
+  venueArea,
+  venueAddress,
+  ...event
+}: Omit<HavenEvent, "venue"> & VenueColumns): HavenEvent {
+  return {
+    ...event,
+    venue: venueName
+      ? { name: venueName, area: venueArea, address: venueAddress }
+      : null,
+  };
+}
+
 /** Every synced event, alphabetically by name. */
 export async function getEvents(): Promise<HavenEvent[]> {
   if (!hasDatabase) return [];
 
-  return db
+  const rows = await db
     .select({
       id: eventsTable.airtableId,
       slug: eventsTable.slug,
@@ -215,9 +343,14 @@ export async function getEvents(): Promise<HavenEvent[]> {
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
+      venueName: eventsTable.venueName,
+      venueArea: eventsTable.venueArea,
+      venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)
     .orderBy(asc(eventsTable.name));
+
+  return rows.map(toEvent);
 }
 
 export async function getHavenCities(): Promise<City[]> {
@@ -263,12 +396,15 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
+      venueName: eventsTable.venueName,
+      venueArea: eventsTable.venueArea,
+      venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)
     .where(eq(eventsTable.slug, slug))
     .limit(1);
 
-  return row ?? null;
+  return row ? toEvent(row) : null;
 }
 
 /**

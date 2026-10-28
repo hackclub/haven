@@ -97,6 +97,15 @@ export const eventsTable = pgTable(
      * broken version is reported once rather than on every sync.
      */
     websiteDataWarnedHash: text(),
+    /**
+     * The event's approved, public venue from the Venues table; null until
+     * there is one.
+     */
+    venueName: text(),
+    /** "City, Region, Country". */
+    venueArea: text(),
+    /** The full street address on one line. */
+    venueAddress: text(),
   },
   (table) => [
     uniqueIndex().on(table.slug),

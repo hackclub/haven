@@ -18,6 +18,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
   return {
     site: resolveSiteData(parseSiteData(event), event),
     eventId: event.id,
+    venue: event.venue,
     ref,
   };
 };
