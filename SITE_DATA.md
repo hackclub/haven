@@ -452,7 +452,7 @@ box, the "what is a game jam?" section and the FAQ.
 Each entry is its own line. The first one is kept on a single line even on a
 narrow phone, so keep it short - dates go in the later lines. Leave the venue
 out: once your venue is approved in Airtable, the page shows it on its own line
-just below, linked to a map.
+just below, linked to a map. A venue marked private is never shown.
 
 The big word above it is your event's name from your Airtable row, which is not
 set from here. If it is wrong, fix the row (or ask us to) and the page follows.

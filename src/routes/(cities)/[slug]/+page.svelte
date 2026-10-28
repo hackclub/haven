@@ -63,7 +63,7 @@
       mapLabel={site.hero.mapLabel}
       scrollLabel={site.hero.scrollLabel}
       signup={site.hero.signup}
-      venue={data.venue}
+      venue={site.hero.venue}
       venueTbd={site.hero.venueTbd}
       {images}
     />

@@ -4,7 +4,7 @@
   import { cssUrl, type SiteImages } from "$lib/data/images";
   import HavenMap from "$lib/components/Map.svelte";
   import type { City } from "$lib/map";
-  import type { EventVenue } from "$lib/server/services/events";
+  import type { EventVenue } from "$lib/data/types";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
 
