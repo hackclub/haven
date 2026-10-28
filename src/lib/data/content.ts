@@ -39,6 +39,7 @@ export const organizeCtaPoc = {
 export const heroCopy = {
   mapLabel: "find an event near you",
   scrollLabel: "more info",
+  venueTbd: "Venue TBD",
 } as const;
 
 export const signupCopy = {

@@ -1,4 +1,3 @@
-import type { HavenEvent } from "$lib/server/services/events";
 import {
   about,
   event,
@@ -28,7 +27,7 @@ import {
   supportersHeading,
 } from "./content";
 import { imageDefaults, type SiteImages } from "./images";
-import type { SiteData, SiteDataInput } from "./types";
+import type { HavenEvent, SiteData, SiteDataInput } from "./types";
 
 /**
  * Everything the page renders when nothing has been written for it — what the
@@ -45,6 +44,7 @@ export const defaultSiteData: SiteData = {
     organizeCta: organizeCta.label,
     mapLabel: heroCopy.mapLabel,
     scrollLabel: heroCopy.scrollLabel,
+    venueTbd: heroCopy.venueTbd,
     signup: { ...signupCopy },
   },
   about: { title: about.title, body: about.body, perks },
@@ -109,6 +109,8 @@ export function resolveSiteData(
       organizeCta: data.hero?.organizeCta ?? base.hero.organizeCta,
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
+      venue: event.venue,
+      venueTbd: data.hero?.venueTbd ?? base.hero.venueTbd,
       signup: {
         placeholder:
           data.hero?.signup?.placeholder ?? base.hero.signup.placeholder,

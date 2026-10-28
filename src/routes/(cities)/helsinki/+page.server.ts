@@ -2,8 +2,13 @@ import z from "zod";
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { resolveSiteData } from "$lib/data/site";
-import { getEventBySlug, parseSiteData, type HavenEvent } from "$lib/server/services/events";
-import { siteDataInputSchema, siteDataJsonSchema, type SiteData } from "$lib/data/types";
+import { getEventBySlug, parseSiteData } from "$lib/server/services/events";
+import {
+  siteDataInputSchema,
+  siteDataJsonSchema,
+  type HavenEvent,
+  type SiteData,
+} from "$lib/data/types";
 
 /**
  * Helsinki's page, like a city page under `[slug]`, but its copy can also carry

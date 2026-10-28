@@ -6,7 +6,11 @@ import { eventsTable } from "../db/schema";
 import { env } from "$env/dynamic/private";
 import { listRecords } from "./airtable";
 import { warnInvalidSiteData } from "$lib/slack";
-import { siteDataJsonSchema, type SiteDataInput } from "$lib/data/types";
+import {
+  siteDataJsonSchema,
+  type HavenEvent,
+  type SiteDataInput,
+} from "$lib/data/types";
 import type { City } from "$lib/map";
 
 /**
@@ -23,6 +27,10 @@ const FIELDS = {
   websiteData: "fldML1eUwOBMwWyoy",
   participantCount: "fldmQ636z6otYRTtz",
   pocSlackIds: "fld65q0Ht28BtCNko",
+  // Venue lookups, filtered in Airtable to the latest approved venue.
+  venueName: "fld0ywmQd0TUG2Pp4", // `_Venue Name`
+  venueAddress: "fldq1OuikFjgW7bqY", // `Venue Address`
+  venueIsPrivate: "fldcs5RSE00sZ9p4F", // `_Venue Is Private`
 } as const;
 
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
@@ -37,16 +45,6 @@ const ACTIVE_STATUS = "Active";
 /** Every two minutes, which is well inside the 1 RPS budget: a full sync is
  * three requests for ~250 events, so the API is idle ~99% of the time. */
 const SCHEDULE = "*/2 * * * *";
-
-export interface HavenEvent {
-  id: string;
-  slug: string;
-  name: string;
-  latitude: number;
-  longitude: number;
-  /** The city page's copy, as the JSON string Airtable stores it in. */
-  websiteData: string | null;
-}
 
 /**
  * The stored copy for an event's page. Airtable is the editor, so the field is
@@ -95,6 +93,33 @@ function pocSlackIds(value: unknown): string[] {
     .filter((id): id is string => typeof id === "string")
     .map((id) => id.trim())
     .filter((id) => SLACK_USER_ID_RE.test(id));
+}
+
+function text(value: unknown): string | null {
+  return typeof value === "string" && value.trim() ? value.trim() : null;
+}
+
+function lookup(value: unknown): unknown[] {
+  return Array.isArray(value) ? value : [];
+}
+
+/** A private venue is never published; the page leaves the venue line out. */
+function isPrivateVenue(fields: Record<string, unknown>): boolean {
+  return lookup(fields[FIELDS.venueIsPrivate]).some((value) => value === true);
+}
+
+/** Multi-line address on one line, without blank or repeated parts. */
+function oneLineAddress(value: unknown): string | null {
+  const seen = new Set<string>();
+  const parts = (text(value) ?? "")
+    .split(/\s*[\n,]\s*/)
+    .map(text)
+    .filter((part): part is string => {
+      if (!part || seen.has(part.toLowerCase())) return false;
+      seen.add(part.toLowerCase());
+      return true;
+    });
+  return parts.length ? parts.join(", ") : null;
 }
 
 /**
@@ -163,6 +188,15 @@ export async function syncEvents(): Promise<number> {
         ? (record.fields[FIELDS.participantCount] as number)
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
+    ...(isPrivateVenue(record.fields)
+      ? { venueName: null, venueAddress: null, venueIsPrivate: true }
+      : {
+          venueName: text(lookup(record.fields[FIELDS.venueName])[0]),
+          venueAddress: oneLineAddress(
+            lookup(record.fields[FIELDS.venueAddress])[0],
+          ),
+          venueIsPrivate: false,
+        }),
     syncedAt: new Date(),
   }));
 
@@ -195,6 +229,9 @@ export async function syncEvents(): Promise<number> {
           websiteData: sql`excluded."websiteData"`,
           participantCount: sql`excluded."participantCount"`,
           pocSlackIds: sql`excluded."pocSlackIds"`,
+          venueName: sql`excluded."venueName"`,
+          venueAddress: sql`excluded."venueAddress"`,
+          venueIsPrivate: sql`excluded."venueIsPrivate"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });
@@ -203,8 +240,9 @@ export async function syncEvents(): Promise<number> {
   return rows.length;
 }
 
-/** Every synced event, alphabetically by name. */
-export async function getEvents(): Promise<HavenEvent[]> {
+/** Every synced event, alphabetically by name. No venue: only the city page
+ * shows one, and it reads it through `getEventBySlug`. */
+export async function getEvents(): Promise<Omit<HavenEvent, "venue">[]> {
   if (!hasDatabase) return [];
 
   return db
@@ -263,12 +301,25 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       latitude: eventsTable.latitude,
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
+      venueName: eventsTable.venueName,
+      venueAddress: eventsTable.venueAddress,
+      venueIsPrivate: eventsTable.venueIsPrivate,
     })
     .from(eventsTable)
     .where(eq(eventsTable.slug, slug))
     .limit(1);
 
-  return row ?? null;
+  if (!row) return null;
+
+  const { venueName, venueAddress, venueIsPrivate, ...event } = row;
+  return {
+    ...event,
+    venue: venueIsPrivate
+      ? undefined
+      : venueName
+        ? { name: venueName, address: venueAddress }
+        : null,
+  };
 }
 
 /**
