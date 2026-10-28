@@ -23,26 +23,15 @@ const FIELDS = {
   websiteData: "fldML1eUwOBMwWyoy",
   participantCount: "fldmQ636z6otYRTtz",
   pocSlackIds: "fld65q0Ht28BtCNko",
+  // Lookups through the Venue link. Name and status cover every linked venue,
+  // in link order; the address is already filtered to approved ones.
+  venueName: "fld0ywmQd0TUG2Pp4", // `_Venue Name`
+  venueStatus: "fldgkyy4OeirmVOGt", // `_Venue Status`
+  venueAddress: "fldq1OuikFjgW7bqY", // `Venue Address`
 } as const;
 
-/**
- * Field ids in the "Venues" table. A venue links back to its event, and only
- * one a Haven staffer has approved is shown — the rest are proposals an
- * organizer is still working through.
- */
-const VENUE_FIELDS = {
-  name: "fld4nzqJYaqIQ3ep2",
-  event: "fldBkfN0Z52kXzEvN",
-  status: "fldru928uWydwCKu8",
-  addressLine1: "fldO3zZ57q0fk9JDr",
-  addressLine2: "fld5OxCfWXzowDMiL",
-  city: "fldkmqXMaI09CzFD4",
-  state: "fldXRE3cYL98rwUnM",
-  country: "fldVuWG8AmYXq5LnX",
-  postalCode: "fldzt3ssJar1ltCQe",
-  isPrivate: "fld6Q7pBdyxNqOM5t",
-} as const;
-
+/** Only a venue a Haven staffer has approved is shown; the rest are
+ * proposals an organizer is still working through. */
 const APPROVED_VENUE_STATUS = "Approved";
 
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
@@ -129,82 +118,45 @@ function text(value: unknown): string | null {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
+/** A lookup's values, which the REST API returns as an array. */
+function lookup(value: unknown): unknown[] {
+  return Array.isArray(value) ? value : [];
+}
+
 /**
- * Address parts on one line, skipping blanks and repeats — city-states like
- * Budapest are routinely typed into both the city and the region field.
+ * The name of the event's first approved venue. `_Venue Name` and
+ * `_Venue Status` look up the same link, so the same index is the same venue.
  */
-function joinParts(parts: unknown[]): string {
+function approvedVenueName(fields: Record<string, unknown>): string | null {
+  const statuses = lookup(fields[FIELDS.venueStatus]);
+  const index = statuses.findIndex(
+    (status) => selectName(status) === APPROVED_VENUE_STATUS,
+  );
+  return index === -1 ? null : text(lookup(fields[FIELDS.venueName])[index]);
+}
+
+/**
+ * An address on one line, skipping blanks and repeats. The lookup is of the
+ * venue's multi-line `_Full Address`, and city-states like Budapest are
+ * routinely typed into both its city and its region.
+ */
+function oneLineAddress(value: unknown): string | null {
   const seen = new Set<string>();
-  return parts
+  const parts = (text(value) ?? "")
+    .split(/\s*[\n,]\s*/)
     .map(text)
     .filter((part): part is string => {
       if (!part || seen.has(part.toLowerCase())) return false;
       seen.add(part.toLowerCase());
       return true;
-    })
-    .join(", ");
+    });
+  return parts.length ? parts.join(", ") : null;
 }
 
 type VenueColumns = {
   venueName: string | null;
   venueAddress: string | null;
 };
-
-/**
- * Each event's approved venue, keyed by event record id. Returns null when
- * `AIRTABLE_VENUES_TABLE_ID` is not set, so the sync leaves the venue columns
- * alone rather than clearing them.
- *
- * An event can have more than one approved venue (it moved, or someone
- * approved a backup), so the most recently submitted one wins.
- */
-async function fetchVenues(): Promise<Map<string, VenueColumns> | null> {
-  const tableId = env.AIRTABLE_VENUES_TABLE_ID;
-  if (!tableId) return null;
-
-  const records = await listRecords(tableId, Object.values(VENUE_FIELDS));
-
-  const byEvent = new Map<string, VenueColumns>();
-  const approved = records
-    // A private venue — someone's office or home, say — is not published at
-    // all, not even its name; the page's city is enough to go on.
-    .filter(
-      ({ fields }) =>
-        selectName(fields[VENUE_FIELDS.status]) === APPROVED_VENUE_STATUS &&
-        !fields[VENUE_FIELDS.isPrivate],
-    )
-    .sort((a, b) => b.createdTime.localeCompare(a.createdTime));
-
-  for (const { fields } of approved) {
-    const name = text(fields[VENUE_FIELDS.name]);
-    if (!name) continue;
-
-    const address = joinParts(
-      [
-        VENUE_FIELDS.addressLine1,
-        VENUE_FIELDS.addressLine2,
-        VENUE_FIELDS.city,
-        VENUE_FIELDS.state,
-        VENUE_FIELDS.postalCode,
-        VENUE_FIELDS.country,
-      ].map((id) => fields[id]),
-    );
-
-    const venue = {
-      venueName: name,
-      venueAddress: address || null,
-    };
-
-    const events = fields[VENUE_FIELDS.event];
-    if (!Array.isArray(events)) continue;
-    for (const eventId of events) {
-      if (typeof eventId === "string" && !byEvent.has(eventId))
-        byEvent.set(eventId, venue);
-    }
-  }
-
-  return byEvent;
-}
 
 /**
  * Pull the Events table and replace our mirror of it. Reads through
@@ -225,7 +177,6 @@ export async function syncEvents(): Promise<number> {
   const records = await listRecords(tableId, Object.values(FIELDS), {
     viewId: env.AIRTABLE_EVENTS_VIEW_ID,
   });
-  const venues = await fetchVenues();
 
   const active = records
     .filter((record) => {
@@ -273,11 +224,10 @@ export async function syncEvents(): Promise<number> {
         ? (record.fields[FIELDS.participantCount] as number)
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
-    ...(venues && {
-      venueName: null,
-      venueAddress: null,
-      ...venues.get(record.id),
-    }),
+    venueName: approvedVenueName(record.fields),
+    // Filtered to approved venues in Airtable, so its first value belongs to
+    // the same venue as the name above.
+    venueAddress: oneLineAddress(lookup(record.fields[FIELDS.venueAddress])[0]),
     syncedAt: new Date(),
   }));
 
@@ -310,10 +260,8 @@ export async function syncEvents(): Promise<number> {
           websiteData: sql`excluded."websiteData"`,
           participantCount: sql`excluded."participantCount"`,
           pocSlackIds: sql`excluded."pocSlackIds"`,
-          ...(venues && {
-            venueName: sql`excluded."venueName"`,
-            venueAddress: sql`excluded."venueAddress"`,
-          }),
+          venueName: sql`excluded."venueName"`,
+          venueAddress: sql`excluded."venueAddress"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });

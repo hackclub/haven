@@ -98,8 +98,8 @@ export const eventsTable = pgTable(
      */
     websiteDataWarnedHash: text(),
     /**
-     * The event's approved, public venue from the Venues table; null until
-     * there is one.
+     * The event's approved venue, from its lookups on the Events table;
+     * null until there is one.
      */
     venueName: text(),
     /** The full street address on one line. */
