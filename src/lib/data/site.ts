@@ -2,6 +2,7 @@ import type { HavenEvent } from "$lib/server/services/events";
 import {
   about,
   event,
+  faqContact,
   faqCta,
   faqHeading,
   faqs,
@@ -61,7 +62,7 @@ export const defaultSiteData: SiteData = {
     safety: pastEventsSafety,
   },
   sponsors: { heading: supportersHeading, items: supporters },
-  faq: { heading: faqHeading, cta: faqCta, items: faqs },
+  faq: { heading: faqHeading, cta: faqCta, contact: faqContact, items: faqs },
   footer: {
     body: footerBody,
     links: Object.fromEntries(
@@ -152,6 +153,7 @@ export function resolveSiteData(
     faq: {
       heading: data.faq?.heading ?? base.faq.heading,
       cta: data.faq?.cta ?? base.faq.cta,
+      contact: data.faq?.contact ?? base.faq.contact,
       items: data.faq?.items ?? base.faq.items,
     },
     footer: {

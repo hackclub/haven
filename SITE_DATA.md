@@ -279,6 +279,7 @@ in. Copy it, delete what you are not editing, and change the rest.
   "faq": {
     "heading": "FAQ",
     "cta": "Sign up!",
+    "contact": "Contact us",
     "items": [
       {
         "q": "Am I eligible?",
@@ -550,7 +551,8 @@ on the illustration.
 ### `faq` - the questions
 
 `heading` is the word above them and `cta` is the button underneath that jumps
-back to the signup box.
+back to the signup box. `contact` is the button beside it that emails
+city@haven.hackclub.com.
 
 Each question is `{ "q": ..., "a": [...] }`, and the answer is a list of pieces
 so you can put links in the middle of a sentence:

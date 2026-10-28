@@ -193,7 +193,7 @@ export interface SiteData {
   };
   pastEvents: { heading: string[]; items: PastEvent[]; safety: Linked };
   sponsors: { heading: string; items: Sponsor[] };
-  faq: { heading: string; cta: string; items: FaqItem[] };
+  faq: { heading: string; cta: string; contact: string; items: FaqItem[] };
   /** The "who is Hack Club" paragraphs, and the labels (not the targets) of
    * the Hack Club links beside them. */
   footer: { body: Linked[]; links: Record<FooterLinkKey, string> };
@@ -213,6 +213,7 @@ const faqSectionSchema = z
     z.object({
       heading: z.string().optional(),
       cta: z.string().optional(),
+      contact: z.string().optional(),
       items: faqItemSchema.array().optional(),
     }),
   ])

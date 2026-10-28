@@ -360,6 +360,10 @@ export const faqHeading = "FAQ";
 /** The button under the FAQ column, which scrolls back up to the signup box. */
 export const faqCta = "Sign up!";
 
+/** The button beside it on city pages, which emails the city organizers. */
+export const faqContact = "Contact us";
+export const CITY_EMAIL = "mailto:city@haven.hackclub.com";
+
 export const faqs: { q: string; a: Linked }[] = [
   {
     q: "Am I eligible?",

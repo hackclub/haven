@@ -117,6 +117,7 @@
     heading={site.faq.heading}
     items={site.faq.items}
     cta={site.faq.cta}
+    contact={site.faq.contact}
     {images}
   />
 </main>
