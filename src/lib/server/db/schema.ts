@@ -102,8 +102,6 @@ export const eventsTable = pgTable(
      * there is one.
      */
     venueName: text(),
-    /** "City, Region, Country". */
-    venueArea: text(),
     /** The full street address on one line. */
     venueAddress: text(),
   },

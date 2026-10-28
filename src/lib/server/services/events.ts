@@ -71,8 +71,6 @@ export interface HavenEvent {
 
 export interface EventVenue {
   name: string;
-  /** "City, Region, Country". */
-  area: string | null;
   /** The full street address on one line. */
   address: string | null;
 }
@@ -131,9 +129,24 @@ function text(value: unknown): string | null {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
+/**
+ * Address parts on one line, skipping blanks and repeats — city-states like
+ * Budapest are routinely typed into both the city and the region field.
+ */
+function joinParts(parts: unknown[]): string {
+  const seen = new Set<string>();
+  return parts
+    .map(text)
+    .filter((part): part is string => {
+      if (!part || seen.has(part.toLowerCase())) return false;
+      seen.add(part.toLowerCase());
+      return true;
+    })
+    .join(", ");
+}
+
 type VenueColumns = {
   venueName: string | null;
-  venueArea: string | null;
   venueAddress: string | null;
 };
 
@@ -166,25 +179,19 @@ async function fetchVenues(): Promise<Map<string, VenueColumns> | null> {
     const name = text(fields[VENUE_FIELDS.name]);
     if (!name) continue;
 
-    const area = [VENUE_FIELDS.city, VENUE_FIELDS.state, VENUE_FIELDS.country]
-      .map((id) => text(fields[id]))
-      .filter(Boolean)
-      .join(", ");
-    const address = [
-      VENUE_FIELDS.addressLine1,
-      VENUE_FIELDS.addressLine2,
-      VENUE_FIELDS.city,
-      VENUE_FIELDS.state,
-      VENUE_FIELDS.postalCode,
-      VENUE_FIELDS.country,
-    ]
-      .map((id) => text(fields[id]))
-      .filter(Boolean)
-      .join(", ");
+    const address = joinParts(
+      [
+        VENUE_FIELDS.addressLine1,
+        VENUE_FIELDS.addressLine2,
+        VENUE_FIELDS.city,
+        VENUE_FIELDS.state,
+        VENUE_FIELDS.postalCode,
+        VENUE_FIELDS.country,
+      ].map((id) => fields[id]),
+    );
 
     const venue = {
       venueName: name,
-      venueArea: area || null,
       venueAddress: address || null,
     };
 
@@ -268,7 +275,6 @@ export async function syncEvents(): Promise<number> {
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
     ...(venues && {
       venueName: null,
-      venueArea: null,
       venueAddress: null,
       ...venues.get(record.id),
     }),
@@ -306,7 +312,6 @@ export async function syncEvents(): Promise<number> {
           pocSlackIds: sql`excluded."pocSlackIds"`,
           ...(venues && {
             venueName: sql`excluded."venueName"`,
-            venueArea: sql`excluded."venueArea"`,
             venueAddress: sql`excluded."venueAddress"`,
           }),
           syncedAt: sql`excluded."syncedAt"`,
@@ -319,14 +324,13 @@ export async function syncEvents(): Promise<number> {
 
 function toEvent({
   venueName,
-  venueArea,
   venueAddress,
   ...event
 }: Omit<HavenEvent, "venue"> & VenueColumns): HavenEvent {
   return {
     ...event,
     venue: venueName
-      ? { name: venueName, area: venueArea, address: venueAddress }
+      ? { name: venueName, address: venueAddress }
       : null,
   };
 }
@@ -344,7 +348,6 @@ export async function getEvents(): Promise<HavenEvent[]> {
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
       venueName: eventsTable.venueName,
-      venueArea: eventsTable.venueArea,
       venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)
@@ -397,7 +400,6 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       longitude: eventsTable.longitude,
       websiteData: eventsTable.websiteData,
       venueName: eventsTable.venueName,
-      venueArea: eventsTable.venueArea,
       venueAddress: eventsTable.venueAddress,
     })
     .from(eventsTable)

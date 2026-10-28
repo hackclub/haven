@@ -45,6 +45,7 @@ export const defaultSiteData: SiteData = {
     organizeCta: organizeCta.label,
     mapLabel: heroCopy.mapLabel,
     scrollLabel: heroCopy.scrollLabel,
+    venueTbd: heroCopy.venueTbd,
     signup: { ...signupCopy },
   },
   about: { title: about.title, body: about.body, perks },
@@ -109,6 +110,7 @@ export function resolveSiteData(
       organizeCta: data.hero?.organizeCta ?? base.hero.organizeCta,
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
+      venueTbd: data.hero?.venueTbd ?? base.hero.venueTbd,
       signup: {
         placeholder:
           data.hero?.signup?.placeholder ?? base.hero.signup.placeholder,

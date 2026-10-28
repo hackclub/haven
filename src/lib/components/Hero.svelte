@@ -26,8 +26,13 @@
     /** Caption on the arrow down to the rest of the page. */
     scrollLabel?: string;
     signup?: { placeholder: string; button: string };
-    /** Where a city's event is held, once its venue is approved. */
+    /**
+     * Where a city's event is held. Undefined on pages with no venue line at
+     * all (the home page); null for an event still waiting on one.
+     */
     venue?: EventVenue | null;
+    /** Shown in place of the venue until it is approved. */
+    venueTbd?: string;
     images?: SiteImages;
   }
 
@@ -44,7 +49,8 @@
     mapLabel = defaultSiteData.hero.mapLabel,
     scrollLabel = defaultSiteData.hero.scrollLabel,
     signup = defaultSiteData.hero.signup,
-    venue = null,
+    venue,
+    venueTbd = defaultSiteData.hero.venueTbd,
     images = defaultSiteData.images,
   }: Props = $props();
 
@@ -155,7 +161,7 @@
           {/each}
         </p>
 
-        {#if venue}
+        {#if venue !== undefined}
           <svelte:element
             this={venueMapUrl ? "a" : "p"}
             href={venueMapUrl}
@@ -175,9 +181,7 @@
                 d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"
               />
             </svg>
-            <span>
-              {venue.name}{#if venue.area}<span class="text-white/80">, {venue.area}</span>{/if}
-            </span>
+            <span>{venue?.name ?? venueTbd}</span>
           </svelte:element>
         {/if}
 

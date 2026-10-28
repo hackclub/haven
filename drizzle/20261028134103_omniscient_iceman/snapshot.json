@@ -1,7 +1,7 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "597fbebf-55ea-4d58-a8a5-f9b5ed1b8568",
+  "id": "a38d11d8-bbcf-40f1-8ced-1cd222cb1ebe",
   "prevIds": [
     "98c5cc9f-20a8-49f2-a8a4-eb0923caa4ff"
   ],
@@ -181,19 +181,6 @@
       "generated": null,
       "identity": null,
       "name": "venueName",
-      "entityType": "columns",
-      "schema": "public",
-      "table": "events"
-    },
-    {
-      "type": "text",
-      "typeSchema": null,
-      "notNull": false,
-      "dimensions": 0,
-      "default": null,
-      "generated": null,
-      "identity": null,
-      "name": "venueArea",
       "entityType": "columns",
       "schema": "public",
       "table": "events"
