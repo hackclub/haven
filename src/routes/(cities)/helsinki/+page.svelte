@@ -85,6 +85,7 @@
       referral={data.referral}
       cities={data.cities}
       organizeCta={site.hero.organizeCta}
+      contact={site.hero.contact}
       mapLabel={site.hero.mapLabel}
       scrollLabel={site.hero.scrollLabel}
       signup={site.hero.signup}

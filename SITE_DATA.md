@@ -86,6 +86,7 @@ in. Copy it, delete what you are not editing, and change the rest.
   "tagline": ["Game jam for teens 13-18", "Nov 14–15 · Burlington, VT"],
   "hero": {
     "organizeCta": "Want to organize your own Hack Club Haven?",
+    "contact": "Contact Haven Yerevan!",
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
     "signup": { "placeholder": "you@hackclub.com", "button": "sign up!" }
@@ -279,7 +280,6 @@ in. Copy it, delete what you are not editing, and change the rest.
   "faq": {
     "heading": "FAQ",
     "cta": "Sign up!",
-    "contact": "Contact us",
     "items": [
       {
         "q": "Am I eligible?",
@@ -461,6 +461,7 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 | Field                | What it is                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------- |
 | `organizeCta`        | The small underlined link below the signup box, for people who want to run their own event. |
+| `contact`            | The button below that, which emails city@haven.hackclub.com. Defaults to "Contact Haven " plus the city's name. |
 | `mapLabel`           | The handwritten label pointing at the map.                                                  |
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `signup.placeholder` | The grey example text inside the email box.                                                 |
@@ -551,8 +552,7 @@ on the illustration.
 ### `faq` - the questions
 
 `heading` is the word above them and `cta` is the button underneath that jumps
-back to the signup box. `contact` is the button beside it that emails
-city@haven.hackclub.com.
+back to the signup box.
 
 Each question is `{ "q": ..., "a": [...] }`, and the answer is a list of pieces
 so you can put links in the middle of a sentence:

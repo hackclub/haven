@@ -60,6 +60,7 @@
       referral={data.referral}
       cities={data.cities}
       organizeCta={site.hero.organizeCta}
+      contact={site.hero.contact}
       mapLabel={site.hero.mapLabel}
       scrollLabel={site.hero.scrollLabel}
       signup={site.hero.signup}
@@ -117,7 +118,6 @@
     heading={site.faq.heading}
     items={site.faq.items}
     cta={site.faq.cta}
-    contact={site.faq.contact}
     {images}
   />
 </main>

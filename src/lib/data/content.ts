@@ -35,6 +35,12 @@ export const organizeCtaPoc = {
   label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
+/** Where the hero's contact button on a city page sends its email. */
+export const CITY_EMAIL = "mailto:city@haven.hackclub.com";
+
+/** That button's label on a city page that has not written its own. */
+export const cityContactLabel = (name: string) => `Contact Haven ${name}!`;
+
 /** Copy for the hero that is not the title or the tagline. */
 export const heroCopy = {
   mapLabel: "find an event near you",
@@ -360,9 +366,6 @@ export const faqHeading = "FAQ";
 /** The button under the FAQ column, which scrolls back up to the signup box. */
 export const faqCta = "Sign up!";
 
-/** The button beside it on city pages, which emails the city organizers. */
-export const faqContact = "Contact us";
-export const CITY_EMAIL = "mailto:city@haven.hackclub.com";
 
 export const faqs: { q: string; a: Linked }[] = [
   {

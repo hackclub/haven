@@ -1,8 +1,8 @@
 import type { HavenEvent } from "$lib/server/services/events";
 import {
   about,
+  cityContactLabel,
   event,
-  faqContact,
   faqCta,
   faqHeading,
   faqs,
@@ -62,7 +62,7 @@ export const defaultSiteData: SiteData = {
     safety: pastEventsSafety,
   },
   sponsors: { heading: supportersHeading, items: supporters },
-  faq: { heading: faqHeading, cta: faqCta, contact: faqContact, items: faqs },
+  faq: { heading: faqHeading, cta: faqCta, items: faqs },
   footer: {
     body: footerBody,
     links: Object.fromEntries(
@@ -110,6 +110,7 @@ export function resolveSiteData(
       organizeCta: data.hero?.organizeCta ?? base.hero.organizeCta,
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
+      contact: data.hero?.contact ?? cityContactLabel(event.name),
       signup: {
         placeholder:
           data.hero?.signup?.placeholder ?? base.hero.signup.placeholder,
@@ -153,7 +154,6 @@ export function resolveSiteData(
     faq: {
       heading: data.faq?.heading ?? base.faq.heading,
       cta: data.faq?.cta ?? base.faq.cta,
-      contact: data.faq?.contact ?? base.faq.contact,
       items: data.faq?.items ?? base.faq.items,
     },
     footer: {

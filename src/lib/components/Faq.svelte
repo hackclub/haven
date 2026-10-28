@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { CITY_EMAIL } from "$lib/data/content";
   import { defaultSiteData } from "$lib/data/site";
   import type { SiteImages } from "$lib/data/images";
   import type { FaqItem } from "$lib/data/types";
@@ -9,8 +8,6 @@
     items?: FaqItem[];
     /** Label on the button that jumps back to the signup box. */
     cta?: string;
-    /** Label on the button that emails the city organizers; city pages only. */
-    contact?: string;
     images?: SiteImages;
   }
 
@@ -18,7 +15,6 @@
     heading = defaultSiteData.faq.heading,
     items = defaultSiteData.faq.items,
     cta = defaultSiteData.faq.cta,
-    contact,
     images = defaultSiteData.images,
   }: Props = $props();
 
@@ -181,27 +177,12 @@
         class="relative scale-x-[-1] pointer-events-none z-20 w-[18%] md:w-[10%] h-auto"
       />
 
-      <!-- The contact button hangs below the signup one, in its bottom margin,
-           so the row keeps the same height and offset with or without it. -->
-      <div
-        class="relative translate-y-[80%] z-20 mt-[clamp(2rem,4vw,8rem)] mb-[clamp(4rem,24vw,20rem)] w-[50%] md:mb-[clamp(4rem,14vw,6rem)] md:mt-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none"
+      <a
+        href="#top"
+        class="relative translate-y-[80%] z-20 py-[clamp(1rem,3vw,5rem)] mt-[clamp(2rem,4vw,8rem)] mb-[clamp(4rem,24vw,20rem)] block w-[50%] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:mb-[clamp(4rem,14vw,6rem)] md:mt-[clamp(1rem,5vw,4rem)] md:w-[25%] md:max-w-none md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
       >
-        <a
-          href="#top"
-          class="block w-full py-[clamp(1rem,3vw,5rem)] rounded-[1.875rem] bg-haven-green-deep shadow-[0_0_10px_var(--color-haven-green-deep)] px-6 text-center font-display text-[clamp(1.5rem,4vw,2.5rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:rounded-[2.1cqw] md:py-[1.5cqw] md:text-[clamp(1.5rem,3vw,2.5rem)]"
-        >
-          {cta}
-        </a>
-
-        {#if contact}
-          <a
-            href={CITY_EMAIL}
-            class="absolute left-0 top-full mt-[clamp(0.75rem,1.5vw,1.5rem)] block w-full py-[clamp(0.75rem,2vw,3rem)] rounded-[1.875rem] bg-haven-orange-bright shadow-[0_0_10px_var(--color-haven-orange-bright)] px-6 text-center font-display text-[clamp(1.25rem,3vw,2rem)] leading-none tracking-[-0.03em] text-white transition-transform hover:scale-[1.02] active:scale-100 md:rounded-[2.1cqw] md:py-[1.1cqw] md:text-[clamp(1.25rem,2.2vw,2rem)]"
-          >
-            {contact}
-          </a>
-        {/if}
-      </div>
+        {cta}
+      </a>
 
       <img
         src={images.faqArrow}

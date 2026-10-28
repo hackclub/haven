@@ -181,6 +181,8 @@ export interface SiteData {
     organizeCta: string;
     mapLabel: string;
     scrollLabel: string;
+    /** The button that emails the city organizers; city pages only. */
+    contact?: string;
     signup: { placeholder: string; button: string; lang?: string };
   };
   about: { title: string; body: string; perks: Perk[] };
@@ -193,7 +195,7 @@ export interface SiteData {
   };
   pastEvents: { heading: string[]; items: PastEvent[]; safety: Linked };
   sponsors: { heading: string; items: Sponsor[] };
-  faq: { heading: string; cta: string; contact: string; items: FaqItem[] };
+  faq: { heading: string; cta: string; items: FaqItem[] };
   /** The "who is Hack Club" paragraphs, and the labels (not the targets) of
    * the Hack Club links beside them. */
   footer: { body: Linked[]; links: Record<FooterLinkKey, string> };
@@ -213,7 +215,6 @@ const faqSectionSchema = z
     z.object({
       heading: z.string().optional(),
       cta: z.string().optional(),
-      contact: z.string().optional(),
       items: faqItemSchema.array().optional(),
     }),
   ])
@@ -240,6 +241,7 @@ export const siteDataInputSchema = z.object({
       organizeCta: z.string().optional(),
       mapLabel: z.string().optional(),
       scrollLabel: z.string().optional(),
+      contact: z.string().optional(),
       signup: z
         .object({
           placeholder: z.string().optional(),
