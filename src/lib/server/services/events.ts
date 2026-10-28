@@ -23,15 +23,12 @@ const FIELDS = {
   websiteData: "fldML1eUwOBMwWyoy",
   participantCount: "fldmQ636z6otYRTtz",
   pocSlackIds: "fld65q0Ht28BtCNko",
-  // Lookups through the Venue link. Name and status cover every linked venue,
-  // in link order; the address is already filtered to approved ones.
+  // Venue lookups; `Venue Address` is filtered to approved venues in Airtable.
   venueName: "fld0ywmQd0TUG2Pp4", // `_Venue Name`
   venueStatus: "fldgkyy4OeirmVOGt", // `_Venue Status`
   venueAddress: "fldq1OuikFjgW7bqY", // `Venue Address`
 } as const;
 
-/** Only a venue a Haven staffer has approved is shown; the rest are
- * proposals an organizer is still working through. */
 const APPROVED_VENUE_STATUS = "Approved";
 
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
@@ -60,7 +57,6 @@ export interface HavenEvent {
 
 export interface EventVenue {
   name: string;
-  /** The full street address on one line. */
   address: string | null;
 }
 
@@ -113,20 +109,15 @@ function pocSlackIds(value: unknown): string[] {
     .filter((id) => SLACK_USER_ID_RE.test(id));
 }
 
-/** Trimmed text from a free-text field, or null when there is none. */
 function text(value: unknown): string | null {
   return typeof value === "string" && value.trim() ? value.trim() : null;
 }
 
-/** A lookup's values, which the REST API returns as an array. */
 function lookup(value: unknown): unknown[] {
   return Array.isArray(value) ? value : [];
 }
 
-/**
- * The name of the event's first approved venue. `_Venue Name` and
- * `_Venue Status` look up the same link, so the same index is the same venue.
- */
+/** Name and status lookups share an order, so the index lines up. */
 function approvedVenueName(fields: Record<string, unknown>): string | null {
   const statuses = lookup(fields[FIELDS.venueStatus]);
   const index = statuses.findIndex(
@@ -135,11 +126,7 @@ function approvedVenueName(fields: Record<string, unknown>): string | null {
   return index === -1 ? null : text(lookup(fields[FIELDS.venueName])[index]);
 }
 
-/**
- * An address on one line, skipping blanks and repeats. The lookup is of the
- * venue's multi-line `_Full Address`, and city-states like Budapest are
- * routinely typed into both its city and its region.
- */
+/** Multi-line address on one line, without blank or repeated parts. */
 function oneLineAddress(value: unknown): string | null {
   const seen = new Set<string>();
   const parts = (text(value) ?? "")
@@ -225,8 +212,6 @@ export async function syncEvents(): Promise<number> {
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
     venueName: approvedVenueName(record.fields),
-    // Filtered to approved venues in Airtable, so its first value belongs to
-    // the same venue as the name above.
     venueAddress: oneLineAddress(lookup(record.fields[FIELDS.venueAddress])[0]),
     syncedAt: new Date(),
   }));

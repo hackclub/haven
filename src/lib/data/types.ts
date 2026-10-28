@@ -181,7 +181,6 @@ export interface SiteData {
     organizeCta: string;
     mapLabel: string;
     scrollLabel: string;
-    /** Shown in place of the venue until the event has an approved one. */
     venueTbd: string;
     signup: { placeholder: string; button: string; lang?: string };
   };

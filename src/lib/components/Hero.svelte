@@ -26,12 +26,8 @@
     /** Caption on the arrow down to the rest of the page. */
     scrollLabel?: string;
     signup?: { placeholder: string; button: string };
-    /**
-     * Where a city's event is held. Undefined on pages with no venue line at
-     * all (the home page); null for an event still waiting on one.
-     */
+    /** Omitted on pages without a venue line; null shows `venueTbd`. */
     venue?: EventVenue | null;
-    /** Shown in place of the venue until it is approved. */
     venueTbd?: string;
     images?: SiteImages;
   }
