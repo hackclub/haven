@@ -9,6 +9,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
+- **Check your event page's venue link** (added to every page; else "Venue TBD"). Wrong? DM daamin
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -57,13 +58,13 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 For every attendee who ships a project and every organizer who finished Jumpstart. See the [t-shirt guide](https://docs.google.com/document/d/1hc0W0iDjXEoAWda23s8ZkFefZ6vSQVGsub04a654Wr4/edit?tab=t.5fn89abennyk).
 
 - **Contiguous US, Canada, UK & EU** ([regions](https://help.printful.com/hc/en-us/articles/50265219092753-Which-countries-apply-to-which-Printful-shipping-regions)): shipped to you via Printful
-- **Everywhere else:** get quotes from 3+ local print shops now (check they can deliver before Haven), lock in everything but the count, then submit the final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) once counts are out. **Don't finalize** before then.
-- **Count** is based on signups around **Oct 20** (padded for late signups). Extra shirts get shipped if more people show up.
+- **Everywhere else:** [counts are out](https://docs.google.com/spreadsheets/d/1d9Feqdg1Oaic6LD-YPtKzTyC2GTLALLy1rzwPieGWGQ/edit?usp=sharing). Confirm your order with your print shop, submit the final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) (~48h review), and pay only after approval. Funding: **$5/shirt Asia, $7/shirt elsewhere** (DM katsu for exceptions)
+- **Count** is based on signups around **Oct 20** and won't increase. Not on the sheet? DM katsu. Shirts cover organizers, volunteers & participants; if short, they get mailed.
 
 ## Community Calls & Workshops (all EDT)
 
 - **Game dev (beginner friendly):** [Ren'Py](https://luma.com/b97crb9f) Oct 29, 5 PM · [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
-- [Sponsor Outreach Call](https://luma.com/2ti1prjv) Oct 28, 3 PM · [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
+- [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
