@@ -9,7 +9,6 @@ import {
   heroCopy,
   meta,
   navLinks,
-  organizeCta,
   pastEvents,
   pastEventsHeading,
   pastEventsSafety,
@@ -41,7 +40,6 @@ export const defaultSiteData: SiteData = {
   title: [...event.title],
   tagline: [...event.tagline],
   hero: {
-    organizeCta: organizeCta.label,
     mapLabel: heroCopy.mapLabel,
     scrollLabel: heroCopy.scrollLabel,
     venueTbd: heroCopy.venueTbd,
@@ -106,7 +104,6 @@ export function resolveSiteData(
     title: [event.name],
     tagline: data.tagline ?? base.tagline,
     hero: {
-      organizeCta: data.hero?.organizeCta ?? base.hero.organizeCta,
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
       venue: event.venue,

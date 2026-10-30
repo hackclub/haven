@@ -197,7 +197,6 @@ export interface SiteData {
   title: string[];
   tagline: string[];
   hero: {
-    organizeCta: string;
     mapLabel: string;
     scrollLabel: string;
     /** From the event, not the copy. Omitted on pages without a venue line;
@@ -259,7 +258,6 @@ export const siteDataInputSchema = z.object({
   tagline: z.string().array().optional(),
   hero: z
     .object({
-      organizeCta: z.string().optional(),
       mapLabel: z.string().optional(),
       scrollLabel: z.string().optional(),
       venueTbd: z.string().optional(),
