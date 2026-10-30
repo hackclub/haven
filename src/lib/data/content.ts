@@ -21,10 +21,6 @@ export const event = {
   tagline: ["Game jam for teens in 200+ cities", "Nov 14–15, 2026"],
 } as const;
 
-export const organizeCta = {
-  label: "Want to organize your own Hack Club Haven?",
-} as const;
-
 export const eventPoc = {
   name: "Haven",
   title: ["Organize a game jam", "in your city!"],
@@ -35,16 +31,17 @@ export const organizeCtaPoc = {
   label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
-/** Where the hero's contact button on a city page sends its email. */
+/** Where the hero's contact link on a city page sends its email. */
 export const CITY_EMAIL = "mailto:city@haven.hackclub.com";
 
-/** That button's label on a city page that has not written its own. */
+/** That link's label on a city page that has not written its own. */
 export const cityContactLabel = (name: string) => `Contact Haven ${name}!`;
 
 /** Copy for the hero that is not the title or the tagline. */
 export const heroCopy = {
   mapLabel: "find an event near you",
   scrollLabel: "more info",
+  venueTbd: "Venue TBD",
 } as const;
 
 export const signupCopy = {
@@ -365,7 +362,6 @@ export const faqHeading = "FAQ";
 
 /** The button under the FAQ column, which scrolls back up to the signup box. */
 export const faqCta = "Sign up!";
-
 
 export const faqs: { q: string; a: Linked }[] = [
   {

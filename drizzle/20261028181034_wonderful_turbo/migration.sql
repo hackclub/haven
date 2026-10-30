@@ -1,0 +1,1 @@
+ALTER TABLE "events" ADD COLUMN "venueIsPrivate" boolean DEFAULT false NOT NULL;

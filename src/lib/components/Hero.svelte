@@ -9,6 +9,7 @@
   import { cssUrl, type SiteImages } from "$lib/data/images";
   import HavenMap from "$lib/components/Map.svelte";
   import type { City } from "$lib/map";
+  import type { EventVenue } from "$lib/data/types";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
 
@@ -23,15 +24,16 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
-    /** Link under the signup box, over to the organizer signup. */
-    organizeCta?: string;
-    /** Button under that, emailing the city organizers; city pages only. */
+    /** Link under the signup box, emailing the city organizers; city pages only. */
     contact?: string;
     /** Caption pointing at the map of events. */
     mapLabel?: string;
     /** Caption on the arrow down to the rest of the page. */
     scrollLabel?: string;
     signup?: { placeholder: string; button: string };
+    /** Omitted on pages without a venue line; null shows `venueTbd`. */
+    venue?: EventVenue | null;
+    venueTbd?: string;
     images?: SiteImages;
   }
 
@@ -42,13 +44,12 @@
     signupUrl,
     referral = null,
     cities = [],
-    organizeCta = poc
-      ? organizeCtaPoc.label
-      : defaultSiteData.hero.organizeCta,
     contact,
     mapLabel = defaultSiteData.hero.mapLabel,
     scrollLabel = defaultSiteData.hero.scrollLabel,
     signup = defaultSiteData.hero.signup,
+    venue,
+    venueTbd = defaultSiteData.hero.venueTbd,
     images = defaultSiteData.images,
   }: Props = $props();
 
@@ -105,6 +106,12 @@
     return url.toString();
   });
 
+  const venueMapUrl = $derived(
+    venue?.address
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name}, ${venue.address}`)}`
+      : undefined,
+  );
+
   const formAction = $derived(signupAction ?? ORGANIZE_PATH);
 
   const organizeHref = $derived(
@@ -153,6 +160,30 @@
           {/each}
         </p>
 
+        {#if venue !== undefined}
+          <svelte:element
+            this={venueMapUrl ? "a" : "p"}
+            href={venueMapUrl}
+            target={venueMapUrl ? "_blank" : undefined}
+            rel={venueMapUrl ? "noopener noreferrer" : undefined}
+            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.5rem)] flex items-start gap-2 font-body text-start text-[clamp(0.9rem,3.5vw,1.25rem)] text-white sm:ml-[clamp(1rem,3vw,8rem)] sm:text-[clamp(0.9rem,1.4vw,1.75rem)] {venueMapUrl
+              ? 'underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80'
+              : ''}"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="currentColor"
+              class="mt-[0.15em] size-[1em] shrink-0"
+            >
+              <path
+                d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"
+              />
+            </svg>
+            <span>{venue?.name ?? venueTbd}</span>
+          </svelte:element>
+        {/if}
+
         <SignupForm
           {poc}
           action={formAction}
@@ -164,18 +195,10 @@
           bind:valid={emailValid}
           class="pointer-events-auto mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
         />
-        {#if signupAction}
-          <a
-            href={organizeHref}
-            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.5rem,1vw,1.5rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
-          >
-            {organizeCta}
-          </a>
-        {/if}
         {#if contact}
           <a
             href={CITY_EMAIL}
-            class="pointer-events-auto mt-[clamp(0.75rem,1.5vw,1.5rem)] inline-block rounded-full bg-haven-orange-bright px-[clamp(1rem,2vw,2rem)] py-[clamp(0.5rem,0.9vw,1rem)] font-display text-[clamp(1rem,2.5vw,1.5rem)] leading-none tracking-[-0.03em] text-white shadow-[0_0_10px_var(--color-haven-orange-bright)] transition-transform hover:scale-[1.04] active:scale-100 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-[clamp(1rem,1.6vw,2rem)]"
+            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,3.5vw,1.25rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
           >
             {contact}
           </a>
@@ -307,7 +330,7 @@
             href={organizeHref}
             class="glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,1.6vw,1.75rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80"
           >
-            {organizeCta}
+            {organizeCtaPoc.label}
           </a>
         {/if}
       </div>

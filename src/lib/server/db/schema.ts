@@ -97,6 +97,10 @@ export const eventsTable = pgTable(
      * broken version is reported once rather than on every sync.
      */
     websiteDataWarnedHash: text(),
+    venueName: text(),
+    venueAddress: text(),
+    /** A private venue hides the venue line, so name and address stay null. */
+    venueIsPrivate: boolean().notNull().default(false),
   },
   (table) => [
     uniqueIndex().on(table.slug),
