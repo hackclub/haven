@@ -35,7 +35,7 @@ export const organizeCtaPoc = {
 export const cityEmail = (slug: string) => `${slug}@haven.hackclub.com`;
 
 /** The words before that address on a city page that has not written its own. */
-export const cityContactLabel = "Contact us:";
+export const cityContactLabel = "Need help?";
 
 /** Copy for the hero that is not the title or the tagline. */
 export const heroCopy = {
