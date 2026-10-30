@@ -204,6 +204,8 @@ export interface SiteData {
      * null shows `venueTbd`. */
     venue?: EventVenue | null;
     venueTbd: string;
+    /** Where the venue line links instead of a map search for its address. */
+    venueLink?: string;
     signup: { placeholder: string; button: string; lang?: string };
   };
   about: { title: string; body: string; perks: Perk[] };
@@ -263,6 +265,10 @@ export const siteDataInputSchema = z.object({
       mapLabel: z.string().optional(),
       scrollLabel: z.string().optional(),
       venueTbd: z.string().optional(),
+      /** Opens in a new tab, so only a web address makes sense. */
+      venueLink: hrefSchema
+        .regex(/^https?:\/\//i, "must be an http(s) link")
+        .optional(),
       signup: z
         .object({
           placeholder: z.string().optional(),

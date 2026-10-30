@@ -65,6 +65,7 @@
       signup={site.hero.signup}
       venue={site.hero.venue}
       venueTbd={site.hero.venueTbd}
+      venueLink={site.hero.venueLink}
       {images}
     />
   </div>

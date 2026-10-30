@@ -452,7 +452,8 @@ box, the "what is a game jam?" section and the FAQ.
 Each entry is its own line. The first one is kept on a single line even on a
 narrow phone, so keep it short - dates go in the later lines. Leave the venue
 out: once your venue is approved in Airtable, the page shows it on its own line
-just below, linked to a map. A venue marked private is never shown.
+just below, linked to a map (or to your own link, see `venueLink` below). A
+venue marked private is never shown.
 
 The big word above it is your event's name from your Airtable row, which is not
 set from here. If it is wrong, fix the row (or ask us to) and the page follows.
@@ -465,6 +466,7 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 | `mapLabel`           | The handwritten label pointing at the map.                                                  |
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `venueTbd`           | Shown where the venue goes until your venue is approved, like `"Lugar por confirmar"`.      |
+| `venueLink`          | Optional. Where your venue's name links to, instead of a Google Maps search for its address - say a pinned map or your own directions page. A full `https://` link. Ignored until your venue is approved. |
 | `signup.placeholder` | The grey example text inside the email box.                                                 |
 | `signup.button`      | The button next to it. Keep it to a couple of words.                                        |
 | `signup.lang`        | Optional two-letter language code (like `"fi"`). If set, the signup form opens in that language (it is sent as `?lang=`). |
