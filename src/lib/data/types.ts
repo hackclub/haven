@@ -199,9 +199,11 @@ export interface SiteData {
   hero: {
     mapLabel: string;
     scrollLabel: string;
-    /** The link under the signup box that emails the city organizers; city
+    /** The words before `contactEmail` in the link under the signup box; city
      * pages only. */
     contact?: string;
+    /** From the event's slug, not the copy; city pages only. */
+    contactEmail?: string;
     /** From the event, not the copy. Omitted on pages without a venue line;
      * null shows `venueTbd`. */
     venue?: EventVenue | null;

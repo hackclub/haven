@@ -85,7 +85,7 @@ in. Copy it, delete what you are not editing, and change the rest.
   "nav": { "signup": "Sign up", "about": "About", "faq": "FAQ" },
   "tagline": ["Game jam for teens 13-18", "Nov 14–15 · Burlington, VT"],
   "hero": {
-    "contact": "Contact us: city@haven.hackclub.com",
+    "contact": "Contact us:",
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
     "venueLink": "https://maps.google.com/?q=Burlington,+VT",
@@ -463,7 +463,7 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 
 | Field                | What it is                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------- |
-| `contact`            | The small underlined link below the signup box, which emails city@haven.hackclub.com. Defaults to "Contact us: city@haven.hackclub.com". |
+| `contact`            | The words before your city's email address in the small underlined link below the signup box. The address is your page's name plus `@haven.hackclub.com`, like `yerevan@haven.hackclub.com`. Defaults to `"Contact us:"`. |
 | `mapLabel`           | The handwritten label pointing at the map.                                                  |
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `venueTbd`           | Shown where the venue goes until your venue is approved, like `"Lugar por confirmar"`.      |
