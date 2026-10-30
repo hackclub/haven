@@ -87,6 +87,8 @@ in. Copy it, delete what you are not editing, and change the rest.
   "hero": {
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
+    "venueTbd": "Venue TBD",
+    "venueLink": "https://example.com/directions",
     "signup": { "placeholder": "you@hackclub.com", "button": "sign up!" }
   },
   "about": {
