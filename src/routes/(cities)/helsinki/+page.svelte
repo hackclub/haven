@@ -60,7 +60,7 @@
 <SiteHeader {images} nav={site.nav} />
 
 <div
-  class={["fixed inset-x-0 top-0 justify-start z-30 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none transition-[background-color,backdrop-filter,box-shadow] duration-200", origSite.langs?.length ? "block" : "hidden"]}
+  class={["fixed inset-x-0 top-0 justify-start z-40 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none transition-[background-color,backdrop-filter,box-shadow] duration-200", origSite.langs?.length ? "block" : "hidden"]}
 >
   <img
     src="https://cdn.hackclub.com/01a105d1-fa2a-7248-acd2-92ce43c239a5/lang-banner.png"
@@ -76,7 +76,7 @@
 </div>
 
 <main id="main" class="overflow-x-clip">
-  <div class="relative z-20">
+  <div class="relative">
     <Hero
       title={site.title}
       tagline={site.tagline}

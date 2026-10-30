@@ -34,7 +34,7 @@
 <SiteHeader poc={isPoc} />
 
 <main id="main" class="overflow-x-clip">
-  <div class="relative z-20">
+  <div class="relative">
     <Hero
       poc={isPoc}
       {signupUrl}
