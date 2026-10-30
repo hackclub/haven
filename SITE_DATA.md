@@ -463,7 +463,7 @@ set from here. If it is wrong, fix the row (or ask us to) and the page follows.
 
 | Field                | What it is                                                                                  |
 | -------------------- | ------------------------------------------------------------------------------------------- |
-| `contact`            | The words before your city's email address in the small underlined link below the signup box. The address is your page's name plus `@haven.hackclub.com`, like `yerevan@haven.hackclub.com`. Defaults to `"Contact us:"`. |
+| `contact`            | The words before your city's email address in the small underlined link below the signup box. The address is your city's Haven Google account, like `yerevan@haven.hackclub.com`, and the link stays hidden until that account is set up. Defaults to `"Contact us:"`. |
 | `mapLabel`           | The handwritten label pointing at the map.                                                  |
 | `scrollLabel`        | The label on the arrow that scrolls down.                                                   |
 | `venueTbd`           | Shown where the venue goes until your venue is approved, like `"Lugar por confirmar"`.      |

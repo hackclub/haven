@@ -31,6 +31,7 @@ const FIELDS = {
   venueName: "fld0ywmQd0TUG2Pp4", // `_Venue Name`
   venueAddress: "fldq1OuikFjgW7bqY", // `Venue Address`
   venueIsPrivate: "fldcs5RSE00sZ9p4F", // `_Venue Is Private`
+  googleUsername: "fldrEniY0drKNP1c2", // `Google Username`
 } as const;
 
 const SLACK_USER_ID_RE = /^[UW][A-Z0-9]+$/;
@@ -188,6 +189,9 @@ export async function syncEvents(): Promise<number> {
         ? (record.fields[FIELDS.participantCount] as number)
         : 0,
     pocSlackIds: pocSlackIds(record.fields[FIELDS.pocSlackIds]),
+    // Typed in by hand, sometimes capitalized; Google ignores case anyway.
+    googleUsername:
+      text(record.fields[FIELDS.googleUsername])?.toLowerCase() ?? null,
     ...(isPrivateVenue(record.fields)
       ? { venueName: null, venueAddress: null, venueIsPrivate: true }
       : {
@@ -232,6 +236,7 @@ export async function syncEvents(): Promise<number> {
           venueName: sql`excluded."venueName"`,
           venueAddress: sql`excluded."venueAddress"`,
           venueIsPrivate: sql`excluded."venueIsPrivate"`,
+          googleUsername: sql`excluded."googleUsername"`,
           syncedAt: sql`excluded."syncedAt"`,
         },
       });
@@ -240,9 +245,11 @@ export async function syncEvents(): Promise<number> {
   return rows.length;
 }
 
-/** Every synced event, alphabetically by name. No venue: only the city page
- * shows one, and it reads it through `getEventBySlug`. */
-export async function getEvents(): Promise<Omit<HavenEvent, "venue">[]> {
+/** Every synced event, alphabetically by name. No venue or Google account: only
+ * the city page shows those, and it reads them through `getEventBySlug`. */
+export async function getEvents(): Promise<
+  Omit<HavenEvent, "venue" | "googleUsername">[]
+> {
   if (!hasDatabase) return [];
 
   return db
@@ -304,6 +311,7 @@ export async function getEventBySlug(slug: string): Promise<HavenEvent | null> {
       venueName: eventsTable.venueName,
       venueAddress: eventsTable.venueAddress,
       venueIsPrivate: eventsTable.venueIsPrivate,
+      googleUsername: eventsTable.googleUsername,
     })
     .from(eventsTable)
     .where(eq(eventsTable.slug, slug))
