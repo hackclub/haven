@@ -199,6 +199,9 @@ export interface SiteData {
   hero: {
     mapLabel: string;
     scrollLabel: string;
+    /** The link under the signup box that emails the city organizers; city
+     * pages only. */
+    contact?: string;
     /** From the event, not the copy. Omitted on pages without a venue line;
      * null shows `venueTbd`. */
     venue?: EventVenue | null;
@@ -262,6 +265,7 @@ export const siteDataInputSchema = z.object({
     .object({
       mapLabel: z.string().optional(),
       scrollLabel: z.string().optional(),
+      contact: z.string().optional(),
       venueTbd: z.string().optional(),
       /** Opens in a new tab, so only a web address makes sense. */
       venueLink: hrefSchema

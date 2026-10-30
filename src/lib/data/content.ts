@@ -31,6 +31,12 @@ export const organizeCtaPoc = {
   label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
+/** Where the hero's contact link on a city page sends its email. */
+export const CITY_EMAIL = "mailto:city@haven.hackclub.com";
+
+/** That link's label on a city page that has not written its own. */
+export const cityContactLabel = "Contact us: city@haven.hackclub.com";
+
 /** Copy for the hero that is not the title or the tagline. */
 export const heroCopy = {
   mapLabel: "find an event near you",

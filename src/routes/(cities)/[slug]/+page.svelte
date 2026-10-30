@@ -59,6 +59,7 @@
       signupUrl={signupUrl}
       referral={data.referral}
       cities={data.cities}
+      contact={site.hero.contact}
       mapLabel={site.hero.mapLabel}
       scrollLabel={site.hero.scrollLabel}
       signup={site.hero.signup}

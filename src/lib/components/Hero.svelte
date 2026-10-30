@@ -1,5 +1,10 @@
 <script lang="ts">
-  import { event, eventPoc, organizeCtaPoc } from "$lib/data/content";
+  import {
+    CITY_EMAIL,
+    event,
+    eventPoc,
+    organizeCtaPoc,
+  } from "$lib/data/content";
   import { defaultSiteData } from "$lib/data/site";
   import { cssUrl, type SiteImages } from "$lib/data/images";
   import HavenMap from "$lib/components/Map.svelte";
@@ -19,6 +24,8 @@
     /** Referral code from `?r=`, forwarded to the signup form. */
     referral?: string | null;
     cities?: City[];
+    /** Link under the signup box, emailing the city organizers; city pages only. */
+    contact?: string;
     /** Caption pointing at the map of events. */
     mapLabel?: string;
     /** Caption on the arrow down to the rest of the page. */
@@ -40,6 +47,7 @@
     signupUrl,
     referral = null,
     cities = [],
+    contact,
     mapLabel = defaultSiteData.hero.mapLabel,
     scrollLabel = defaultSiteData.hero.scrollLabel,
     signup = defaultSiteData.hero.signup,
@@ -193,6 +201,14 @@
           bind:valid={emailValid}
           class="pointer-events-auto mt-[clamp(1rem,1vw,5rem)] w-[min(90%,28rem)] sm:ml-[clamp(1rem,3vw,8rem)] sm:w-[clamp(15rem,35vw,60rem)]"
         />
+        {#if contact}
+          <a
+            href={CITY_EMAIL}
+            class="pointer-events-auto glow-orange mt-[clamp(0.75rem,1.5vw,1.25rem)] font-body text-[clamp(0.9rem,3.5vw,1.25rem)] text-white underline decoration-from-font underline-offset-4 transition-opacity hover:opacity-80 sm:ml-[clamp(1rem,3vw,8rem)] sm:text-start sm:text-[clamp(0.9rem,1.6vw,1.75rem)]"
+          >
+            {contact}
+          </a>
+        {/if}
       </div>
     </div>
 

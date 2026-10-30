@@ -1,5 +1,6 @@
 import {
   about,
+  cityContactLabel,
   event,
   faqCta,
   faqHeading,
@@ -106,6 +107,7 @@ export function resolveSiteData(
     hero: {
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
+      contact: data.hero?.contact ?? cityContactLabel,
       venue: event.venue,
       venueTbd: data.hero?.venueTbd ?? base.hero.venueTbd,
       venueLink: data.hero?.venueLink,
