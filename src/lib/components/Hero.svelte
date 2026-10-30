@@ -27,6 +27,9 @@
     /** Omitted on pages without a venue line; null shows `venueTbd`. */
     venue?: EventVenue | null;
     venueTbd?: string;
+    /** Replaces the map search for the venue's address; ignored until there is
+     * a venue to show. */
+    venueLink?: string;
     images?: SiteImages;
   }
 
@@ -42,6 +45,7 @@
     signup = defaultSiteData.hero.signup,
     venue,
     venueTbd = defaultSiteData.hero.venueTbd,
+    venueLink,
     images = defaultSiteData.images,
   }: Props = $props();
 
@@ -98,11 +102,13 @@
     return url.toString();
   });
 
-  const venueMapUrl = $derived(
-    venue?.address
+  const venueMapUrl = $derived.by(() => {
+    if (!venue) return undefined;
+    if (venueLink) return venueLink;
+    return venue.address
       ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venue.name}, ${venue.address}`)}`
-      : undefined,
-  );
+      : undefined;
+  });
 
   const formAction = $derived(signupAction ?? ORGANIZE_PATH);
 

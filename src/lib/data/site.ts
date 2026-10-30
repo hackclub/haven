@@ -108,6 +108,7 @@ export function resolveSiteData(
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
       venue: event.venue,
       venueTbd: data.hero?.venueTbd ?? base.hero.venueTbd,
+      venueLink: data.hero?.venueLink,
       signup: {
         placeholder:
           data.hero?.signup?.placeholder ?? base.hero.signup.placeholder,
