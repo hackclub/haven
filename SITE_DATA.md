@@ -88,6 +88,8 @@ in. Copy it, delete what you are not editing, and change the rest.
     "organizeCta": "Want to organize your own Hack Club Haven?",
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
+    "venueTbd": "Venue TBD",
+    "venueLink": "https://example.com/directions",
     "signup": { "placeholder": "you@hackclub.com", "button": "sign up!" }
   },
   "about": {
