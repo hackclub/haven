@@ -87,6 +87,7 @@ in. Copy it, delete what you are not editing, and change the rest.
   "hero": {
     "mapLabel": "find an event near you",
     "scrollLabel": "more info",
+    "venueLink": "https://maps.google.com/?q=Burlington,+VT",
     "signup": { "placeholder": "you@hackclub.com", "button": "sign up!" }
   },
   "about": {
