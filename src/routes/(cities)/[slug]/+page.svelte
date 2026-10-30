@@ -51,7 +51,7 @@
 <SiteHeader {images} nav={site.nav} />
 
 <main id="main" class="overflow-x-clip">
-  <div class="relative z-20">
+  <div class="relative">
     <Hero
       title={site.title}
       tagline={site.tagline}

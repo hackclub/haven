@@ -68,10 +68,22 @@
   let mapExpanded = $state(false);
   let mapPointerDown: { x: number; y: number } | null = null;
 
-  // `#top`'s `isolate` (and the `z-20` wrapper the page renders this Hero
-  // into) caps this modal's stacking priority no matter what z-index it's
-  // given, since the whole section paints as a single layer against
-  // SiteHeader's fixed, z-30 nav. Moving the node to <body> escapes that.
+  // The map's caption and arrow sit above SiteHeader's fixed clouds while the
+  // page is at the top, then drop back under them like the rest of the hero
+  // once it scrolls. For that, neither `#top` (no `isolate`, and the page
+  // wrapper has no z-index) nor the map panel (no z-index or transform) may
+  // be a stacking context of its own.
+  let scrolled = $state(false);
+
+  // The page can load already scrolled (a reload, or a #hash target).
+  $effect(() => {
+    scrolled = window.scrollY > 10;
+  });
+
+  const mapLabelLayer = $derived(scrolled ? "z-20" : "z-35");
+
+  // Moving this modal to <body> keeps any wrapper a page adds from trapping
+  // it under SiteHeader's fixed nav.
   function portal(node: HTMLElement) {
     document.body.appendChild(node);
     return { destroy: () => node.remove() };
@@ -127,6 +139,8 @@
   );
 </script>
 
+<svelte:window onscroll={() => (scrolled = window.scrollY > 10)} />
+
 <svelte:head>
   {#if signupUrl}<link rel="preconnect" href={new URL(signupUrl).origin} />{/if}
 </svelte:head>
@@ -134,11 +148,11 @@
 <section
   id="top"
   style="background-image: {cssUrl(images.heroBackground)}"
-  class="rule-frame relative isolate flex min-h-svh flex-col bg-haven-green bg-cover bg-top bg-no-repeat px-4 pb-[36vw] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
+  class="rule-frame relative flex min-h-svh flex-col bg-haven-green bg-cover bg-top bg-no-repeat px-4 pb-[36vw] sm:pb-[clamp(3rem,10vw,min(8rem,8svh))] [--frame-gap:clamp(0.75rem,1.1vw,1rem)] [--frame-offset:clamp(0.5rem,1.1vw,1rem)] [--frame-weight:clamp(3px,0.35vw,5px)]"
 >
   <div class={poc ? "hidden" : "block sm:contents"}>
     <div
-      class="pointer-events-none relative z-10 flex flex-1 items-center justify-center mt-[clamp(5rem,14vw,20rem)] sm:mt-[clamp(1rem,2vw,15rem)]"
+      class="pointer-events-none relative z-25 flex flex-1 items-center justify-center mt-[clamp(5rem,14vw,20rem)] sm:mt-[clamp(1rem,2vw,15rem)]"
     >
       <div
         class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center sm:pl-[clamp(1rem,4vw,8rem)] sm:items-start sm:pr-[clamp(20rem,45vw,60rem)]"
@@ -233,7 +247,7 @@
 
     <div
       class={[
-        "panel relative z-0 mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:mt-[clamp(2rem,4vw,8rem)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[clamp(10rem,25vw,50rem)] sm:-translate-y-1/2 lg:w-[clamp(15rem,35vw,80rem)] transition-transform hover:scale-[1.04] active:scale-100",
+        "panel group relative mx-auto mt-[clamp(2rem,8vw,8rem)] w-[min(85%,28rem)] h-[clamp(20rem,60vw,40rem)] sm:absolute sm:right-10 sm:top-1/2 sm:mx-[clamp(1.5rem,4vw,8rem)] sm:[--map-h:clamp(10rem,25vw,50rem)] sm:mt-[calc(clamp(2rem,4vw,8rem)_-_var(--map-h)/2)] sm:w-[clamp(15rem,35vw,52rem)] sm:h-[var(--map-h)] lg:w-[clamp(15rem,35vw,80rem)]",
         poc ? "hidden" : "block",
       ]}
       role="button"
@@ -248,7 +262,9 @@
         }
       }}
     >
-      <div class="absolute inset-0 overflow-hidden rounded-[inherit]">
+      <div
+        class="absolute inset-0 overflow-hidden rounded-[inherit] transition-transform group-hover:scale-[1.04] group-active:scale-100"
+      >
         <HavenMap {cities} height="100%" pinImageUrl={images.mapPin} />
       </div>
 
@@ -256,16 +272,16 @@
         src={images.heroArrow}
         alt=""
         aria-hidden="true"
-        class="absolute rotate-24 right-[clamp(1rem,4vw,8rem)] top-[clamp(0rem,0vw,10rem)] z-20 w-[clamp(2rem,12vw,6rem)] sm:right-[clamp(1rem,12vw,30rem)] sm:top-[clamp(-10rem,-3vw,0rem)] sm:w-[clamp(2rem,8vw,20rem)] hidden sm:block"
+        class="absolute rotate-24 right-[clamp(1rem,4vw,8rem)] top-[clamp(0rem,0vw,10rem)] {mapLabelLayer} w-[clamp(2rem,12vw,6rem)] sm:right-[clamp(1rem,12vw,30rem)] sm:top-[clamp(-10rem,-3vw,0rem)] sm:w-[clamp(2rem,8vw,20rem)] hidden sm:block"
       />
       <img
         src={images.heroArrowMobile}
         alt=""
         aria-hidden="true"
-        class="absolute rotate-24 right-[clamp(1rem,6vw,10rem)] top-[clamp(-10rem,-2vw,0rem)] z-20 w-[clamp(2rem,12vw,6rem)] block sm:hidden"
+        class="absolute rotate-24 right-[clamp(1rem,6vw,10rem)] top-[clamp(-10rem,-2vw,0rem)] {mapLabelLayer} w-[clamp(2rem,12vw,6rem)] block sm:hidden"
       />
       <p
-        class="text-white text-center -translate-y-[120%] left-50 text-[clamp(0.875rem,4vw,10rem)] sm:text-haven-butter sm:left-0 sm:-rotate-8 sm:text-[clamp(1rem,3vw,10rem)] sm:-translate-y-[120%] sm:-translate-x-[40%]"
+        class="relative {mapLabelLayer} text-white text-center -translate-y-[120%] text-[clamp(0.875rem,4vw,10rem)] sm:text-haven-butter sm:-rotate-8 sm:text-[clamp(1rem,3vw,10rem)] sm:-translate-y-[120%] sm:-translate-x-[40%]"
       >
         {mapLabel}
       </p>

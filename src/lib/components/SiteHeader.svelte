@@ -62,7 +62,7 @@
 <div
   data-nav-bar
   data-scrolled={scrolled ? "" : undefined}
-  class="fixed inset-x-0 top-0 justify-end z-30 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none transition-[background-color,backdrop-filter,box-shadow] duration-200"
+  class="fixed inset-x-0 top-0 justify-end z-40 flex pb-3 pt-[clamp(0.5rem,1.4vw,1.5rem)] px-[clamp(1rem,4vw,4rem)] pointer-events-none transition-[background-color,backdrop-filter,box-shadow] duration-200"
 >
   <nav class="pointer-events-auto" aria-label="Primary">
     <ul class="flex items-center gap-[clamp(1.125rem,2.2vw,2.75rem)]">
