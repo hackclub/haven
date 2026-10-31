@@ -59,12 +59,15 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 For every attendee who ships a project and every organizer who finished Jumpstart. See the [t-shirt guide](https://docs.google.com/document/d/1hc0W0iDjXEoAWda23s8ZkFefZ6vSQVGsub04a654Wr4/edit?tab=t.5fn89abennyk).
 
 - **Contiguous US, Canada, UK & EU** ([regions](https://help.printful.com/hc/en-us/articles/50265219092753-Which-countries-apply-to-which-Printful-shipping-regions)): shipped to you via Printful
-- **Everywhere else:** [counts are out](https://docs.google.com/spreadsheets/d/1d9Feqdg1Oaic6LD-YPtKzTyC2GTLALLy1rzwPieGWGQ/edit?usp=sharing). Confirm your order with your print shop, submit the final quote to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) (~48h review), and pay only after approval. Funding: **$5/shirt Asia, $7/shirt elsewhere** (DM katsu for exceptions)
+- **No approved venue by Oct 26 = no t-shirt funding planned.** Venue pending, or sure you'll find one? DM katsu
+- **Everywhere else:** [counts are out](https://docs.google.com/spreadsheets/d/1d9Feqdg1Oaic6LD-YPtKzTyC2GTLALLy1rzwPieGWGQ/edit?usp=sharing). Submit the final quote (**incl. shipping & taxes**, sheet quantity, screenshot attached) to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) (~48h review); **pay only after approval**. You get exactly the final cost quoted
+- **Funding:** **$5/shirt Asia, $7/shirt elsewhere**; above that, contact 3+ print shops and DM katsu. Want different counts? DM katsu first
 - **Count** is based on signups around **Oct 20** and won't increase. Not on the sheet? DM katsu. Shirts cover organizers, volunteers & participants; if short, they get mailed.
 
 ## Community Calls & Workshops (all EDT)
 
 - **Game dev (beginner friendly):** [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
+- **Check-in Call #8:** [RSVP for Oct 31, 11 AM](https://luma.com/92m3iu2o). US DST ends Nov 1, so **recheck times for Call #9**
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
