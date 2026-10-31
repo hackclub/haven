@@ -9,7 +9,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
-- **Check your event page's venue link** (added to every page; else "Venue TBD"). Wrong? DM daamin
+- **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
+- **Check-in Call #8 is mandatory** (Fri Oct 30 & **Sat Oct 31**): rename yourself "First Last City" in Slack, **invite your co-organisers**
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -63,8 +64,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 
 ## Community Calls & Workshops (all EDT)
 
-- **Game dev (beginner friendly):** [Ren'Py](https://luma.com/b97crb9f) Oct 29, 5 PM · [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
-- [Outreach Lock-In](https://luma.com/7cv8bu22) Oct 30, 5 PM
+- **Game dev (beginner friendly):** [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
