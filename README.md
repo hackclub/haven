@@ -10,7 +10,6 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
-- **Check-in Call #8 is mandatory** (Fri Oct 30 & **Sat Oct 31**): rename yourself "First Last City" in Slack, **invite your co-organisers**
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -67,7 +66,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 ## Community Calls & Workshops (all EDT)
 
 - **Game dev (beginner friendly):** [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
-- **Check-in Call #8:** [RSVP for Oct 31, 11 AM](https://luma.com/92m3iu2o). US DST ends Nov 1, so **recheck times for Call #9**
+- **Check-in Call #9:** US DST ended Nov 1, so **recheck call times** on the [Luma calendar](https://luma.com/hack-club-haven)
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
@@ -83,4 +82,5 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#5:** [Recording](https://hackclub.zoom.us/rec/play/byxhigz4MmfBKb0qNwuvIOKuhvsYgmRVp0Ca-V6dXm8Rohvh2Cedfwty-wKI9zNRAQQADBF2kMpPJ3Vb.kTNXdaLxaZVy6JEY?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2Fj8AVknx9hsCwolCcYPEfvBFquoHJPAoalFeXnc1BbX7rTyH_dJWoynMt6SWVwcNr.qI8c-iIEFxeeyW0H) (Venue 101 workshop with Kaylee at the end) · [Form](https://forms.hackclub.com/haven-c5)
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
 - **#7:** [Recording](https://hackclub.zoom.us/rec/play/POkDzOPGrE728JbU5MBq3JekWsT_o9My4KD2mWsu7eCu_o-GB9-SEekQnx3wqCLqx4xrRNy6eujIQiZW.BMES9rvAxyy69YOa?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FLlGgBDuSGPtkx6QTlCd7ORwlPDImfoO3wgInbvVKztvI62MD9H6mEagCR5iU-TSU.VPOedwwfpzZChWGu) (public demos)
+- **#8 (8b):** [Recording](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689) · [Slides incl. t-shirt workshop](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689?thread_ts=1793465524.668689&cid=C0BM46V4X7F) (no t-shirt workshop recording)
 - **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
