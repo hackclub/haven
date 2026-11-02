@@ -31,8 +31,9 @@ export const organizeCtaPoc = {
   label: "Want to organize a Hack Club Haven in your city?",
 } as const;
 
-/** The address a city page's contact link emails, named after its slug. */
-export const cityEmail = (slug: string) => `${slug}@haven.hackclub.com`;
+/** The address a city page's contact link emails: its Google account. */
+export const cityEmail = (googleUsername: string) =>
+  `${googleUsername}@haven.hackclub.com`;
 
 /** The words before that address on a city page that has not written its own. */
 export const cityContactLabel = "Contact us:";

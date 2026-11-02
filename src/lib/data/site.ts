@@ -109,7 +109,10 @@ export function resolveSiteData(
       mapLabel: data.hero?.mapLabel ?? base.hero.mapLabel,
       scrollLabel: data.hero?.scrollLabel ?? base.hero.scrollLabel,
       contact: data.hero?.contact ?? cityContactLabel,
-      contactEmail: cityEmail(event.slug),
+      // No account yet, no link: the address would not deliver anywhere.
+      contactEmail: event.googleUsername
+        ? cityEmail(event.googleUsername)
+        : undefined,
       venue: event.venue,
       venueTbd: data.hero?.venueTbd ?? base.hero.venueTbd,
       venueLink: data.hero?.venueLink,

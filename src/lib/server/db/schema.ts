@@ -101,6 +101,11 @@ export const eventsTable = pgTable(
     venueAddress: text(),
     /** A private venue hides the venue line, so name and address stay null. */
     venueIsPrivate: boolean().notNull().default(false),
+    /**
+     * The local part of the city's `@haven.hackclub.com` Google account, which
+     * the page's contact link emails. Null until an account is set up.
+     */
+    googleUsername: text(),
   },
   (table) => [
     uniqueIndex().on(table.slug),

@@ -182,6 +182,8 @@ export interface HavenEvent {
   /** Null until a venue is approved; undefined when it is private, which hides
    * the venue line altogether. */
   venue?: EventVenue | null;
+  /** The city's `@haven.hackclub.com` account, or null without one. */
+  googleUsername?: string | null;
 }
 
 export interface EventVenue {
@@ -202,7 +204,8 @@ export interface SiteData {
     /** The words before `contactEmail` in the link under the signup box; city
      * pages only. */
     contact?: string;
-    /** From the event's slug, not the copy; city pages only. */
+    /** From the event's Google account, not the copy; city pages only, and
+     * only once that account exists. */
     contactEmail?: string;
     /** From the event, not the copy. Omitted on pages without a venue line;
      * null shows `venueTbd`. */
