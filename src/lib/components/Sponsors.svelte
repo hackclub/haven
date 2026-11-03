@@ -220,12 +220,12 @@
               ]}
             />
             <ul
-              class="relative flex items-start z-10 gap-[clamp(0rem,8vw,5rem)] pt-[clamp(3rem,14vw,12rem)] sm:pt-[clamp(3rem,8vw,8rem)] md:pt-[clamp(2rem,10vw+100/vw,8rem)] px-[clamp(2rem,15vw,15rem)]"
+              class="relative flex items-start z-10 gap-[2vw] sm:gap-[clamp(0rem,8vw,5rem)] pt-[clamp(3rem,14vw,12rem)] sm:pt-[clamp(3rem,8vw,8rem)] md:pt-[clamp(2rem,10vw+100/vw,8rem)] px-[clamp(2rem,15vw,15rem)]"
             >
               {#each row as item, itemIndex (itemIndex)}
                 <li
                   class={[
-                    "relative w-full flex flex-col items-center z-20 text-center translate-y-[clamp(0rem,vw,2rem)] ",
+                    "relative min-w-0 flex-1 flex flex-col items-center z-20 text-center translate-y-[clamp(0rem,vw,2rem)] ",
                     sponsorRowPadding[rowIndex],
                   ]}
                 >
@@ -243,7 +243,7 @@
                       class="relative mx-auto h-[clamp(2rem,10vw,8rem)] z-20 w-full max-w-32 object-contain"
                     />
                     <p
-                      class="text-white md:text-[clamp(0.5rem,2vw,2rem)] md:leading-[1.05] md:pt-[clamp(0.5rem,1.2vw,1.2rem)]"
+                      class="text-white text-[clamp(0.75rem,3.5vw,1rem)] leading-tight text-balance wrap-break-word md:text-[clamp(0.5rem,2vw,2rem)] md:leading-[1.05] md:pt-[clamp(0.5rem,1.2vw,1.2rem)]"
                     >
                       {item.name}
                     </p>
