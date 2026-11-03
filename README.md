@@ -65,7 +65,6 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 
 ## Community Calls & Workshops (all EDT)
 
-- **Game dev (beginner friendly):** [Godot platformer](https://luma.com/0d9kex8z) Nov 3, 7 AM
 - **Check-in Call #9:** US DST ended Nov 1, so **recheck call times** on the [Luma calendar](https://luma.com/hack-club-haven)
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
