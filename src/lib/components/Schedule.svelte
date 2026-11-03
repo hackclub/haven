@@ -120,23 +120,27 @@
       >
         {#each filled as day, dayIndex (dayIndex)}
           <section
-            class="panel px-[clamp(0.2rem,2.4vw,2.25rem)] py-[clamp(1rem,2.2vw,2rem)] bg-haven-brown-light"
+            class="@container panel px-[clamp(0.2rem,2.4vw,2.25rem)] py-[clamp(1rem,2.2vw,2rem)] bg-haven-brown-light"
           >
             <h3 class="font-display text-heading text-haven-butter">
               {day.day}
             </h3>
 
+            <!-- The time column is as wide as the day's longest time, so ranges
+                 like "10:45 am - 11:45 am" never run into the titles. A narrow
+                 panel (on phones, or two days side by side) has no room for two
+                 columns, so the time sits above the title instead. -->
             <ol
-              class="mt-[clamp(0.75rem,1.6vw,1.25rem)] flex flex-col gap-[clamp(0.2rem,1vw,1.1rem)]"
+              class="mt-[clamp(0.75rem,1.6vw,1.25rem)] grid gap-x-[clamp(0.5rem,2vw,2.25rem)] gap-y-[clamp(0.5rem,1vw,1.1rem)] @lg:grid-cols-[auto_1fr]"
             >
               {#each day.items as item, itemIndex (itemIndex)}
-                <li class="flex gap-x-[clamp(0.5rem,2vw,2.25rem)] flex-row items-baseline">
+                <li class="grid items-baseline @lg:col-span-2 @lg:grid-cols-subgrid">
                   <span
-                    class="w-[clamp(5rem,10vw,8rem)] font-display text-subheading whitespace-nowrap text-white shrink-0"
+                    class="font-display text-subheading text-white @lg:min-w-[clamp(5rem,10vw,8rem)] @lg:whitespace-nowrap"
                   >
                     {item.time}
                   </span>
-                  <span class="flex-1">
+                  <span class="min-w-0">
                     <span class="block font-display text-subheading line-height leading-none text-white">
                       {item.title}
                     </span>
