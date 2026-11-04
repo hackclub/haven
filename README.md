@@ -15,7 +15,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 ## Don'ts
 
 - **Don't apply for HCB yourself.** POCs get a special account with no fee (under 18? a parent/guardian signs too)
-- **Don't click "Send Invitation"** in Attend. Invites are held on purpose.
+- **Don't click "Send Invitation"** in Attend. Invites go out in batches from **Nov 4** (new signups get theirs right away); venue isn't included, so **message attendees the venue**.
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
@@ -50,7 +50,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Social media campaign:** your Haven HCB gets **$10 per 10,000 views**, capped at **$100 per event** (100k views). Redeem via the [rewards form](https://forms.hackclub.com/haven-socials-rewards)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
-- **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz)
+- **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz); email [Kadmium](https://www.kadmium.dev/contact-links) (emil@kadmium.dev) for in-kind Unreal Engine prizes
+- **Trusted Organizer (PoCs):** 85% ship rate, NPS 60+ (60% of attendees responding), 20+ checked-in attendees = **1.5-2x signup funding** and spending beyond food & drink. Use the feedback form.
 - **Sponsor says they're already talking to another organizer?** DM barnav with who + a screenshot of the email chain
 
 ## Free T-shirts
@@ -82,4 +83,4 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
 - **#7:** [Recording](https://hackclub.zoom.us/rec/play/POkDzOPGrE728JbU5MBq3JekWsT_o9My4KD2mWsu7eCu_o-GB9-SEekQnx3wqCLqx4xrRNy6eujIQiZW.BMES9rvAxyy69YOa?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FLlGgBDuSGPtkx6QTlCd7ORwlPDImfoO3wgInbvVKztvI62MD9H6mEagCR5iU-TSU.VPOedwwfpzZChWGu) (public demos)
 - **#8 (8b):** [Recording](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689) · [Slides incl. t-shirt workshop](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689?thread_ts=1793465524.668689&cid=C0BM46V4X7F) (no t-shirt workshop recording)
-- **Safety Workshop** with Spencer: rescheduled, date TBA. Please attend; a safeguarding training module is coming soon.
+- **Safety Workshop** with Spencer: **after Check-in Call #9, this week** (recorded). Please attend; a safeguarding training module is coming soon.
