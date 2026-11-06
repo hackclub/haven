@@ -6,7 +6,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
-- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **No confirmed venue = no signup funding** ([book a call](https://booking.haven.hackclub.com/) for help)
+- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no confirmed venue = event cancelled, and no signup funding ([book a call](https://booking.haven.hackclub.com/) for help)
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
