@@ -6,7 +6,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
-- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no confirmed venue = event cancelled, and no signup funding ([book a call](https://booking.haven.hackclub.com/) for help)
+- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no confirmed venue = event cancelled, and no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
+- **Striked or missed multiple check-in calls?** Your event is at risk of cancellation; watch your DMs and inbox for barnav
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
@@ -19,6 +20,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
+- **Don't enable the Attend travel module** (or any non-default module); attendees must stay in the venue, even for a park or food run
+- **Don't tell attendees they need ID verification.** They need a Hack Club account (auto-filled), not IDV; ignore "reset waivers" notices on your attend page after date fixes
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
 
 ## Key Links
