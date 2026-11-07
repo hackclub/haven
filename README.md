@@ -21,6 +21,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
 - **Don't enable the Attend travel module** (or any non-default module); attendees must stay in the venue, even for a park or food run
+- **Don't DM EMs/directors with questions that have no participant PII.** Ask in [#haven-help](https://hackclub.slack.com/archives/C0BM9DZ0CR0); HQ mostly doesn't work weekends, so expect replies Monday
 - **Don't tell attendees they need ID verification.** They need a Hack Club account (auto-filled), not IDV; ignore "reset waivers" notices on your attend page after date fixes
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
 
@@ -49,7 +50,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 ## Extra Funding & Prizes
 
-- **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/)). Dashboard now counts only ages 13-18; wrong-age signups don't count, so have them re-sign up with the right age (fix before event ends)
+- **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/)). Dashboard now counts only ages 13-18; wrong-age signups don't count, so have them re-sign up with the right age (fix before event ends). Streak paid out Nov 6; no $100 = no confirmed venue
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Social media campaign:** your Haven HCB gets **$10 per 10,000 views**, capped at **$100 per event** (100k views). Redeem via the [rewards form](https://forms.hackclub.com/haven-socials-rewards)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
@@ -69,7 +70,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 
 ## Community Calls & Workshops (all EDT)
 
-- **Check-in Call #9:** US DST ended Nov 1, so **recheck call times** on the [Luma calendar](https://luma.com/hack-club-haven)
+- **Check-in Call #9 (last one):** **Sat Nov 7, 11 AM EST** ([RSVP](https://luma.com/of0kow7h)); includes the mandatory safeguarding workshop. Be there with all co-organizers. DST ended Nov 1, so recheck times on the [Luma calendar](https://luma.com/hack-club-haven)
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
