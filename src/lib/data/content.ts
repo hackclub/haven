@@ -374,10 +374,10 @@ export const faqs: { q: string; a: Linked }[] = [
     ],
   },
   {
-    q: "Can I organize a Haven?",
+    q: "Is AI allowed at Haven?",
     a: [
       {
-        text: "Absolutely! We’re always looking for passionate organizers. If you’re ready to bring the magic of game development to your community, we’d love to help.",
+        text: 'AI generated assets are prohibited; please create them yourself or use asset packs. AI-assisted coding is allowed but extremely discouraged, and "vibecoding" a project is not allowed. We want to see your creativity and your own work!',
       },
     ],
   },
