@@ -6,7 +6,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
-- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no confirmed venue = event cancelled, and no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
+- **Welcome your participants** in your city channel (they've been added) and answer questions
+- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no written confirmation (or written EM exemption) = event cancelled, and no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
 - **Striked or missed multiple check-in calls?** Your event is at risk of cancellation; watch your DMs and inbox for barnav
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
@@ -32,6 +33,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - [Funding & signup caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): caps are 200/country (some lower); hit it? ask an EM or director
 - [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls · [Add community calls to your calendar](https://hack.club/haven-cal)
 - Slides: [Event planning](https://canva.link/will-your-haven-survive) by Xin Bing Lim · [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
+- [Workshop slides](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794112490474539): GitHub · Godot (leaf game, platformer) · Ren'Py · shipping to GitHub/Itch.io
 - [Gas Fund](https://gas.hackclub.com/) works for Haven · [Haven website source](https://github.com/hackclub/haven)
 - [Rename your `@haven.hackclub.com` account](https://myaccount.google.com/u/1/profile/name/edit) (try "Haven [City]")
 
@@ -70,7 +72,6 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 
 ## Community Calls & Workshops (all EDT)
 
-- **Check-in Call #9 (last one):** **Sat Nov 7, 11 AM EST** ([RSVP](https://luma.com/of0kow7h)); includes the mandatory safeguarding workshop. Be there with all co-organizers. DST ended Nov 1, so recheck times on the [Luma calendar](https://luma.com/hack-club-haven)
 - **Missed the Signupmaxxing call?** [Slides](https://canva.link/llzmktoubgnczpg) from Haven Chandigarh's POC
 
 ## Slack
@@ -87,4 +88,4 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **#6:** [Recording](https://hackclub.zoom.us/rec/play/bgpEWW6S4_pWaVMbHyHa0e95rbja8MJHm1YDpGxGxq_f96nb1Q8Cwr4QFi519QUGMjw0tFb23SfsbzqA.lx_S9WNptQ3Ckp_K?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FDe6bO1OVhhzQYfVNUO2CrFFBTtxnjTPTZSMNc5uDyrKFcCqEMe0Iq6QcVghszbFk.iHlrv__mKE1_x3gw) · [Form](https://hack.club/haven-c6)
 - **#7:** [Recording](https://hackclub.zoom.us/rec/play/POkDzOPGrE728JbU5MBq3JekWsT_o9My4KD2mWsu7eCu_o-GB9-SEekQnx3wqCLqx4xrRNy6eujIQiZW.BMES9rvAxyy69YOa?accessLevel=meeting&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FLlGgBDuSGPtkx6QTlCd7ORwlPDImfoO3wgInbvVKztvI62MD9H6mEagCR5iU-TSU.VPOedwwfpzZChWGu) (public demos)
 - **#8 (8b):** [Recording](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689) · [Slides incl. t-shirt workshop](https://hackclub.enterprise.slack.com/archives/C0BM46V4X7F/p1793465524668689?thread_ts=1793465524.668689&cid=C0BM46V4X7F) (no t-shirt workshop recording)
-- **Safety Workshop** with Spencer: **after Check-in Call #9, this week** (recorded). Please attend; a safeguarding training module is coming soon.
+- **#9 (last):** [Recording](https://hackclub.zoom.us/rec/play/1XKvVtiD92yR7ShyANIacXJZLJ80mgHXXLYAEUosqEfUV-uOMLwm2bEqqi3apofJwxIwfWI2MN6ONI3O.Pg4zWMHKyx9umFnu?accessLevel=&canPlayFromShare=true&from=share_recording_detail&continueMode=true&oldStyle=true&componentName=rec-play&originRequestUrl=https%3A%2F%2Fhackclub.zoom.us%2Frec%2Fshare%2FbTx1vCHcYmO37HnpsaSYfEbSew7GppILrreYcfs0UFY8DhtYn0hWu-UedafMdA0.CZFcOmEv-OOCOVIy) (includes mandatory safeguarding call; **watch it**) · [Slides](https://docs.google.com/presentation/d/11qK60n05gZacUAwH8dJ3N9Ww5DEhkl4Z-j89uEMEtC8/edit?usp=drivesdk) · [Form](https://hack.club/haven-c9)
