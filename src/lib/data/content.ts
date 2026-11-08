@@ -79,7 +79,7 @@ export const perks: Perk[] = [
         href: "https://theavgeekbee.itch.io/office-click-clack",
         caption: {
           title: "office click clack",
-          author: "by bunnyguy and nathan",
+          author: "by nat and bunnyguy",
         },
       },
     ],
