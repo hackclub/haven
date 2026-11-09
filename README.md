@@ -7,7 +7,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **All organizers:** complete [Jumpstart](https://haven.jumpstart.hackclub.com/) (or submit a game made with the new [Godot guide](https://hack.club/haven-tutorial) to waive it; [feedback](http://hack.club/haven-tutorial-feedback))
 - **POCs:** verify your identity at [auth.hackclub.com](https://auth.hackclub.com/) or you won't get funding
 - **Welcome your participants** in your city channel (they've been added) and answer questions
-- **Got a venue?** Submit the [venue confirmation form](https://forms.hackclub.com/haven-venue) with proof. **Hard deadline: Sunday Nov 8**; no written confirmation (or written EM exemption) = event cancelled, and no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
+- **Venue not confirmed?** The [venue confirmation form](https://forms.hackclub.com/haven-venue) deadline (Nov 8) has passed; no written confirmation (or written EM exemption) = event cancelled, no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
 - **Striked or missed multiple check-in calls?** Your event is at risk of cancellation; watch your DMs and inbox for barnav
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
@@ -17,7 +17,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 ## Don'ts
 
 - **Don't apply for HCB yourself.** POCs get a special account with no fee (under 18? a parent/guardian signs too)
-- **Don't click "Send Invitation"** in Attend. Invites go out in batches from **Nov 4** (new signups get theirs right away); venue isn't included, so **message attendees the venue**.
+- **Don't click "Send Invitation"** in Attend. Invites go out automatically in batches (new signups get theirs right away); venue isn't included, so **message attendees the venue**.
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
