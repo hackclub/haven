@@ -67,6 +67,7 @@
       venue={site.hero.venue}
       venueTbd={site.hero.venueTbd}
       venueLink={site.hero.venueLink}
+      partner={data.partner}
       {images}
     />
   </div>
