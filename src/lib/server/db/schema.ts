@@ -144,3 +144,43 @@ export const signupSnapshotsTable = pgTable(
   },
   (table) => [index().on(table.createdAt)],
 );
+
+/**
+ * Every click on an announcement button, which carry Block Kit Builder's
+ * default `actionId-0` and `actionId-1` action ids. Nothing reads this; it is a
+ * log to query by hand. The useful fields are pulled out into columns, and `payload` keeps the
+ * rest of Slack's interaction payload, minus the verification token, trigger id
+ * and response URL.
+ */
+export const announcementClicksTable = pgTable(
+  "announcement_clicks",
+  {
+    id: uuid().primaryKey().defaultRandom(),
+    actionId: text().notNull(),
+    blockId: text().notNull(),
+    value: text(),
+    buttonText: text(),
+    /** When Slack says the click happened, as a Slack timestamp. */
+    actionTs: text().notNull(),
+    userId: text().notNull(),
+    username: text(),
+    teamId: text(),
+    /** "message", "view" or "message_attachment". */
+    containerType: text().notNull(),
+    channelId: text(),
+    channelName: text(),
+    messageTs: text(),
+    /** The text of the message the button was on, if it was a message. */
+    messageText: text(),
+    isEphemeral: boolean(),
+    viewId: text(),
+    payload: jsonb().$type<Record<string, unknown>>().notNull(),
+    createdAt: timestamp({ withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index().on(table.actionId),
+    index().on(table.userId),
+    index().on(table.messageTs),
+    index().on(table.createdAt),
+  ],
+);

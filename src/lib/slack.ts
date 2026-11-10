@@ -16,6 +16,7 @@ import {
 import { env } from "$env/dynamic/private";
 import { db } from "./server/db";
 import {
+  announcementClicksTable,
   eventsTable,
   signupNotificationsTable,
   signupSnapshotsTable,
@@ -472,6 +473,46 @@ app.on("action:button.close", async (event) => {
     report("remove the hourglass reaction", helpMessage.unreact("hourglass")),
   ]);
 });
+
+// Clicks on announcement buttons are logged and nothing else, so the only
+// response is Slack's acknowledgement.
+for (const actionId of ["actionId-0", "actionId-1"]) {
+  app.on(`action:button.${actionId}`, async (action) => {
+    const { event } = action;
+    const { container } = event;
+    // The token and response URL let their holder act as the app, and the
+    // trigger id expires seconds from now, so none of them are kept.
+    const {
+      token: _token,
+      trigger_id: _triggerId,
+      response_url: _responseUrl,
+      ...payload
+    } = event;
+    const inMessage = container.type !== "view";
+
+    await db.insert(announcementClicksTable).values({
+      actionId: action.action_id,
+      blockId: action.block_id,
+      value: action.value ?? null,
+      buttonText: action.text?.text ?? null,
+      actionTs: action.action_ts,
+      userId: event.user.id,
+      username: event.user.username,
+      teamId: event.user.team_id ?? event.team?.id ?? null,
+      containerType: container.type,
+      channelId: event.channel?.id ?? (inMessage ? container.channel_id : null),
+      channelName: event.channel?.name ?? null,
+      messageTs: inMessage ? container.message_ts : null,
+      messageText:
+        event.message && "text" in event.message
+          ? (event.message.text ?? null)
+          : null,
+      isEphemeral: inMessage ? container.is_ephemeral : null,
+      viewId: inMessage ? null : container.view_id,
+      payload,
+    });
+  });
+}
 
 let cachedAdmins: Promise<string[]> | undefined;
 
