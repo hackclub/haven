@@ -68,6 +68,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **No approved venue by Oct 26 = no t-shirt funding planned.** Venue pending, or sure you'll find one? DM katsu
 - **Everywhere else:** [counts are out](https://docs.google.com/spreadsheets/d/1d9Feqdg1Oaic6LD-YPtKzTyC2GTLALLy1rzwPieGWGQ/edit?usp=sharing). Submit the final quote (**incl. shipping & taxes**, sheet quantity, screenshot attached) to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) (~48h review); **pay only after approval**. You get exactly the final cost quoted
 - **Funding:** **$5/shirt Asia, $7/shirt elsewhere**; above that, contact 3+ print shops and DM katsu. Want different counts? DM katsu first
+- **Last day to order:** katsu funds no new shirt orders after **Nov 10** (unless postponed). Shop must deliver **before your event**; otherwise shirts are mailed to attendees who ship, after Haven
 - **Count** is based on signups around **Oct 20** and won't increase. Not on the sheet? DM katsu. Shirts cover organizers, volunteers & participants; if short, they get mailed.
 
 ## Community Calls & Workshops (all EDT)
