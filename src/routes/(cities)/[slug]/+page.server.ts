@@ -1,6 +1,7 @@
 import { error } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { resolveSiteData } from "$lib/data/site";
+import { partnerFor } from "$lib/data/partners";
 import { getEventBySlug, parseSiteData } from "$lib/server/services/events";
 
 /**
@@ -18,6 +19,7 @@ export const load: PageServerLoad = async ({ params, url }) => {
   return {
     site: resolveSiteData(parseSiteData(event), event),
     eventId: event.id,
+    partner: partnerFor(event.slug),
     ref,
   };
 };

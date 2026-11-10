@@ -5,6 +5,7 @@
   import HavenMap from "$lib/components/Map.svelte";
   import type { City } from "$lib/map";
   import type { EventVenue } from "$lib/data/types";
+  import type { Partner } from "$lib/data/partners";
   import SignupForm from "./SignupForm.svelte";
   import VideoPanel from "./VideoPanel.svelte";
 
@@ -34,6 +35,8 @@
     /** Replaces the map search for the venue's address; ignored until there is
      * a venue to show. */
     venueLink?: string;
+    /** Shows a "Hack Club × partner" lockup above the logo. */
+    partner?: Partner;
     images?: SiteImages;
   }
 
@@ -52,6 +55,7 @@
     venue,
     venueTbd = defaultSiteData.hero.venueTbd,
     venueLink,
+    partner,
     images = defaultSiteData.images,
   }: Props = $props();
 
@@ -155,6 +159,53 @@
       <div
         class="mx-auto flex w-full flex-col items-center px-[clamp(1rem,4vw,8rem)] text-center sm:pl-[clamp(1rem,4vw,8rem)] sm:items-start sm:pr-[clamp(20rem,45vw,60rem)]"
       >
+        {#if partner}
+          <div
+            class="pointer-events-auto mb-[clamp(1rem,2vw,2.5rem)] flex items-center gap-[clamp(0.75rem,1.5vw,2rem)]"
+          >
+            <a
+              href="https://hackclub.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-opacity hover:opacity-80"
+            >
+              <img
+                src="/images/partners/hack-club.svg"
+                alt="Hack Club"
+                width="526"
+                height="184"
+                class="h-[clamp(2.25rem,4vw,5.5rem)] w-auto"
+              />
+            </a>
+            <!-- Drawn, since the display font has no × glyph. -->
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              class="size-[clamp(0.875rem,1.5vw,2rem)] shrink-0 text-white"
+            >
+              <path d="M5 5l14 14M19 5L5 19" />
+            </svg>
+            <a
+              href={partner.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="transition-opacity hover:opacity-80"
+            >
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                width={partner.width}
+                height={partner.height}
+                class="h-[clamp(2.75rem,4.75vw,6.5rem)] w-auto"
+              />
+            </a>
+          </div>
+        {/if}
+
         <div class="grid grid-cols-2 max-w-[1700px]">
           <img
             src={images.logo}
