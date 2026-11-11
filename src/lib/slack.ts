@@ -35,6 +35,7 @@ import {
   isNull,
   lt,
   ne,
+  or,
 } from "drizzle-orm";
 import { prettifyError } from "zod";
 import { EXTERNAL_URL } from "./consts";
@@ -72,6 +73,9 @@ if (env.SLACK_HELP_CHANNEL) {
     if (event.subtype && (event.subtype as string) !== "file_share") return;
 
     if (event.thread_ts) {
+      // The thread's parent is the ticket itself, not a reply to it.
+      if (event.ts === event.thread_ts) return;
+
       const [ticket] = await db
         .select()
         .from(ticketsTable)
@@ -79,6 +83,21 @@ if (env.SLACK_HELP_CHANNEL) {
 
       if (!ticket) return;
       if (ticket.resolvedBy && event.user !== ticket.openedBy) return;
+
+      // Slack can hand us a message late or more than once, so only a
+      // message sent after the close may reopen the ticket.
+      const sentAt = new Date(Number(event.ts) * 1000);
+      if (ticket.resolvedAt && sentAt <= ticket.resolvedAt) {
+        console.log("Ignoring a message sent before the ticket was closed", {
+          ticket: ticket.id,
+          ts: event.ts,
+          threadTs: event.thread_ts,
+          user: event.user,
+          subtype: event.subtype,
+          resolvedAt: ticket.resolvedAt,
+        });
+        return;
+      }
 
       const [reopened] = await db
         .update(ticketsTable)
@@ -91,6 +110,12 @@ if (env.SLACK_HELP_CHANNEL) {
           and(
             eq(ticketsTable.id, ticket.id),
             isNotNull(ticketsTable.resolvedBy),
+            // Checked again here in case the ticket was closed after the
+            // select above.
+            or(
+              isNull(ticketsTable.resolvedAt),
+              lt(ticketsTable.resolvedAt, sentAt),
+            ),
           ),
         )
         .returning({ id: ticketsTable.id });
