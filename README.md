@@ -10,6 +10,9 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Venue not confirmed?** The [venue confirmation form](https://forms.hackclub.com/haven-venue) deadline (Nov 8) has passed; no written confirmation (or written EM exemption) = event cancelled, no signup funding. Stuck? DM an EM or [book a call](https://booking.haven.hackclub.com/)
 - **Striked or missed multiple check-in calls?** Your event is at risk of cancellation; watch your DMs and inbox for barnav
 - **Plan public demos** (the pop-up arcade); how they run is covered in Check-in Call #7. Venue bans entry/exit? You can skip them.
+- **Child Safety Training (before your event):** PoC, **2+ other organizers** and all adult volunteers, under "My Training" on [Attend](https://attend.hackclub.com) (add volunteers on your event staff page)
+- **Email attendees venue & logistics now** via Attend: venue, directions, check-in/pickup times, schedule link ([template](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794333794626529)); Attend emails don't support images
+- **Film for Hack Club media:** "I'm [name] and this is Haven [city]!" clip, a group "3…2…1 Hack!" clip (any language) and one group photo ([details](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794347691131219))
 - **Add your event's schedule** via the [website update form](https://forms.hackclub.com/haven-website); most event pages don't have one yet
 - **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
@@ -21,7 +24,8 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't share the organizer signup form** outside your team. It exposes participant info.
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
-- **Don't enable the Attend travel module** (or any non-default module); attendees must stay in the venue, even for a park or food run
+- **Don't touch your Attend event settings:** no travel module, **no freedom waivers**, no non-default modules; attendees stay in the venue at all times (enabling = event cancelled)
+- **Don't let in anyone not "completed" on Attend.** QR code = completed; others register at the door (parent signs) **before** entering
 - **Don't DM EMs/directors with questions that have no participant PII.** Ask in [#haven-help](https://hackclub.slack.com/archives/C0BM9DZ0CR0); HQ mostly doesn't work weekends, so expect replies Monday
 - **Don't tell attendees they need ID verification.** They need a Hack Club account (auto-filled), not IDV; ignore "reset waivers" notices on your attend page after date fixes
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
@@ -68,6 +72,7 @@ For every attendee who ships a project and every organizer who finished Jumpstar
 - **No approved venue by Oct 26 = no t-shirt funding planned.** Venue pending, or sure you'll find one? DM katsu
 - **Everywhere else:** [counts are out](https://docs.google.com/spreadsheets/d/1d9Feqdg1Oaic6LD-YPtKzTyC2GTLALLy1rzwPieGWGQ/edit?usp=sharing). Submit the final quote (**incl. shipping & taxes**, sheet quantity, screenshot attached) to the [T-shirt form](https://forms.hackclub.com/haven-tshirts) (~48h review); **pay only after approval**. You get exactly the final cost quoted
 - **Funding:** **$5/shirt Asia, $7/shirt elsewhere**; above that, contact 3+ print shops and DM katsu. Want different counts? DM katsu first
+- **Printful shirts not arrived?** Check the tracking link katsu sent; if delivery failed, **call the postal service ASAP** and DM katsu
 - **Count** is based on signups around **Oct 20** and won't increase. Not on the sheet? DM katsu. Shirts cover organizers, volunteers & participants; if short, they get mailed.
 
 ## Community Calls & Workshops (all EDT)
