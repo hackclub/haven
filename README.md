@@ -28,6 +28,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't let in anyone not "completed" on Attend.** QR code = completed; others register at the door (parent signs) **before** entering
 - **Don't DM EMs/directors with questions that have no participant PII.** Ask in [#haven-help](https://hackclub.slack.com/archives/C0BM9DZ0CR0); HQ mostly doesn't work weekends, so expect replies Monday
 - **Don't tell attendees they need ID verification.** They need a Hack Club account (auto-filled), not IDV; ignore "reset waivers" notices on your attend page after date fixes
+- **Don't share the game theme** (it's in the opening slides); keep it secret until the event ([source](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794460187913839))
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
 
 ## Key Links
@@ -37,6 +38,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - [Funding & signup caps](https://docs.google.com/spreadsheets/d/1XiPZ3MkGMqXhQl1UQwPz1JmrG4JJEFsmEcRCtYjVVdI/edit?gid=340478831#gid=340478831): caps are 200/country (some lower); hit it? ask an EM or director
 - [Book a call](https://booking.haven.hackclub.com/) with an EM · [Luma calendar](https://luma.com/hack-club-haven) for all calls · [Add community calls to your calendar](https://hack.club/haven-cal)
 - Slides: [Event planning](https://canva.link/will-your-haven-survive) by Xin Bing Lim · [Sponsors](https://canva.link/huw3xd32mkwswlh) & [Venues](https://canva.link/haven-venue) by Aryan Brite · [Budgeting](https://docs.google.com/presentation/d/15eH2M2oSRv-55x0EDxKo6sJ8EOtmZhEnPSELpx96BO8/edit?usp=sharing) by Srinidhi (not recorded; another session planned)
+- **Ceremony slides (required framework, small edits OK):** [Opening](https://docs.google.com/presentation/d/18nJnCY4UdPUEwB8-mnH0zUuPKeP0qUx7sFOBzp-kWic/edit?usp=sharing) · [Closing](https://docs.google.com/presentation/d/1SIO39TmfJcs4E8km5CH0KuBhJyHHZWwK4zqW_D2BDek/edit?usp=sharing); links like hack.club/hv go live during Haven
 - [Workshop slides](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794112490474539): GitHub · Godot (leaf game, platformer) · Ren'Py · shipping to GitHub/Itch.io
 - [Gas Fund](https://gas.hackclub.com/) works for Haven · [Haven website source](https://github.com/hackclub/haven)
 - [Rename your `@haven.hackclub.com` account](https://myaccount.google.com/u/1/profile/name/edit) (try "Haven [City]")
@@ -51,12 +53,14 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Posters & postcards:** request them (plus swag) at [merch.hackclub.com](https://merch.hackclub.com). Free shipping in the US; elsewhere, print your own ([postcard](https://merch.hackclub.com/items/964-haven-postcard-double-sided) / [poster](https://merch.hackclub.com/items/965-haven-poster)) or pay shipping from your budget
 - [Info poster & teacher email template](https://docs.google.com/document/d/1CHgiBmXzeSj7Ng21wMoXsnwjzrLzSbg0siVn8AUoqQ0/edit?tab=t.vev3hj1q8m2g) (org handbook, outreach pages 3 & 4)
 - [Customizable flyer template](https://canva.link/c84mt0an3bpw8ap) (Canva)
+- **Winner certificates:** [Figma](https://www.figma.com/design/6Xp1nCkxoirBtLK4UYI105/Haven-Certificats?node-id=0-1&t=U3J6507udzBwXVas-1); color-print **3 of each** for teams (or send digitally); keep the sponsor logos
 - [Email signature maker](https://haven-signature-maker.netlify.app/)
 - **Signup pings (POCs):** invite Daven to a *private* organizer channel and run `/haven-signups`
 
 ## Extra Funding & Prizes
 
 - **$100 streak:** 1+ signup/day for 30 days **or** 2+/day for 14 days (not both) in [#50-days-till-daven](https://hackclub.slack.com/archives/C0C4GR00EF4) ([tracker](https://daven.haven.hackclub.com/)). Dashboard now counts only ages 13-18; wrong-age signups don't count, so have them re-sign up with the right age (fix before event ends). Streak paid out Nov 6; no $100 = no confirmed venue
+- **boot.dev prize:** every participant who ships a game gets a **1-month code** ($59, new users only), sent 1–3 weeks after Haven; tell your attendees
 - **Email CS teachers** in a lock-in call for extra funding: [session 1](https://luma.com/iqrybfm3) · [session 2](https://luma.com/4e7s4r8d) (better timezone)
 - **Social media campaign:** your Haven HCB gets **$10 per 10,000 views**, capped at **$100 per event** (100k views). Redeem via the [rewards form](https://forms.hackclub.com/haven-socials-rewards)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
