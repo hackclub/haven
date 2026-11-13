@@ -67,8 +67,39 @@ function report<T>(what: string, promise: Promise<T>) {
   });
 }
 
-if (env.SLACK_HELP_CHANNEL) {
-  app.on(`message#${env.SLACK_HELP_CHANNEL}`, async (event) => {
+type TicketQueue = (typeof ticketsTable.$inferSelect)["queue"];
+
+/** The help channels tickets are opened in, in the order they are listed. */
+const HELP_QUEUES: {
+  queue: TicketQueue;
+  channel: string | undefined;
+  label: string;
+  reply: string;
+}[] = [
+  {
+    queue: "participants",
+    channel: env.SLACK_HELP_CHANNEL,
+    label: "Participants",
+    reply:
+      "Hi there! A support team member will help you soon. In the meantime, take a look at https://hack.club/hv for our resources to help you!",
+  },
+  {
+    queue: "organizers",
+    channel: env.SLACK_ORGANIZERS_HELP_CHANNEL,
+    label: "Organizers",
+    reply:
+      "Hi there! A staff member will help you soon. In the meantime, take a look at the organizer guide at https://haven.hackclub.com/docs to see if your question is answered!",
+  },
+];
+
+function helpChannel(queue: TicketQueue) {
+  return HELP_QUEUES.find((q) => q.queue === queue)?.channel;
+}
+
+for (const { queue, channel, reply } of HELP_QUEUES) {
+  if (!channel) continue;
+
+  app.on(`message#${channel}`, async (event) => {
     if (event.user === env.SLACK_BOT_USER_ID) return;
     if (event.subtype && (event.subtype as string) !== "file_share") return;
 
@@ -79,7 +110,12 @@ if (env.SLACK_HELP_CHANNEL) {
       const [ticket] = await db
         .select()
         .from(ticketsTable)
-        .where(eq(ticketsTable.helpMessageTs, event.thread_ts));
+        .where(
+          and(
+            eq(ticketsTable.queue, queue),
+            eq(ticketsTable.helpMessageTs, event.thread_ts),
+          ),
+        );
 
       if (!ticket) return;
       if (ticket.resolvedBy && event.user !== ticket.openedBy) return;
@@ -143,12 +179,10 @@ if (env.SLACK_HELP_CHANNEL) {
         ),
       ]);
     } else {
-      const text =
-        "Hi there! A staff member will help you soon. In the meantime, take a look at https://haven.hackclub.com/#faq to see if your question is answered!";
       const message = await event.reply({
-        text,
+        text: reply,
         blocks: blocks(
-          section(text),
+          section(reply),
           actions(button("Close ticket").id("close").style("primary")),
         ),
         unfurl_links: false,
@@ -156,6 +190,7 @@ if (env.SLACK_HELP_CHANNEL) {
 
       try {
         await db.insert(ticketsTable).values({
+          queue,
           helpMessageTs: event.ts,
           helpReplyMessageTs: message.ts,
           openedBy: event.user!,
@@ -230,8 +265,8 @@ if (env.SLACK_TICKETS_CHANNEL) {
 /** The @haven-helpers user group, pinged about tickets open for a day. */
 const HELPERS_GROUP = "S0C7XSYK884";
 
-function ticketLink(helpMessageTs: string) {
-  return `https://hackclub.slack.com/archives/${env.SLACK_HELP_CHANNEL}/p${helpMessageTs.replace(/\./g, "")}`;
+function ticketLink(ticket: { queue: TicketQueue; helpMessageTs: string }) {
+  return `https://hackclub.slack.com/archives/${helpChannel(ticket.queue)}/p${ticket.helpMessageTs.replace(/\./g, "")}`;
 }
 
 /**
@@ -256,7 +291,7 @@ async function escalateTickets() {
     .returning();
 
   for (const ticket of due) {
-    const link = ticketLink(ticket.helpMessageTs);
+    const link = ticketLink(ticket);
     try {
       await app.channel(channel).send({
         text: `<!subteam^${HELPERS_GROUP}> A ticket has been open for 24 hours without being resolved: ${link}`,
@@ -266,6 +301,8 @@ async function escalateTickets() {
               R.usergroup(HELPERS_GROUP),
               " this ticket from ",
               R.user(ticket.openedBy),
+              " in ",
+              R.channel(helpChannel(ticket.queue)!),
               " has been open for 24 hours without being resolved: ",
               R.link(link, `"${ticket.text.substring(0, 50)}"`),
               ". Can someone take a look and resolve it?",
@@ -579,12 +616,19 @@ async function resendTicketsMessage() {
 
   const channel = env.SLACK_TICKETS_CHANNEL;
 
-  const tickets = await db
-    .select()
-    .from(ticketsTable)
-    .where(isNull(ticketsTable.resolvedBy))
-    .orderBy(asc(ticketsTable.createdAt))
-    .limit(50);
+  const queues = await Promise.all(
+    HELP_QUEUES.filter((q) => q.channel).map(async (q) => ({
+      ...q,
+      tickets: await db
+        .select()
+        .from(ticketsTable)
+        .where(
+          and(eq(ticketsTable.queue, q.queue), isNull(ticketsTable.resolvedBy)),
+        )
+        .orderBy(asc(ticketsTable.createdAt))
+        .limit(50),
+    })),
+  );
 
   // Every recorded summary is cleaned up, not just the newest one. A delete
   // that failed on an earlier run would otherwise be stranded in the channel
@@ -618,21 +662,23 @@ async function resendTicketsMessage() {
   const content = {
     blocks: blocks(
       header("Oldest open tickets"),
-      richText(
-        R.list(
-          ...tickets.map((t) =>
-            R.section(
-              R.date(t.createdAt, "{date} at {time}"),
-              " - ",
-              R.user(t.openedBy),
-              ` - `,
-              R.link(
-                ticketLink(t.helpMessageTs),
-                `"${t.text.substring(0, 50)}"`,
+      ...queues.map((q) =>
+        richText(
+          R.section(R.channel(q.channel!).bold(), " ", R.text(q.label).bold()),
+          R.list(
+            ...q.tickets.map((t) =>
+              R.section(
+                R.date(t.createdAt, "{date} at {time}"),
+                " - ",
+                R.user(t.openedBy),
+                ` - `,
+                R.link(ticketLink(t), `"${t.text.substring(0, 50)}"`),
               ),
             ),
+            ...(q.tickets.length
+              ? []
+              : [R.section("No open tickets. Well done!")]),
           ),
-          ...(tickets.length ? [] : [R.section("No open tickets. Well done!")]),
         ),
       ),
     ),

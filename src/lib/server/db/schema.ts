@@ -37,6 +37,10 @@ export const ticketsTable = pgTable(
   "tickets",
   {
     id: uuid().primaryKey().defaultRandom(),
+    /** Which help channel the ticket was opened in. */
+    queue: text({ enum: ["participants", "organizers"] })
+      .notNull()
+      .default("participants"),
     helpMessageTs: text().notNull(),
     helpReplyMessageTs: text().notNull(),
     resolvedBy: text(),
