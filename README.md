@@ -1,5 +1,7 @@
 # Haven tl;dr
 
+> Good luck at your Haven!! You'll do great :D ~ Jolly, Kaylee, Katie, & Barnav
+
 Everything you need to run your [Haven](https://haven.hackclub.com/) event. Haven is **November 14 & 15**.
 
 ## Must-dos
