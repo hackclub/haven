@@ -16,6 +16,9 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Check your event page's venue link** (else "Venue TBD"). Wrong? Fix it yourself: add `venueLink` to `hero` in the [website form](https://forms.hackclub.com/haven-website) ([how-to](https://github.com/hackclub/haven/blob/main/SITE_DATA.md)); don't DM daamin
 - **Re-copy updated ceremony slides:** Opening **slides 14-15 & 24**, Closing **slide 9**; recheck templates **1h+ before you start** ([details](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794498224365439))
 - **Know game dev?** Help attendees in [#haven-support](https://hackclub.slack.com/archives/C0BM9DZ0CR0); top helpers may get exclusive merch
+- **Upload photos & videos** to your team's "Haven [City]" Drive folder (invite from daamin); best set wins **$150** for an org dinner ([details](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794602405573439))
+- **Closing-video clips:** send katsu 5-10s clips showing participants, in [thread](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794650371777029) or DM, by **1pm EST Sat Nov 14**
+- **Get attendees to fill [hack.club/feedback](http://hack.club/feedback)** (in closing slides); low response rates get investigated and lose Trusted Organizer status
 - **Check your `@haven.hackclub.com` inbox.** Participant questions go there; forward it to your organizer channel ([Slack](https://slack.com/intl/en-au/help/articles/206819278-Send-emails-to-Slack#h_01F4WDZG8RTCTNAMR4KJ7D419V) / [Gmail](https://support.google.com/mail/answer/10957?hl=en))
 
 ## Don'ts
@@ -26,12 +29,20 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Don't email CraftPix** for sponsorship. They already sponsor every Haven (top 10 teams per city, up to 5 people each, get a membership).
 - **Don't spend signup funding outside your event.** First round is out; **cover food & drink first**, then decorations/merch (monitored)
 - **Don't touch your Attend event settings:** no travel module, **no freedom waivers**, no non-default modules; attendees stay in the venue at all times (enabling = event cancelled)
-- **Don't let in anyone not "completed" on Attend.** QR code = completed; others register at the door (parent signs) **before** entering
+- **Don't let in anyone not "completed" on Attend.** Scan **every** attendee in (2-day events: **both days**); no QR? they register at the door (parent signs) first
 - **Don't DM EMs/directors with questions that have no participant PII.** Ask in [#haven-organizers-help](https://hackclub.slack.com/archives/C0CFYP73VJ9); HQ mostly doesn't work weekends, so expect replies Monday
 - **Don't tell attendees they need ID verification.** They need a Hack Club account (auto-filled), not IDV; ignore "reset waivers" notices on your attend page after date fixes
 - **Don't share the game theme** (it's in the opening slides); keep it secret until the event ([source](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794460187913839))
 - **Don't withdraw attendees in Attend yourself:** you lose their funding. DM HQ to close registrations or withdraw people
 - **Don't buy event insurance** unless your venue requires it (then find a sponsor to pay)
+
+## During Haven
+
+- **Emergency / need HQ now?** Call **+1 855-625-4225** · [Report an incident](http://hack.club/incident) (attendees can too; [guide](https://hackclub.gitbook.io/haven/attend/incidents)) ([source](https://hackclub.slack.com/archives/C0BM46V4X7F/p1794620288282419))
+- **Urgent extra funding** (more attendees, surprise dietary needs): [hack.club/emergency](http://hack.club/emergency)
+- **Pick winners** by peer voting on [Podium](http://podium.hackclub.com) ([guide](https://hackclub.gitbook.io/haven/peer-voting))
+- **Share with attendees:** [hack.club/hv](http://hack.club/hv) (theme & shipping guide) · [Theme video](http://hack.club/haven-theme) (if missing from slides)
+- **[Portal](http://portal.haven.hackclub.com):** video-call other Havens (no audio); password is in your org channel or POC's DMs
 
 ## Key Links
 
@@ -68,7 +79,7 @@ Everything you need to run your [Haven](https://haven.hackclub.com/) event. Have
 - **Social media campaign:** your Haven HCB gets **$10 per 10,000 views**, capped at **$100 per event** (100k views). Redeem via the [rewards form](https://forms.hackclub.com/haven-socials-rewards)
 - **Framework Laptop 12 raffle:** every signup via your [referral link](https://forms.hackclub.com/haven-referrals) is an entry (co-organizers: get the form from your POC)
 - **Sponsors open to Haven:** email CodeCrafters; fill out the form on XYZ Domains (gen.xyz); email [Kadmium](https://www.kadmium.dev/contact-links) (emil@kadmium.dev) for in-kind Unreal Engine prizes
-- **Trusted Organizer (PoCs):** 85% ship rate, NPS 60+ (60% of attendees responding), 20+ checked-in attendees = **1.5-2x signup funding** and spending beyond food & drink. Use the feedback form.
+- **Trusted Organizer (PoCs):** 85% ship rate, NPS 60+ (60% of attendees responding), 20+ checked-in attendees = **1.5-2x signup funding** and spending beyond food & drink. Use the [feedback form](http://hack.club/feedback).
 - **Doing something whimsical at your event?** DM josh; the coolest ideas get extra event funding
 - **Sponsor says they're already talking to another organizer?** DM barnav with who + a screenshot of the email chain
 
