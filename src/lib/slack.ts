@@ -456,8 +456,6 @@ async function sendSignupLeaderboard({ daily }: { daily: boolean }) {
 }
 
 if (env.SLACK_SIGNUPS_CHANNEL) {
-  cron.schedule("0 0 * * *", () => sendSignupLeaderboard({ daily: true }));
-
   app.on(`message#${env.SLACK_SIGNUPS_CHANNEL}`, async (message) => {
     if (
       env.SLACK_SIGNUPS_USER_ID &&
